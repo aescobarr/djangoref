@@ -81,7 +81,7 @@
                     <li><a href="http://www.earthpoint.us/Convert.aspx" target="_blank">{% trans "Conversió de coordenades - Earth Point: Convert coordinates" %}</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="http://www.geo-locate.org/web/WebGeoref.aspx" target="_blank">{% trans "Georeferenciació - Geolocate" %}</a></li>
-                    <li><a href="http://manisnet.org/gci2.html" target="_blank">{% trans "Georeferenciació - Georeferencing calculator" %}</a></li>
+                    <li><a href="https://www.gbif.org/tool/81315/georeferencing-calculator" target="_blank">{% trans "Georeferenciació - Georeferencing calculator" %}</a></li>
                     <li><a href="http://berkeleymapper.berkeley.edu/#" target="_blank">{% trans "Georeferenciació - Berkeley Mapper" %}</a></li>
                 </ul>
             </li>
@@ -108,19 +108,21 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Benvingut" %}, {{ user.username }}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="nav-link" href="{% url 'logout' %}">{% trans "Tancar sessió" %} - {{ user.username }}</a>
-                    </li>
-                    <li>
                         <a class="nav-link" href="{% url 'my_profile' %}">{% trans "El meu perfil" %}</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{% url 'change_my_password' %}">{% trans "Canviar el meu password" %}</a>
                     </li>
+                    <li role="separator" class="divider"></li>
                     {% if user.profile.is_admin or user.is_superuser %}
                     <li>
                         <a class="nav-link" href="{% url 'users_list' %}">{% trans "Gestió usuaris" %}</a>
                     </li>
+                    <li role="separator" class="divider"></li>
                     {% endif %}
+                    <li>
+                        <a class="nav-link" href="{% url 'logout' %}">{% trans "Tancar sessió" %} - {{ user.username }}</a>
+                    </li>
                 </ul>
             </li>
             {% else %}

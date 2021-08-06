@@ -71,7 +71,7 @@ msgstr "Coordinate reference system"
 #: georef/templates/georef/prefsvisualitzaciowms.html:23
 #: georef/templates/georef/prefsvisualitzaciowms.html:28
 msgid "Preferències visualització capes WMS"
-msgstr "WMS Layer visualization preferences"
+msgstr "Activate/Deactivate WMS layers"
 
 #: georef/models.py:310
 msgid "Versió de topònim"
@@ -80,7 +80,7 @@ msgstr "Toponym version"
 #: georef/models.py:387 georef/templates/georef/recursos_list.html:175
 #: georef/views.py:2316 georef/views.py:2317
 msgid "Paraula clau"
-msgstr "Key word"
+msgstr "Keyword"
 
 #: georef/models.py:401
 msgid "Paraules clau del recurs (relació)"
@@ -414,19 +414,19 @@ msgstr "Cartographic resources"
 #: georef/templates/georef/recursos_list.html:94
 #: georef/templates/georef/toponims_list.html:106
 msgid "Llistat"
-msgstr "List"
+msgstr "Show Map/List"
 
 #: georef/templates/georef/base.html:58
 #: georef/templates/georef/recursfilters_list.html:21
 msgid "Llistat de filtres de recursos"
-msgstr "Resource filters list"
+msgstr "List of filters"
 
 #: georef/templates/georef/base.html:59
 #: georef/templates/georef/capes_wms.html:26
 #: georef/templates/georef/capes_wms.html:31
 #: georef/templates/georef/prefsvisualitzaciowms.html:33
 msgid "Càrrega de capes WMS pròpies"
-msgstr "User defined WMS Layer upload"
+msgstr "Create own WMS layer"
 
 #: georef/templates/georef/base.html:64
 #: georef/templates/georef/toponim_create.html:30
@@ -435,7 +435,7 @@ msgstr "User defined WMS Layer upload"
 #: georef/templates/georef/toponims_list.html:125
 #: georef/templates/georef/toponimstree.html:23 georef/views.py:712
 msgid "Topònims"
-msgstr "Toponyms"
+msgstr "Site names"
 
 #: georef/templates/georef/base.html:67
 #: georef/templates/georef/toponimstree.html:24
@@ -445,7 +445,7 @@ msgstr "Tree view"
 #: georef/templates/georef/base.html:68
 #: georef/templates/georef/toponimfilters_list.html:21
 msgid "Llistat de filtres de topònims"
-msgstr "Toponym filter list"
+msgstr "List of filters"
 
 #: georef/templates/georef/base.html:72
 #: georef/templates/georef/calculcentroides.html:28
@@ -456,7 +456,7 @@ msgstr "Utilities"
 
 #: georef/templates/georef/base.html:74
 msgid "Cerca topònim"
-msgstr "Toponym search"
+msgstr "Search site name"
 
 #: georef/templates/georef/base.html:75
 #: georef/templates/georef/calculcentroides.html:29
@@ -466,7 +466,7 @@ msgstr "Centroid calculation"
 #: georef/templates/georef/base.html:76
 #: georef/templates/georef/toponims_import.html:24
 msgid "Importació de topònims"
-msgstr "Toponym import"
+msgstr "Import site name"
 
 #: georef/templates/georef/base.html:77
 msgid "Anar a google"
@@ -499,7 +499,7 @@ msgstr "Georeferenciacing - Berkeley Mapper"
 #: georef/templates/georef/base.html:89
 #: georef/templates/georef/t_generic.html:33
 msgid "Tesaures"
-msgstr "Thesaurus"
+msgstr "Parent tables"
 
 #: georef/templates/georef/base.html:92
 msgid "Organitzacions"
@@ -515,7 +515,7 @@ msgstr "Version qualifiers"
 
 #: georef/templates/georef/base.html:98
 msgid "Tipus topònim"
-msgstr "Toponym type"
+msgstr "Site name type"
 
 #: georef/templates/georef/base.html:102 georef/templates/georef/graphs.html:22
 msgid "Gràfiques"
@@ -1294,7 +1294,7 @@ msgstr "Filter edition"
 #: georef/templates/georef/user_base.html:114
 #: georef/templates/georef/user_new.html:129
 msgid "Edició tesaures"
-msgstr "Thesaurus edition"
+msgstr "Parent table edition"
 
 #: georef/templates/georef/user_base.html:122
 #: georef/templates/georef/user_new.html:137
