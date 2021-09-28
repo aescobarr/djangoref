@@ -49,10 +49,6 @@
         .collapsed{
             height: 45px;
         }
-        #sidebar{
-            top: 70px;
-            margin-right: 10px;
-        }
         .navbar {
 	        margin-bottom: 0px;
         }
@@ -102,8 +98,8 @@
     <div class="container">
     </div>
     <div class="container-fluid">
-        <div id="map" class="sidebar-map"></div>
-        <div id="sidebar" class="sidebar collapsed">
+        <div id="map" class="sidebar-map">
+            <div id="sidebar" class="sidebar collapsed">
             <div class="sidebar-tabs">
                 <ul role="tablist">
                     <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
@@ -154,6 +150,7 @@
                 </div> <!-- sidebar-pane -->
             </div> <!-- sidebar-content -->
         </div> <!-- sidebar -->
+        </div>
     </div>
     <div class="container-fluid">
         <div id="fileuploader"></div>
