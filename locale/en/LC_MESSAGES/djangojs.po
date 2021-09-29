@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 11:30+0000\n"
+"POT-Creation-Date: 2021-09-29 14:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,7 +96,7 @@ msgid "Cal posar un nom a la capa (un títol)"
 msgstr "The layer name is mandatory (a title)"
 
 #: georef/static/georef/javascript/capes_wms.js:146
-#: georef/static/georef/javascript/generic_thesaurus.js:191
+#: georef/static/georef/javascript/generic_thesaurus.js:196
 #: georef/static/georef/javascript/recursfilters_list.js:70
 #: georef/static/georef/javascript/toponimfilters_list.js:70
 msgid "Esborrat amb èxit!"
@@ -131,45 +131,49 @@ msgstr "A geometry must be digitized in the map"
 msgid "Actualitzar"
 msgstr "Update"
 
-#: georef/static/georef/javascript/generic_thesaurus.js:123
+#: georef/static/georef/javascript/generic_thesaurus.js:88
+msgid "Cancel·lar"
+msgstr "Cancel"
+
+#: georef/static/georef/javascript/generic_thesaurus.js:128
 msgid "Actualitzat amb èxit!"
 msgstr "Successfully updated!"
 
-#: georef/static/georef/javascript/generic_thesaurus.js:128
+#: georef/static/georef/javascript/generic_thesaurus.js:133
 msgid "Error actualitzant!"
 msgstr "Error updating!"
 
-#: georef/static/georef/javascript/generic_thesaurus.js:137
+#: georef/static/georef/javascript/generic_thesaurus.js:142
 msgid "Crear"
 msgstr "Create"
 
-#: georef/static/georef/javascript/generic_thesaurus.js:170
+#: georef/static/georef/javascript/generic_thesaurus.js:175
 msgid "Afegit amb èxit!"
 msgstr "Added successfully!"
 
-#: georef/static/georef/javascript/generic_thesaurus.js:175
+#: georef/static/georef/javascript/generic_thesaurus.js:180
 msgid "Error afegint!"
 msgstr "Error adding!"
 
-#: georef/static/georef/javascript/generic_thesaurus.js:195
+#: georef/static/georef/javascript/generic_thesaurus.js:200
 msgid "Error esborrant!"
 msgstr "Error deleting!"
 
-#: georef/static/georef/javascript/generic_thesaurus.js:225
+#: georef/static/georef/javascript/generic_thesaurus.js:230
 #: georef/static/georef/javascript/users_list.js:168
 msgid "Esborrant..."
 msgstr "Deleting..."
 
-#: georef/static/georef/javascript/generic_thesaurus.js:248
+#: georef/static/georef/javascript/generic_thesaurus.js:253
 #: georef/static/georef/javascript/users_list.js:158
 msgid "Es produïran els esborrats en cascada següents"
 msgstr "The following cascade deletes will occur"
 
-#: georef/static/georef/javascript/generic_thesaurus.js:274
+#: georef/static/georef/javascript/generic_thesaurus.js:279
 msgid "S'esborrarà '"
 msgstr "Will delete '"
 
-#: georef/static/georef/javascript/generic_thesaurus.js:274
+#: georef/static/georef/javascript/generic_thesaurus.js:279
 #: georef/static/georef/javascript/users_list.js:266
 msgid "'! Segur que vols continuar?"
 msgstr "'! Are you sure you want to continue?"
@@ -290,9 +294,6 @@ msgid "Segur que vols esborrar?"
 msgstr "Are you sure you want to delete?"
 
 #: georef/static/georef/javascript/recursos_list.js:73
-msgid "Recurs de georeferenciació"
-msgstr "Georeferencing resource"
-
 #: georef/static/georef/javascript/recursos_list.js:441
 msgid "Nom recurs"
 msgstr "Resource name"
@@ -600,6 +601,9 @@ msgstr "Unblocking..."
 #: georef/static/georef/javascript/users_list.js:266
 msgid "S'esborrarà l'usuari '"
 msgstr "Will delete the user '"
+
+#~ msgid "Recurs de georeferenciació"
+#~ msgstr "Georeferencing resource"
 
 #, fuzzy
 #~| msgid "Aquàtic"

@@ -85,18 +85,23 @@
         }
 
         var update_text = gettext('Actualitzar');
+        var cancel_text = gettext('Cancel·lar');
 
         var dialog_update = $( "#dialog-form-update" ).dialog({
             autoOpen: false,
             height: 300,
             width: 400,
             modal: true,
-            buttons: {
+            /*buttons: {
                 update_text: do_update,
                 Cancel: function() {
                     dialog_update.dialog( "close" );
                 }
-            },
+            },*/
+            buttons: [
+                {text: update_text, click: do_update},
+                {text: cancel_text, click: function() { dialog_update.dialog( "close" ); }}
+            ],
             close: function() {
                 form_update[ 0 ].reset();
             }
@@ -135,10 +140,11 @@
         };
 
         var btn_create = gettext('Crear');
+        var cancel_text = gettext('Cancel·lar');
 
         var dialog_buttons = {};
         dialog_buttons[btn_create] = do_add;
-        dialog_buttons['Cancel'] = function() { dialog_create.dialog( "close" ); }
+        dialog_buttons[cancel_text] = function() { dialog_create.dialog( "close" ); }
 
         var dialog_create = $( "#dialog-form-create" ).dialog({
             autoOpen: false,
