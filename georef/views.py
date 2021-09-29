@@ -1382,8 +1382,15 @@ def recursos_list_pdf(request):
                                            field_translation_list, sort_translation_list, paginate=False)
 
     records = data.data['data']
-    html_string = render_to_string('georef/reports/recursos_list_pdf.html',
-                                   {'title': 'Llistat de Recursos de georeferenciació', 'records': records})
+
+    language = request.LANGUAGE_CODE
+
+    try:
+        html_string = render_to_string('georef/reports/recursos_list_pdf_{0}.html'.format(language), {'records': records})
+    except TemplateDoesNotExist:
+        html_string = render_to_string('georef/reports/recursos_list_pdf_ca.html', {'records': records})
+
+
 
     html = HTML(string=html_string)
     html.write_pdf(target='/tmp/mypdf.pdf');
@@ -1452,7 +1459,13 @@ def toponims_list_pdf(request):
 def toponims_detail_pdf(request, idtoponim=None):
     toponim = get_object_or_404(Toponim, pk=idtoponim)
 
-    html_string = render_to_string('georef/reports/toponim_detail_pdf.html', {'toponim': toponim})
+    language = request.LANGUAGE_CODE
+
+    try:
+        html_string = render_to_string('georef/reports/toponim_detail_pdf_{0}.html'.format(language), {'toponim': toponim})
+    except TemplateDoesNotExist:
+        html_string = render_to_string('georef/reports/toponim_detail_pdf_ca.html', {'toponim': toponim})
+
     georef_css = CSS('georef/static/georef/css/georef.css')
     # simple_grid = CSS('georef/static/georef/css/grid/simple-grid.css')
     # styles = [simple_grid, georef_css]
