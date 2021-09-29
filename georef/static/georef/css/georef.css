@@ -172,7 +172,7 @@ table#toponim_edit tbody tr td ul li{
 
 .separador_seccio p{
     background: #4598ea;
-    text-color: 000#;
+    color: #FFF !important;
     padding-left: 10px;
 }
 

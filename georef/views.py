@@ -77,12 +77,14 @@ from django.apps import apps
 from django.contrib.admin.utils import NestedObjects
 from georef.geom_utils import *
 from haversine import haversine
+from datetime import date
 
 from slugify import slugify
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.views import login
 from django.http import Http404
 from rest_framework.exceptions import ParseError
+from django.template.loader import TemplateDoesNotExist
 
 def get_order_clause(params_dict, translation_dict=None):
     order_clause = []
@@ -1238,6 +1240,15 @@ def toponims_update_2(request, idtoponim=None, idversio=None):
                 }
                 return render(request, 'georef/toponim_update_2.html', context)
 
+def get_sitenames_export_filename(extension):
+    today = date.today()
+    str_today = today.strftime("%d/%m/%Y")
+    return 'attachment; filename="georef_sitenames_export_{0}.{1}"'.format(str_today, extension)
+
+def get_carto_res_export_filename(extension):
+    today = date.today()
+    str_today = today.strftime("%d/%m/%Y")
+    return 'attachment; filename="georef_cartographic_resources_export_{0}.{1}"'.format(str_today, extension)
 
 @login_required
 def recursos_list_csv(request):
@@ -1250,7 +1261,7 @@ def recursos_list_csv(request):
     records = data.data['data']
 
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="recursos.csv"'
+    response['Content-Disposition'] = get_carto_res_export_filename('csv')
     writer = csv.writer(response, delimiter=';')
     writer.writerow(['nom'])
     for record in records:
@@ -1269,7 +1280,8 @@ def recursos_list_xls(request):
     records = data.data['data']
 
     response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="recursos.xls"'
+
+    response['Content-Disposition'] = get_carto_res_export_filename('xls')
 
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Recursos')
@@ -1319,7 +1331,7 @@ def toponims_list_xls(request):
         versions[darrera_versio.idtoponim.id] = { '_x': darrera_versio.get_coordenada_x_centroide, '_y': darrera_versio.get_coordenada_y_centroide, '_inc': darrera_versio.get_incertesa_centroide}
 
     response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="toponims.xls"'
+    response['Content-Disposition'] = get_sitenames_export_filename('xls')
 
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Toponims')
@@ -1379,7 +1391,7 @@ def recursos_list_pdf(request):
     fs = FileSystemStorage('/tmp')
     with fs.open('mypdf.pdf') as pdf:
         response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        response['Content-Disposition'] = get_carto_res_export_filename('pdf')
         return response
 
     return response
@@ -1417,8 +1429,12 @@ def toponims_list_pdf(request):
         else:
             clean_data.append({'nom_str':record['nom_str'],'aquatic':record['aquatic'],'tipus':record['idtipustoponim']['nom'], 'x': '', 'y': '', 'inc': ''})
 
-    html_string = render_to_string('georef/reports/toponims_list_pdf.html',
-                                   {'title': 'Llistat de topònims', 'records': clean_data})
+    language = request.LANGUAGE_CODE
+    try:
+        html_string = render_to_string('georef/reports/toponims_list_pdf_{0}.html'.format(language), {'title': 'Site names list', 'records': clean_data})
+    except TemplateDoesNotExist:
+        html_string = render_to_string('georef/reports/toponims_list_pdf_ca.html', {'title': 'Llistat de topònims', 'records': clean_data})
+
 
     html = HTML(string=html_string)
     html.write_pdf(target='/tmp/mypdf.pdf');
@@ -1426,7 +1442,7 @@ def toponims_list_pdf(request):
     fs = FileSystemStorage('/tmp')
     with fs.open('mypdf.pdf') as pdf:
         response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        response['Content-Disposition'] = get_sitenames_export_filename('pdf')
         return response
 
     return response
@@ -1476,7 +1492,7 @@ def toponims_list_csv(request):
                                                  '_inc': darrera_versio.get_incertesa_centroide}
 
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="toponims.csv"'
+    response['Content-Disposition'] = get_sitenames_export_filename('csv')
     writer = csv.writer(response, delimiter=';')
     writer.writerow(['nom_toponim', 'aquatic?', 'tipus_toponim', 'centroide_x', 'centroide_y','incertesa_m'])
     for record in records:

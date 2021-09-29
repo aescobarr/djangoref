@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <style>
+            table {
+                width: 100%;
+            }
+
+            body{
+                font-family: 'Helvetica Neue', Helvetica, Arial;
+                font-size: 10px;
+                line-height: 20px;
+                font-weight: 400;
+                /*color: #3b3b3b;*/
+                -webkit-font-smoothing: antialiased;
+                font-smoothing: antialiased;
+                /*background: #2b2b2b;*/
+            }
+
+            .wrapper{
+                margin: 0 auto;
+                padding: 20px;
+                max-width: 800px;
+            }
+
+            .table{
+                margin: 0 0 40px 0;
+                width: 100%;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+                display: table;
+                @media screen and (max-width: 580px);
+                display: block;
+            }
+
+            .row{
+                display: table-row;
+                background: #f6f6f6;
+            }
+
+
+            .header{
+                font-weight: 900;
+                color: #ffffff;
+                background: #ea6153;
+            }
+
+            .green{
+                background: #27ae60;
+            }
+
+            .blue{
+                background: #2980b9;
+            }
+
+            @media screen and (max-width: 580px){
+                padding: 14px 0 7px;
+                display: block;
+            }
+
+            &.header{
+                padding: 0;
+                height: 6px;
+            }
+
+            .cell{
+                display: none;
+            }
+
+            .cell{
+                margin-bottom: 10px;
+            }
+
+            &:before{
+                margin-bottom: 3px;
+                content: attr(data-title);
+                min-width: 98px;
+                font-size: 10px;
+                line-height: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #969696;
+                display: block;
+            }
+
+            .cell{
+                padding: 6px 12px;
+                display: table-cell;
+            }
+
+            @media screen and (max-width: 580px){
+                padding: 2px 16px;
+                display: block;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>{{ title }}</h1>
+        <!--<table>
+            <thead>
+                <th>Nom</th>
+                <th>Aquàtic</th>
+                <th>Tipus Topònim</th>
+            </thead>
+            <tbody>
+            {% for record in records %}
+                <tr>
+                    <td>{{ record.nom_str }}</td>
+                    <td>{{ record.aquatic }}</td>
+                    <td>{{ record.idtipustoponim.nom }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>-->
+
+        <div class="wrapper">
+            <div class="table">
+                <div class="row header blue">
+                    <div class="cell">
+                        Name
+                    </div>
+                    <div class="cell">
+                        Aquatic
+                    </div>
+                    <div class="cell">
+                        Type
+                    </div>
+                    <div class="cell">
+                        X centroid
+                    </div>
+                    <div class="cell">
+                        Y centroid
+                    </div>
+                    <div class="cell">
+                        Centroid uncertainty(m)
+                    </div>
+                </div>
+                {% for record in records %}
+                <div class="row">
+                    <div class="cell" data-title="Nom">
+                        {{ record.nom_str }}
+                    </div>
+                    <div class="cell" data-title="Aquatic">
+                        {{ record.aquatic }}
+                    </div>
+                    <div class="cell" data-title="Tipus">
+                        {{ record.tipus }}
+                    </div>
+                    <div class="cell" data-title="X centroide">
+                        {{ record.x }}
+                    </div>
+                    <div class="cell" data-title="Y centroide">
+                        {{ record.y }}
+                    </div>
+                    <div class="cell" data-title="Incertesa centroide(m)">
+                        {{ record.inc }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

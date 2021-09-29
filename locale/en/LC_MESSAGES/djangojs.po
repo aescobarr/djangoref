@@ -44,17 +44,17 @@ msgstr "Import shapefile (zip)"
 #: georef/static/georef/javascript/capes_wms.js:37
 #: georef/static/georef/javascript/prefsvisualitzaciowms.js:34
 msgid "Nom de la capa"
-msgstr "Layer name"
+msgstr "Name"
 
 #: georef/static/georef/javascript/capes_wms.js:41
 #: georef/static/georef/javascript/prefsvisualitzaciowms.js:38
 msgid "Títol de la capa"
-msgstr "Layer title"
+msgstr "Title"
 
 #: georef/static/georef/javascript/capes_wms.js:45
 #: georef/static/georef/javascript/prefsvisualitzaciowms.js:42
 msgid "URL servidor wms"
-msgstr "WMS server URL"
+msgstr "URL"
 
 #: georef/static/georef/javascript/capes_wms.js:50
 #: georef/static/georef/javascript/filtre.js:81
