@@ -57,18 +57,21 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-xs-4 form-inline">
+                <div class="col-xs-6">
                     <div class="form-group">
-                        1)
                         <label for="id_nomcapa">{% trans 'Nom de la capa' %}:</label>
                         <input name="nomcapa" class="form-control" id="id_nomcapa" required="true" type="text">
                     </div>
                 </div>
-                <div class="col-xs-4">
-                    2) <div id="fileuploader"></div>
+                <div class="col-xs-6">
+                    <div id="fileuploader"></div>
                 </div>
-                <div class="col-xs-4">
-                    3) <input data-toggle="tooltip" data-placement="right" id="btnCreaCapa" role="button" class="btn btn-success" value="{% trans 'Crear capa WMS' %}" />
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2">
+                    <input data-toggle="tooltip" data-placement="right" id="btnCreaCapa" role="button" class="btn btn-success" value="{% trans 'Crear capa WMS' %}" />
                 </div>
             </div>
         </div>

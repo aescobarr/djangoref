@@ -1016,7 +1016,7 @@ msgstr ""
 #: georef/templates/georef/toponim_create.html:83
 #: georef/templates/georef/toponim_update_2.html:137
 msgid "Topònim pare"
-msgstr "Parent toponym"
+msgstr "Parent site"
 
 #: georef/templates/georef/toponim_search.html:20
 msgid "Cerca topònims"
@@ -1052,7 +1052,7 @@ msgstr "Back to toponym list"
 
 #: georef/templates/georef/toponim_update_2.html:134
 msgid "Jerarquia del topònim"
-msgstr "Toponym hyerarchy"
+msgstr "Site hyerarchy"
 
 #: georef/templates/georef/toponim_update_2.html:144
 msgid "btn_save_toponim_tooltip"
@@ -1155,11 +1155,11 @@ msgstr ""
 
 #: georef/templates/georef/toponim_update_2.html:241
 msgid "Número versió"
-msgstr "Version number"
+msgstr "Number"
 
 #: georef/templates/georef/toponim_update_2.html:247 georef/views.py:2304
 msgid "Qualificador versió"
-msgstr "Version qualifier"
+msgstr "Qualifier"
 
 #: georef/templates/georef/toponim_update_2.html:252
 msgid "toponym_version_autocomplete_tooltip"
@@ -1170,11 +1170,11 @@ msgstr ""
 
 #: georef/templates/georef/toponim_update_2.html:252
 msgid "Versió capturada del recurs"
-msgstr "Version captured from resource"
+msgstr "Captured from resource"
 
 #: georef/templates/georef/toponim_update_2.html:258
 msgid "Sistema referència del recurs"
-msgstr "Reference system of the resource"
+msgstr "Resource reference system"
 
 #: georef/templates/georef/toponim_update_2.html:262
 msgid "toponym_nomtoponim_resource"
@@ -1184,7 +1184,7 @@ msgstr ""
 
 #: georef/templates/georef/toponim_update_2.html:262
 msgid "Nom del topònim al recurs"
-msgstr "Toponym name on the resource"
+msgstr "Site name on the resource"
 
 #: georef/templates/georef/toponim_update_2.html:268
 msgid "toponym_date_tooltip"
@@ -1198,7 +1198,7 @@ msgstr ""
 
 #: georef/templates/georef/toponim_update_2.html:280
 msgid "Coordenada X original"
-msgstr "Original x coordinate"
+msgstr "Original X coordinate"
 
 #: georef/templates/georef/toponim_update_2.html:286
 msgid "toponim_coordy_origin"
@@ -1212,11 +1212,11 @@ msgstr "Original Y coordinate"
 
 #: georef/templates/georef/toponim_update_2.html:292
 msgid "Altitud profunditat màxima(m)"
-msgstr "Maximum depth height(m)"
+msgstr "Maximum depth/height(m)"
 
 #: georef/templates/georef/toponim_update_2.html:297
 msgid "Altitud profunditat mínima(m)"
-msgstr "Minimum depth height(m)"
+msgstr "Minimum depth/height(m)"
 
 #: georef/templates/georef/toponim_update_2.html:306
 msgid "toponim_coordx_transform_tooltip"
@@ -1240,11 +1240,11 @@ msgstr "Y coordinate of centroid"
 
 #: georef/templates/georef/toponim_update_2.html:318
 msgid "Incertesa coordenades(m)"
-msgstr "Coordinate uncertainty(m)"
+msgstr "Coordinate uncertainty (m)"
 
 #: georef/templates/georef/toponim_update_2.html:327
 msgid "Observacions"
-msgstr "Observations"
+msgstr "Comments"
 
 #: georef/templates/georef/toponim_update_2.html:335
 msgid "Desar Versió"
