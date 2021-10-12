@@ -180,26 +180,26 @@ msgstr "'! Are you sure you want to continue?"
 
 #: georef/static/georef/javascript/georef_layers.js:74
 msgid "Centroides de topònims calculats pel museu"
-msgstr "Toponym centroids calculated by the museum"
+msgstr "Calculated centroids"
 
 #: georef/static/georef/javascript/georef_layers.js:75
 msgid "Centroides de topònims extrets de la digitalització"
-msgstr "Toponym centroids extracted from digitalization"
+msgstr "Digitisation-derived centroids"
 
 #: georef/static/georef/javascript/georef_layers.js:76
 #: georef/static/georef/javascript/toponims_list.js:520
 msgid "Darreres versions de topònims"
-msgstr "Latest versions of toponyms"
+msgstr "Sites (latest versions)"
 
 #: georef/static/georef/javascript/georef_layers.js:77
 #: georef/static/georef/javascript/recursos_list.js:376
 #: georef/static/georef/javascript/recursos_list.js:440
 msgid "Recursos de georeferenciació (límits digitalitzats)"
-msgstr "Georeferencing resources (digitized limits)"
+msgstr "Cartographic resources (digitized limits)"
 
 #: georef/static/georef/javascript/georef_layers.js:78
 msgid "Recursos de georeferenciació (límits de les capes wms associades)"
-msgstr "Georeferencing resources (associated WMS layer bounds)"
+msgstr "Cartographic resources (associated WMS layer bounds)"
 
 #: georef/static/georef/javascript/georef_layers.js:91
 #: georef/static/georef/javascript/toponim_update.js:527
@@ -209,7 +209,7 @@ msgstr "Toponyms"
 #: georef/static/georef/javascript/georef_layers.js:96
 #: georef/static/georef/javascript/recursos_list.js:382
 msgid "Recursos de georeferenciació"
-msgstr "Georeferencing resources    "
+msgstr "Cartographic resources    "
 
 #: georef/static/georef/javascript/graphs.js:28
 #: georef/static/georef/javascript/toponims_list.js:132
@@ -247,7 +247,7 @@ msgstr "Number of toponyms by aquatic/terrestrial"
 #: georef/static/georef/javascript/toponims_list.js:456
 #: georef/static/georef/javascript/toponims_list.js:462
 msgid "Topònims"
-msgstr "Toponyms"
+msgstr "Sites"
 
 #: georef/static/georef/javascript/graphs.js:131
 msgid "Número de recursos georeferenciació per tipus"
@@ -414,7 +414,7 @@ msgstr "Created toponyms"
 #: georef/static/georef/javascript/toponims_import.js:146
 #: georef/static/georef/javascript/toponims_import.js:163
 msgid "Nom del topònim"
-msgstr "Toponym name"
+msgstr "Name"
 
 #: georef/static/georef/javascript/toponims_import.js:146
 #: georef/static/georef/javascript/toponims_import.js:163
@@ -505,11 +505,11 @@ msgstr "Filter has no conditions. Choose a few criteria and try again."
 
 #: georef/static/georef/javascript/toponims_list.js:521
 msgid "Nom topònim"
-msgstr "Toponym name"
+msgstr "Name"
 
 #: georef/static/georef/javascript/toponims_list.js:523
 msgid "Tipus de topònim"
-msgstr "Toponym type"
+msgstr "Type"
 
 #: georef/static/georef/javascript/toponims_list.js:524
 msgid "Número de versió"

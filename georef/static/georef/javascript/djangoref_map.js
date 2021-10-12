@@ -106,13 +106,13 @@
                 }
             }
             ,{
-                groupName: 'Bing Maps',
+                groupName: 'Microsoft Bing Maps',
                 expanded: false,
                 layers: {
-                    'Bing aerial': djangoRef.Map.bing,
-                    'Bing aerial+roads': djangoRef.Map.bing_aerial_labels,
-                    'Bing roads': djangoRef.Map.bing_road,
-                    'Bing roads dark': djangoRef.Map.bing_road_dark
+                    'Aerial': djangoRef.Map.bing,
+                    'Aerial+roads': djangoRef.Map.bing_aerial_labels,
+                    'Roads': djangoRef.Map.bing_road,
+                    'Roads dark': djangoRef.Map.bing_road_dark
                 }
             }
             /*,{

@@ -55,6 +55,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Recursos cartogràfics" %}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'recursos' %}">{% trans "Llistat" %}</a></li>
+                    <li><a href="{% url 'recursos_create' %}">{% trans "Afegir nou recurs" %}</a></li>
                     <li><a href="{% url 'recursfilters' %}">{% trans "Llistat de filtres de recursos" %}</a></li>
                     <li><a href="{% url 'recursos_capeswms' %}">{% trans "Càrrega de capes WMS pròpies" %}</a></li>
                     <li><a href="{% url 'prefsvisualitzaciowms' %}">{% trans "Preferències visualització capes WMS" %}</a></li>
@@ -64,6 +65,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Topònims" %}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'toponims' %}">{% trans "Llistat" %}</a></li>
+                    <li><a href="{% url 'toponims_create' %}">{% trans "Afegir nou topònim" %}</a></li>
                     <li><a href="{% url 'toponimstree' %}">{% trans "Arbre" %}</a></li>
                     <li><a href="{% url 'toponimfilters' %}">{% trans "Llistat de filtres de topònims" %}</a></li>
                 </ul>

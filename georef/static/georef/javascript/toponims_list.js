@@ -517,7 +517,7 @@ $(document).ready(function() {
         var html = '';
         html += '<style type="text/css">li.titol {font-size: 80%;padding:2px; } li.text {font-size: 100%;padding:2px;} a.linkFitxa{color:#00008B;text-align:right;padding:2px;} table.contingut{font-size: 80%;width:100%;} th, td {border: none;} td.atribut {text-align:right;vertical-align:top;padding:2px;} td.valor {text-align:left;padding:2px;} th.aladreta{text-align:right;padding:2px;} th.alesquerra{text-align:left;padding:2px;}</style>';
         html += '<table class="contingut"><tbody>';
-        html += '<tr><th class="alesquerra">' + gettext('Darreres versions de topònims') + '</th>';
+        html += '<tr><th class="alesquerra">' + gettext('Topònims') + '</th>';
         html += '<tr><td class="atribut">' + gettext('Nom topònim') + ' : </td><td class="valor">' + data.properties.nomtoponim + '</td></tr>';
         html += '<tr><td class="atribut">' + gettext('Aquàtic') + '? : </td><td class="valor">' + data.properties.aquatic + '</td></tr>';
         html += '<tr><td class="atribut">' + gettext('Tipus de topònim') + ' : </td><td class="valor">' + data.properties.tipustoponim + '</td></tr>';

@@ -10,6 +10,21 @@
         #val_x, #val_y, #val_inc{
             height: 25px;
         }
+        .qq-upload-button {
+            width: 150px;
+        }
+        .results_container {
+            display: flex;
+            flex-direction: column;
+        }
+        .row_result_container {
+            display: flex;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        #label_x, #label_y, #label_inc {
+            width: 160px;
+        }
     </style>
 {% endblock %}
 {% block extrahead %}
@@ -46,16 +61,41 @@
                 <li>Depenent de la mida i complexitat del fitxer, el procés pot trigar una mica.</li>
             </ul>
             -->
+            <p>{% trans 'Depenent de la mida i complexitat del fitxer, el procés pot trigar una mica' %}.</p>
         </div>
         <div class="container separador_seccio">
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-xs-2 col-xs-offset-2">
                     <button data-toggle="tooltip" title="{% trans 'Copiar resultats al portapapers' %}" id="clipboard" type="button" class="btn btn-primary"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="container">
             <div class="row">
+                <div class="col-xs-2">
+                    <div id="fileuploader"></div>
+                </div>
+                <div id="info_block" class="col-xs-10" style="display:none;">
+                    <div class="results_container">
+                        <div class="row_result_container">
+                            <button data-toggle="tooltip" title="{% trans 'Copiar resultats al portapapers' %}" id="clipboard" type="button" class="btn btn-primary"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
+                        </div>
+                        <div class="row_result_container">
+                            <span id="label_x" class="label label-primary">{% trans 'Coordenada x centroide (long)' %}: </span>
+                            <div id="val_x" class="col-xs-6"></div>
+                        </div>
+                        <div class="row_result_container">
+                            <span id="label_y" class="label label-primary">{% trans 'Coordenada y centroide (lat)' %}: </span>
+                            <div id="val_y" class="col-xs-6"></div>
+                        </div>
+                        <div class="row_result_container">
+                            <span id="label_inc" class="label label-primary">{% trans 'Radi incertesa (m)' %}: </span>
+                            <div id="val_inc" class="col-xs-6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="row">
                 <div class="col-xs-2">
                     <div id="fileuploader"></div>
                 </div>
@@ -79,7 +119,7 @@
                         <div id="val_inc" class="col-xs-6"></div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </main>
     <input id="filename" name="filename" type="hidden" value=""/>
