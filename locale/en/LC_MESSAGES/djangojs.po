@@ -204,7 +204,7 @@ msgstr "Cartographic resources (associated WMS layer bounds)"
 #: georef/static/georef/javascript/georef_layers.js:91
 #: georef/static/georef/javascript/toponim_update.js:527
 msgid "Toponims"
-msgstr "Toponyms"
+msgstr "Site names"
 
 #: georef/static/georef/javascript/georef_layers.js:96
 #: georef/static/georef/javascript/recursos_list.js:382
@@ -223,25 +223,25 @@ msgstr "Terrestrial"
 
 #: georef/static/georef/javascript/graphs.js:127
 msgid "Número de topònims per país"
-msgstr "Number of toponyms by country"
+msgstr "Number of site names by country"
 
 #: georef/static/georef/javascript/graphs.js:127
 #: georef/static/georef/javascript/graphs.js:128
 #: georef/static/georef/javascript/graphs.js:129
 msgid "Número de topònims"
-msgstr "Number of toponyms"
+msgstr "Number of site names"
 
 #: georef/static/georef/javascript/graphs.js:128
 msgid "Número de topònims per georeferenciador"
-msgstr "Number of toponyms by georeferencer"
+msgstr "Number of site names by georeferencer"
 
 #: georef/static/georef/javascript/graphs.js:129
 msgid "Número de topònims per tipus"
-msgstr "Number of toponyms by type"
+msgstr "Number of site names by type"
 
 #: georef/static/georef/javascript/graphs.js:130
 msgid "Número de topònims per aquàtic/terrestre"
-msgstr "Number of toponyms by aquatic/terrestrial"
+msgstr "Number of site names by aquatic/terrestrial"
 
 #: georef/static/georef/javascript/graphs.js:130
 #: georef/static/georef/javascript/toponims_list.js:456
@@ -401,15 +401,15 @@ msgstr "Import results summary"
 
 #: georef/static/georef/javascript/toponims_import.js:140
 msgid "Número de topònims creats"
-msgstr "Number of created toponyms"
+msgstr "Number of created site names"
 
 #: georef/static/georef/javascript/toponims_import.js:140
 msgid "Topònims que ja existien"
-msgstr "Already existing toponyms"
+msgstr "Already existing site names"
 
 #: georef/static/georef/javascript/toponims_import.js:145
 msgid "Topònims creats"
-msgstr "Created toponyms"
+msgstr "Created site names"
 
 #: georef/static/georef/javascript/toponims_import.js:146
 #: georef/static/georef/javascript/toponims_import.js:163
@@ -423,7 +423,7 @@ msgstr "Link to toponym"
 
 #: georef/static/georef/javascript/toponims_import.js:162
 msgid "Topònims que ja existien a la base de dades (no s'han importat)"
-msgstr "Toponyms already existed in the database (not imported)"
+msgstr "Site names already existed in the database (not imported)"
 
 #: georef/static/georef/javascript/toponims_import.js:181
 msgid "Descarrega fitxer csv de resum"

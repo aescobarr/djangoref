@@ -1542,7 +1542,7 @@ def my_profile(request):
     return render(request, 'georef/profile.html', {'user_form': user_form, 'successfully_saved': successfully_saved})
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.profile.is_admin)
 @login_required
 @transaction.atomic
 def user_profile(request, user_id=None):
@@ -1589,7 +1589,7 @@ def change_my_password(request):
     return render(request, 'georef/change_password.html', {'form': form, 'edited_user': None})
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.profiles.is_admin)
 @login_required
 def change_password(request, user_id=None):
     this_user = get_object_or_404(User, pk=user_id)
@@ -1606,7 +1606,7 @@ def change_password(request, user_id=None):
     return render(request, 'georef/change_password.html', {'form': form, 'edited_user': this_user})
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.profile.is_admin)
 @login_required
 @transaction.atomic
 def user_new(request):

@@ -27,7 +27,7 @@ msgstr "English"
 
 #: georef/models.py:45 georef/views.py:2386 georef/views.py:2387
 msgid "Tipus de topònim"
-msgstr "Toponym type"
+msgstr "Site name type"
 
 #: georef/models.py:58 georef/templates/georef/toponim_create.html:60
 #: georef/templates/georef/toponim_update_2.html:115
@@ -37,7 +37,7 @@ msgstr "Country"
 
 #: georef/models.py:71
 msgid "Qualificador de la versió de topònim"
-msgstr "Toponym version qualifier"
+msgstr "Site name version qualifier"
 
 #: georef/models.py:87
 msgid "Sistema de referència del recurs"
@@ -45,7 +45,7 @@ msgstr "Resource reference system"
 
 #: georef/models.py:110 georef/templates/georef/toponim_search.html:40
 msgid "Topònim"
-msgstr "Toponym"
+msgstr "Site name"
 
 #: georef/models.py:218 georef/templates/georef/base.html:101
 msgid "Tipus unitats"
@@ -74,7 +74,7 @@ msgstr "Activate/Deactivate WMS layers"
 
 #: georef/models.py:310
 msgid "Versió de topònim"
-msgstr "Toponym version"
+msgstr "Site name version"
 
 #: georef/models.py:387 georef/templates/georef/recursos_list.html:172
 #: georef/views.py:2344 georef/views.py:2345
@@ -196,17 +196,17 @@ msgstr "Site names versions based on the resource"
 
 #: georef/templates/georef/_recursos_fields.html:80
 msgid "Toponímia"
-msgstr "Toponymy"
+msgstr "Site names"
 
 #: georef/templates/georef/_recursos_fields.html:85
 msgid "resource_toponymy_id_field_tooltip"
 msgstr ""
 "Identifies the information field in the structure information of the "
-"resource which allows for toponymic searches"
+"resource which allows for site name searches"
 
 #: georef/templates/georef/_recursos_fields.html:85
 msgid "Camp identificador toponímia"
-msgstr "Toponymy identifier field"
+msgstr "Site name identifier field"
 
 #: georef/templates/georef/_recursos_fields.html:91
 msgid "resource_base_graphic_file_tooltip"
@@ -767,7 +767,7 @@ msgstr ""
 "the ubiquity and availability of satellite positioning, so they usually have "
 "a reference of the sample location which is primarily based on the textual "
 "descriptions in the labels. Assigning a coordinate point in a map from its "
-"toponymical and position description is what we call georeferencing."
+"site name and position description is what we call georeferencing."
 
 #: georef/templates/georef/index.html:29
 msgid "home_text_4"
@@ -852,7 +852,7 @@ msgstr "Resource edition"
 
 #: georef/templates/georef/recurs_update.html:69
 msgid "Topònims basats en el recurs"
-msgstr "Toponyms based on the resource"
+msgstr "Site names based on the resource"
 
 #: georef/templates/georef/recursos_list.html:95
 #: georef/templates/georef/toponims_list.html:106
@@ -1016,7 +1016,7 @@ msgstr "Selected: none"
 #: georef/templates/georef/toponim_update_2.html:136
 msgid "node_search_tooltip"
 msgstr ""
-"Write three characters and a Toponym name search will be performed, "
+"Write three characters and a site name search will be performed, "
 "returning a list of results. Selecting an element from the list will result "
 "on it being selected in the tree."
 
@@ -1027,11 +1027,11 @@ msgstr "Parent site"
 
 #: georef/templates/georef/toponim_search.html:20
 msgid "Cerca topònims"
-msgstr "Toponyms search"
+msgstr "Site name search"
 
 #: georef/templates/georef/toponim_search.html:25
 msgid "Cerca de topònims"
-msgstr "Toponyms search"
+msgstr "Site name search"
 
 #: georef/templates/georef/toponim_search.html:28
 msgid "Cerca"
@@ -1055,7 +1055,7 @@ msgstr "Site edition"
 
 #: georef/templates/georef/toponim_update_2.html:95
 msgid "Tornar al llistat de topònims"
-msgstr "Back to toponym list"
+msgstr "Back to site name list"
 
 #: georef/templates/georef/toponim_update_2.html:134
 msgid "Jerarquia del topònim"
@@ -1063,11 +1063,11 @@ msgstr "Site hyerarchy"
 
 #: georef/templates/georef/toponim_update_2.html:144
 msgid "btn_save_toponim_tooltip"
-msgstr "Save the modified toponym fields"
+msgstr "Save the modified site name fields"
 
 #: georef/templates/georef/toponim_update_2.html:144
 msgid "Desar Topònim"
-msgstr "Save toponym"
+msgstr "Save site name"
 
 #: georef/templates/georef/toponim_update_2.html:151
 msgid "Versions"
@@ -1075,7 +1075,7 @@ msgstr "Versions"
 
 #: georef/templates/georef/toponim_update_2.html:153
 msgid "btn_save_version_tooltip"
-msgstr "Create the form for a new toponym version"
+msgstr "Create the form for a new site name version"
 
 #: georef/templates/georef/toponim_update_2.html:153
 msgid "Afegir nova versió"
@@ -1123,7 +1123,7 @@ msgstr "(adding new version...)"
 #: georef/templates/georef/toponim_update_2.html:196
 msgid "toponym_update_no_versions"
 msgstr ""
-"This toponym has no versions yet. Fill the version form and press 'Save "
+"This site name has no versions yet. Fill the version form and press 'Save "
 "version' to create the first version"
 
 #: georef/templates/georef/toponim_update_2.html:205
@@ -1157,7 +1157,7 @@ msgstr "Y coordinate (latitude)"
 #: georef/templates/georef/toponim_update_2.html:241
 msgid "toponym_numbering_tooltip"
 msgstr ""
-"Numbering of the versions of each toponym, counting from 1 and up. Useful "
+"Numbering of the versions of each site name, counting from 1 and up. Useful "
 "only to identify versions"
 
 #: georef/templates/georef/toponim_update_2.html:241
@@ -1186,7 +1186,7 @@ msgstr "Resource reference system"
 #: georef/templates/georef/toponim_update_2.html:262
 msgid "toponym_nomtoponim_resource"
 msgstr ""
-"Literal transcription of the toponym according to the cartographic resource "
+"Literal transcription of the site name according to the cartographic resource "
 "used in the georeferencing process"
 
 #: georef/templates/georef/toponim_update_2.html:262
@@ -1200,7 +1200,7 @@ msgstr "Generation date of the version data"
 #: georef/templates/georef/toponim_update_2.html:280
 msgid "toponim_coordx_origin"
 msgstr ""
-"Value of the longitude coordinate resulting from locating the toponym in the "
+"Value of the longitude coordinate resulting from locating the site name in the "
 "resource and its correspondent conversion to WGS84 if needed"
 
 #: georef/templates/georef/toponim_update_2.html:280
@@ -1210,7 +1210,7 @@ msgstr "Original X coordinate"
 #: georef/templates/georef/toponim_update_2.html:286
 msgid "toponim_coordy_origin"
 msgstr ""
-"Value of the latitude coordinate resulting from locating the toponym in the "
+"Value of the latitude coordinate resulting from locating the site name in the "
 "resource and its correspondent conversion to WGS84 if needed"
 
 #: georef/templates/georef/toponim_update_2.html:286
@@ -1267,7 +1267,7 @@ msgstr "Site names from CSV import"
 
 #: georef/templates/georef/toponims_import.html:34
 msgid "Aquesta eina permet importar topònims des d'un fitxer csv."
-msgstr "This tool allows the user to import toponyms from a csv file."
+msgstr "This tool allows the user to import site names from a csv file."
 
 #: georef/templates/georef/toponims_import.html:35
 msgid "Detalls"
@@ -1288,7 +1288,7 @@ msgstr ""
 "maintaining the indicated order:</p><p><ul><li>Name</li><li>Type</"
 "li><li>Country</li><li>Aquatic</li><li>Parent node</li><li>Version number</"
 "li><li>Version qualifier</li><li>Version captured from resource</"
-"li><li>Toponym name in the resource</li><li>Date</li><li>Original X "
+"li><li>Site name name in the resource</li><li>Date</li><li>Original X "
 "coordinate (LONG)</li><li>Original Y coordinate (LAT)</li><li>Z Coordinate</"
 "li><li>Coordinate uncertainty (m)</li><li>Height uncertainty (m)</"
 "li><li>Georeferencer</li><li>Comments</li><li>Parent site name in Georef</"
@@ -1313,7 +1313,7 @@ msgstr "All"
 
 #: georef/templates/georef/toponims_list.html:163
 msgid "help_btn_add_toponym"
-msgstr "Click here to access the Toponym creation form"
+msgstr "Click here to access the Site name creation form"
 
 #: georef/templates/georef/toponims_list.html:193
 msgid "Filtre geogràfic"
@@ -1342,7 +1342,7 @@ msgstr "Parent table edition"
 #: georef/templates/georef/user_base.html:122
 #: georef/templates/georef/user_new.html:137
 msgid "Edició topònim"
-msgstr "Toponym edition"
+msgstr "Site name edition"
 
 #: georef/templates/georef/user_base.html:128
 #: georef/templates/georef/user_new.html:143
@@ -1367,7 +1367,7 @@ msgstr "Password(repeat)"
 
 #: georef/views.py:903
 msgid "Tots els topònims"
-msgstr "All toponyms"
+msgstr "All site names"
 
 #: georef/views.py:1005 georef/views.py:1706
 msgid "Recurs desat amb èxit!"
@@ -1395,7 +1395,7 @@ msgstr "Unit type"
 
 #: georef_addenda/models.py:19
 msgid "Geometria de versió de topònim"
-msgstr "Toponym version geometry"
+msgstr "Site name version geometry"
 
 #: georef_addenda/models.py:30
 msgid "Geometria de recurs de georeferenciació"
@@ -1413,7 +1413,7 @@ msgstr "Help file"
 #~ msgstr "Resource creation"
 
 #~ msgid "Creació de topònim"
-#~ msgstr "Toponym creation"
+#~ msgstr "Site name creation"
 
 #~ msgid "Coordenada Z"
 #~ msgstr "Z coordinate"
@@ -1422,7 +1422,7 @@ msgstr "Help file"
 #~ msgstr "Height uncertainty(m)"
 
 #~ msgid "Mostrant tots els topònims"
-#~ msgstr "Showing all toponyms"
+#~ msgstr "Showing all site names"
 
 #~ msgid "Mostrant només els topònims de"
-#~ msgstr "Showing only toponyms for"
+#~ msgstr "Showing only site names for"
