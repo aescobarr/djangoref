@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-21 16:49+0200\n"
+"POT-Creation-Date: 2021-10-21 17:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -254,6 +254,7 @@ msgid "Darreres versions de topònims"
 msgstr "Darreres versions de topònims"
 
 #: georef/static/georef/javascript/georef_layers.js:77
+#: georef/static/georef/javascript/georef_layers.js:161
 #: georef/static/georef/javascript/recursos_list.js:376
 #: georef/static/georef/javascript/recursos_list.js:440
 #: static/georef/javascript/georef_layers.js:77
@@ -312,6 +313,19 @@ msgstr "Tipus de topònim"
 #: static/georef/javascript/toponims_list.js:524
 msgid "Número de versió"
 msgstr "Número de versió"
+
+#: georef/static/georef/javascript/georef_layers.js:162
+#: georef/static/georef/javascript/recursos_list.js:73
+#: georef/static/georef/javascript/recursos_list.js:441
+#: static/georef/javascript/recursos_list.js:441
+msgid "Nom recurs"
+msgstr "Nom recurs"
+
+#: georef/static/georef/javascript/georef_layers.js:163
+#: georef/static/georef/javascript/recursos_list.js:442
+#: static/georef/javascript/recursos_list.js:442
+msgid "Acrònim"
+msgstr "Acrònim"
 
 #: georef/static/georef/javascript/graphs.js:30
 #: static/georef/javascript/graphs.js:30
@@ -420,17 +434,6 @@ msgstr "Esborrant filtre de recursos..."
 #: static/georef/javascript/toponimfilters_list.js:105
 msgid "Segur que vols esborrar?"
 msgstr "Segur que vols esborrar?"
-
-#: georef/static/georef/javascript/recursos_list.js:73
-#: georef/static/georef/javascript/recursos_list.js:441
-#: static/georef/javascript/recursos_list.js:441
-msgid "Nom recurs"
-msgstr "Nom recurs"
-
-#: georef/static/georef/javascript/recursos_list.js:442
-#: static/georef/javascript/recursos_list.js:442
-msgid "Acrònim"
-msgstr "Acrònim"
 
 #: georef/static/georef/javascript/toponim_update.js:96
 #: static/georef/javascript/toponim_update.js:96

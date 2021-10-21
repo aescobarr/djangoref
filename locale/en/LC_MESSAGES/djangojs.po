@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-21 16:49+0200\n"
+"POT-Creation-Date: 2021-10-21 17:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -251,6 +251,7 @@ msgid "Darreres versions de topònims"
 msgstr "Sites (latest versions)"
 
 #: georef/static/georef/javascript/georef_layers.js:77
+#: georef/static/georef/javascript/georef_layers.js:161
 #: georef/static/georef/javascript/recursos_list.js:376
 #: georef/static/georef/javascript/recursos_list.js:440
 #: static/georef/javascript/georef_layers.js:77
@@ -309,6 +310,19 @@ msgstr "Type"
 #: static/georef/javascript/toponims_list.js:524
 msgid "Número de versió"
 msgstr "Version number"
+
+#: georef/static/georef/javascript/georef_layers.js:162
+#: georef/static/georef/javascript/recursos_list.js:73
+#: georef/static/georef/javascript/recursos_list.js:441
+#: static/georef/javascript/recursos_list.js:441
+msgid "Nom recurs"
+msgstr "Resource name"
+
+#: georef/static/georef/javascript/georef_layers.js:163
+#: georef/static/georef/javascript/recursos_list.js:442
+#: static/georef/javascript/recursos_list.js:442
+msgid "Acrònim"
+msgstr "Acronym"
 
 #: georef/static/georef/javascript/graphs.js:30
 #: static/georef/javascript/graphs.js:30
@@ -417,17 +431,6 @@ msgstr "Deleting resource filter..."
 #: static/georef/javascript/toponimfilters_list.js:105
 msgid "Segur que vols esborrar?"
 msgstr "Are you sure you want to delete?"
-
-#: georef/static/georef/javascript/recursos_list.js:73
-#: georef/static/georef/javascript/recursos_list.js:441
-#: static/georef/javascript/recursos_list.js:441
-msgid "Nom recurs"
-msgstr "Resource name"
-
-#: georef/static/georef/javascript/recursos_list.js:442
-#: static/georef/javascript/recursos_list.js:442
-msgid "Acrònim"
-msgstr "Acronym"
 
 #: georef/static/georef/javascript/toponim_update.js:96
 #: static/georef/javascript/toponim_update.js:96
