@@ -3,43 +3,83 @@
 {% load i18n %}
 {% block extra_css %}
     <link href="{% static 'jquery-ui/themes/base/jquery-ui.min.css' %}" rel="stylesheet">
+    <link href="{% static 'georef/javascript/leaflet/leaflet.css' %}" rel="stylesheet">
+    <link href="{% static 'georef/javascript/leaflet.plugins/Leaflet.StyledLayerControl/css/styledLayerControl.css' %}" rel="stylesheet">
+    <link href="{% static 'georef/css/georef.css' %}" rel="stylesheet">
+    <link href="{% static 'georef/javascript/leaflet.plugins/Leaflet.Coordinates-master/dist/Leaflet.Coordinates-0.1.5.css' %}" rel="stylesheet">
+    <style>
+        #map {
+            margin-top: 10px;
+            height: 600px;
+        }
+    </style>
+{% endblock %}
+{% block extrahead %}
+    <script>
+        var wms_url = "{{ wms_url }}";
+    </script>
 {% endblock %}
 {% block main %}
 <main>
     <div class="page-header">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active">{% trans "Inici" %}</li>
+                <li class="breadcrumb-item active">{% trans 'Inici' %}</li>
             </ol>
         </div>
     </div>
-    <div class="container col-md-6 col-md-offset-3">
-        <div><h3>{% trans "home_text_1" %}</h3></div>
-        <!--<div><h3>La plataforma per a treballs en cartografia i georeferenciació</h3></div>-->
-        <div>
-            <p class="text-justify">
-                {% trans "home_text_2" %}
-                <!--La cartografia està present en gairebé tots els àmbits d’activitat del museu: col·leccions, recerca, publicacions, exposicions, etc. Georef és el recurs desenvolupat per donar suport a les necessitats d’indexar i reconèixer recursos cartogràfics útils inicialment pels projectes del Museu de Ciències Naturals de Barcelona. Avui dia ja és una eina compartida per altres institucions.-->
-            </p>
-            <p class="text-justify">
-                {% trans "home_text_3" %}
-                <!--Un projecte especialment actiu en museus d'història natural és la georeferenciació retrospectiva de les mostres de col·leccions. La immensa majoria de mostres són anteriors a la generalització del posicionament per satèl·lit i tenen assignada una referència del lloc de recol·lecció basada en les dades textuals de les etiquetes. Convertir topònims i descripcions de posicionament respecte topònims en un punt de coordenades sobre un mapa és l’acció de qualitat que definim com a georeferenciació.-->
-            </p>
-            <p class="text-justify">
-                {% trans "home_text_4" %}
-                <!--Desar la traça d’aquestes estimacions de georeferenciació permet:-->
-                <ul>
-                    <li>{% trans "home_text_4_1" %}</li>
-                    <!--<li>la reutilització posterior de les dades per augmentar l’eficiència de la georeferenciació.</li>-->
-                    <li>{% trans "home_text_4_2" %}</li>
-                    <!--<li>garanteix la coherència entre si de les dades de localització de les mostres de col·leccions.</li>-->
-                    <li>{% trans "home_text_4_3" %}</li>
-                    <!--<li>eventualment permet revisar la qualitat de la pròpia georeferenciació.</li>-->
-                </ul>
-                {% trans "home_text_5" %}
-                <!--La georeferenciació de col·leccions és un projecte capital a Georef.-->
-            </p>
-        </div>
+    <div class="container">
+        <div id="map"></div>
     </div>
 </main>
+{% endblock %}
+{% block extra_js %}
+    <script>
+        var editableLayers;
+        var controlCapes;
+    </script>
+    <script src="{{ google_maps }}" async defer></script>
+    <script src="{% static 'georef/javascript/leaflet/leaflet.js' %}"></script>
+
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/Leaflet.draw.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/Leaflet.Draw.Event.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/Toolbar.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/Tooltip.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/ext/GeometryUtil.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/ext/LatLngUtil.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/ext/LineUtil.Intersect.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/ext/Polygon.Intersect.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/ext/Polyline.Intersect.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/ext/TouchEvents.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/draw/DrawToolbar.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/draw/handler/Draw.Feature.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/draw/handler/Draw.SimpleShape.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/draw/handler/Draw.Polyline.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/draw/handler/Draw.Marker.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/draw/handler/Draw.Circle.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/draw/handler/Draw.CircleMarker.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/draw/handler/Draw.Polygon.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/draw/handler/Draw.Rectangle.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/edit/EditToolbar.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/edit/handler/EditToolbar.Edit.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/edit/handler/EditToolbar.Delete.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/Control.Draw.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/edit/handler/Edit.Poly.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/edit/handler/Edit.SimpleShape.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/edit/handler/Edit.Rectangle.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/edit/handler/Edit.Marker.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/edit/handler/Edit.CircleMarker.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/edit/handler/Edit.Circle.js' %}"></script>
+
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.GridLayer.GoogleMutant/Leaflet.GoogleMutant.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.StyledLayerControl/src/styledLayerControl.js' %}"></script>
+    <script src="{% static 'georef/javascript/leaflet.plugins/Leaflet.Coordinates-master/dist/Leaflet.Coordinates-0.1.5.min.js' %}"></script>
+    <script src="{% static 'georef/javascript/cookies.js' %}?{{ revision }}"></script>
+    <script src="{% static 'georef/javascript/csrf_utils.js' %}?{{ revision }}"></script>
+    <script src="{% static 'georef/javascript/leaflet-bing-layer.min.js' %}"></script>
+    <script>
+        var bing_key = '{{ bing }}';
+    </script>
+    <script src="{% static 'georef/javascript/djangoref_map.js' %}?{{ revision }}"></script>
+    <script src="{% static 'georef/javascript/georef_layers.js' %}?{{ revision }}"></script>
 {% endblock %}

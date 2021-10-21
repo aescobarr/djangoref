@@ -198,7 +198,9 @@ def generic_datatable_list_endpoint(request, search_field_list, queryClass, clas
 
 
 def index(request):
-    return render(request, 'georef/index.html')
+    wms_url = conf.GEOSERVER_WMS_URL
+    context = {'wms_url': wms_url, 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY}
+    return render(request, 'georef/index.html', context)
 
 
 class PaisViewSet(viewsets.ModelViewSet):

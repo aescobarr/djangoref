@@ -529,7 +529,7 @@ msgstr "Site name type"
 
 #: georef/templates/georef/base.html:104 georef/templates/georef/graphs.html:22
 msgid "Gràfiques"
-msgstr "Graphics"
+msgstr "Usage charts"
 
 #: georef/templates/georef/base.html:105
 #: georef/templates/georef/georef_layers.html:28

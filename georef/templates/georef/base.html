@@ -76,15 +76,15 @@
                     <li><a href="{% url 'toponims_search' %}">{% trans "Cerca topònim" %}</a></li>
                     <li><a href="{% url 'calculcentroides' %}">{% trans "Calcula centroides" %}</a></li>
                     <li><a href="{% url 'toponims_import' %}">{% trans "Importació de topònims" %}</a></li>
-                    <li><a href="https://www.google.es" target="_blank">{% trans "Anar a google" %}</a></li>
-                    <li><a href="http://www.icgc.cat/" target="_blank">{% trans "Anar a ICC" %}</a></li>
+                    <li><a href="{% url 'graphs' %}">{% trans "Gràfiques" %}</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="http://betaportal.icgc.cat/convertbox/#" target="_blank">{% trans "Conversió de coordenades - Convertbox" %}</a></li>
-                    <li><a href="http://www.earthpoint.us/Convert.aspx" target="_blank">{% trans "Conversió de coordenades - Earth Point: Convert coordinates" %}</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="http://www.geo-locate.org/web/WebGeoref.aspx" target="_blank">{% trans "Georeferenciació - Geolocate" %}</a></li>
-                    <li><a href="https://www.gbif.org/tool/81315/georeferencing-calculator" target="_blank">{% trans "Georeferenciació - Georeferencing calculator" %}</a></li>
-                    <li><a href="http://berkeleymapper.berkeley.edu/#" target="_blank">{% trans "Georeferenciació - Berkeley Mapper" %}</a></li>
+                    {% for link in custom_tool_links %}
+                        {% if link.1 == '' %}
+                        <li role="separator" class="divider"></li>
+                        {% else %}
+                        <li><a href="{{ link.1 }}" target="_blank">{{ link.0 }}</a></li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
             </li>
             <li class="dropdown">
@@ -101,7 +101,6 @@
                     <li><a href="{% url 't_tipusunitats' %}">{% trans "Tipus unitats" %}</a></li>
                 </ul>
             </li>
-            <li><a href="{% url 'graphs' %}">{% trans "Gràfiques" %}</a></li>
             <li><a href="{% url 'georef_layers' %}">{% trans "Capes de georeferenciació" %}</a></li>
             <li><a href="{% url 'help' %}">{% trans "Ajut" %}</a></li>
             <li><a href="{% url 'about' %}">{% trans "Sobre" %}</a></li>
