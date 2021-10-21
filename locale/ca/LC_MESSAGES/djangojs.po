@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-21 16:34+0200\n"
+"POT-Creation-Date: 2021-10-21 16:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -246,6 +246,7 @@ msgid "Centroides de topònims extrets de la digitalització"
 msgstr "Centroides de topònims extrets de la digitalització"
 
 #: georef/static/georef/javascript/georef_layers.js:76
+#: georef/static/georef/javascript/georef_layers.js:148
 #: static/georef/javascript/georef_layers.js:76
 #: static/georef/javascript/georef_layers.js:148
 #: static/georef/javascript/toponims_list.js:520
@@ -280,6 +281,14 @@ msgstr "Toponims"
 msgid "Recursos de georeferenciació"
 msgstr "Recursos de georeferenciació"
 
+#: georef/static/georef/javascript/georef_layers.js:149
+#: georef/static/georef/javascript/toponims_list.js:521
+#: static/georef/javascript/georef_layers.js:149
+#: static/georef/javascript/toponims_list.js:521
+msgid "Nom topònim"
+msgstr "Nom topònim"
+
+#: georef/static/georef/javascript/georef_layers.js:150
 #: georef/static/georef/javascript/graphs.js:28
 #: georef/static/georef/javascript/toponims_list.js:132
 #: georef/static/georef/javascript/toponims_list.js:522
@@ -289,6 +298,20 @@ msgstr "Recursos de georeferenciació"
 #: static/georef/javascript/toponims_list.js:522
 msgid "Aquàtic"
 msgstr "Aquàtic"
+
+#: georef/static/georef/javascript/georef_layers.js:151
+#: georef/static/georef/javascript/toponims_list.js:523
+#: static/georef/javascript/georef_layers.js:151
+#: static/georef/javascript/toponims_list.js:523
+msgid "Tipus de topònim"
+msgstr "Tipus de topònim"
+
+#: georef/static/georef/javascript/georef_layers.js:152
+#: georef/static/georef/javascript/toponims_list.js:524
+#: static/georef/javascript/georef_layers.js:152
+#: static/georef/javascript/toponims_list.js:524
+msgid "Número de versió"
+msgstr "Número de versió"
 
 #: georef/static/georef/javascript/graphs.js:30
 #: static/georef/javascript/graphs.js:30
@@ -665,24 +688,6 @@ msgid ""
 msgstr ""
 "El filtre no té condicions, està en blanc. Tria alguns criteris i torna-ho a "
 "intentar."
-
-#: georef/static/georef/javascript/toponims_list.js:521
-#: static/georef/javascript/georef_layers.js:149
-#: static/georef/javascript/toponims_list.js:521
-msgid "Nom topònim"
-msgstr "Nom topònim"
-
-#: georef/static/georef/javascript/toponims_list.js:523
-#: static/georef/javascript/georef_layers.js:151
-#: static/georef/javascript/toponims_list.js:523
-msgid "Tipus de topònim"
-msgstr "Tipus de topònim"
-
-#: georef/static/georef/javascript/toponims_list.js:524
-#: static/georef/javascript/georef_layers.js:152
-#: static/georef/javascript/toponims_list.js:524
-msgid "Número de versió"
-msgstr "Número de versió"
 
 #: georef/static/georef/javascript/users_list.js:37
 #: static/georef/javascript/users_list.js:37
