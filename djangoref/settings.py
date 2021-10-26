@@ -39,7 +39,7 @@ LOCALE_PATHS = (
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # OVERRIDEN IN SETTINGS_LOCAL
-SECRET_KEY = 'gx%(-$i!e@y9o-xa^=962t*f-ngn-!u+zf)m-$icedw8pzb@&s'
+SECRET_KEY = 'secret!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # OVERRIDEN IN SETTINGS_LOCAL
@@ -52,8 +52,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'material',
-    #'material.admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -137,6 +135,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+# OVERRIDEN IN SETTINGS_LOCAL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

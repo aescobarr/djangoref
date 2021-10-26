@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 07:54+0000\n"
+"POT-Creation-Date: 2021-10-26 06:25+0000\n"
 "PO-Revision-Date: 2019-11-18 09:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,13 +25,41 @@ msgstr "Catalan"
 msgid "English"
 msgstr "English"
 
-#: georef/models.py:45 georef/views.py:2386 georef/views.py:2387
+#: djangoref/settings.py:206
+msgid "Anar a google"
+msgstr "Go to google"
+
+#: djangoref/settings.py:207
+msgid "Anar a ICC"
+msgstr "Go to ICC"
+
+#: djangoref/settings.py:209
+msgid "Conversió de coordenades - Convertbox"
+msgstr "Coordinate conversion - Convertbox"
+
+#: djangoref/settings.py:210
+msgid "Conversió de coordenades - Earth Point: Convert coordinates"
+msgstr "Coordinate conversion - Earth Point: Convert coordinates"
+
+#: djangoref/settings.py:212
+msgid "Georeferenciació - Geolocate"
+msgstr "Georeferencing - Geolocate"
+
+#: djangoref/settings.py:213
+msgid "Georeferenciació - Georeferencing calculator"
+msgstr "Georeferencing - Georeferencing calculator"
+
+#: djangoref/settings.py:214
+msgid "Georeferenciació - Berkeley Mapper"
+msgstr "Georeferenciacing - Berkeley Mapper"
+
+#: georef/models.py:45 georef/views.py:2388 georef/views.py:2389
 msgid "Tipus de topònim"
 msgstr "Site name type"
 
 #: georef/models.py:58 georef/templates/georef/toponim_create.html:60
 #: georef/templates/georef/toponim_update_2.html:115
-#: georef/templates/georef/toponims_list.html:190 georef/views.py:2331
+#: georef/templates/georef/toponims_list.html:190 georef/views.py:2333
 msgid "País"
 msgstr "Country"
 
@@ -56,8 +84,8 @@ msgid "Tipus de recurs"
 msgstr "Resource type"
 
 #: georef/models.py:247 georef/templates/georef/_recursos_fields.html:144
-#: georef/templates/georef/base.html:99 georef/views.py:2372
-#: georef/views.py:2373
+#: georef/templates/georef/base.html:99 georef/views.py:2374
+#: georef/views.py:2375
 msgid "Tipus de suport"
 msgstr "Support type"
 
@@ -77,7 +105,7 @@ msgid "Versió de topònim"
 msgstr "Site name version"
 
 #: georef/models.py:387 georef/templates/georef/recursos_list.html:172
-#: georef/views.py:2344 georef/views.py:2345
+#: georef/views.py:2346 georef/views.py:2347
 msgid "Paraula clau"
 msgstr "Keyword"
 
@@ -104,6 +132,10 @@ msgstr "Georeferencing resource"
 #: georef/models.py:605
 msgid "Filtre"
 msgstr "Filter"
+
+#: georef/permissions.py:6
+msgid "Edició d'usuaris no permesa."
+msgstr "User edition not allowed."
 
 #: georef/templates/georef/_recursos_fields.html:3
 #: georef/templates/georef/_recursos_fields.html:209
@@ -148,8 +180,8 @@ msgid "Acrònim"
 msgstr "Acronym"
 
 #: georef/templates/georef/_recursos_fields.html:39
-#: georef/templates/georef/base.html:98 georef/views.py:2358
-#: georef/views.py:2359
+#: georef/templates/georef/base.html:98 georef/views.py:2360
+#: georef/views.py:2361
 msgid "Tipus de contingut"
 msgstr "Content type"
 
@@ -186,7 +218,7 @@ msgstr ""
 "added to the author thesaurus automatically."
 
 #: georef/templates/georef/_recursos_fields.html:60
-#: georef/templates/georef/about.html:20 georef/templates/georef/base.html:93
+#: georef/templates/georef/about.html:46 georef/templates/georef/base.html:93
 msgid "Autors"
 msgstr "Authors"
 
@@ -296,12 +328,12 @@ msgid "Divisió política administrativa"
 msgstr "Administrative division"
 
 #: georef/templates/georef/about.html:12 georef/templates/georef/base.html:53
-#: georef/templates/georef/calculcentroides.html:27
+#: georef/templates/georef/calculcentroides.html:42
 #: georef/templates/georef/capes_wms.html:32
 #: georef/templates/georef/change_password.html:20
 #: georef/templates/georef/georef_layers.html:27
 #: georef/templates/georef/graphs.html:21 georef/templates/georef/help.html:9
-#: georef/templates/georef/index.html:12
+#: georef/templates/georef/index.html:27
 #: georef/templates/georef/prefsvisualitzaciowms.html:21
 #: georef/templates/georef/profile.html:24
 #: georef/templates/georef/recurs_create.html:38
@@ -322,7 +354,7 @@ msgstr "Administrative division"
 msgid "Inici"
 msgstr "Home"
 
-#: georef/templates/georef/about.html:13 georef/templates/georef/base.html:107
+#: georef/templates/georef/about.html:13 georef/templates/georef/base.html:106
 msgid "Sobre"
 msgstr "About"
 
@@ -348,7 +380,51 @@ msgstr ""
 "API is a separate project and can be found <a href=\"https://github.com/"
 "aescobarr/nhc-georef\">here</a>.</p>"
 
-#: georef/templates/georef/about.html:21
+#: georef/templates/georef/about.html:20
+msgid "home_text_1"
+msgstr "A platform for cartography and georeferencing tasks"
+
+#: georef/templates/georef/about.html:24
+msgid "home_text_2"
+msgstr ""
+"Cartography is present in almost all aspects of Museu de Ciencies Naturals "
+"de Barcelona: collections, research, publications,  displays, etc. Georef is "
+"the platform developed to lend support to the index and recognition of "
+"useful georeferencing resources. Initially used only by MCNB, today is a "
+"tool shared with other institutions."
+
+#: georef/templates/georef/about.html:28
+msgid "home_text_3"
+msgstr ""
+"A specially active project in natural history museums is the retrospective "
+"georeferencing of the sample collections. A great number of samples precede "
+"the ubiquity and availability of satellite positioning, so they usually have "
+"a reference of the sample location which is primarily based on the textual "
+"descriptions in the labels. Assigning a coordinate point in a map from its "
+"site name and position description is what we call georeferencing."
+
+#: georef/templates/georef/about.html:32
+msgid "home_text_4"
+msgstr "Storing traceable information of these estimations allows:"
+
+#: georef/templates/georef/about.html:35
+msgid "home_text_4_1"
+msgstr "data reutilization to improve the georeferencing efficiency."
+
+#: georef/templates/georef/about.html:37
+msgid "home_text_4_2"
+msgstr ""
+"guarantees the coherence among the location data of the sample collections."
+
+#: georef/templates/georef/about.html:39
+msgid "home_text_4_3"
+msgstr "eventually allows assessment of the georeferencing process quality."
+
+#: georef/templates/georef/about.html:42
+msgid "home_text_5"
+msgstr "Collection georeferencing is a capital project inside Georef."
+
+#: georef/templates/georef/about.html:47
 msgid ""
 "<p class=\"text-justify\"><ul><li>Desenvolupadors: <a href=\"https://github."
 "com/aescobarr\">Agustí Escobar</a> (versió actual), <a href=\"https://github."
@@ -363,22 +439,22 @@ msgstr ""
 "\">Arnald Marcer (CREAF)</a>, Francesc Uribe (Museu de Ciències Naturals de "
 "Barcelona).</li></ul></p>"
 
-#: georef/templates/georef/about.html:22
+#: georef/templates/georef/about.html:48
 msgid "Com citar el programari"
 msgstr "How to cite this software"
 
-#: georef/templates/georef/about.html:23
+#: georef/templates/georef/about.html:49
 msgid ""
 "<p class=\"text-justify\">Marcer A., Escobar A., Garcia V. and Uribe F. "
 "(2019) Georef. Github repository <a href=\"https://github.com/aescobarr/nhc-"
 "georef\">https://github.com/aescobarr/nhc-georef</a></p>"
 msgstr ""
 
-#: georef/templates/georef/about.html:24
+#: georef/templates/georef/about.html:50
 msgid "Llicència"
 msgstr "License"
 
-#: georef/templates/georef/about.html:25
+#: georef/templates/georef/about.html:51
 msgid ""
 "<p class=\"text-justify\">Aquest programari es distribueix amb la llicència "
 "<a href=\"https://www.gnu.org/licenses/gpl-3.0.html\" rel=\"nofollow\">GNU "
@@ -388,11 +464,11 @@ msgstr ""
 "www.gnu.org/licenses/gpl-3.0.html\" rel=\"nofollow\">GNU General Public "
 "License v3.0</a>.</p>"
 
-#: georef/templates/georef/about.html:26
+#: georef/templates/georef/about.html:52
 msgid "Agraïments"
 msgstr "Acknowledgements"
 
-#: georef/templates/georef/about.html:27
+#: georef/templates/georef/about.html:53
 msgid ""
 "<p>Moltes gràcies a Miguel Martínez( <a href=\"https://www.auupa.com/\" rel="
 "\"nofollow\">Auupa</a> ) per la seva ajuda integrant el programari a l&#39;"
@@ -438,7 +514,7 @@ msgstr "Create own WMS layer"
 #: georef/templates/georef/toponim_update_2.html:86
 #: georef/templates/georef/toponims_list.html:101
 #: georef/templates/georef/toponims_list.html:121
-#: georef/templates/georef/toponimstree.html:23 georef/views.py:714
+#: georef/templates/georef/toponimstree.html:23 georef/views.py:716
 msgid "Topònims"
 msgstr "Site names"
 
@@ -458,7 +534,7 @@ msgid "Llistat de filtres de topònims"
 msgstr "List of filters"
 
 #: georef/templates/georef/base.html:74
-#: georef/templates/georef/calculcentroides.html:28
+#: georef/templates/georef/calculcentroides.html:43
 #: georef/templates/georef/toponim_search.html:19
 #: georef/templates/georef/toponims_import.html:23
 msgid "Utilitats"
@@ -469,7 +545,7 @@ msgid "Cerca topònim"
 msgstr "Search site name"
 
 #: georef/templates/georef/base.html:77
-#: georef/templates/georef/calculcentroides.html:29
+#: georef/templates/georef/calculcentroides.html:44
 msgid "Calcula centroides"
 msgstr "Centroid calculation"
 
@@ -478,33 +554,9 @@ msgstr "Centroid calculation"
 msgid "Importació de topònims"
 msgstr "Site names from CSV import"
 
-#: georef/templates/georef/base.html:79
-msgid "Anar a google"
-msgstr "Go to google"
-
-#: georef/templates/georef/base.html:80
-msgid "Anar a ICC"
-msgstr "Go to ICC"
-
-#: georef/templates/georef/base.html:82
-msgid "Conversió de coordenades - Convertbox"
-msgstr "Coordinate conversion - Convertbox"
-
-#: georef/templates/georef/base.html:83
-msgid "Conversió de coordenades - Earth Point: Convert coordinates"
-msgstr "Coordinate conversion - Earth Point: Convert coordinates"
-
-#: georef/templates/georef/base.html:85
-msgid "Georeferenciació - Geolocate"
-msgstr "Georeferencing - Geolocate"
-
-#: georef/templates/georef/base.html:86
-msgid "Georeferenciació - Georeferencing calculator"
-msgstr "Georeferencing - Georeferencing calculator"
-
-#: georef/templates/georef/base.html:87
-msgid "Georeferenciació - Berkeley Mapper"
-msgstr "Georeferenciacing - Berkeley Mapper"
+#: georef/templates/georef/base.html:79 georef/templates/georef/graphs.html:22
+msgid "Gràfiques"
+msgstr "Usage charts"
 
 #: georef/templates/georef/base.html:91
 #: georef/templates/georef/t_generic.html:33
@@ -527,94 +579,90 @@ msgstr "Version qualifiers"
 msgid "Tipus topònim"
 msgstr "Site name type"
 
-#: georef/templates/georef/base.html:104 georef/templates/georef/graphs.html:22
-msgid "Gràfiques"
-msgstr "Usage charts"
-
-#: georef/templates/georef/base.html:105
+#: georef/templates/georef/base.html:104
 #: georef/templates/georef/georef_layers.html:28
 msgid "Capes de georeferenciació"
 msgstr "Georeferencing layers"
 
-#: georef/templates/georef/base.html:106 georef/templates/georef/help.html:10
+#: georef/templates/georef/base.html:105 georef/templates/georef/help.html:10
 msgid "Ajut"
 msgstr "Help"
 
-#: georef/templates/georef/base.html:110
+#: georef/templates/georef/base.html:109
 msgid "Benvingut"
 msgstr "Welcome"
 
-#: georef/templates/georef/base.html:113
+#: georef/templates/georef/base.html:112
 msgid "El meu perfil"
 msgstr "My profile"
 
-#: georef/templates/georef/base.html:116
+#: georef/templates/georef/base.html:115
 msgid "Canviar el meu password"
 msgstr "Change password"
 
-#: georef/templates/georef/base.html:121
+#: georef/templates/georef/base.html:120
 #: georef/templates/georef/user_list.html:25
 msgid "Gestió usuaris"
 msgstr "User management"
 
-#: georef/templates/georef/base.html:126
+#: georef/templates/georef/base.html:125
 msgid "Tancar sessió"
 msgstr "Log out"
 
-#: georef/templates/georef/base.html:132
+#: georef/templates/georef/base.html:131
 #: georef/templates/registration/login.html:12
 msgid "Iniciar sessió"
 msgstr "Log in"
 
-#: georef/templates/georef/base.html:136
+#: georef/templates/georef/base.html:135
 msgid "Idioma"
 msgstr "Language"
 
-#: georef/templates/georef/base.html:169
+#: georef/templates/georef/base.html:168
 msgid "sLengthMenu"
 msgstr "Show _MENU_ records"
 
-#: georef/templates/georef/base.html:170
+#: georef/templates/georef/base.html:169
 msgid "sZeroRecords"
 msgstr "No records found."
 
-#: georef/templates/georef/base.html:171
+#: georef/templates/georef/base.html:170
 msgid "sInfo"
 msgstr "Showing from _START_ to _END_ of _TOTAL_ records"
 
-#: georef/templates/georef/base.html:172
+#: georef/templates/georef/base.html:171
 msgid "sInfoEmpty"
 msgstr "Showing 0 to 0 from 0 records"
 
-#: georef/templates/georef/base.html:173
+#: georef/templates/georef/base.html:172
 msgid "sInfoFiltered"
 msgstr "(filtered from _MAX_ total records)"
 
-#: georef/templates/georef/base.html:174
+#: georef/templates/georef/base.html:173
 msgid "loadingRecords"
 msgstr "Loading..."
 
-#: georef/templates/georef/base.html:179
+#: georef/templates/georef/base.html:178
 msgid "Primer"
 msgstr "First"
 
-#: georef/templates/georef/base.html:180
+#: georef/templates/georef/base.html:179
 msgid "Anterior"
 msgstr "Previous"
 
-#: georef/templates/georef/base.html:181
+#: georef/templates/georef/base.html:180
 msgid "Següent"
 msgstr "Next"
 
-#: georef/templates/georef/base.html:182
+#: georef/templates/georef/base.html:181
 msgid "Últim"
 msgstr "Last"
 
-#: georef/templates/georef/calculcentroides.html:34
+#: georef/templates/georef/calculcentroides.html:49
 msgid "Càlcul de centroides"
 msgstr "Centroid calculation"
 
-#: georef/templates/georef/calculcentroides.html:37
+#: georef/templates/georef/calculcentroides.html:52
 msgid "centroid_calc_help"
 msgstr ""
 "<p>This tool takes as input a shapefile and computes its centroid and "
@@ -628,26 +676,31 @@ msgstr ""
 "centroid. If the geometry contains multiple elements (polygons, lines, "
 "points) these are merged and considered as a single geometry.</li></ul>"
 
-#: georef/templates/georef/calculcentroides.html:49
+#: georef/templates/georef/calculcentroides.html:64
 msgid ""
 "Depenent de la mida i complexitat del fitxer, el procés pot trigar una mica"
 msgstr ""
-"Please note that depending on size and complexity of the file, it can take a while"
+"Please note that depending on size and complexity of the file, it can take a "
+"while"
 
-#: georef/templates/georef/calculcentroides.html:54
+#: georef/templates/georef/calculcentroides.html:69
+#: georef/templates/georef/calculcentroides.html:81
 #: georef/templates/georef/toponim_search.html:34
 msgid "Copiar resultats al portapapers"
 msgstr "Copy result to clipboard"
 
-#: georef/templates/georef/calculcentroides.html:66
+#: georef/templates/georef/calculcentroides.html:84
+#: georef/templates/georef/calculcentroides.html:105
 msgid "Coordenada x centroide (long)"
 msgstr "Centroid X coordinate (long)"
 
-#: georef/templates/georef/calculcentroides.html:72
+#: georef/templates/georef/calculcentroides.html:88
+#: georef/templates/georef/calculcentroides.html:111
 msgid "Coordenada y centroide (lat)"
 msgstr "Centroid Y coordinate (lat) "
 
-#: georef/templates/georef/calculcentroides.html:78
+#: georef/templates/georef/calculcentroides.html:92
+#: georef/templates/georef/calculcentroides.html:117
 msgid "Radi incertesa (m)"
 msgstr "Uncertainty radius (m)"
 
@@ -746,50 +799,6 @@ msgstr "Are you sure you want to delete the document?"
 msgid "Encara no hi ha documents d'ajuda!"
 msgstr "No help documents yet!"
 
-#: georef/templates/georef/index.html:17
-msgid "home_text_1"
-msgstr "A platform for cartography and georeferencing tasks"
-
-#: georef/templates/georef/index.html:21
-msgid "home_text_2"
-msgstr ""
-"Cartography is present in almost all aspects of Museu de Ciencies Naturals "
-"de Barcelona: collections, research, publications,  displays, etc. Georef is "
-"the platform developed to lend support to the index and recognition of "
-"useful georeferencing resources. Initially used only by MCNB, today is a "
-"tool shared with other institutions."
-
-#: georef/templates/georef/index.html:25
-msgid "home_text_3"
-msgstr ""
-"A specially active project in natural history museums is the retrospective "
-"georeferencing of the sample collections. A great number of samples precede "
-"the ubiquity and availability of satellite positioning, so they usually have "
-"a reference of the sample location which is primarily based on the textual "
-"descriptions in the labels. Assigning a coordinate point in a map from its "
-"site name and position description is what we call georeferencing."
-
-#: georef/templates/georef/index.html:29
-msgid "home_text_4"
-msgstr "Storing traceable information of these estimations allows:"
-
-#: georef/templates/georef/index.html:32
-msgid "home_text_4_1"
-msgstr "data reutilization to improve the georeferencing efficiency."
-
-#: georef/templates/georef/index.html:34
-msgid "home_text_4_2"
-msgstr ""
-"guarantees the coherence among the location data of the sample collections."
-
-#: georef/templates/georef/index.html:36
-msgid "home_text_4_3"
-msgstr "eventually allows assessment of the georeferencing process quality."
-
-#: georef/templates/georef/index.html:39
-msgid "home_text_5"
-msgstr "Collection georeferencing is a capital project inside Georef."
-
 #: georef/templates/georef/prefsvisualitzaciowms.html:28
 msgid "Llista de capes WMS"
 msgstr "List of WMS layers"
@@ -815,7 +824,7 @@ msgstr "User data"
 
 #: georef/templates/georef/profile.html:42
 #: georef/templates/georef/user_base.html:88
-#: georef/templates/georef/user_new.html:86 georef/views.py:2289
+#: georef/templates/georef/user_new.html:86 georef/views.py:2291
 #: georef_addenda/models.py:37
 msgid "Organització"
 msgstr "Organization"
@@ -1016,9 +1025,9 @@ msgstr "Selected: none"
 #: georef/templates/georef/toponim_update_2.html:136
 msgid "node_search_tooltip"
 msgstr ""
-"Write three characters and a site name search will be performed, "
-"returning a list of results. Selecting an element from the list will result "
-"on it being selected in the tree."
+"Write three characters and a site name search will be performed, returning a "
+"list of results. Selecting an element from the list will result on it being "
+"selected in the tree."
 
 #: georef/templates/georef/toponim_create.html:83
 #: georef/templates/georef/toponim_update_2.html:137
@@ -1091,7 +1100,7 @@ msgid "Data"
 msgstr "Date"
 
 #: georef/templates/georef/toponim_update_2.html:161
-#: georef/templates/georef/toponims_list.html:188 georef/views.py:2303
+#: georef/templates/georef/toponims_list.html:188 georef/views.py:2305
 #: georef_addenda/models.py:84
 msgid "Autor"
 msgstr "Author"
@@ -1164,7 +1173,7 @@ msgstr ""
 msgid "Número versió"
 msgstr "Number"
 
-#: georef/templates/georef/toponim_update_2.html:247 georef/views.py:2317
+#: georef/templates/georef/toponim_update_2.html:247 georef/views.py:2319
 msgid "Qualificador versió"
 msgstr "Qualifier"
 
@@ -1186,8 +1195,8 @@ msgstr "Resource reference system"
 #: georef/templates/georef/toponim_update_2.html:262
 msgid "toponym_nomtoponim_resource"
 msgstr ""
-"Literal transcription of the site name according to the cartographic resource "
-"used in the georeferencing process"
+"Literal transcription of the site name according to the cartographic "
+"resource used in the georeferencing process"
 
 #: georef/templates/georef/toponim_update_2.html:262
 msgid "Nom del topònim al recurs"
@@ -1200,8 +1209,8 @@ msgstr "Generation date of the version data"
 #: georef/templates/georef/toponim_update_2.html:280
 msgid "toponim_coordx_origin"
 msgstr ""
-"Value of the longitude coordinate resulting from locating the site name in the "
-"resource and its correspondent conversion to WGS84 if needed"
+"Value of the longitude coordinate resulting from locating the site name in "
+"the resource and its correspondent conversion to WGS84 if needed"
 
 #: georef/templates/georef/toponim_update_2.html:280
 msgid "Coordenada X original"
@@ -1210,8 +1219,8 @@ msgstr "Original X coordinate"
 #: georef/templates/georef/toponim_update_2.html:286
 msgid "toponim_coordy_origin"
 msgstr ""
-"Value of the latitude coordinate resulting from locating the site name in the "
-"resource and its correspondent conversion to WGS84 if needed"
+"Value of the latitude coordinate resulting from locating the site name in "
+"the resource and its correspondent conversion to WGS84 if needed"
 
 #: georef/templates/georef/toponim_update_2.html:286
 msgid "Coordenada Y original"
@@ -1287,17 +1296,17 @@ msgstr ""
 "have UTF-8 codification. The file columns should be the following, "
 "maintaining the indicated order:</p><p><ul><li>Name</li><li>Type</"
 "li><li>Country</li><li>Aquatic</li><li>Parent node</li><li>Version number</"
-"li><li>Version qualifier</li><li>Version captured from resource</"
-"li><li>Site name name in the resource</li><li>Date</li><li>Original X "
-"coordinate (LONG)</li><li>Original Y coordinate (LAT)</li><li>Z Coordinate</"
-"li><li>Coordinate uncertainty (m)</li><li>Height uncertainty (m)</"
-"li><li>Georeferencer</li><li>Comments</li><li>Parent site name in Georef</"
-"li></ul></p><p>On file upload, all file rows are checked to find possible "
-"errors. When found, a window with the errors list is shown, indicating the "
-"problematic lines and columns. The user should resolve these "
-"issues before trying to upload again.Once the file has been successfully "
-"uploaded, a success report with a list of the newly created records "
-"will be shown. This report can be downloaded as a csv file.</p>"
+"li><li>Version qualifier</li><li>Version captured from resource</li><li>Site "
+"name name in the resource</li><li>Date</li><li>Original X coordinate (LONG)</"
+"li><li>Original Y coordinate (LAT)</li><li>Z Coordinate</li><li>Coordinate "
+"uncertainty (m)</li><li>Height uncertainty (m)</li><li>Georeferencer</"
+"li><li>Comments</li><li>Parent site name in Georef</li></ul></p><p>On file "
+"upload, all file rows are checked to find possible errors. When found, a "
+"window with the errors list is shown, indicating the problematic lines and "
+"columns. The user should resolve these issues before trying to upload again."
+"Once the file has been successfully uploaded, a success report with a list "
+"of the newly created records will be shown. This report can be downloaded as "
+"a csv file.</p>"
 
 #: georef/templates/georef/toponims_list.html:125
 msgid "Exportar a shp"
@@ -1365,31 +1374,31 @@ msgstr "Password"
 msgid "Password(repetir)"
 msgstr "Password(repeat)"
 
-#: georef/views.py:903
+#: georef/views.py:905
 msgid "Tots els topònims"
 msgstr "All site names"
 
-#: georef/views.py:1005 georef/views.py:1706
+#: georef/views.py:1007 georef/views.py:1708
 msgid "Recurs desat amb èxit!"
 msgstr "Resource successfully saved!"
 
-#: georef/views.py:2288
+#: georef/views.py:2290
 msgid "Nom organització"
 msgstr "Organization name"
 
-#: georef/views.py:2302
+#: georef/views.py:2304
 msgid "Nom autor"
 msgstr "Author name"
 
-#: georef/views.py:2316
+#: georef/views.py:2318
 msgid "Nom qualificador"
 msgstr "Qualifier name"
 
-#: georef/views.py:2330
+#: georef/views.py:2332
 msgid "Nom país"
 msgstr "Country name"
 
-#: georef/views.py:2447 georef/views.py:2448
+#: georef/views.py:2449 georef/views.py:2450
 msgid "Tipus d'unitats"
 msgstr "Unit type"
 

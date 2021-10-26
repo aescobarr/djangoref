@@ -199,7 +199,7 @@ def generic_datatable_list_endpoint(request, search_field_list, queryClass, clas
 
 def index(request):
     wms_url = conf.GEOSERVER_WMS_URL
-    context = {'wms_url': wms_url, 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY}
+    context = {'wms_url': wms_url, 'bing': conf.BING_MAPS_API_KEY}
     return render(request, 'georef/index.html', context)
 
 
@@ -790,7 +790,7 @@ def recursos(request):
     if this_user.profile:
         edit_permission = this_user.profile.can_edit_recurs
     return render(request, 'georef/recursos_list.html',
-                  context={'llista_tipus': llista_tipus, 'wms_url': wms_url, 'csrf_token': csrf_token, 'wmslayers': json.dumps(wms_dict), 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY})
+                  context={'llista_tipus': llista_tipus, 'wms_url': wms_url, 'csrf_token': csrf_token, 'wmslayers': json.dumps(wms_dict), 'bing': conf.BING_MAPS_API_KEY})
 
 
 @login_required
@@ -805,7 +805,7 @@ def toponims(request):
     llista_versions = Qualificadorversio.objects.all().order_by('qualificador')
     return render(request, 'georef/toponims_list.html',
                   context={'llista_versions': llista_versions, 'llista_tipus': llista_tipus, 'llista_paisos': llista_paisos, 'llista_autors':llista_autors,'csrf_token': csrf_token,
-                           'wms_url': wms_url, 'wmslayers': json.dumps(wms_dict), 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY })
+                           'wms_url': wms_url, 'wmslayers': json.dumps(wms_dict), 'bing': conf.BING_MAPS_API_KEY })
 
 @login_required
 def calculcentroides(request):
@@ -1008,7 +1008,7 @@ def recursos_create(request):
                 return HttpResponseRedirect(url)
     else:
         form = RecursForm()
-    return render(request, 'georef/recurs_create.html', {'form': form, 'wms_url': wms_url, 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY})
+    return render(request, 'georef/recurs_create.html', {'form': form, 'wms_url': wms_url, 'bing': conf.BING_MAPS_API_KEY})
 
 
 def toponims_search(request):
@@ -1103,7 +1103,6 @@ def toponims_update_2(request, idtoponim=None, idversio=None):
             'node_ini': node_ini,
             'wms_url': wms_url,
             'wmslayers': json.dumps(wms_dict),
-            'google_maps': conf.GOOGLE_MAPS_KEY_URL,
             'bing': conf.BING_MAPS_API_KEY
         }
         return render(request, 'georef/toponim_update_2.html', context)
@@ -1165,7 +1164,6 @@ def toponims_update_2(request, idtoponim=None, idversio=None):
                     'node_ini': node_ini,
                     'wms_url': wms_url,
                     'wmslayers': json.dumps(wms_dict),
-                    'google_maps': conf.GOOGLE_MAPS_KEY_URL,
                     'bing': conf.BING_MAPS_API_KEY
                 }
                 return render(request, 'georef/toponim_update_2.html', context)
@@ -1237,7 +1235,6 @@ def toponims_update_2(request, idtoponim=None, idversio=None):
                     'node_ini': node_ini,
                     'wms_url': wms_url,
                     'wmslayers': json.dumps(wms_dict),
-                    'google_maps': conf.GOOGLE_MAPS_KEY_URL,
                     'bing': conf.BING_MAPS_API_KEY
                 }
                 return render(request, 'georef/toponim_update_2.html', context)
@@ -1651,7 +1648,7 @@ def recursos_update(request, id=None):
     this_user = request.user
     context = {'form': form, 'paraulesclau': recurs.paraulesclau_str(), 'capeswms': capeswms,
                'autors': recurs.autors_str(), 'toponims_basats_recurs': toponimsversio, 'moretoponims': moretoponims,
-               'wms_url': wms_url, 'geometries_json': geometries_json, 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY}
+               'wms_url': wms_url, 'geometries_json': geometries_json, 'bing': conf.BING_MAPS_API_KEY}
     if request.method == 'POST':
         if not this_user.profile.can_edit_recurs and not this_user.profile.is_admin:
             message = ('No tens permís per editar recursos. Operació no permesa.')
@@ -1830,7 +1827,7 @@ def prefsvisualitzaciowms(request):
 @login_required
 def georef_layers(request):
     wms_url = conf.GEOSERVER_WMS_URL
-    context = {'wms_url' : wms_url, 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY}
+    context = {'wms_url' : wms_url, 'bing': conf.BING_MAPS_API_KEY}
     return render(request, 'georef/georef_layers.html', context)
 
 

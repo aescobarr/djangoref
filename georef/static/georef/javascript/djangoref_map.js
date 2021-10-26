@@ -115,16 +115,6 @@
                     'Roads dark': djangoRef.Map.bing_road_dark
                 }
             }
-            /*,{
-                groupName: 'Google Base Maps',
-                expanded: false,
-                layers: {
-                    'Google roads': djangoRef.Map.roads,
-                    'Google satellite': djangoRef.Map.satellite,
-                    'Google terrain': djangoRef.Map.terrain,
-                    'Google hybrid': djangoRef.Map.hybrid
-                }
-            }*/
         ];
 
         var overlays_control_config = options.overlays_control_config;
