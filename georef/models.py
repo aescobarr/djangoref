@@ -563,6 +563,21 @@ class Versions(models.Model):
         db_table = 'versions'
 '''
 
+def cond_translator(condition):
+    trans = {
+        'nom':          _('cond_filtre_nom'),
+        'acronim':      _('cond_filtre_acronim'),
+        'paraulaclau':  _('cond_filtre_paraulaclau'),
+        'nomautor':     _('cond_filtre_nomautor'),
+        'tipus':        _('cond_filtre_tipus'),
+        'pais':         _('cond_filtre_pais'),
+        'aquatic':      _('cond_filtre_aquatic'),
+        'versio':       _('cond_filtre_versio'),
+        'geografic':    _('cond_filtre_geografic'),
+        'geografic_geo': _('cond_filtre_geografic_geo')
+    }
+    return trans.get(condition, condition)
+
 class Filtrejson(models.Model):
     idfiltre = models.CharField(primary_key=True, max_length=100, default=pkgen)
     json = models.TextField()
@@ -583,11 +598,11 @@ class Filtrejson(models.Model):
                     filtre_text.append(op)
                     negate = '' if elem['not'] == 'N' else 'NOT'
                     filtre_text.append(negate)
-                    cond = elem['condicio']
+                    cond = cond_translator(elem['condicio'])
                     filtre_text.append(cond)
                     filtre_text.append('=')
-                    if cond.lower() == 'geografic' or cond.lower() == 'geografic_geo':
-                        filtre_text.append('Poligon')
+                    if cond.lower() == cond_translator('geografic') or cond.lower() == cond_translator('geografic_geo'):
+                        filtre_text.append(_('Poligon'))
                     else:
                         filtre_text.append(elem['valor'])
             retval = ' '.join(filtre_text)

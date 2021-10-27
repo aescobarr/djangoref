@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 06:25+0000\n"
+"POT-Creation-Date: 2021-10-27 13:59+0000\n"
 "PO-Revision-Date: 2019-11-18 09:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,41 +26,41 @@ msgstr "Català"
 msgid "English"
 msgstr "Anglès"
 
-#: djangoref/settings.py:206
+#: djangoref/settings.py:205
 msgid "Anar a google"
 msgstr "Anar a google"
 
-#: djangoref/settings.py:207
+#: djangoref/settings.py:206
 msgid "Anar a ICC"
 msgstr "Anar a ICC"
 
-#: djangoref/settings.py:209
+#: djangoref/settings.py:208
 msgid "Conversió de coordenades - Convertbox"
 msgstr "Conversió de coordenades - Convertbox"
 
-#: djangoref/settings.py:210
+#: djangoref/settings.py:209
 msgid "Conversió de coordenades - Earth Point: Convert coordinates"
 msgstr "Conversió de coordenades - Earth Point: Convert coordinates"
 
-#: djangoref/settings.py:212
+#: djangoref/settings.py:211
 msgid "Georeferenciació - Geolocate"
 msgstr "Georeferenciació - Geolocate"
 
-#: djangoref/settings.py:213
+#: djangoref/settings.py:212
 msgid "Georeferenciació - Georeferencing calculator"
 msgstr "Georeferenciació - Georeferencing calculator"
 
-#: djangoref/settings.py:214
+#: djangoref/settings.py:213
 msgid "Georeferenciació - Berkeley Mapper"
 msgstr "Georeferenciació - Berkeley Mapper"
 
-#: georef/models.py:45 georef/views.py:2388 georef/views.py:2389
+#: georef/models.py:45 georef/views.py:2385 georef/views.py:2386
 msgid "Tipus de topònim"
 msgstr "Tipus de topònim"
 
 #: georef/models.py:58 georef/templates/georef/toponim_create.html:60
 #: georef/templates/georef/toponim_update_2.html:115
-#: georef/templates/georef/toponims_list.html:190 georef/views.py:2333
+#: georef/templates/georef/toponims_list.html:190 georef/views.py:2330
 msgid "País"
 msgstr "País"
 
@@ -85,8 +85,8 @@ msgid "Tipus de recurs"
 msgstr "Tipus de recurs"
 
 #: georef/models.py:247 georef/templates/georef/_recursos_fields.html:144
-#: georef/templates/georef/base.html:99 georef/views.py:2374
-#: georef/views.py:2375
+#: georef/templates/georef/base.html:99 georef/views.py:2371
+#: georef/views.py:2372
 msgid "Tipus de suport"
 msgstr "Tipus de suport"
 
@@ -106,7 +106,7 @@ msgid "Versió de topònim"
 msgstr "Versió de topònim"
 
 #: georef/models.py:387 georef/templates/georef/recursos_list.html:172
-#: georef/views.py:2346 georef/views.py:2347
+#: georef/views.py:2343 georef/views.py:2344
 msgid "Paraula clau"
 msgstr "Paraula clau"
 
@@ -130,7 +130,51 @@ msgstr "Capes WMS del recurs (relació)"
 msgid "Recurs de georeferenciació"
 msgstr "Recurs de georeferenciació"
 
-#: georef/models.py:605
+#: georef/models.py:568
+msgid "cond_filtre_nom"
+msgstr "nom"
+
+#: georef/models.py:569
+msgid "cond_filtre_acronim"
+msgstr "acronim"
+
+#: georef/models.py:570
+msgid "cond_filtre_paraulaclau"
+msgstr "paraulaclau"
+
+#: georef/models.py:571
+msgid "cond_filtre_nomautor"
+msgstr "nomautor"
+
+#: georef/models.py:572
+msgid "cond_filtre_tipus"
+msgstr "tipus"
+
+#: georef/models.py:573
+msgid "cond_filtre_pais"
+msgstr "pais"
+
+#: georef/models.py:574
+msgid "cond_filtre_aquatic"
+msgstr "aquatic"
+
+#: georef/models.py:575
+msgid "cond_filtre_versio"
+msgstr "versio"
+
+#: georef/models.py:576
+msgid "cond_filtre_geografic"
+msgstr "geografic"
+
+#: georef/models.py:577
+msgid "cond_filtre_geografic_geo"
+msgstr "geografic_limits"
+
+#: georef/models.py:606
+msgid "Poligon"
+msgstr ""
+
+#: georef/models.py:621
 msgid "Filtre"
 msgstr "Filtre"
 
@@ -181,8 +225,8 @@ msgid "Acrònim"
 msgstr "Acrònim"
 
 #: georef/templates/georef/_recursos_fields.html:39
-#: georef/templates/georef/base.html:98 georef/views.py:2360
-#: georef/views.py:2361
+#: georef/templates/georef/base.html:98 georef/views.py:2357
+#: georef/views.py:2358
 msgid "Tipus de contingut"
 msgstr "Tipus de contingut"
 
@@ -446,7 +490,7 @@ msgstr ""
 #: georef/templates/georef/about.html:49
 msgid ""
 "<p class=\"text-justify\">Marcer A., Escobar A., Garcia V. and Uribe F. "
-"(2019) Ali-Bey. Github repository <a href=\"https://github.com/aescobarr/nhc-"
+"(2019) Georef. Github repository <a href=\"https://github.com/aescobarr/nhc-"
 "georef\">https://github.com/aescobarr/nhc-georef</a></p>"
 msgstr ""
 
@@ -826,7 +870,7 @@ msgstr "Dades usuari"
 
 #: georef/templates/georef/profile.html:42
 #: georef/templates/georef/user_base.html:88
-#: georef/templates/georef/user_new.html:86 georef/views.py:2291
+#: georef/templates/georef/user_new.html:86 georef/views.py:2288
 #: georef_addenda/models.py:37
 msgid "Organització"
 msgstr "Organització"
@@ -1103,7 +1147,7 @@ msgid "Data"
 msgstr "Data"
 
 #: georef/templates/georef/toponim_update_2.html:161
-#: georef/templates/georef/toponims_list.html:188 georef/views.py:2305
+#: georef/templates/georef/toponims_list.html:188 georef/views.py:2302
 #: georef_addenda/models.py:84
 msgid "Autor"
 msgstr "Autor"
@@ -1176,7 +1220,7 @@ msgstr ""
 msgid "Número versió"
 msgstr "Número versió"
 
-#: georef/templates/georef/toponim_update_2.html:247 georef/views.py:2319
+#: georef/templates/georef/toponim_update_2.html:247 georef/views.py:2316
 msgid "Qualificador versió"
 msgstr "Qualificador versió"
 
@@ -1380,27 +1424,27 @@ msgstr "Clau de pas (repetir)"
 msgid "Tots els topònims"
 msgstr "Tots els topònims"
 
-#: georef/views.py:1007 georef/views.py:1708
+#: georef/views.py:1007 georef/views.py:1705
 msgid "Recurs desat amb èxit!"
 msgstr "Recurs desat amb èxit!"
 
-#: georef/views.py:2290
+#: georef/views.py:2287
 msgid "Nom organització"
 msgstr "Nom organització"
 
-#: georef/views.py:2304
+#: georef/views.py:2301
 msgid "Nom autor"
 msgstr "Nom autor"
 
-#: georef/views.py:2318
+#: georef/views.py:2315
 msgid "Nom qualificador"
 msgstr "Nom qualificador"
 
-#: georef/views.py:2332
+#: georef/views.py:2329
 msgid "Nom país"
 msgstr "Nom país"
 
-#: georef/views.py:2449 georef/views.py:2450
+#: georef/views.py:2446 georef/views.py:2447
 msgid "Tipus d'unitats"
 msgstr "Tipus d'unitats"
 

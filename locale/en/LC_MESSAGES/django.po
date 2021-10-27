@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 06:25+0000\n"
+"POT-Creation-Date: 2021-10-27 13:59+0000\n"
 "PO-Revision-Date: 2019-11-18 09:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,41 +25,41 @@ msgstr "Catalan"
 msgid "English"
 msgstr "English"
 
-#: djangoref/settings.py:206
+#: djangoref/settings.py:205
 msgid "Anar a google"
 msgstr "Go to google"
 
-#: djangoref/settings.py:207
+#: djangoref/settings.py:206
 msgid "Anar a ICC"
 msgstr "Go to ICC"
 
-#: djangoref/settings.py:209
+#: djangoref/settings.py:208
 msgid "Conversió de coordenades - Convertbox"
 msgstr "Coordinate conversion - Convertbox"
 
-#: djangoref/settings.py:210
+#: djangoref/settings.py:209
 msgid "Conversió de coordenades - Earth Point: Convert coordinates"
 msgstr "Coordinate conversion - Earth Point: Convert coordinates"
 
-#: djangoref/settings.py:212
+#: djangoref/settings.py:211
 msgid "Georeferenciació - Geolocate"
 msgstr "Georeferencing - Geolocate"
 
-#: djangoref/settings.py:213
+#: djangoref/settings.py:212
 msgid "Georeferenciació - Georeferencing calculator"
 msgstr "Georeferencing - Georeferencing calculator"
 
-#: djangoref/settings.py:214
+#: djangoref/settings.py:213
 msgid "Georeferenciació - Berkeley Mapper"
 msgstr "Georeferenciacing - Berkeley Mapper"
 
-#: georef/models.py:45 georef/views.py:2388 georef/views.py:2389
+#: georef/models.py:45 georef/views.py:2385 georef/views.py:2386
 msgid "Tipus de topònim"
 msgstr "Site name type"
 
 #: georef/models.py:58 georef/templates/georef/toponim_create.html:60
 #: georef/templates/georef/toponim_update_2.html:115
-#: georef/templates/georef/toponims_list.html:190 georef/views.py:2333
+#: georef/templates/georef/toponims_list.html:190 georef/views.py:2330
 msgid "País"
 msgstr "Country"
 
@@ -84,8 +84,8 @@ msgid "Tipus de recurs"
 msgstr "Resource type"
 
 #: georef/models.py:247 georef/templates/georef/_recursos_fields.html:144
-#: georef/templates/georef/base.html:99 georef/views.py:2374
-#: georef/views.py:2375
+#: georef/templates/georef/base.html:99 georef/views.py:2371
+#: georef/views.py:2372
 msgid "Tipus de suport"
 msgstr "Support type"
 
@@ -105,7 +105,7 @@ msgid "Versió de topònim"
 msgstr "Site name version"
 
 #: georef/models.py:387 georef/templates/georef/recursos_list.html:172
-#: georef/views.py:2346 georef/views.py:2347
+#: georef/views.py:2343 georef/views.py:2344
 msgid "Paraula clau"
 msgstr "Keyword"
 
@@ -129,7 +129,51 @@ msgstr "Resource WMS layers (relationship)"
 msgid "Recurs de georeferenciació"
 msgstr "Georeferencing resource"
 
-#: georef/models.py:605
+#: georef/models.py:568
+msgid "cond_filtre_nom"
+msgstr "name"
+
+#: georef/models.py:569
+msgid "cond_filtre_acronim"
+msgstr "acronym"
+
+#: georef/models.py:570
+msgid "cond_filtre_paraulaclau"
+msgstr "keyword"
+
+#: georef/models.py:571
+msgid "cond_filtre_nomautor"
+msgstr "authorname"
+
+#: georef/models.py:572
+msgid "cond_filtre_tipus"
+msgstr "type"
+
+#: georef/models.py:573
+msgid "cond_filtre_pais"
+msgstr "country"
+
+#: georef/models.py:574
+msgid "cond_filtre_aquatic"
+msgstr "aquatic"
+
+#: georef/models.py:575
+msgid "cond_filtre_versio"
+msgstr "version"
+
+#: georef/models.py:576
+msgid "cond_filtre_geografic"
+msgstr "geographic"
+
+#: georef/models.py:577
+msgid "cond_filtre_geografic_geo"
+msgstr "geographic_geo"
+
+#: georef/models.py:606
+msgid "Poligon"
+msgstr "Polygon"
+
+#: georef/models.py:621
 msgid "Filtre"
 msgstr "Filter"
 
@@ -180,8 +224,8 @@ msgid "Acrònim"
 msgstr "Acronym"
 
 #: georef/templates/georef/_recursos_fields.html:39
-#: georef/templates/georef/base.html:98 georef/views.py:2360
-#: georef/views.py:2361
+#: georef/templates/georef/base.html:98 georef/views.py:2357
+#: georef/views.py:2358
 msgid "Tipus de contingut"
 msgstr "Content type"
 
@@ -388,8 +432,8 @@ msgstr "A platform for cartography and georeferencing tasks"
 msgid "home_text_2"
 msgstr ""
 "Cartography is present in almost all aspects of Museu de Ciencies Naturals "
-"de Barcelona: collections, research, publications,  displays, etc. Ali-Bey is "
-"the platform developed to lend support to the index and recognition of "
+"de Barcelona: collections, research, publications,  displays, etc. Ali-Bey "
+"is the platform developed to lend support to the index and recognition of "
 "useful georeferencing resources. Initially used only by MCNB, today is a "
 "tool shared with other institutions."
 
@@ -446,7 +490,7 @@ msgstr "How to cite this software"
 #: georef/templates/georef/about.html:49
 msgid ""
 "<p class=\"text-justify\">Marcer A., Escobar A., Garcia V. and Uribe F. "
-"(2019) Ali-Bey. Github repository <a href=\"https://github.com/aescobarr/nhc-"
+"(2019) Georef. Github repository <a href=\"https://github.com/aescobarr/nhc-"
 "georef\">https://github.com/aescobarr/nhc-georef</a></p>"
 msgstr ""
 
@@ -824,7 +868,7 @@ msgstr "User data"
 
 #: georef/templates/georef/profile.html:42
 #: georef/templates/georef/user_base.html:88
-#: georef/templates/georef/user_new.html:86 georef/views.py:2291
+#: georef/templates/georef/user_new.html:86 georef/views.py:2288
 #: georef_addenda/models.py:37
 msgid "Organització"
 msgstr "Organization"
@@ -1100,7 +1144,7 @@ msgid "Data"
 msgstr "Date"
 
 #: georef/templates/georef/toponim_update_2.html:161
-#: georef/templates/georef/toponims_list.html:188 georef/views.py:2305
+#: georef/templates/georef/toponims_list.html:188 georef/views.py:2302
 #: georef_addenda/models.py:84
 msgid "Autor"
 msgstr "Author"
@@ -1173,7 +1217,7 @@ msgstr ""
 msgid "Número versió"
 msgstr "Number"
 
-#: georef/templates/georef/toponim_update_2.html:247 georef/views.py:2319
+#: georef/templates/georef/toponim_update_2.html:247 georef/views.py:2316
 msgid "Qualificador versió"
 msgstr "Qualifier"
 
@@ -1378,27 +1422,27 @@ msgstr "Password(repeat)"
 msgid "Tots els topònims"
 msgstr "All site names"
 
-#: georef/views.py:1007 georef/views.py:1708
+#: georef/views.py:1007 georef/views.py:1705
 msgid "Recurs desat amb èxit!"
 msgstr "Resource successfully saved!"
 
-#: georef/views.py:2290
+#: georef/views.py:2287
 msgid "Nom organització"
 msgstr "Organization name"
 
-#: georef/views.py:2304
+#: georef/views.py:2301
 msgid "Nom autor"
 msgstr "Author name"
 
-#: georef/views.py:2318
+#: georef/views.py:2315
 msgid "Nom qualificador"
 msgstr "Qualifier name"
 
-#: georef/views.py:2332
+#: georef/views.py:2329
 msgid "Nom país"
 msgstr "Country name"
 
-#: georef/views.py:2449 georef/views.py:2450
+#: georef/views.py:2446 georef/views.py:2447
 msgid "Tipus d'unitats"
 msgstr "Unit type"
 
