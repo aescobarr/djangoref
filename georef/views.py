@@ -1588,7 +1588,7 @@ def change_my_password(request):
     return render(request, 'georef/change_password.html', {'form': form, 'edited_user': None})
 
 
-@user_passes_test(lambda u: u.profiles.is_admin)
+@user_passes_test(lambda u: u.profile.is_admin)
 @login_required
 def change_password(request, user_id=None):
     this_user = get_object_or_404(User, pk=user_id)
