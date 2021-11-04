@@ -104,7 +104,8 @@ $(document).ready(function() {
         consultable:                true,
         overlays:                   overlay_list,
         overlays_control_config:    overlays_control_config,
-        wms_url:                    wms_url
+        wms_url:                    wms_url,
+        zoom:                       2
     };
 
     map_options.consultable = [
@@ -184,7 +185,7 @@ $(document).ready(function() {
         'recursosgeoreferenciacio_wms_bound' : recursosgeoreferenciacio_wms_bound_formatter
     };
 
-    var valorView = getCookie('view_lg');
+    /*var valorView = getCookie('view_lg');
     if(valorView){
         var jsonView = JSON.parse(valorView);
         map_options.center = jsonView.center;
@@ -201,12 +202,13 @@ $(document).ready(function() {
             base: 'djangoRef.Map.roads',
             view:{ center:new L.LatLng(40.58, -3.25),zoom:2}
         };
-    }
+    }*/
 
     map = new djangoRef.Map.createMap(map_options);
 
 });
 
+/*
 $(window).bind('beforeunload', function(){
     var state = djangoRef.Map.getState();
     var state_string = JSON.stringify(state);
@@ -218,3 +220,4 @@ $(window).bind('beforeunload', function(){
     var view_string = JSON.stringify(view);
     setCookie('view_lg', view_string);
 });
+*/

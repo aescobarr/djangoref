@@ -15,7 +15,7 @@
 
     djangoRef.Map.osm = new L.TileLayer(
         osmUrl,
-        {minZoom: 3, maxZoom: 12, attribution: osmAttrib}
+        {minZoom: 2, maxZoom: 12, attribution: osmAttrib}
     );
 
     /*
