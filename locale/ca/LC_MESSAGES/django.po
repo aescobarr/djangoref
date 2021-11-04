@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 13:59+0000\n"
+"POT-Creation-Date: 2021-11-04 14:00+0000\n"
 "PO-Revision-Date: 2019-11-18 09:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -170,11 +170,11 @@ msgstr "geografic"
 msgid "cond_filtre_geografic_geo"
 msgstr "geografic_limits"
 
-#: georef/models.py:606
+#: georef/models.py:605
 msgid "Poligon"
 msgstr ""
 
-#: georef/models.py:621
+#: georef/models.py:620
 msgid "Filtre"
 msgstr "Filtre"
 
@@ -1157,16 +1157,8 @@ msgid "Afegint nova versió..."
 msgstr "Afegint nova versió..."
 
 #: georef/templates/georef/toponim_update_2.html:180
-msgid "Estàs a punt d'esborrar la versió "
-msgstr "Estàs a punt d'esborrar la versió "
-
-#: georef/templates/georef/toponim_update_2.html:180
-msgid " amb número "
-msgstr " amb número "
-
-#: georef/templates/georef/toponim_update_2.html:180
-msgid "vols continuar?"
-msgstr "vols continuar?"
+msgid "Esborrar la versió?"
+msgstr "Esborrar la versió?"
 
 #: georef/templates/georef/toponim_update_2.html:194
 msgid "Dades versió"
@@ -1463,6 +1455,12 @@ msgstr "Perfil d'usuari"
 #: georef_addenda/models.py:97
 msgid "Fitxer d'ajuda"
 msgstr "Fitxer d'ajuda"
+
+#~ msgid " amb número "
+#~ msgstr " amb número "
+
+#~ msgid "vols continuar?"
+#~ msgstr "vols continuar?"
 
 #~ msgid "Creació de recursos"
 #~ msgstr "Creació de recursos"

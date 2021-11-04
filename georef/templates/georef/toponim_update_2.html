@@ -177,7 +177,7 @@
                     <td><a href="{% url 'toponims_update_2' idtoponim versio.id %}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a></td>
                     <td>
                         {% if user.profile.is_admin or user.profile.can_edit_toponim or user.is_superuser %}
-                        <button id="delete_version" class="btn btn-danger" onclick="javascript:confirmDialog('{% trans "Esborrar la versió?"%}', '{{ versio.id }}');" type="reset"><i class="fa fa-times"></i></button>
+                        <button id="delete_version" class="btn btn-danger" onclick="javascript:confirmDialog('{% trans "Esborrar la versió?" %}', '{{ versio.id }}');" type="reset"><i class="fa fa-times"></i></button>
                         {% else %}
                         &nbsp;
                         {% endif %}
