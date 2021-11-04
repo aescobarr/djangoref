@@ -208,7 +208,7 @@ table#toponim_edit tbody tr td ul li{
 }
 
 .active_edit {
-    background-color: red;
+    background-color: #A9A9A9;
     color: white;
 }
 
