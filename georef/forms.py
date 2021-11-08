@@ -42,7 +42,6 @@ AQUATIC_CHOICES = (
 class ToponimsUpdateForm(ModelForm):
     aquatic = forms.ChoiceField(choices=AQUATIC_CHOICES,widget=forms.RadioSelect, label='Aquàtic?', required=False)
     idtipustoponim = forms.ModelChoiceField(queryset=Tipustoponim.objects.all().order_by('nom'),widget=forms.Select, label='Tipus topònim')
-    idpais = forms.ModelChoiceField(queryset=Pais.objects.all().order_by('nom'), widget=forms.Select, label='País', required=False)
     sinonims = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
 
     class Meta:
