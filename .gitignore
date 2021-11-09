@@ -17,3 +17,4 @@ static/*
 __pycache__/
 desplegament_2019_03_01.txt
 llista_geom.txt
+.env
