@@ -334,7 +334,9 @@ $(document).ready(function() {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
         var id = row.data().id;
-        confirmDialog(gettext("S'esborrarà el topònim '") + row.data().nom_str + gettext("' i totes les seves versions i informació associada! Segur que vols continuar?"),id);
+        if(id != '0'){
+            confirmDialog(gettext("S'esborrarà el topònim '") + row.data().nom_str + gettext("' i totes les seves versions i informació associada! Segur que vols continuar?"),id);
+        }
     });
 
     $('#toponims_list tbody').on('click', 'td button.edit_button', function () {

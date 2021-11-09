@@ -32,8 +32,8 @@ $(document).ready(function() {
             {
                 layers: 'mzoologia:toponimsdarreraversio',
                 format: 'image/png'
-                ,transparent: true,
-                /*opacity: 0.4*/
+                ,transparent: true
+                ,opacity: 0.4
             }
         )
     };

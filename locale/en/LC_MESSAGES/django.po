@@ -1112,7 +1112,7 @@ msgstr "Back to site name list"
 
 #: georef/templates/georef/toponim_update_2.html:134
 msgid "Jerarquia del topònim"
-msgstr "Site hyerarchy"
+msgstr "Site hierarchy"
 
 #: georef/templates/georef/toponim_update_2.html:144
 msgid "btn_save_toponim_tooltip"

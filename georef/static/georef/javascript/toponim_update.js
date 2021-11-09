@@ -90,24 +90,26 @@ var init_ariadna = function(nodes){
 };
 
 var confirmDialog = function(message,id){
-        $('<div></div>').appendTo('body')
-            .html('<div><h6>'+message+'</h6></div>')
-            .dialog({
-                modal: true, title: gettext('Esborrant versió...'), zIndex: 10000, autoOpen: true,
-                width: 'auto', resizable: false,
-                buttons: {
-                    Yes: function () {
-                        delete_versio(id);
-                        $(this).dialog("close");
+        if(id != 'world_version_0'){
+            $('<div></div>').appendTo('body')
+                .html('<div><h6>'+message+'</h6></div>')
+                .dialog({
+                    modal: true, title: gettext('Esborrant versió...'), zIndex: 10000, autoOpen: true,
+                    width: 'auto', resizable: false,
+                    buttons: {
+                        Yes: function () {
+                            delete_versio(id);
+                            $(this).dialog("close");
+                        },
+                        No: function () {
+                            $(this).dialog("close");
+                        }
                     },
-                    No: function () {
-                        $(this).dialog("close");
+                    close: function (event, ui) {
+                        $(this).remove();
                     }
-                },
-                close: function (event, ui) {
-                    $(this).remove();
-                }
-        });
+            });
+        }
     };
 
 
