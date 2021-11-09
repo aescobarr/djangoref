@@ -7,6 +7,7 @@ $(document).ready(function() {
         toponims_georef.push(toponims_georeferenciador[i][0]);
     }
 
+    /*
     var paisos = [];
     var toponims_per_pais = [];
 
@@ -14,6 +15,7 @@ $(document).ready(function() {
         paisos.push(toponims_pais[i][0]);
         toponims_per_pais.push(toponims_pais[i][1]);
     }
+    */
 
     var tipus = [];
     var tipus_per_pais = [];
@@ -111,24 +113,32 @@ $(document).ready(function() {
                     pointPadding: 0.2,
                     borderWidth: 0
                 },
-                series:{
+                /*series:{
                     dataLabels:{
                         enabled: true
                     }
-                }
+                }*/
             },
             series: [{
                 name: series_name,
-                data: data
+                data: data,
+                showInLegend: false
             }]
         });
     }
 
+    /*
     spawn_chart('toponims_per_pais',gettext('Número de topònims per país'),gettext('Número de topònims'),gettext('Número de topònims'),paisos,toponims_per_pais,-85,'8px');
     spawn_chart('toponims_per_georeferenciador',gettext('Número de topònims per georeferenciador'),gettext('Número de topònims'),gettext('Número de topònims'),georeferenciadors,toponims_georef,-45,'12px');
     spawn_chart('toponims_per_tipus',gettext('Número de topònims per tipus'),gettext('Número de topònims'),gettext('Número de topònims'),tipus,tipus_per_pais,-45,'12px');
     spawn_pie('toponims_humitat',gettext('Número de topònims per aquàtic/terrestre'),gettext('Topònims'),pie_data);
     spawn_chart('recursos_tipus',gettext('Número de recursos georeferenciació per tipus'),gettext('Número de recursos'),gettext('Número de recursos'),recursos,tipus_per_recurs,-45,'12px');
+    */
+
+    spawn_chart('toponims_per_georeferenciador',gettext('Número de topònims per georeferenciador'),'','',georeferenciadors,toponims_georef,-45,'12px');
+    spawn_chart('toponims_per_tipus',gettext('Número de topònims per tipus'),'','',tipus,tipus_per_pais,-45,'12px');
+    spawn_pie('toponims_humitat',gettext('Número de topònims per aquàtic/terrestre'),'',pie_data);
+    spawn_chart('recursos_tipus',gettext('Número de recursos georeferenciació per tipus'),'','',recursos,tipus_per_recurs,-45,'12px');
 
 
 });

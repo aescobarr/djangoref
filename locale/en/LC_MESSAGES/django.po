@@ -605,7 +605,7 @@ msgstr "Usage charts"
 #: georef/templates/georef/base.html:91
 #: georef/templates/georef/t_generic.html:33
 msgid "Tesaures"
-msgstr "Parent tables"
+msgstr "Lookup tables"
 
 #: georef/templates/georef/base.html:94
 msgid "Organitzacions"
@@ -1382,7 +1382,7 @@ msgstr "Filter edition"
 #: georef/templates/georef/user_base.html:114
 #: georef/templates/georef/user_new.html:129
 msgid "Edició tesaures"
-msgstr "Parent table edition"
+msgstr "Lookup table edition"
 
 #: georef/templates/georef/user_base.html:122
 #: georef/templates/georef/user_new.html:137

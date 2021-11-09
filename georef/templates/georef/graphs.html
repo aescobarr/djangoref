@@ -3,6 +3,11 @@
 {% load staticfiles %}
 {% block extra_css %}
 <link href="{% static 'jquery-ui/themes/base/jquery-ui.min.css' %}" rel="stylesheet">
+<style>
+    hr {
+        border-top: 2px solid black;
+    }
+</style>
 {% endblock %}
 {% block extrahead %}
 <script>
@@ -29,9 +34,11 @@
 
     <div class="container">
         <div id="toponims_per_georeferenciador"></div>
-        <div id="toponims_per_pais"></div>
+        <hr>
         <div id="toponims_per_tipus"></div>
+        <hr>
         <div id="toponims_humitat"></div>
+        <hr>
         <div id="recursos_tipus"></div>
     </div>
 

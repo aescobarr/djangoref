@@ -337,10 +337,12 @@ table.toponimsimportats tbody tr.odd{
     background-color: #ffdbbc;
 }
 
+/*
 .leaflet-control-layers {
-    max-height: 400px;
+    max-height: 200px;
     overflow: auto;
 }
+*/
 
 .iconainfo {
     position:relative;
