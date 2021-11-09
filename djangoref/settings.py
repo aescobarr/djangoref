@@ -38,15 +38,14 @@ LOCALE_PATHS = (
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# OVERRIDEN IN SETTINGS_LOCAL
-SECRET_KEY = 'secret!'
+SECRET_KEY = os.environ.get("SECRET_KEY","secret!")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # OVERRIDEN IN SETTINGS_LOCAL
-DEBUG = True
+DEBUG=int(os.environ.get("DEBUG", default=0))
 
 # OVERRIDEN IN SETTINGS_LOCAL
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS=os.environ.get("DJANGO_ALLOWED_HOSTS","*").split(" ")
 
 
 # Application definition
@@ -135,11 +134,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-# OVERRIDEN IN SETTINGS_LOCAL
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': os.environ.get("SQL_ENGINE", 'django.contrib.gis.db.backends.postgis'),
+        'NAME': os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "postgres")),
+        'USER': os.environ.get("SQL_USER", "postgres"),
+        'PASSWORD': os.environ.get("SQL_PASSWORD", ""),
+        'HOST': os.environ.get("SQL_HOST", "db"),
+        'PORT': os.environ.get("SQL_PORT", "5432")
     }
 }
 
@@ -148,9 +150,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# OVERRIDEN IN SETTINGS_LOCAL
-STATIC_ROOT = '/home/webuser/dev/django/djangoref/static/'
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -182,12 +181,25 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 25
 }
 
-# OVERRIDEN IN SETTINGS_LOCAL
+MEDIA_URL = '/media/'
+# Media root
 UPLOAD_DIR = BASE_DIR + "/uploads"
+LOCAL_DATAFILE_ROOT_DIRECTORY = 'helpfile_uploads'
 MEDIA_ROOT = UPLOAD_DIR
-MEDIA_URL = "/media/"
+STATIC_ROOT = '/public_html/djangoref/static/'
 
-from djangoref.settings_local import *
+#GEOSERVER STUFF
+#DO NOT CHANGE THIS VALUE!
+GEOSERVER_WORKSPACE = 'mzoologia'
+GEOSERVER_USER = os.environ.get("GEOSERVER_ADMIN_USER", 'admin')
+GEOSERVER_PASSWORD = os.environ.get("GEOSERVER_ADMIN_PASSWORD", 'geoserver')
+GEOSERVER_BASE_URL = 'http://127.0.0.1:8080/'
+GEOSERVER_WMS_URL_CLEAN = GEOSERVER_BASE_URL + 'geoserver/wms/'
+GEOSERVER_REST_URL = GEOSERVER_BASE_URL + 'geoserver/rest/'
+GEOSERVER_WMS_URL = GEOSERVER_BASE_URL + 'geoserver/' + GEOSERVER_WORKSPACE + "/wms/?"
+
+# bing developer account a.escobar@creaf.uab.cat
+BING_MAPS_API_KEY = os.environ.get("BING_MAPS_API_KEY", "")
 
 #5MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
