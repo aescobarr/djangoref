@@ -50,7 +50,15 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a  class="active" href="/">{% trans "Inici" %}</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Topònims" %}<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'toponims' %}">{% trans "Llistat" %}</a></li>
+                    <li><a href="{% url 'toponims_create' %}">{% trans "Afegir nou topònim" %}</a></li>
+                    <li><a href="{% url 'toponimstree' %}">{% trans "Arbre" %}</a></li>
+                    <li><a href="{% url 'toponimfilters' %}">{% trans "Llistat de filtres de topònims" %}</a></li>
+                </ul>
+            </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Recursos cartogràfics" %}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -62,12 +70,17 @@
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Topònims" %}<span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Tesaures" %}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{% url 'toponims' %}">{% trans "Llistat" %}</a></li>
-                    <li><a href="{% url 'toponims_create' %}">{% trans "Afegir nou topònim" %}</a></li>
-                    <li><a href="{% url 'toponimstree' %}">{% trans "Arbre" %}</a></li>
-                    <li><a href="{% url 'toponimfilters' %}">{% trans "Llistat de filtres de topònims" %}</a></li>
+                    <li><a href="{% url 't_authors' %}">{% trans "Autors" %}</a></li>
+                    <li><a href="{% url 't_organizations' %}">{% trans "Organitzacions" %}</a></li>
+                    <li><a href="{% url 't_paisos' %}">{% trans "Països" %}</a></li>
+                    <li><a href="{% url 't_paraulesclau' %}">{% trans "Paraules clau" %}</a></li>
+                    <li><a href="{% url 't_qualificadors' %}">{% trans "Qualificadors de versió" %}</a></li>
+                    <li><a href="{% url 't_tipuscontingut' %}">{% trans "Tipus de contingut" %}</a></li>
+                    <li><a href="{% url 't_tipussuport' %}">{% trans "Tipus de suport" %}</a></li>
+                    <li><a href="{% url 't_tipustoponim' %}">{% trans "Tipus topònim" %}</a></li>
+                    <li><a href="{% url 't_tipusunitats' %}">{% trans "Tipus unitats" %}</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -85,20 +98,6 @@
                         <li><a href="{{ link.1 }}" target="_blank">{{ link.0 }}</a></li>
                         {% endif %}
                     {% endfor %}
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Tesaures" %}<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="{% url 't_authors' %}">{% trans "Autors" %}</a></li>
-                    <li><a href="{% url 't_organizations' %}">{% trans "Organitzacions" %}</a></li>
-                    <li><a href="{% url 't_paisos' %}">{% trans "Països" %}</a></li>
-                    <li><a href="{% url 't_paraulesclau' %}">{% trans "Paraules clau" %}</a></li>
-                    <li><a href="{% url 't_qualificadors' %}">{% trans "Qualificadors de versió" %}</a></li>
-                    <li><a href="{% url 't_tipuscontingut' %}">{% trans "Tipus de contingut" %}</a></li>
-                    <li><a href="{% url 't_tipussuport' %}">{% trans "Tipus de suport" %}</a></li>
-                    <li><a href="{% url 't_tipustoponim' %}">{% trans "Tipus topònim" %}</a></li>
-                    <li><a href="{% url 't_tipusunitats' %}">{% trans "Tipus unitats" %}</a></li>
                 </ul>
             </li>
             <li><a href="{% url 'help' %}">{% trans "Ajut" %}</a></li>

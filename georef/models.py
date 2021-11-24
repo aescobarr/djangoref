@@ -124,7 +124,7 @@ class Toponim(models.Model):
 
     @property
     def aquatic_str(self):
-        return "Sí" if self.aquatic == "S" else "No"
+        return _("Sí") if self.aquatic == "S" else _("No")
 
     @property
     def aquatic_bool(self):
@@ -132,7 +132,7 @@ class Toponim(models.Model):
 
     @property
     def nom_str(self):
-        return '%s - %s (%s) (%s)' % (self.nom, '' if self.idpais is None else self.idpais, self.idtipustoponim, 'Aquàtic' if self.aquatic=='S' else 'Terrestre')
+        return '%s - %s (%s) (%s)' % (self.nom, '' if self.idpais is None else self.idpais, self.idtipustoponim, _('Aquàtic') if self.aquatic=='S' else _('Terrestre'))
 
     def get_denormalized_toponimtree(self):
         #stack = []
