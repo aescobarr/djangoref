@@ -109,7 +109,7 @@ $(document).ready(function() {
                 'sortable': false,
                 'render': function(value){
                     if(value==true){
-                        return '<button class="delete_button btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
+                        return '<button class="delete_button btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
                     }else{
                         return '&nbsp;';
                     }
@@ -120,7 +120,19 @@ $(document).ready(function() {
                 'data': 'editable',
                 'sortable': false,
                 'render': function(value){
-                    return '<button class="edit_button btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+                    return '<button class="edit_button btn btn-sm btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+                }
+            },
+            {
+                'targets': 6,
+                'data': 'coords_centroide',
+                'sortable': false,
+                'render': function(value){
+                    if(value){
+                        return '<button class="lookup_button btn btn-sm btn-info"><i class="fa fa-binoculars" aria-hidden="true"></i></button>';
+                    }else{
+                        return '&nbsp;';
+                    }
                 }
             },
             {
@@ -345,6 +357,14 @@ $(document).ready(function() {
         var id = row.data().id;
         url = '/toponims/update/' + id + '/-1';
         window.location.href = url;
+    });
+
+    $('#toponims_list tbody').on('click', 'td button.lookup_button', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+        var coords = row.data().coords_centroide;
+        console.log(coords);
+        map.map.setView( { lon:coords.x,lat:coords.y }, 10 );
     });
 
     $( '#saveDoFilter' ).click(function() {
