@@ -8,7 +8,7 @@ The application exposes an API which allows to query the underlying data. The AP
 
 These instructions will help you set up a basic working development environment on an Ubuntu 18.04 LTS system. It assumes [Git](https://git-scm.com/) is installed and running in the host machine. 
 
-If you are a docker user, you can use the dockerized version from this [repository] (https://github.com/aescobarr/docker_alibey) which simplifies the installation process a lot.
+If you are a docker user, you can use the dockerized version from this [repository](https://github.com/aescobarr/docker_alibey) which simplifies the installation process a lot.
 
 ### Prerequisites
 
