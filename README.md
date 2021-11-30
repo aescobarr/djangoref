@@ -1,6 +1,6 @@
-# Georef
+# Ali-Bey
 
-Georef is a tool for georeferencing site names, originally created for the Museu de Ciencies Naturals de Barcelona - [MCNB](https://museuciencies.cat/). It allows storage, indexing and querying of georeferenced site names, including geometry, and supports multiple versions of the site names. Georef is built using [Django](https://www.djangoproject.com/).
+Ali-Bey is a tool for georeferencing site names, originally created for the Museu de Ciencies Naturals de Barcelona - [MCNB](https://museuciencies.cat/). It allows storage, indexing and querying of georeferenced site names, including geometry, and supports multiple versions of the site names. Ali-Bey is built using [Django](https://www.djangoproject.com/).
 
 The application exposes an API which allows to query the underlying data. The API is a separate project and can be found [here](https://github.com/aescobarr/nhc-georef-api).
 
@@ -29,7 +29,7 @@ sudo apt install g++
 
 #### Database
 
-Georef uses a Postgresql 9+ with Postgis database. You can install it like this:
+Ali-Bey uses a Postgresql 9+ with Postgis database. You can install it like this:
 
 ```bash
 sudo apt install postgresql-10
@@ -37,7 +37,7 @@ sudo apt install postgresql-10-postgis-2.4
 sudo apt install postgresql-10-postgis-scripts
 ```
 
-We recommend to create a separate Postgresql user which will own the Georef database and not use the postgres super user. To create the user and the application database we would follow these steps (we will create a user called georef_app):
+We recommend to create a separate Postgresql user which will own the Ali-Bey database and not use the postgres super user. To create the user and the application database we would follow these steps (we will create a user called georef_app):
 
 Log to Postgresql console using the postgres (admin) user. Then:
 ```
@@ -67,7 +67,7 @@ sudo apt install python-pip
 sudo apt install python3.6-dev
 ```
 
-Georef relies heavily on [GDAL/OGR](https://live.osgeo.org/en/overview/gdal_overview.html) libraries for certain spatial calculations. These are installed like this:
+Ali-Bey relies heavily on [GDAL/OGR](https://live.osgeo.org/en/overview/gdal_overview.html) libraries for certain spatial calculations. These are installed like this:
 ```bash
 sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
 sudo apt-get update
@@ -92,7 +92,7 @@ For additional info on virtualenvwrapper, go to the virtualenvwrapper [docs](htt
 
 #### Geoserver
 
-Georef uses a [GeoServer](http://geoserver.org/) instance to serve some layers via WMS services. This step could be considered optional in a development environment although it is mandatory in production deployment.
+Ali-Bey uses a [GeoServer](http://geoserver.org/) instance to serve some layers via WMS services. This step could be considered optional in a development environment although it is mandatory in production deployment.
 
 ##### Geoserver dependencies
 
@@ -169,7 +169,7 @@ This instructs GeoServer to use the /opt/data_dir_gs_2.14.2 instead of the defau
 
 Next, we should perform some administrative tasks in the GeoServer instance. This includes:
 
-* Create a user which will perform the interactions between Georef and GeoServer
+* Create a user which will perform the interactions between Ali-Bey and GeoServer
 * Create a workspace to store the created layers
 * Publish a few layers from the PostgreSQL database
 
