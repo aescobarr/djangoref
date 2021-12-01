@@ -2,13 +2,13 @@
 
 Ali-Bey is a tool for georeferencing site names, originally created for the Museu de Ciencies Naturals de Barcelona - [MCNB](https://museuciencies.cat/). It allows storage, indexing and querying of georeferenced site names, including geometry, and supports multiple versions of the site names. Ali-Bey is built using [Django](https://www.djangoproject.com/).
 
-The application exposes an API which allows to query the underlying data. The API is a separate project and can be found [here](https://github.com/aescobarr/nhc-georef-api).
+The application exposes an API which allows to query the underlying data. The API is a separate project and can be found [here](https://github.com/aescobarr/mcnb-alibey-api).
 
 ## Getting Started
 
 These instructions will help you set up a basic working development environment on an Ubuntu 18.04 LTS system. It assumes [Git](https://git-scm.com/) is installed and running in the host machine. 
 
-If you are a docker user, you can use the dockerized version from this [repository](https://github.com/aescobarr/docker_alibey) which simplifies the installation process a lot.
+If you are a docker user, you can use the dockerized version from this [repository](https://github.com/aescobarr/mcnb-alibey-docker) which simplifies the installation process a lot.
 
 ### Prerequisites
 
@@ -16,7 +16,7 @@ If you are a docker user, you can use the dockerized version from this [reposito
 * Log on the machine as the djangoref user and clone this repo
 
 ```bash
-git clone https://github.com/aescobarr/nhc-georef.git
+git clone https://github.com/aescobarr/mcnb-alibey.git
 ```
 
 #### General packages
@@ -482,7 +482,7 @@ We should now use the start command to start the gunicorn instance. If everythin
 
 ## Authors
 
-Developers: [Agustí Escobar](https://github.com/aescobarr) (current version), [Victor Garcia](https://github.com/vg-coder) (first version)
+Developers: [Agustí Escobar](https://github.com/aescobarr) (current version), [Victor Garcia](https://github.com/vg-coder) (J2EE version)
 Conceptual design: Arnald Marcer (CREAF), Francesc Uribe (Museu de Ciències Naturals de Barcelona)
 
 ## How to cite this software
