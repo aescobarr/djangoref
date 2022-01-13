@@ -1,14 +1,14 @@
 # Ali-Bey
 
-Ali-Bey is a tool for georeferencing site names, originally created for the Museu de Ciencies Naturals de Barcelona - [MCNB](https://museuciencies.cat/). It allows storage, indexing and querying of georeferenced site names, including geometry, and supports multiple versions of the site names. Ali-Bey is built using [Django](https://www.djangoproject.com/).
+Ali-Bey is a web application for georeferencing site names, originally created for the Museu de Ciencies Naturals de Barcelona - [MCNB](https://museuciencies.cat/). It allows the storage, indexing and querying of georeferenced site names, including their geometry, and supports multiple versions of the site names. Ali-Bey is built using [Django Python web framework](https://www.djangoproject.com/).
 
-The application exposes an API which allows to query the underlying data. The API is a separate project and can be found [here](https://github.com/aescobarr/mcnb-alibey-api).
+Some functionality of the application is also exposed as an API which allows to query the underlying data. The API is a separate project and can be found [here](https://github.com/aescobarr/mcnb-alibey-api).
 
 ## Getting Started
 
 These instructions will help you set up a basic working development environment on an Ubuntu 18.04 LTS system. It assumes [Git](https://git-scm.com/) is installed and running in the host machine. 
 
-If you are a docker user, you can use the dockerized version from this [repository](https://github.com/aescobarr/mcnb-alibey-docker) which simplifies the installation process a lot.
+If you are a docker user, you can use the dockerized version from this [repository](https://github.com/aescobarr/mcnb-alibey-docker) which simplifies the installation process.
 
 ### Prerequisites
 
@@ -21,7 +21,7 @@ git clone https://github.com/aescobarr/mcnb-alibey.git
 
 #### General packages
 
-First some basic general purpose packages:
+First, install some basic general purpose packages:
 
 ```bash
 sudo apt install libpq-dev libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev libffi-dev
@@ -31,7 +31,7 @@ sudo apt install g++
 
 #### Database
 
-Ali-Bey uses a Postgresql 9+ with Postgis database. You can install it like this:
+Ali-Bey uses a [Postgresql 9+](https://www.postgresql.org) database with the [PostGIS](https://postgis.net) spatial database extension. You can install it like this:
 
 ```bash
 sudo apt install postgresql-10
@@ -39,21 +39,21 @@ sudo apt install postgresql-10-postgis-2.4
 sudo apt install postgresql-10-postgis-scripts
 ```
 
-We recommend to create a separate Postgresql user which will own the Ali-Bey database and not use the postgres super user. To create the user and the application database we would follow these steps (we will create a user called georef_app):
+We recommend to create a separate PostgreSQL user which will own the Ali-Bey database and not use the postgres super user. To create the user and the application database we would follow these steps (we will create a user called georef_app):
 
-Log to Postgresql console using the postgres (admin) user. Then:
+Log in to the Postgresql console using the postgres (admin) user. Then:
 ```
 -- Create the georef_app user
 CREATE ROLE georef_app LOGIN PASSWORD 'mypassword' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
 ```
 
-With the user created, we now proceed to create the database which will host the application data. As the postgresql system user, from the shell we can create the database and make it belong to the application user which we named georef_app in the last step (in this example we call the database georef):
+With the user created, we now proceed to create the database which will host the application data. As the PostgreSQL system user, from the shell we can create the database and make it owned by the application user which we named georef_app in the last step (in this example we call the database georef):
 ```bash
 # As postgresql user
 createdb georef -O georef_app
 ```
 
-Finally, we enable the postgis extensions in the database. We connect as the postgres user to the georef database and we execute the commands:
+Finally, we enable the PostGIS extensions in the database. We connect as the postgres user to the georef database and execute the commands:
 ```
 CREATE EXTENSION postgis;
 CREATE EXTENSION postgis_topology;
@@ -92,7 +92,7 @@ source ~/.bashrc
 
 For additional info on virtualenvwrapper, go to the virtualenvwrapper [docs](https://virtualenvwrapper.readthedocs.io/en/latest/)
 
-#### Geoserver
+#### GeoServer
 
 Ali-Bey uses a [GeoServer](http://geoserver.org/) instance to serve some layers via WMS services. This step could be considered optional in a development environment although it is mandatory in production deployment.
 
@@ -114,8 +114,6 @@ sudo apt install tomcat8-admin
 ```
 
 ##### Geoserver install and basic setup
-
-The following example is done using GeoServer 2.14.2; this project moves fast so probably this version will be outdated by the time anyone reads this... We recommend using always the latest stable version of GeoServer: the install process should be about the same.
 
 From the shell, do something like this:
 ```bash
@@ -175,8 +173,6 @@ Next, we should perform some administrative tasks in the GeoServer instance. Thi
 * Create a workspace to store the created layers
 * Publish a few layers from the PostgreSQL database
 
-Right now this must be done manually, but we are working on scripts to automate all this via scripts that interact with the GeoServer RESTFul API.
-
 ### Installing
 
 
@@ -197,11 +193,11 @@ With the virtual environment active, let's load all the needed python packages i
 ```bash
 pip install -r requirements.txt
 ```
-This will install all the packages listed in requirements.txt in the virtual environment. If all goes well, we proceed with the next step.
+This will install all the packages listed in requirements.txt in the virtual environment.
 
 #### Adjusting config files
 
-The cloned repository has a [settings.py](https://github.com/aescobarr/nhc-georef/blob/master/djangoref/settings.py) typical django config file. However, this file is not enough to run the app, as it points to a second settings_local.py file which must be created. Most parameters in settings.py are overwritten in the settings_local.py file, so it must be created and exist at the same level in the folder structure as settings.py.
+The cloned repository has a [settings.py](https://github.com/aescobarr/nhc-georef/blob/master/djangoref/settings.py), the typical django config file. However, this file is not enough to run the app, as it points to a second settings_local.py file which must be created. Most parameters in settings.py are overwritten in the settings_local.py file, so it must be created and exist at the same level in the folder structure as settings.py.
 
 The file settings_local.py contains the following (the comments give a brief description of each config key value):
 ```python
@@ -311,7 +307,7 @@ This should start a development server at http://127.0.0.1:8000
 
 ### Apache
 
-Our particular deployment setup uses [Apache](http://httpd.apache.org/) with mod_proxy to proxy a local [gunicorn](https://gunicorn.org/) instance. The static resources will also be served by Apache. So we need to install a few additional pieces; Gunicorn should already be installed in your system as it is contained in the project requirements.txt file.
+Our particular deployment setup uses [Apache](http://httpd.apache.org/) with mod_proxy to proxy a local [Gunicorn](https://gunicorn.org/) instance. The static resources will also be served by Apache. So we need to install a few additional pieces; Gunicorn should already be installed in your system as it is contained in the project requirements.txt file.
 
 The Apache installation goes something like this:
 ```bash
@@ -469,7 +465,7 @@ sudo supervisorctl stop gunicorn-georef
 # start running process by handle
 sudo supervisorctl start gunicorn-georef
 ```
-We should now use the start command to start the gunicorn instance. If everything is okay, the app should be running!
+We should now use the start command to start the gunicorn instance. The app is now running!
 
 ## Built With
 
@@ -482,12 +478,12 @@ We should now use the start command to start the gunicorn instance. If everythin
 
 ## Authors
 
-Developers: [Agustí Escobar](https://github.com/aescobarr) (current version), [Victor Garcia](https://github.com/vg-coder) (J2EE version)
+Developers: [Agustí Escobar](https://github.com/aescobarr) (current version), [Victor Garcia](https://github.com/vg-coder) (previous J2EE version)
 Conceptual design: Arnald Marcer (CREAF), Francesc Uribe (Museu de Ciències Naturals de Barcelona)
 
 ## How to cite this software
 
-Marcer A., Escobar A., Garcia V. and Uribe F. (2019) Georef. Github repository https://github.com/aescobarr/nhc-georef
+Marcer A., Escobar A., Garcia V. and Uribe F. (2019) Ali-Bey. Github repository https://github.com/aescobarr/nhc-georef
 
 ## License
 
