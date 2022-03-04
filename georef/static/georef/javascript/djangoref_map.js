@@ -106,25 +106,15 @@
                 }
             }
             ,{
-                groupName: 'Bing Maps',
+                groupName: 'Microsoft Bing Maps',
                 expanded: false,
                 layers: {
-                    'Bing aerial': djangoRef.Map.bing,
-                    'Bing aerial+roads': djangoRef.Map.bing_aerial_labels,
-                    'Bing roads': djangoRef.Map.bing_road,
-                    'Bing roads dark': djangoRef.Map.bing_road_dark
+                    'Aerial': djangoRef.Map.bing,
+                    'Aerial+roads': djangoRef.Map.bing_aerial_labels,
+                    'Roads': djangoRef.Map.bing_road,
+                    'Roads dark': djangoRef.Map.bing_road_dark
                 }
             }
-            /*,{
-                groupName: 'Google Base Maps',
-                expanded: false,
-                layers: {
-                    'Google roads': djangoRef.Map.roads,
-                    'Google satellite': djangoRef.Map.satellite,
-                    'Google terrain': djangoRef.Map.terrain,
-                    'Google hybrid': djangoRef.Map.hybrid
-                }
-            }*/
         ];
 
         var overlays_control_config = options.overlays_control_config;

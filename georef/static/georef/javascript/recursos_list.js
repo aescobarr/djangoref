@@ -70,7 +70,7 @@ $(document).ready(function() {
             },
             {
                 'targets':0,
-                'title': gettext('Recurs de georeferenciació')
+                'title': gettext('Nom recurs')
             }
         ]
     } );

@@ -77,12 +77,14 @@ from django.apps import apps
 from django.contrib.admin.utils import NestedObjects
 from georef.geom_utils import *
 from haversine import haversine
+from datetime import date
 
 from slugify import slugify
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.views import login
 from django.http import Http404
 from rest_framework.exceptions import ParseError
+from django.template.loader import TemplateDoesNotExist
 
 def get_order_clause(params_dict, translation_dict=None):
     order_clause = []
@@ -196,7 +198,9 @@ def generic_datatable_list_endpoint(request, search_field_list, queryClass, clas
 
 
 def index(request):
-    return render(request, 'georef/index.html')
+    wms_url = conf.GEOSERVER_WMS_URL
+    context = {'wms_url': wms_url, 'bing': conf.BING_MAPS_API_KEY}
+    return render(request, 'georef/index.html', context)
 
 
 class PaisViewSet(viewsets.ModelViewSet):
@@ -786,7 +790,7 @@ def recursos(request):
     if this_user.profile:
         edit_permission = this_user.profile.can_edit_recurs
     return render(request, 'georef/recursos_list.html',
-                  context={'llista_tipus': llista_tipus, 'wms_url': wms_url, 'csrf_token': csrf_token, 'wmslayers': json.dumps(wms_dict), 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY})
+                  context={'llista_tipus': llista_tipus, 'wms_url': wms_url, 'csrf_token': csrf_token, 'wmslayers': json.dumps(wms_dict), 'bing': conf.BING_MAPS_API_KEY})
 
 
 @login_required
@@ -801,7 +805,7 @@ def toponims(request):
     llista_versions = Qualificadorversio.objects.all().order_by('qualificador')
     return render(request, 'georef/toponims_list.html',
                   context={'llista_versions': llista_versions, 'llista_tipus': llista_tipus, 'llista_paisos': llista_paisos, 'llista_autors':llista_autors,'csrf_token': csrf_token,
-                           'wms_url': wms_url, 'wmslayers': json.dumps(wms_dict), 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY })
+                           'wms_url': wms_url, 'wmslayers': json.dumps(wms_dict), 'bing': conf.BING_MAPS_API_KEY })
 
 @login_required
 def calculcentroides(request):
@@ -1004,7 +1008,7 @@ def recursos_create(request):
                 return HttpResponseRedirect(url)
     else:
         form = RecursForm()
-    return render(request, 'georef/recurs_create.html', {'form': form, 'wms_url': wms_url, 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY})
+    return render(request, 'georef/recurs_create.html', {'form': form, 'wms_url': wms_url, 'bing': conf.BING_MAPS_API_KEY})
 
 
 def toponims_search(request):
@@ -1099,7 +1103,6 @@ def toponims_update_2(request, idtoponim=None, idversio=None):
             'node_ini': node_ini,
             'wms_url': wms_url,
             'wmslayers': json.dumps(wms_dict),
-            'google_maps': conf.GOOGLE_MAPS_KEY_URL,
             'bing': conf.BING_MAPS_API_KEY
         }
         return render(request, 'georef/toponim_update_2.html', context)
@@ -1161,7 +1164,6 @@ def toponims_update_2(request, idtoponim=None, idversio=None):
                     'node_ini': node_ini,
                     'wms_url': wms_url,
                     'wmslayers': json.dumps(wms_dict),
-                    'google_maps': conf.GOOGLE_MAPS_KEY_URL,
                     'bing': conf.BING_MAPS_API_KEY
                 }
                 return render(request, 'georef/toponim_update_2.html', context)
@@ -1233,11 +1235,19 @@ def toponims_update_2(request, idtoponim=None, idversio=None):
                     'node_ini': node_ini,
                     'wms_url': wms_url,
                     'wmslayers': json.dumps(wms_dict),
-                    'google_maps': conf.GOOGLE_MAPS_KEY_URL,
                     'bing': conf.BING_MAPS_API_KEY
                 }
                 return render(request, 'georef/toponim_update_2.html', context)
 
+def get_sitenames_export_filename(extension):
+    today = date.today()
+    str_today = today.strftime("%d/%m/%Y")
+    return 'attachment; filename="georef_sitenames_export_{0}.{1}"'.format(str_today, extension)
+
+def get_carto_res_export_filename(extension):
+    today = date.today()
+    str_today = today.strftime("%d/%m/%Y")
+    return 'attachment; filename="georef_cartographic_resources_export_{0}.{1}"'.format(str_today, extension)
 
 @login_required
 def recursos_list_csv(request):
@@ -1250,7 +1260,7 @@ def recursos_list_csv(request):
     records = data.data['data']
 
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="recursos.csv"'
+    response['Content-Disposition'] = get_carto_res_export_filename('csv')
     writer = csv.writer(response, delimiter=';')
     writer.writerow(['nom'])
     for record in records:
@@ -1269,7 +1279,8 @@ def recursos_list_xls(request):
     records = data.data['data']
 
     response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="recursos.xls"'
+
+    response['Content-Disposition'] = get_carto_res_export_filename('xls')
 
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Recursos')
@@ -1319,7 +1330,7 @@ def toponims_list_xls(request):
         versions[darrera_versio.idtoponim.id] = { '_x': darrera_versio.get_coordenada_x_centroide, '_y': darrera_versio.get_coordenada_y_centroide, '_inc': darrera_versio.get_incertesa_centroide}
 
     response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="toponims.xls"'
+    response['Content-Disposition'] = get_sitenames_export_filename('xls')
 
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Toponims')
@@ -1370,8 +1381,15 @@ def recursos_list_pdf(request):
                                            field_translation_list, sort_translation_list, paginate=False)
 
     records = data.data['data']
-    html_string = render_to_string('georef/reports/recursos_list_pdf.html',
-                                   {'title': 'Llistat de Recursos de georeferenciació', 'records': records})
+
+    language = request.LANGUAGE_CODE
+
+    try:
+        html_string = render_to_string('georef/reports/recursos_list_pdf_{0}.html'.format(language), {'records': records})
+    except TemplateDoesNotExist:
+        html_string = render_to_string('georef/reports/recursos_list_pdf_ca.html', {'records': records})
+
+
 
     html = HTML(string=html_string)
     html.write_pdf(target='/tmp/mypdf.pdf');
@@ -1379,7 +1397,7 @@ def recursos_list_pdf(request):
     fs = FileSystemStorage('/tmp')
     with fs.open('mypdf.pdf') as pdf:
         response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        response['Content-Disposition'] = get_carto_res_export_filename('pdf')
         return response
 
     return response
@@ -1417,8 +1435,12 @@ def toponims_list_pdf(request):
         else:
             clean_data.append({'nom_str':record['nom_str'],'aquatic':record['aquatic'],'tipus':record['idtipustoponim']['nom'], 'x': '', 'y': '', 'inc': ''})
 
-    html_string = render_to_string('georef/reports/toponims_list_pdf.html',
-                                   {'title': 'Llistat de topònims', 'records': clean_data})
+    language = request.LANGUAGE_CODE
+    try:
+        html_string = render_to_string('georef/reports/toponims_list_pdf_{0}.html'.format(language), {'title': 'Site names list', 'records': clean_data})
+    except TemplateDoesNotExist:
+        html_string = render_to_string('georef/reports/toponims_list_pdf_ca.html', {'title': 'Llistat de topònims', 'records': clean_data})
+
 
     html = HTML(string=html_string)
     html.write_pdf(target='/tmp/mypdf.pdf');
@@ -1426,7 +1448,7 @@ def toponims_list_pdf(request):
     fs = FileSystemStorage('/tmp')
     with fs.open('mypdf.pdf') as pdf:
         response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        response['Content-Disposition'] = get_sitenames_export_filename('pdf')
         return response
 
     return response
@@ -1436,7 +1458,13 @@ def toponims_list_pdf(request):
 def toponims_detail_pdf(request, idtoponim=None):
     toponim = get_object_or_404(Toponim, pk=idtoponim)
 
-    html_string = render_to_string('georef/reports/toponim_detail_pdf.html', {'toponim': toponim})
+    language = request.LANGUAGE_CODE
+
+    try:
+        html_string = render_to_string('georef/reports/toponim_detail_pdf_{0}.html'.format(language), {'toponim': toponim})
+    except TemplateDoesNotExist:
+        html_string = render_to_string('georef/reports/toponim_detail_pdf_ca.html', {'toponim': toponim})
+
     georef_css = CSS('georef/static/georef/css/georef.css')
     # simple_grid = CSS('georef/static/georef/css/grid/simple-grid.css')
     # styles = [simple_grid, georef_css]
@@ -1476,7 +1504,7 @@ def toponims_list_csv(request):
                                                  '_inc': darrera_versio.get_incertesa_centroide}
 
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="toponims.csv"'
+    response['Content-Disposition'] = get_sitenames_export_filename('csv')
     writer = csv.writer(response, delimiter=';')
     writer.writerow(['nom_toponim', 'aquatic?', 'tipus_toponim', 'centroide_x', 'centroide_y','incertesa_m'])
     for record in records:
@@ -1513,7 +1541,7 @@ def my_profile(request):
     return render(request, 'georef/profile.html', {'user_form': user_form, 'successfully_saved': successfully_saved})
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.profile.is_admin)
 @login_required
 @transaction.atomic
 def user_profile(request, user_id=None):
@@ -1560,7 +1588,7 @@ def change_my_password(request):
     return render(request, 'georef/change_password.html', {'form': form, 'edited_user': None})
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.profile.is_admin)
 @login_required
 def change_password(request, user_id=None):
     this_user = get_object_or_404(User, pk=user_id)
@@ -1577,7 +1605,7 @@ def change_password(request, user_id=None):
     return render(request, 'georef/change_password.html', {'form': form, 'edited_user': this_user})
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.profile.is_admin)
 @login_required
 @transaction.atomic
 def user_new(request):
@@ -1620,7 +1648,7 @@ def recursos_update(request, id=None):
     this_user = request.user
     context = {'form': form, 'paraulesclau': recurs.paraulesclau_str(), 'capeswms': capeswms,
                'autors': recurs.autors_str(), 'toponims_basats_recurs': toponimsversio, 'moretoponims': moretoponims,
-               'wms_url': wms_url, 'geometries_json': geometries_json, 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY}
+               'wms_url': wms_url, 'geometries_json': geometries_json, 'bing': conf.BING_MAPS_API_KEY}
     if request.method == 'POST':
         if not this_user.profile.can_edit_recurs and not this_user.profile.is_admin:
             message = ('No tens permís per editar recursos. Operació no permesa.')
@@ -1799,7 +1827,7 @@ def prefsvisualitzaciowms(request):
 @login_required
 def georef_layers(request):
     wms_url = conf.GEOSERVER_WMS_URL
-    context = {'wms_url' : wms_url, 'google_maps': conf.GOOGLE_MAPS_KEY_URL, 'bing': conf.BING_MAPS_API_KEY}
+    context = {'wms_url' : wms_url, 'bing': conf.BING_MAPS_API_KEY}
     return render(request, 'georef/georef_layers.html', context)
 
 

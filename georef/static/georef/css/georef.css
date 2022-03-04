@@ -172,7 +172,7 @@ table#toponim_edit tbody tr td ul li{
 
 .separador_seccio p{
     background: #4598ea;
-    text-color: 000#;
+    color: #FFF !important;
     padding-left: 10px;
 }
 
@@ -208,7 +208,7 @@ table#toponim_edit tbody tr td ul li{
 }
 
 .active_edit {
-    background-color: red;
+    background-color: #A9A9A9;
     color: white;
 }
 
@@ -337,10 +337,12 @@ table.toponimsimportats tbody tr.odd{
     background-color: #ffdbbc;
 }
 
+/*
 .leaflet-control-layers {
-    max-height: 400px;
+    max-height: 200px;
     overflow: auto;
 }
+*/
 
 .iconainfo {
     position:relative;

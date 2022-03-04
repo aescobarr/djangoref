@@ -13,7 +13,7 @@ django-datetime-widget==0.9.3
 django-filter==1.1.0
 django-material==1.1.0
 djangorestframework==3.7.3
-GDAL==2.2.3
+GDAL==3.0.4
 gsconfig-py3==1.0.7
 gunicorn==19.9.0
 haversine==2.0.0

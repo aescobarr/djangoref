@@ -1,0 +1,123 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Site name sheet</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic);
+
+        * {
+          font-family: 'Lato', Helvetica, sans-serif;
+          color: #333447;
+          line-height: 1;
+        }
+
+        body {
+            font-size: 14px;
+        }
+
+        .taulatoponim {
+            padding-top: 10px;
+            width:100%;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .taula_versio {
+            padding-top: 10px;
+            width:100%;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .taula_versio th,td {
+            padding: 5px;
+        }
+
+        .taulatoponim th,td {
+            padding: 5px;
+        }
+
+        .table_head {
+            background-color: #3bbbf7;
+        }
+
+    </style>
+</head>
+<body>
+    <h3>Site name sheet {{ toponim.nom_str }}</h3>
+    <div class="container separador_seccio">
+        <p><strong>Basic data:</strong></p>
+    </div>
+    <table class="taulatoponim">
+        <tr class="table_head">
+            <th>Name:</th>
+            <td>{{ toponim.nom }}</td>
+        </tr>
+        <tr>
+            <th>Type:</th>
+            <td>{{ toponim.idtipustoponim }}</td>
+        </tr>
+        <tr>
+            <th>Country:</th>
+            <td>{{ toponim.idpais }}</td>
+        </tr>
+        <tr>
+            <th>Aquatic:</th>
+            <td>{{ toponim.aquatic }}</td>
+        </tr>
+    </table>
+    <div class="container separador_seccio">
+        <p><strong>Versions:</strong></p>
+        {% for versio in toponim.versions.all %}
+        <table class="taula_versio">
+            <tr class="table_head">
+                <th>Version name:</th>
+                <td>{{ versio.nom }}</td>
+            </tr>
+            <tr>
+                <th>Version number:</th>
+                <td>{{ versio.numero_versio }}</td>
+            </tr>
+            <tr>
+                <th>Version qualifier:</th>
+                <td>{{ versio.idqualificador }}</td>
+            </tr>
+            <tr>
+                <th>Version captured from resource:</th>
+                <td>{{ versio.idrecursgeoref }}</td>
+            </tr>
+            <tr>
+                <th>Date:</th>
+                <td>{{ versio.datacaptura }}</td>
+            </tr>
+        </table>
+        <table class="taula_versio">
+            <tr>
+                <th>Original X coordinate:</th>
+                <td>{{ versio.coordenada_x_origen }}</td>
+                <th>X centroid coordinate:</th>
+                <td>{{ versio.centroide_x }}</td>
+            </tr>
+            <tr>
+                <th>Original Y coordinate:</th>
+                <td>{{ versio.coordenada_y_origen }}</td>
+                <th>Y centroid coordinate:</th>
+                <td>{{ versio.centroide_y }}</td>
+            </tr>
+            <tr>
+                <th>Z coordinate:</th>
+                <td>{{ versio.coordenada_z_origen }}</td>
+                <th>Coordinate uncertainty(m):</th>
+                <td>{{ versio.precisio_h }}</td>
+            </tr>
+            <tr>
+                <th>Height uncertainty(m):</th>
+                <td>{{ versio.precisio_z }}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+        {% endfor %}
+    </div>
+</body>
+</html>

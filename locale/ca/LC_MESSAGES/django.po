@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-01 10:43+0200\n"
+"POT-Creation-Date: 2021-11-24 07:48+0000\n"
 "PO-Revision-Date: 2019-11-18 09:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,13 +26,40 @@ msgstr "Català"
 msgid "English"
 msgstr "Anglès"
 
-#: georef/models.py:45 georef/views.py:2358 georef/views.py:2359
+#: djangoref/settings.py:217
+msgid "Anar a google"
+msgstr "Anar a google"
+
+#: djangoref/settings.py:218
+msgid "Anar a ICC"
+msgstr "Anar a ICC"
+
+#: djangoref/settings.py:220
+msgid "Conversió de coordenades - Convertbox"
+msgstr "Conversió de coordenades - Convertbox"
+
+#: djangoref/settings.py:221
+msgid "Conversió de coordenades - Earth Point: Convert coordinates"
+msgstr "Conversió de coordenades - Earth Point: Convert coordinates"
+
+#: djangoref/settings.py:223
+msgid "Georeferenciació - Geolocate"
+msgstr "Georeferenciació - Geolocate"
+
+#: djangoref/settings.py:224
+msgid "Georeferenciació - Georeferencing calculator"
+msgstr "Georeferenciació - Georeferencing calculator"
+
+#: djangoref/settings.py:225
+msgid "Georeferenciació - Berkeley Mapper"
+msgstr "Georeferenciació - Berkeley Mapper"
+
+#: georef/models.py:45 georef/views.py:2385 georef/views.py:2386
 msgid "Tipus de topònim"
 msgstr "Tipus de topònim"
 
-#: georef/models.py:58 georef/templates/georef/toponim_create.html:60
-#: georef/templates/georef/toponim_update_2.html:115
-#: georef/templates/georef/toponims_list.html:193 georef/views.py:2303
+#: georef/models.py:58 georef/templates/georef/toponims_list.html:190
+#: georef/views.py:2330
 msgid "País"
 msgstr "País"
 
@@ -48,7 +75,27 @@ msgstr "Sistema de referència del recurs"
 msgid "Topònim"
 msgstr "Topònim"
 
-#: georef/models.py:218 georef/templates/georef/base.html:99
+#: georef/models.py:127
+msgid "Sí"
+msgstr ""
+
+#: georef/models.py:127
+#, fuzzy
+#| msgid "Nom"
+msgid "No"
+msgstr "Nom"
+
+#: georef/models.py:135 georef/templates/georef/toponim_create.html:60
+#: georef/templates/georef/toponim_update_2.html:115
+#: georef/templates/georef/toponims_list.html:191
+msgid "Aquàtic"
+msgstr "Aquàtic"
+
+#: georef/models.py:135
+msgid "Terrestre"
+msgstr ""
+
+#: georef/models.py:218 georef/templates/georef/base.html:101
 msgid "Tipus unitats"
 msgstr "Tipus unitats"
 
@@ -57,8 +104,8 @@ msgid "Tipus de recurs"
 msgstr "Tipus de recurs"
 
 #: georef/models.py:247 georef/templates/georef/_recursos_fields.html:144
-#: georef/templates/georef/base.html:97 georef/views.py:2344
-#: georef/views.py:2345
+#: georef/templates/georef/base.html:99 georef/views.py:2371
+#: georef/views.py:2372
 msgid "Tipus de suport"
 msgstr "Tipus de suport"
 
@@ -67,10 +114,9 @@ msgstr "Tipus de suport"
 msgid "Sistema de referència"
 msgstr "Sistema de referència"
 
-#: georef/models.py:272 georef/templates/georef/base.html:60
-#: georef/templates/georef/capes_wms.html:36
+#: georef/models.py:272 georef/templates/georef/base.html:61
+#: georef/templates/georef/capes_wms.html:44
 #: georef/templates/georef/prefsvisualitzaciowms.html:23
-#: georef/templates/georef/prefsvisualitzaciowms.html:28
 msgid "Preferències visualització capes WMS"
 msgstr "Preferències visualització capes WMS"
 
@@ -78,8 +124,8 @@ msgstr "Preferències visualització capes WMS"
 msgid "Versió de topònim"
 msgstr "Versió de topònim"
 
-#: georef/models.py:387 georef/templates/georef/recursos_list.html:175
-#: georef/views.py:2316 georef/views.py:2317
+#: georef/models.py:387 georef/templates/georef/recursos_list.html:172
+#: georef/views.py:2343 georef/views.py:2344
 msgid "Paraula clau"
 msgstr "Paraula clau"
 
@@ -103,9 +149,57 @@ msgstr "Capes WMS del recurs (relació)"
 msgid "Recurs de georeferenciació"
 msgstr "Recurs de georeferenciació"
 
+#: georef/models.py:568
+msgid "cond_filtre_nom"
+msgstr "nom"
+
+#: georef/models.py:569
+msgid "cond_filtre_acronim"
+msgstr "acronim"
+
+#: georef/models.py:570
+msgid "cond_filtre_paraulaclau"
+msgstr "paraulaclau"
+
+#: georef/models.py:571
+msgid "cond_filtre_nomautor"
+msgstr "nomautor"
+
+#: georef/models.py:572
+msgid "cond_filtre_tipus"
+msgstr "tipus"
+
+#: georef/models.py:573
+msgid "cond_filtre_pais"
+msgstr "pais"
+
+#: georef/models.py:574
+msgid "cond_filtre_aquatic"
+msgstr "aquatic"
+
+#: georef/models.py:575
+msgid "cond_filtre_versio"
+msgstr "versio"
+
+#: georef/models.py:576
+msgid "cond_filtre_geografic"
+msgstr "geografic"
+
+#: georef/models.py:577
+msgid "cond_filtre_geografic_geo"
+msgstr "geografic_limits"
+
 #: georef/models.py:605
+msgid "Poligon"
+msgstr ""
+
+#: georef/models.py:620
 msgid "Filtre"
 msgstr "Filtre"
+
+#: georef/permissions.py:6
+msgid "Edició d'usuaris no permesa."
+msgstr ""
 
 #: georef/templates/georef/_recursos_fields.html:3
 #: georef/templates/georef/_recursos_fields.html:209
@@ -135,23 +229,23 @@ msgstr "Dades bàsiques"
 
 #: georef/templates/georef/_recursos_fields.html:23
 #: georef/templates/georef/profile.html:51
-#: georef/templates/georef/recursos_list.html:173
+#: georef/templates/georef/recursos_list.html:170
 #: georef/templates/georef/toponim_create.html:50
 #: georef/templates/georef/toponim_update_2.html:105
-#: georef/templates/georef/toponims_list.html:190
+#: georef/templates/georef/toponims_list.html:187
 #: georef/templates/georef/user_base.html:50
 #: georef/templates/georef/user_new.html:48
 msgid "Nom"
 msgstr "Nom"
 
 #: georef/templates/georef/_recursos_fields.html:30
-#: georef/templates/georef/recursos_list.html:174
+#: georef/templates/georef/recursos_list.html:171
 msgid "Acrònim"
 msgstr "Acrònim"
 
 #: georef/templates/georef/_recursos_fields.html:39
-#: georef/templates/georef/base.html:96 georef/views.py:2330
-#: georef/views.py:2331
+#: georef/templates/georef/base.html:98 georef/views.py:2357
+#: georef/views.py:2358
 msgid "Tipus de contingut"
 msgstr "Tipus de contingut"
 
@@ -160,7 +254,7 @@ msgid "resource_version_tooltip"
 msgstr "Identificació de la versió disponible o consultada del recurs."
 
 #: georef/templates/georef/_recursos_fields.html:46
-#: georef/templates/georef/toponims_list.html:195
+#: georef/templates/georef/toponims_list.html:192
 msgid "Versió"
 msgstr "Versió"
 
@@ -174,7 +268,7 @@ msgstr ""
 "s'afegirà al tesaure de paraules clau automàticament."
 
 #: georef/templates/georef/_recursos_fields.html:55
-#: georef/templates/georef/base.html:94
+#: georef/templates/georef/base.html:96
 msgid "Paraules clau"
 msgstr "Paraules clau"
 
@@ -188,7 +282,7 @@ msgstr ""
 "tesaure d'autors automàticament."
 
 #: georef/templates/georef/_recursos_fields.html:60
-#: georef/templates/georef/about.html:20 georef/templates/georef/base.html:91
+#: georef/templates/georef/about.html:46 georef/templates/georef/base.html:93
 msgid "Autors"
 msgstr "Autors"
 
@@ -249,9 +343,9 @@ msgid "Capes"
 msgstr "Capes"
 
 #: georef/templates/georef/_recursos_fields.html:131
-#: georef/templates/georef/recursos_list.html:150
+#: georef/templates/georef/recursos_list.html:146
 #: georef/templates/georef/t_generic.html:41
-#: georef/templates/georef/toponims_list.html:167
+#: georef/templates/georef/toponims_list.html:163
 #: georef/templates/georef/user_list.html:36
 msgid "Afegir"
 msgstr "Afegir"
@@ -298,25 +392,25 @@ msgid "Divisió política administrativa"
 msgstr "Divisió política administrativa"
 
 #: georef/templates/georef/about.html:12 georef/templates/georef/base.html:53
-#: georef/templates/georef/calculcentroides.html:27
-#: georef/templates/georef/capes_wms.html:24
+#: georef/templates/georef/calculcentroides.html:42
+#: georef/templates/georef/capes_wms.html:32
 #: georef/templates/georef/change_password.html:20
 #: georef/templates/georef/georef_layers.html:27
-#: georef/templates/georef/graphs.html:21 georef/templates/georef/help.html:9
-#: georef/templates/georef/index.html:12
+#: georef/templates/georef/graphs.html:26 georef/templates/georef/help.html:9
+#: georef/templates/georef/index.html:27
 #: georef/templates/georef/prefsvisualitzaciowms.html:21
 #: georef/templates/georef/profile.html:24
-#: georef/templates/georef/recurs_create.html:35
+#: georef/templates/georef/recurs_create.html:38
 #: georef/templates/georef/recurs_update.html:57
 #: georef/templates/georef/recursfilters_list.html:19
-#: georef/templates/georef/recursos_list.html:92
+#: georef/templates/georef/recursos_list.html:88
 #: georef/templates/georef/t_generic.html:32
 #: georef/templates/georef/toponim_create.html:29
 #: georef/templates/georef/toponim_search.html:18
 #: georef/templates/georef/toponim_update_2.html:85
 #: georef/templates/georef/toponimfilters_list.html:19
 #: georef/templates/georef/toponims_import.html:22
-#: georef/templates/georef/toponims_list.html:104
+#: georef/templates/georef/toponims_list.html:100
 #: georef/templates/georef/toponimstree.html:22
 #: georef/templates/georef/user_base.html:31
 #: georef/templates/georef/user_list.html:23
@@ -324,7 +418,7 @@ msgstr "Divisió política administrativa"
 msgid "Inici"
 msgstr "Inici"
 
-#: georef/templates/georef/about.html:13
+#: georef/templates/georef/about.html:13 georef/templates/georef/base.html:105
 msgid "Sobre"
 msgstr ""
 
@@ -340,17 +434,66 @@ msgid ""
 "L&#39;API és un projecte separat i es pot trobar <a href=\"https://github."
 "com/aescobarr/nhc-georef-api\">aquí</a>.</p>"
 msgstr ""
-"<p class=\"text-justify\">Georef és una eina de georeferenciació de "
+"<p class=\"text-justify\">Ali-Bey és una eina de georeferenciació de "
 "topònims, creada originalment per al Museu de Ciències Naturals de Barcelona "
 "- <a href=\"https://museuciencies.cat/\" rel=\"nofollow\">MCNB</a>. Permet "
 "desar, indexar i consultar topònims, que inclouen geometria, i suporta "
-"diverses versions de cadascun dels topònims. Georef està fet amb <a href="
+"diverses versions de cadascun dels topònims. Ali-Bey està fet amb <a href="
 "\"https://www.djangoproject.com/\" rel=\"nofollow\">Django</a>. L&#39;"
 "aplicació disposa d&#39;una API que permet fer consultes sobre les dades. "
 "L&#39;API és un projecte separat i es pot trobar <a href=\"https://github."
 "com/aescobarr/nhc-georef-api\">aquí</a>.</p>"
 
-#: georef/templates/georef/about.html:21
+#: georef/templates/georef/about.html:20
+msgid "home_text_1"
+msgstr "La plataforma per a treballs en cartografia i georeferenciació"
+
+#: georef/templates/georef/about.html:24
+msgid "home_text_2"
+msgstr ""
+"La cartografia està present en gairebé tots els àmbits d’activitat del "
+"museu: col·leccions, recerca, publicacions, exposicions, etc. Ali-Bey és el "
+"recurs desenvolupat per donar suport a les necessitats d’indexar i "
+"reconèixer recursos cartogràfics útils inicialment pels projectes del Museu "
+"de Ciències Naturals de Barcelona. Avui dia ja és una eina compartida per "
+"altres institucions."
+
+#: georef/templates/georef/about.html:28
+msgid "home_text_3"
+msgstr ""
+"Un projecte especialment actiu en museus d'història natural és la "
+"georeferenciació retrospectiva de les mostres de col·leccions. La immensa "
+"majoria de mostres són anteriors a la generalització del posicionament per "
+"satèl·lit i tenen assignada una referència del lloc de recol·lecció basada "
+"en les dades textuals de les etiquetes. Convertir topònims i descripcions de "
+"posicionament respecte topònims en un punt de coordenades sobre un mapa és "
+"l’acció de qualitat que definim com a georeferenciació."
+
+#: georef/templates/georef/about.html:32
+msgid "home_text_4"
+msgstr "Desar la traça d’aquestes estimacions de georeferenciació permet:"
+
+#: georef/templates/georef/about.html:35
+msgid "home_text_4_1"
+msgstr ""
+"la reutilització posterior de les dades per augmentar l’eficiència de la "
+"georeferenciació."
+
+#: georef/templates/georef/about.html:37
+msgid "home_text_4_2"
+msgstr ""
+"garanteix la coherència entre si de les dades de localització de les mostres "
+"de col·leccions."
+
+#: georef/templates/georef/about.html:39
+msgid "home_text_4_3"
+msgstr "eventualment permet revisar la qualitat de la pròpia georeferenciació."
+
+#: georef/templates/georef/about.html:42
+msgid "home_text_5"
+msgstr "La georeferenciació de col·leccions és un projecte capital a Ali-Bey."
+
+#: georef/templates/georef/about.html:47
 msgid ""
 "<p class=\"text-justify\"><ul><li>Desenvolupadors: <a href=\"https://github."
 "com/aescobarr\">Agustí Escobar</a> (versió actual), <a href=\"https://github."
@@ -359,33 +502,33 @@ msgid ""
 "a>, Francesc Uribe (Museu de Ciències Naturals de Barcelona).</li></ul></p>"
 msgstr ""
 
-#: georef/templates/georef/about.html:22
+#: georef/templates/georef/about.html:48
 msgid "Com citar el programari"
 msgstr ""
 
-#: georef/templates/georef/about.html:23
+#: georef/templates/georef/about.html:49
 msgid ""
 "<p class=\"text-justify\">Marcer A., Escobar A., Garcia V. and Uribe F. "
 "(2019) Georef. Github repository <a href=\"https://github.com/aescobarr/nhc-"
 "georef\">https://github.com/aescobarr/nhc-georef</a></p>"
 msgstr ""
 
-#: georef/templates/georef/about.html:24
+#: georef/templates/georef/about.html:50
 msgid "Llicència"
 msgstr ""
 
-#: georef/templates/georef/about.html:25
+#: georef/templates/georef/about.html:51
 msgid ""
 "<p class=\"text-justify\">Aquest programari es distribueix amb la llicència "
 "<a href=\"https://www.gnu.org/licenses/gpl-3.0.html\" rel=\"nofollow\">GNU "
 "General Public License v3.0</a>.</p>"
 msgstr ""
 
-#: georef/templates/georef/about.html:26
+#: georef/templates/georef/about.html:52
 msgid "Agraïments"
 msgstr ""
 
-#: georef/templates/georef/about.html:27
+#: georef/templates/georef/about.html:53
 msgid ""
 "<p>Moltes gràcies a Miguel Martínez( <a href=\"https://www.auupa.com/\" rel="
 "\"nofollow\">Auupa</a> ) per la seva ajuda integrant el programari a l&#39;"
@@ -394,212 +537,187 @@ msgid ""
 msgstr ""
 
 #: georef/templates/georef/base.html:55
-#: georef/templates/georef/capes_wms.html:25
+#: georef/templates/georef/capes_wms.html:33
 #: georef/templates/georef/prefsvisualitzaciowms.html:22
 msgid "Recursos cartogràfics"
 msgstr "Recursos cartogràfics"
 
-#: georef/templates/georef/base.html:57 georef/templates/georef/base.html:66
-#: georef/templates/georef/recursos_list.html:94
-#: georef/templates/georef/toponims_list.html:106
+#: georef/templates/georef/base.html:57 georef/templates/georef/base.html:67
+#: georef/templates/georef/recursos_list.html:90
+#: georef/templates/georef/toponims_list.html:102
 msgid "Llistat"
 msgstr "Llistat"
 
 #: georef/templates/georef/base.html:58
+#: georef/templates/georef/recurs_create.html:40
+#, fuzzy
+#| msgid "Afegir nova versió"
+msgid "Afegir nou recurs"
+msgstr "Afegir nova versió"
+
+#: georef/templates/georef/base.html:59
 #: georef/templates/georef/recursfilters_list.html:21
 msgid "Llistat de filtres de recursos"
 msgstr "Llistat de filtres de recursos"
 
-#: georef/templates/georef/base.html:59
-#: georef/templates/georef/capes_wms.html:26
-#: georef/templates/georef/capes_wms.html:31
+#: georef/templates/georef/base.html:60
+#: georef/templates/georef/capes_wms.html:34
+#: georef/templates/georef/capes_wms.html:39
 #: georef/templates/georef/prefsvisualitzaciowms.html:33
 msgid "Càrrega de capes WMS pròpies"
 msgstr "Càrrega de capes WMS pròpies"
 
-#: georef/templates/georef/base.html:64
+#: georef/templates/georef/base.html:65
 #: georef/templates/georef/toponim_create.html:30
 #: georef/templates/georef/toponim_update_2.html:86
-#: georef/templates/georef/toponims_list.html:105
-#: georef/templates/georef/toponims_list.html:125
-#: georef/templates/georef/toponimstree.html:23 georef/views.py:712
+#: georef/templates/georef/toponims_list.html:101
+#: georef/templates/georef/toponims_list.html:121
+#: georef/templates/georef/toponimstree.html:23 georef/views.py:716
 msgid "Topònims"
 msgstr "Topònims"
 
-#: georef/templates/georef/base.html:67
+#: georef/templates/georef/base.html:68
+#: georef/templates/georef/toponim_create.html:31
+#, fuzzy
+#| msgid "Cerca topònim"
+msgid "Afegir nou topònim"
+msgstr "Cerca topònim"
+
+#: georef/templates/georef/base.html:69
 #: georef/templates/georef/toponimstree.html:24
 msgid "Arbre"
 msgstr "Arbre"
 
-#: georef/templates/georef/base.html:68
+#: georef/templates/georef/base.html:70
 #: georef/templates/georef/toponimfilters_list.html:21
 msgid "Llistat de filtres de topònims"
 msgstr "Llistat de filtres de topònims"
 
-#: georef/templates/georef/base.html:72
-#: georef/templates/georef/calculcentroides.html:28
+#: georef/templates/georef/base.html:74
+#: georef/templates/georef/calculcentroides.html:43
 #: georef/templates/georef/toponim_search.html:19
 #: georef/templates/georef/toponims_import.html:23
 msgid "Utilitats"
 msgstr "Utilitats"
 
-#: georef/templates/georef/base.html:74
+#: georef/templates/georef/base.html:76
 msgid "Cerca topònim"
 msgstr "Cerca topònim"
 
-#: georef/templates/georef/base.html:75
-#: georef/templates/georef/calculcentroides.html:29
+#: georef/templates/georef/base.html:77
+#: georef/templates/georef/calculcentroides.html:44
 msgid "Calcula centroides"
 msgstr "Calcula centroides"
 
-#: georef/templates/georef/base.html:76
+#: georef/templates/georef/base.html:78
 #: georef/templates/georef/toponims_import.html:24
 msgid "Importació de topònims"
 msgstr "Importació de topònims"
 
-#: georef/templates/georef/base.html:77
-msgid "Anar a google"
-msgstr "Anar a google"
+#: georef/templates/georef/base.html:79 georef/templates/georef/graphs.html:27
+msgid "Gràfiques"
+msgstr "Gràfiques"
 
-#: georef/templates/georef/base.html:78
-msgid "Anar a ICC"
-msgstr "Anar a ICC"
-
-#: georef/templates/georef/base.html:80
-msgid "Conversió de coordenades - Convertbox"
-msgstr "Conversió de coordenades - Convertbox"
-
-#: georef/templates/georef/base.html:81
-msgid "Conversió de coordenades - Earth Point: Convert coordinates"
-msgstr "Conversió de coordenades - Earth Point: Convert coordinates"
-
-#: georef/templates/georef/base.html:83
-msgid "Georeferenciació - Geolocate"
-msgstr "Georeferenciació - Geolocate"
-
-#: georef/templates/georef/base.html:84
-msgid "Georeferenciació - Georeferencing calculator"
-msgstr "Georeferenciació - Georeferencing calculator"
-
-#: georef/templates/georef/base.html:85
-msgid "Georeferenciació - Berkeley Mapper"
-msgstr "Georeferenciació - Berkeley Mapper"
-
-#: georef/templates/georef/base.html:89
+#: georef/templates/georef/base.html:91
 #: georef/templates/georef/t_generic.html:33
 msgid "Tesaures"
 msgstr "Tesaures"
 
-#: georef/templates/georef/base.html:92
+#: georef/templates/georef/base.html:94
 msgid "Organitzacions"
 msgstr "Organitzacions"
 
-#: georef/templates/georef/base.html:93
+#: georef/templates/georef/base.html:95
 msgid "Països"
 msgstr "Països"
 
-#: georef/templates/georef/base.html:95
+#: georef/templates/georef/base.html:97
 msgid "Qualificadors de versió"
 msgstr "Qualificadors de versió"
 
-#: georef/templates/georef/base.html:98
+#: georef/templates/georef/base.html:100
 msgid "Tipus topònim"
 msgstr "Tipus topònim"
-
-#: georef/templates/georef/base.html:102 georef/templates/georef/graphs.html:22
-msgid "Gràfiques"
-msgstr "Gràfiques"
-
-#: georef/templates/georef/base.html:103
-#: georef/templates/georef/georef_layers.html:28
-msgid "Capes de georeferenciació"
-msgstr "Capes de georeferenciació"
 
 #: georef/templates/georef/base.html:104 georef/templates/georef/help.html:10
 msgid "Ajut"
 msgstr "Ajut"
 
-#: georef/templates/georef/base.html:107
+#: georef/templates/georef/base.html:108
 msgid "Benvingut"
 msgstr "Benvingut"
 
-#: georef/templates/georef/base.html:110
-msgid "Tancar sessió"
-msgstr "Tancar sessió"
-
-#: georef/templates/georef/base.html:113
+#: georef/templates/georef/base.html:111
 msgid "El meu perfil"
 msgstr "El meu perfil"
 
-#: georef/templates/georef/base.html:116
+#: georef/templates/georef/base.html:114
 msgid "Canviar el meu password"
 msgstr "Canviar el meu password"
 
-#: georef/templates/georef/base.html:120
+#: georef/templates/georef/base.html:119
 #: georef/templates/georef/user_list.html:25
 msgid "Gestió usuaris"
 msgstr "Gestió usuaris"
 
-#: georef/templates/georef/base.html:127
+#: georef/templates/georef/base.html:124
+msgid "Tancar sessió"
+msgstr "Tancar sessió"
+
+#: georef/templates/georef/base.html:130
 #: georef/templates/registration/login.html:12
 msgid "Iniciar sessió"
 msgstr "Iniciar sessió"
 
-#: georef/templates/georef/base.html:131
+#: georef/templates/georef/base.html:134
 msgid "Idioma"
 msgstr "Idioma"
 
-#: georef/templates/georef/base.html:164
+#: georef/templates/georef/base.html:167
 msgid "sLengthMenu"
 msgstr "Mostra _MENU_ registres"
 
-#: georef/templates/georef/base.html:165
+#: georef/templates/georef/base.html:168
 msgid "sZeroRecords"
 msgstr "No s'han trobat registres."
 
-#: georef/templates/georef/base.html:166
+#: georef/templates/georef/base.html:169
 msgid "sInfo"
 msgstr "Mostrant de _START_ a _END_ de _TOTAL_ registres"
 
-#: georef/templates/georef/base.html:167
+#: georef/templates/georef/base.html:170
 msgid "sInfoEmpty"
 msgstr "Mostrant 0 a 0 de 0 registres"
 
-#: georef/templates/georef/base.html:168
+#: georef/templates/georef/base.html:171
 msgid "sInfoFiltered"
 msgstr "(filtrat de _MAX_ total registres)"
 
-#: georef/templates/georef/base.html:169
+#: georef/templates/georef/base.html:172
 msgid "loadingRecords"
 msgstr "Carregant..."
 
-#: georef/templates/georef/base.html:171
-#: georef/templates/georef/recursos_list.html:137
-#: georef/templates/georef/toponims_list.html:154
-msgid "Filtrar"
-msgstr "Filtrar"
-
-#: georef/templates/georef/base.html:174
+#: georef/templates/georef/base.html:177
 msgid "Primer"
 msgstr "Primer"
 
-#: georef/templates/georef/base.html:175
+#: georef/templates/georef/base.html:178
 msgid "Anterior"
 msgstr "Anterior"
 
-#: georef/templates/georef/base.html:176
+#: georef/templates/georef/base.html:179
 msgid "Següent"
 msgstr "Següent"
 
-#: georef/templates/georef/base.html:177
+#: georef/templates/georef/base.html:180
 msgid "Últim"
 msgstr "Últim"
 
-#: georef/templates/georef/calculcentroides.html:34
+#: georef/templates/georef/calculcentroides.html:49
 msgid "Càlcul de centroides"
 msgstr "Calcula centroides"
 
-#: georef/templates/georef/calculcentroides.html:37
+#: georef/templates/georef/calculcentroides.html:52
 msgid "centroid_calc_help"
 msgstr ""
 "<p>Aquesta eina pren com a entrada un fitxer shapefile i en calcula el "
@@ -612,27 +730,35 @@ msgstr ""
 "intervé en el càlcul és la geometria.</li><li>La incertesa de coordenades es "
 "calcula com el punt més allunyat de la corba del polígon, contant des del "
 "centroide. Si la geometria conté múltiples polígons, aquests es fusionen i "
-"es considera la geometria resultant com un sol polígon.</li><li>Depenent de "
-"la mida i complexitat del fitxer, el procés pot trigar una mica.</li></ul>"
+"es considera la geometria resultant com un sol polígon.</li></ul>"
 
-#: georef/templates/georef/calculcentroides.html:53
+#: georef/templates/georef/calculcentroides.html:64
+msgid ""
+"Depenent de la mida i complexitat del fitxer, el procés pot trigar una mica"
+msgstr ""
+
+#: georef/templates/georef/calculcentroides.html:69
+#: georef/templates/georef/calculcentroides.html:81
 #: georef/templates/georef/toponim_search.html:34
 msgid "Copiar resultats al portapapers"
 msgstr "Copiar resultats al portapapers"
 
-#: georef/templates/georef/calculcentroides.html:65
+#: georef/templates/georef/calculcentroides.html:84
+#: georef/templates/georef/calculcentroides.html:105
 msgid "Coordenada x centroide (long)"
 msgstr "Coordenada X centroide (long)"
 
-#: georef/templates/georef/calculcentroides.html:71
+#: georef/templates/georef/calculcentroides.html:88
+#: georef/templates/georef/calculcentroides.html:111
 msgid "Coordenada y centroide (lat)"
 msgstr "Coordenada Y centroide (lat)"
 
-#: georef/templates/georef/calculcentroides.html:77
+#: georef/templates/georef/calculcentroides.html:92
+#: georef/templates/georef/calculcentroides.html:117
 msgid "Radi incertesa (m)"
 msgstr "Radi incertesa (m)"
 
-#: georef/templates/georef/capes_wms.html:35
+#: georef/templates/georef/capes_wms.html:43
 msgid "wms_layers_help_text"
 msgstr ""
 "Aquesta utilitat serveix per carregar capes pròpies en un servidor de "
@@ -641,19 +767,36 @@ msgstr ""
 "Mapa de dins de l'aplicació. Un cop carregada una capa, està desactivada per "
 "defecte. Si vols tenir-la disponible, vés a "
 
-#: georef/templates/georef/capes_wms.html:46
+#: georef/templates/georef/capes_wms.html:54
 msgid "wms_layers_help_text_warning"
 msgstr ""
 "És important que les capes, tant ràster com shapefile, estiguin en projecció "
 "WGS84."
 
-#: georef/templates/georef/capes_wms.html:54
-msgid "Nom de la capa"
+#: georef/templates/georef/capes_wms.html:58
+msgid "Segueix aquests passos per crear una capa WMS"
+msgstr ""
+
+#: georef/templates/georef/capes_wms.html:60
+#, fuzzy
+#| msgid "Nom de la capa"
+msgid "Escriu el nom de la capa"
 msgstr "Nom de la capa"
 
-#: georef/templates/georef/capes_wms.html:66
+#: georef/templates/georef/capes_wms.html:61
+msgid "Importar shapefile"
+msgstr ""
+
+#: georef/templates/georef/capes_wms.html:62
+#: georef/templates/georef/capes_wms.html:79
+#: georef/templates/georef/capes_wms.html:100
 msgid "Crear capa WMS"
 msgstr "Crear capa WMS"
+
+#: georef/templates/georef/capes_wms.html:71
+#: georef/templates/georef/capes_wms.html:88
+msgid "Nom de la capa"
+msgstr "Nom de la capa"
 
 #: georef/templates/georef/change_password.html:21
 #: georef/templates/georef/profile.html:25
@@ -687,6 +830,10 @@ msgstr "Nou password"
 msgid "Nou password (repeteix)"
 msgstr "Nou password (repeteix)"
 
+#: georef/templates/georef/georef_layers.html:28
+msgid "Capes de georeferenciació"
+msgstr "Capes de georeferenciació"
+
 #: georef/templates/georef/help.html:18
 msgid "Afegir documents d'ajuda"
 msgstr "Afegir documents d'ajuda"
@@ -715,54 +862,9 @@ msgstr "Segur que vols esborrar el document?"
 msgid "Encara no hi ha documents d'ajuda!"
 msgstr "Encara no hi ha documents d'ajuda!"
 
-#: georef/templates/georef/index.html:17
-msgid "home_text_1"
-msgstr "La plataforma per a treballs en cartografia i georeferenciació"
-
-#: georef/templates/georef/index.html:21
-msgid "home_text_2"
+#: georef/templates/georef/prefsvisualitzaciowms.html:28
+msgid "Llista de capes WMS"
 msgstr ""
-"La cartografia està present en gairebé tots els àmbits d’activitat del "
-"museu: col·leccions, recerca, publicacions, exposicions, etc. Georef és el "
-"recurs desenvolupat per donar suport a les necessitats d’indexar i "
-"reconèixer recursos cartogràfics útils inicialment pels projectes del Museu "
-"de Ciències Naturals de Barcelona. Avui dia ja és una eina compartida per "
-"altres institucions."
-
-#: georef/templates/georef/index.html:25
-msgid "home_text_3"
-msgstr ""
-"Un projecte especialment actiu en museus d'història natural és la "
-"georeferenciació retrospectiva de les mostres de col·leccions. La immensa "
-"majoria de mostres són anteriors a la generalització del posicionament per "
-"satèl·lit i tenen assignada una referència del lloc de recol·lecció basada "
-"en les dades textuals de les etiquetes. Convertir topònims i descripcions de "
-"posicionament respecte topònims en un punt de coordenades sobre un mapa és "
-"l’acció de qualitat que definim com a georeferenciació."
-
-#: georef/templates/georef/index.html:29
-msgid "home_text_4"
-msgstr "Desar la traça d’aquestes estimacions de georeferenciació permet:"
-
-#: georef/templates/georef/index.html:32
-msgid "home_text_4_1"
-msgstr ""
-"la reutilització posterior de les dades per augmentar l’eficiència de la "
-"georeferenciació."
-
-#: georef/templates/georef/index.html:34
-msgid "home_text_4_2"
-msgstr ""
-"garanteix la coherència entre si de les dades de localització de les mostres "
-"de col·leccions."
-
-#: georef/templates/georef/index.html:36
-msgid "home_text_4_3"
-msgstr "eventualment permet revisar la qualitat de la pròpia georeferenciació."
-
-#: georef/templates/georef/index.html:39
-msgid "home_text_5"
-msgstr "La georeferenciació de col·leccions és un projecte capital a Georef."
 
 #: georef/templates/georef/prefsvisualitzaciowms.html:32
 msgid "prefs_viz_help_text_1"
@@ -786,7 +888,7 @@ msgstr "Dades usuari"
 
 #: georef/templates/georef/profile.html:42
 #: georef/templates/georef/user_base.html:88
-#: georef/templates/georef/user_new.html:86 georef/views.py:2261
+#: georef/templates/georef/user_new.html:86 georef/views.py:2288
 #: georef_addenda/models.py:37
 msgid "Organització"
 msgstr "Organització"
@@ -809,17 +911,13 @@ msgstr "Correu electrònic"
 msgid "Nom d'usuari"
 msgstr "Nom d'usuari"
 
-#: georef/templates/georef/recurs_create.html:36
+#: georef/templates/georef/recurs_create.html:39
 #: georef/templates/georef/recurs_update.html:58
 #: georef/templates/georef/recursfilters_list.html:20
-#: georef/templates/georef/recursos_list.html:93
-#: georef/templates/georef/recursos_list.html:114
+#: georef/templates/georef/recursos_list.html:89
+#: georef/templates/georef/recursos_list.html:110
 msgid "Recursos"
 msgstr "Recursos"
-
-#: georef/templates/georef/recurs_create.html:37
-msgid "Creació de recursos"
-msgstr "Creació de recursos"
 
 #: georef/templates/georef/recurs_update.html:59
 msgid "Edició de recursos"
@@ -829,69 +927,89 @@ msgstr "Edició de recursos"
 msgid "Topònims basats en el recurs"
 msgstr "Topònims basats en el recurs"
 
-#: georef/templates/georef/recursos_list.html:99
-#: georef/templates/georef/toponims_list.html:110
+#: georef/templates/georef/recursos_list.html:95
+#: georef/templates/georef/toponims_list.html:106
 msgid "Confirmar sobreescriure filtre"
 msgstr "Confirmar sobreescriure filtre"
 
-#: georef/templates/georef/recursos_list.html:100
-#: georef/templates/georef/toponims_list.html:111
+#: georef/templates/georef/recursos_list.html:96
+#: georef/templates/georef/toponims_list.html:107
 msgid "msg_warn_overwrite_filter"
 msgstr "Ja hi ha un filtre amb aquest nom, el vols sobreescriure?"
 
-#: georef/templates/georef/recursos_list.html:124
-#: georef/templates/georef/toponims_list.html:141
+#: georef/templates/georef/recursos_list.html:114
+#: georef/templates/georef/toponims_list.html:127
+msgid "Exportar a xls"
+msgstr ""
+
+#: georef/templates/georef/recursos_list.html:115
+#: georef/templates/georef/toponims_list.html:128
+msgid "Exportar a csv"
+msgstr ""
+
+#: georef/templates/georef/recursos_list.html:116
+#: georef/templates/georef/toponims_list.html:129
+msgid "Exportar a pdf"
+msgstr ""
+
+#: georef/templates/georef/recursos_list.html:120
+#: georef/templates/georef/toponims_list.html:137
 msgid "help_btn_add_condicio"
 msgstr ""
 "Afegeix una nova condició a la taula de filtre. Es pot modificar els "
 "paràmetres de la condició un cop apareix a la taula."
 
-#: georef/templates/georef/recursos_list.html:124
-#: georef/templates/georef/toponims_list.html:141
+#: georef/templates/georef/recursos_list.html:120
+#: georef/templates/georef/toponims_list.html:137
 msgid "Afegir condició"
 msgstr "Afegir condició"
 
-#: georef/templates/georef/recursos_list.html:128
-#: georef/templates/georef/toponims_list.html:145
+#: georef/templates/georef/recursos_list.html:124
+#: georef/templates/georef/toponims_list.html:141
 msgid "Operador"
 msgstr "Operador"
 
-#: georef/templates/georef/recursos_list.html:129
-#: georef/templates/georef/toponims_list.html:146
+#: georef/templates/georef/recursos_list.html:125
+#: georef/templates/georef/toponims_list.html:142
 msgid "NOT"
 msgstr "NOT"
 
-#: georef/templates/georef/recursos_list.html:130
-#: georef/templates/georef/toponims_list.html:147
+#: georef/templates/georef/recursos_list.html:126
+#: georef/templates/georef/toponims_list.html:143
 msgid "Condició"
 msgstr "Condició"
 
-#: georef/templates/georef/recursos_list.html:131
-#: georef/templates/georef/toponims_list.html:148
+#: georef/templates/georef/recursos_list.html:127
+#: georef/templates/georef/toponims_list.html:144
 msgid "Valor"
 msgstr "Valor"
 
-#: georef/templates/georef/recursos_list.html:137
-#: georef/templates/georef/toponims_list.html:154
+#: georef/templates/georef/recursos_list.html:133
+#: georef/templates/georef/toponims_list.html:150
 msgid "help_btn_filter"
 msgstr ""
 "Executa una cerca, segons les condicions definides. La cerca mostrarà els "
 "resultats a la taula de recursos de georeferenciació i al mapa."
 
-#: georef/templates/georef/recursos_list.html:138
-#: georef/templates/georef/toponims_list.html:155
+#: georef/templates/georef/recursos_list.html:133
+#: georef/templates/georef/toponims_list.html:150
+msgid "Filtrar"
+msgstr "Filtrar"
+
+#: georef/templates/georef/recursos_list.html:134
+#: georef/templates/georef/toponims_list.html:151
 msgid "help_btn_clear_filter"
 msgstr ""
 "Elimina totes les condicions de filtre. La taula i el mapa perdran qualsevol "
 "filtre aplicat."
 
-#: georef/templates/georef/recursos_list.html:138
-#: georef/templates/georef/toponims_list.html:155
+#: georef/templates/georef/recursos_list.html:134
+#: georef/templates/georef/toponims_list.html:151
 msgid "Netejar filtre"
 msgstr "Netejar filtre"
 
-#: georef/templates/georef/recursos_list.html:141
-#: georef/templates/georef/toponims_list.html:158
+#: georef/templates/georef/recursos_list.html:137
+#: georef/templates/georef/toponims_list.html:154
 msgid "help_btn_filter_load"
 msgstr ""
 "A la caixa de text es pot escriure part del nom d'un filtre prèviament "
@@ -900,41 +1018,41 @@ msgstr ""
 "filtre, a Menú->Recursos cartogràfics->Llistat de filtres de recursos hi ha "
 "la llista completa."
 
-#: georef/templates/georef/recursos_list.html:141
-#: georef/templates/georef/toponims_list.html:158
+#: georef/templates/georef/recursos_list.html:137
+#: georef/templates/georef/toponims_list.html:154
 msgid "Carregar filtre"
 msgstr "Carregar filtre"
 
-#: georef/templates/georef/recursos_list.html:144
-#: georef/templates/georef/toponims_list.html:161
+#: georef/templates/georef/recursos_list.html:140
+#: georef/templates/georef/toponims_list.html:157
 msgid "help_btn_filter_save"
 msgstr ""
 "Aquí pots desar un filtre que hagis creat. Escriu un nom força descriptiu a "
 "la casella de text (que no existeixi ja) i prem el botó. Podràs recuperar el "
 "filtre escrivint el nom o part d'ell a la casella de text."
 
-#: georef/templates/georef/recursos_list.html:144
-#: georef/templates/georef/toponims_list.html:161
+#: georef/templates/georef/recursos_list.html:140
+#: georef/templates/georef/toponims_list.html:157
 msgid "Desar i filtrar"
 msgstr "Desar i filtrar"
 
-#: georef/templates/georef/recursos_list.html:150
+#: georef/templates/georef/recursos_list.html:146
 msgid "help_btn_add_resource"
 msgstr ""
 "Fes clic aquí per accedir a la fitxa de creació de Recursos Cartogràfics"
 
-#: georef/templates/georef/recursos_list.html:176
+#: georef/templates/georef/recursos_list.html:173
 #: georef/templates/georef/toponim_create.html:55
 #: georef/templates/georef/toponim_update_2.html:110
-#: georef/templates/georef/toponims_list.html:192
+#: georef/templates/georef/toponims_list.html:189
 msgid "Tipus"
 msgstr "Tipus"
 
-#: georef/templates/georef/recursos_list.html:177
+#: georef/templates/georef/recursos_list.html:174
 msgid "Geogràfic (límits capes WMS associades)"
 msgstr "Geogràfic (límits capes WMS associades)"
 
-#: georef/templates/georef/recursos_list.html:178
+#: georef/templates/georef/recursos_list.html:175
 msgid "Geogràfic (elements digitalitzats)"
 msgstr "Geogràfic (elements digitalitzats)"
 
@@ -947,39 +1065,29 @@ msgstr "Editar"
 msgid "Tots els camps són obligatoris."
 msgstr "Tots els camps són obligatoris."
 
-#: georef/templates/georef/toponim_create.html:31
-msgid "Creació de topònim"
-msgstr "Creació de topònim"
-
 #: georef/templates/georef/toponim_create.html:39
-#: georef/templates/georef/toponim_update_2.html:168
+#: georef/templates/georef/toponim_update_2.html:163
 msgid "Cancel·lar"
 msgstr "Cancel·lar"
 
 #: georef/templates/georef/toponim_create.html:65
 #: georef/templates/georef/toponim_update_2.html:120
-#: georef/templates/georef/toponims_list.html:194
-msgid "Aquàtic"
-msgstr "Aquàtic"
-
-#: georef/templates/georef/toponim_create.html:70
-#: georef/templates/georef/toponim_update_2.html:125
 msgid "Sinònims"
 msgstr "Sinònims"
 
-#: georef/templates/georef/toponim_create.html:79
+#: georef/templates/georef/toponim_create.html:74
 msgid "Seleccionat: cap"
 msgstr "Seleccionat: cap"
 
-#: georef/templates/georef/toponim_create.html:82
-#: georef/templates/georef/toponim_update_2.html:136
+#: georef/templates/georef/toponim_create.html:77
+#: georef/templates/georef/toponim_update_2.html:131
 msgid "node_search_tooltip"
 msgstr ""
 "Escriu 3 caràcters i es farà una cerca per nom de topònim. Seleccionant un "
 "element de la llista, aquest element es seleccionarà a l'arbre."
 
-#: georef/templates/georef/toponim_create.html:83
-#: georef/templates/georef/toponim_update_2.html:137
+#: georef/templates/georef/toponim_create.html:78
+#: georef/templates/georef/toponim_update_2.html:132
 msgid "Topònim pare"
 msgstr "Topònim pare"
 
@@ -1015,207 +1123,199 @@ msgstr "Edició de topònim"
 msgid "Tornar al llistat de topònims"
 msgstr "Tornar al llistat de topònims"
 
-#: georef/templates/georef/toponim_update_2.html:134
+#: georef/templates/georef/toponim_update_2.html:129
 msgid "Jerarquia del topònim"
 msgstr "Jerarquia del topònim"
 
-#: georef/templates/georef/toponim_update_2.html:144
+#: georef/templates/georef/toponim_update_2.html:139
 msgid "btn_save_toponim_tooltip"
 msgstr ""
 "Es desarà la informació que hagis modificat del topònim (els camps que "
 "queden per sobre d'aquest botó)"
 
-#: georef/templates/georef/toponim_update_2.html:144
+#: georef/templates/georef/toponim_update_2.html:139
 msgid "Desar Topònim"
 msgstr "Desar Topònim"
 
-#: georef/templates/georef/toponim_update_2.html:151
+#: georef/templates/georef/toponim_update_2.html:146
 msgid "Versions"
 msgstr "Versions"
 
-#: georef/templates/georef/toponim_update_2.html:153
+#: georef/templates/georef/toponim_update_2.html:148
 msgid "btn_save_version_tooltip"
 msgstr "Crear la fitxa d’una nova versió del topònim"
 
-#: georef/templates/georef/toponim_update_2.html:153
+#: georef/templates/georef/toponim_update_2.html:148
 msgid "Afegir nova versió"
 msgstr "Afegir nova versió"
 
-#: georef/templates/georef/toponim_update_2.html:159
+#: georef/templates/georef/toponim_update_2.html:154
 msgid "Qualificador"
 msgstr "Qualificador"
 
-#: georef/templates/georef/toponim_update_2.html:160
-#: georef/templates/georef/toponim_update_2.html:268
+#: georef/templates/georef/toponim_update_2.html:155
+#: georef/templates/georef/toponim_update_2.html:263
 msgid "Data"
 msgstr "Data"
 
-#: georef/templates/georef/toponim_update_2.html:161
-#: georef/templates/georef/toponims_list.html:191 georef/views.py:2275
+#: georef/templates/georef/toponim_update_2.html:156
+#: georef/templates/georef/toponims_list.html:188 georef/views.py:2302
 #: georef_addenda/models.py:84
 msgid "Autor"
 msgstr "Autor"
 
-#: georef/templates/georef/toponim_update_2.html:167
+#: georef/templates/georef/toponim_update_2.html:162
 msgid "Afegint nova versió..."
 msgstr "Afegint nova versió..."
 
-#: georef/templates/georef/toponim_update_2.html:180
-msgid "Estàs a punt d'esborrar la versió "
-msgstr "Estàs a punt d'esborrar la versió "
+#: georef/templates/georef/toponim_update_2.html:175
+msgid "Esborrar la versió?"
+msgstr "Esborrar la versió?"
 
-#: georef/templates/georef/toponim_update_2.html:180
-msgid " amb número "
-msgstr " amb número "
-
-#: georef/templates/georef/toponim_update_2.html:180
-msgid "vols continuar?"
-msgstr "vols continuar?"
-
-#: georef/templates/georef/toponim_update_2.html:194
+#: georef/templates/georef/toponim_update_2.html:189
 msgid "Dades versió"
 msgstr "Dades versió"
 
-#: georef/templates/georef/toponim_update_2.html:194
+#: georef/templates/georef/toponim_update_2.html:189
 msgid "(Afegint nova versió...)"
 msgstr "(Afegint nova versió...)"
 
-#: georef/templates/georef/toponim_update_2.html:196
+#: georef/templates/georef/toponim_update_2.html:191
 msgid "toponym_update_no_versions"
 msgstr ""
 "Aquest topònim encara no té versions. Omple el formulari de versió i prem "
 "'Desar versió' per crear la primera versió"
 
-#: georef/templates/georef/toponim_update_2.html:205
+#: georef/templates/georef/toponim_update_2.html:200
 msgid "toponim_kb_digitize_tooltip"
 msgstr "Digitalitza un punt per teclat"
 
-#: georef/templates/georef/toponim_update_2.html:212
+#: georef/templates/georef/toponim_update_2.html:207
 msgid "toponim_uncert_radius_tooltip"
 msgstr "Entra el radi d'incertesa del punt, en metres"
 
-#: georef/templates/georef/toponim_update_2.html:215
+#: georef/templates/georef/toponim_update_2.html:210
 msgid "Radi"
 msgstr "Radius"
 
-#: georef/templates/georef/toponim_update_2.html:218
+#: georef/templates/georef/toponim_update_2.html:213
 msgid "Digitalització de punt via teclat"
 msgstr "Digitalització de punt via teclat"
 
-#: georef/templates/georef/toponim_update_2.html:222
+#: georef/templates/georef/toponim_update_2.html:217
 msgid "Radi incertesa(m)"
 msgstr "Radi incertesa(m)"
 
-#: georef/templates/georef/toponim_update_2.html:226
+#: georef/templates/georef/toponim_update_2.html:221
 msgid "Coordenada x (longitud)"
 msgstr "Coordenada x (longitud)"
 
-#: georef/templates/georef/toponim_update_2.html:230
+#: georef/templates/georef/toponim_update_2.html:225
 msgid "Coordenada y (latitud)"
 msgstr "Coordenada y (latitud)"
 
-#: georef/templates/georef/toponim_update_2.html:241
+#: georef/templates/georef/toponim_update_2.html:236
 msgid "toponym_numbering_tooltip"
 msgstr ""
 "Numeració de les versions de cada topònim, des de l'1 i creixent. Útil només "
 "per identificar versions"
 
-#: georef/templates/georef/toponim_update_2.html:241
+#: georef/templates/georef/toponim_update_2.html:236
 msgid "Número versió"
 msgstr "Número versió"
 
-#: georef/templates/georef/toponim_update_2.html:247 georef/views.py:2289
+#: georef/templates/georef/toponim_update_2.html:242 georef/views.py:2316
 msgid "Qualificador versió"
 msgstr "Qualificador versió"
 
-#: georef/templates/georef/toponim_update_2.html:252
+#: georef/templates/georef/toponim_update_2.html:247
 msgid "toponym_version_autocomplete_tooltip"
 msgstr ""
 "Al desplegable es pot triar un recurs. Després s'omplirà el control de "
 "sistemes de referència amb els sistemes possibles per al recurs triat."
 
-#: georef/templates/georef/toponim_update_2.html:252
+#: georef/templates/georef/toponim_update_2.html:247
 msgid "Versió capturada del recurs"
 msgstr "Versió capturada del recurs"
 
-#: georef/templates/georef/toponim_update_2.html:258
+#: georef/templates/georef/toponim_update_2.html:253
 msgid "Sistema referència del recurs"
 msgstr "Sistema referència del recurs"
 
-#: georef/templates/georef/toponim_update_2.html:262
+#: georef/templates/georef/toponim_update_2.html:257
 msgid "toponym_nomtoponim_resource"
 msgstr ""
 "Transcripció literal del topònim segons el recurs emprat per georeferenciar"
 
-#: georef/templates/georef/toponim_update_2.html:262
+#: georef/templates/georef/toponim_update_2.html:257
 msgid "Nom del topònim al recurs"
 msgstr "Nom del topònim al recurs"
 
-#: georef/templates/georef/toponim_update_2.html:268
+#: georef/templates/georef/toponim_update_2.html:263
 msgid "toponym_date_tooltip"
 msgstr "Data de generació de la fitxa de versió"
 
-#: georef/templates/georef/toponim_update_2.html:280
+#: georef/templates/georef/toponim_update_2.html:275
 msgid "toponim_coordx_origin"
 msgstr ""
 "Valor de la coordenada resultant de localitzar el topònim en el recurs i "
 "d’haver convertit el sistema de referència al del museu si era necessari"
 
-#: georef/templates/georef/toponim_update_2.html:280
+#: georef/templates/georef/toponim_update_2.html:275
 msgid "Coordenada X original"
 msgstr "Coordenada X original"
 
-#: georef/templates/georef/toponim_update_2.html:286
+#: georef/templates/georef/toponim_update_2.html:281
 msgid "toponim_coordy_origin"
 msgstr ""
 "Valor de la coordenada resultant de localitzar el topònim en el recurs i "
 "d’haver convertit el sistema de referència al del museu si era necessari"
 
-#: georef/templates/georef/toponim_update_2.html:286
+#: georef/templates/georef/toponim_update_2.html:281
 msgid "Coordenada Y original"
 msgstr "Coordenada Y original"
 
-#: georef/templates/georef/toponim_update_2.html:292
+#: georef/templates/georef/toponim_update_2.html:287
 msgid "Altitud profunditat màxima(m)"
 msgstr "Altitud profunditat màxima(m)"
 
-#: georef/templates/georef/toponim_update_2.html:297
+#: georef/templates/georef/toponim_update_2.html:292
 msgid "Altitud profunditat mínima(m)"
 msgstr "Altitud profunditat mínima(m)"
 
-#: georef/templates/georef/toponim_update_2.html:306
+#: georef/templates/georef/toponim_update_2.html:301
 msgid "toponim_coordx_transform_tooltip"
 msgstr ""
 "Valor de les coordenades del centroide obtingut a partir de l’estimació "
 "sobre el mapa a sobre d'aquests controls"
 
-#: georef/templates/georef/toponim_update_2.html:306
+#: georef/templates/georef/toponim_update_2.html:301
 msgid "Coordenada X centroide"
 msgstr "Coordenada X centroide"
 
-#: georef/templates/georef/toponim_update_2.html:312
+#: georef/templates/georef/toponim_update_2.html:307
 msgid "topomim_coordy_transform_tooltip"
 msgstr ""
 "Valor de les coordenades del centroide obtingut a partir de l’estimació "
 "sobre el mapa a sobre d'aquests controls"
 
-#: georef/templates/georef/toponim_update_2.html:312
+#: georef/templates/georef/toponim_update_2.html:307
 msgid "Coordenada Y centroide"
 msgstr "Coordenada Y centroide"
 
-#: georef/templates/georef/toponim_update_2.html:318
+#: georef/templates/georef/toponim_update_2.html:313
 msgid "Incertesa coordenades(m)"
 msgstr "Incertesa coordenades(m)"
 
-#: georef/templates/georef/toponim_update_2.html:327
+#: georef/templates/georef/toponim_update_2.html:322
 msgid "Observacions"
 msgstr "Observacions"
 
-#: georef/templates/georef/toponim_update_2.html:335
+#: georef/templates/georef/toponim_update_2.html:330
 msgid "Desar Versió"
 msgstr "Desar Versió"
 
-#: georef/templates/georef/toponim_update_2.html:399
+#: georef/templates/georef/toponim_update_2.html:394
 msgid "Desat amb èxit!"
 msgstr "Desat amb èxit!"
 
@@ -1258,15 +1358,23 @@ msgstr ""
 "es mostrarà un informe de sortida amb un llistat dels registres que "
 "s'hanafegit. Es podrà descarregar l'informe de sortida en format csv.</p>"
 
-#: georef/templates/georef/toponims_list.html:136
+#: georef/templates/georef/toponims_list.html:125
+msgid "Exportar a shp"
+msgstr ""
+
+#: georef/templates/georef/toponims_list.html:126
+msgid "Exportar a kml"
+msgstr ""
+
+#: georef/templates/georef/toponims_list.html:132
 msgid "Tots"
 msgstr ""
 
-#: georef/templates/georef/toponims_list.html:167
+#: georef/templates/georef/toponims_list.html:163
 msgid "help_btn_add_toponym"
 msgstr "Fes clic aquí per accedir a la fitxa de creació de Topònims"
 
-#: georef/templates/georef/toponims_list.html:196
+#: georef/templates/georef/toponims_list.html:193
 msgid "Filtre geogràfic"
 msgstr "Filtre geogràfic"
 
@@ -1316,31 +1424,31 @@ msgstr "Clau de pas"
 msgid "Password(repetir)"
 msgstr "Clau de pas (repetir)"
 
-#: georef/views.py:901
+#: georef/views.py:905
 msgid "Tots els topònims"
 msgstr "Tots els topònims"
 
-#: georef/views.py:1003 georef/views.py:1678
+#: georef/views.py:1007 georef/views.py:1705
 msgid "Recurs desat amb èxit!"
 msgstr "Recurs desat amb èxit!"
 
-#: georef/views.py:2260
+#: georef/views.py:2287
 msgid "Nom organització"
 msgstr "Nom organització"
 
-#: georef/views.py:2274
+#: georef/views.py:2301
 msgid "Nom autor"
 msgstr "Nom autor"
 
-#: georef/views.py:2288
+#: georef/views.py:2315
 msgid "Nom qualificador"
 msgstr "Nom qualificador"
 
-#: georef/views.py:2302
+#: georef/views.py:2329
 msgid "Nom país"
 msgstr "Nom país"
 
-#: georef/views.py:2419 georef/views.py:2420
+#: georef/views.py:2446 georef/views.py:2447
 msgid "Tipus d'unitats"
 msgstr "Tipus d'unitats"
 
@@ -1359,6 +1467,18 @@ msgstr "Perfil d'usuari"
 #: georef_addenda/models.py:97
 msgid "Fitxer d'ajuda"
 msgstr "Fitxer d'ajuda"
+
+#~ msgid " amb número "
+#~ msgstr " amb número "
+
+#~ msgid "vols continuar?"
+#~ msgstr "vols continuar?"
+
+#~ msgid "Creació de recursos"
+#~ msgstr "Creació de recursos"
+
+#~ msgid "Creació de topònim"
+#~ msgstr "Creació de topònim"
 
 #~ msgid "Coordenada Z"
 #~ msgstr "Coordenada Z"

@@ -32,8 +32,8 @@ $(document).ready(function() {
             {
                 layers: 'mzoologia:toponimsdarreraversio',
                 format: 'image/png'
-                ,transparent: true,
-                /*opacity: 0.4*/
+                ,transparent: true
+                ,opacity: 0.4
             }
         )
     };
@@ -104,7 +104,8 @@ $(document).ready(function() {
         consultable:                true,
         overlays:                   overlay_list,
         overlays_control_config:    overlays_control_config,
-        wms_url:                    wms_url
+        wms_url:                    wms_url,
+        zoom:                       2
     };
 
     map_options.consultable = [
@@ -145,11 +146,11 @@ $(document).ready(function() {
         var html = '';
         html += '<style type="text/css">li.titol {font-size: 80%;padding:2px; } li.text {font-size: 100%;padding:2px;} a.linkFitxa{color:#00008B;text-align:right;padding:2px;} table.contingut{font-size: 80%;width:100%;} th, td {border: none;} td.atribut {text-align:right;vertical-align:top;padding:2px;} td.valor {text-align:left;padding:2px;} th.aladreta{text-align:right;padding:2px;} th.alesquerra{text-align:left;padding:2px;}</style>';
         html += '<table class="contingut"><tbody>';
-        html += '<tr><th class="alesquerra">Darreres versions de topònims</th>';
-        html += '<tr><td class="atribut">Nom topònim : </td><td class="valor">' + data.properties.nomtoponim + '</td></tr>';
-        html += '<tr><td class="atribut">Aquàtic? : </td><td class="valor">' + data.properties.aquatic + '</td></tr>';
-        html += '<tr><td class="atribut">Tipus de topònim : </td><td class="valor">' + data.properties.tipustoponim + '</td></tr>';
-        html += '<tr><td class="atribut">Número de versió : </td><td class="valor">' + data.properties.numero_versio + '</td></tr>';
+        html += '<tr><th class="alesquerra">' + gettext("Darreres versions de topònims") + '</th>';
+        html += '<tr><td class="atribut">' + gettext("Nom topònim") + ' : </td><td class="valor">' + data.properties.nomtoponim + '</td></tr>';
+        html += '<tr><td class="atribut">' + gettext("Aquàtic") + '? : </td><td class="valor">' + data.properties.aquatic + '</td></tr>';
+        html += '<tr><td class="atribut">' + gettext("Tipus de topònim") + ' : </td><td class="valor">' + data.properties.tipustoponim + '</td></tr>';
+        html += '<tr><td class="atribut">' + gettext("Número de versió") + ' : </td><td class="valor">' + data.properties.numero_versio + '</td></tr>';
         html += '</tbody></table></br>';
         return html;
     }
@@ -158,9 +159,9 @@ $(document).ready(function() {
         var html = '';
         html += '<style type="text/css">li.titol {font-size: 80%;padding:2px; } li.text {font-size: 100%;padding:2px;} a.linkFitxa{color:#00008B;text-align:right;padding:2px;} table.contingut{font-size: 80%;width:100%;} th, td {border: none;} td.atribut {text-align:right;vertical-align:top;padding:2px;} td.valor {text-align:left;padding:2px;} th.aladreta{text-align:right;padding:2px;} th.alesquerra{text-align:left;padding:2px;}</style>';
         html += '<table class="contingut"><tbody>';
-        html += '<tr><th class="alesquerra">Recursos de georeferenciació (límits digitalitzats)</th>';
-        html += '<tr><td class="atribut">Nom recurs : </td><td class="valor">' + data.properties.nom + '</td></tr>';
-        html += '<tr><td class="atribut">Acrònim : </td><td class="valor">' + data.properties.acronim + '</td></tr>';
+        html += '<tr><th class="alesquerra">' + gettext("Recursos de georeferenciació (límits digitalitzats)") + '</th>';
+        html += '<tr><td class="atribut">' + gettext("Nom recurs") + ' : </td><td class="valor">' + data.properties.nom + '</td></tr>';
+        html += '<tr><td class="atribut">' + gettext("Acrònim") + ' : </td><td class="valor">' + data.properties.acronim + '</td></tr>';
         html += '</tbody></table></br>';
         return html;
     }
@@ -184,7 +185,7 @@ $(document).ready(function() {
         'recursosgeoreferenciacio_wms_bound' : recursosgeoreferenciacio_wms_bound_formatter
     };
 
-    var valorView = getCookie('view_lg');
+    /*var valorView = getCookie('view_lg');
     if(valorView){
         var jsonView = JSON.parse(valorView);
         map_options.center = jsonView.center;
@@ -201,12 +202,13 @@ $(document).ready(function() {
             base: 'djangoRef.Map.roads',
             view:{ center:new L.LatLng(40.58, -3.25),zoom:2}
         };
-    }
+    }*/
 
     map = new djangoRef.Map.createMap(map_options);
 
 });
 
+/*
 $(window).bind('beforeunload', function(){
     var state = djangoRef.Map.getState();
     var state_string = JSON.stringify(state);
@@ -218,3 +220,4 @@ $(window).bind('beforeunload', function(){
     var view_string = JSON.stringify(view);
     setCookie('view_lg', view_string);
 });
+*/

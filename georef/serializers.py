@@ -71,6 +71,7 @@ class ToponimSerializer(serializers.ModelSerializer):
     idtipustoponim = TipusToponimSerializer(required=True)
     idorganization = OrganizationSerializer()
     editable = serializers.SerializerMethodField()
+    coords_centroide = serializers.SerializerMethodField()
 
     class Meta:
         model = Toponim
@@ -78,6 +79,13 @@ class ToponimSerializer(serializers.ModelSerializer):
 
     def get_org(self, obj):
         pass
+
+    def get_coords_centroide(self,obj):
+        darrera_versio = obj.get_darrera_versio()
+        if darrera_versio:
+            if darrera_versio.get_coordenada_x_centroide and darrera_versio.get_coordenada_y_centroide:
+                return {'x': darrera_versio.get_coordenada_x_centroide ,'y': darrera_versio.get_coordenada_y_centroide }
+        return None
 
     def get_editable(self, obj):
         user = self.context['request'].user

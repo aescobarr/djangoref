@@ -6,6 +6,14 @@
     <link href="{% static 'jquery-ui/themes/base/jquery-ui.min.css' %}" rel="stylesheet">
     <link href="{% static 'georef/css/georef.css' %}" rel="stylesheet">
     <link href="{% static 'georef/javascript/ajaxuploader/css/fileuploader.css' %}" media="screen" rel="stylesheet" type="text/css" >
+    <style>
+        td {
+            width: 250px;
+        }
+        #fileuploader {
+            margin-left: 70px;
+        }
+    </style>
 {% endblock %}
 {% block extrahead %}
     <script>
@@ -46,27 +54,53 @@
                 {% trans 'wms_layers_help_text_warning' %}
                 <!-- És important que les capes, tant ràster com shapefile, estiguin en projecció WGS84. -->
             </p>
-        <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label for="id_nomcapa">{% trans 'Nom de la capa' %}:</label>
-                        <input name="nomcapa" class="form-control" id="id_nomcapa" required="true" type="text">
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div id="fileuploader"></div>
-                </div>
-            </div>
+            <p>
+            {% trans 'Segueix aquests passos per crear una capa WMS' %}:
+                <ol>
+                    <li>{% trans 'Escriu el nom de la capa' %}</li>
+                    <li>{% trans 'Importar shapefile' %}</li>
+                    <li>{% trans 'Crear capa WMS' %}</li>
+                </ol>
+            </p>
         </div>
         <div class="container">
-            <div class="row">
-                <div class="col-xs-2">
-                    <input data-toggle="tooltip" data-placement="right" id="btnCreaCapa" role="button" class="btn btn-success" value="{% trans 'Crear capa WMS' %}" />
-                </div>
-            </div>
+            <table>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label for="id_nomcapa">{% trans 'Nom de la capa' %}:</label>
+                            <input name="nomcapa" class="form-control" id="id_nomcapa" required="true" type="text">
+                        </div>
+                    </td>
+                    <td>
+                        <div id="fileuploader"></div>
+                    </td>
+                    <td>
+                        <input data-toggle="tooltip" data-placement="right" id="btnCreaCapa" role="button" class="btn btn-success" value="{% trans 'Crear capa WMS' %}" />
+                    </td>
+                </tr>
+            </table>
         </div>
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-xs-6">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="id_nomcapa">{% trans 'Nom de la capa' %}:</label>-->
+<!--                        <input name="nomcapa" class="form-control" id="id_nomcapa" required="true" type="text">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-xs-6">-->
+<!--                    <div id="fileuploader"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-xs-2">-->
+<!--                    <input data-toggle="tooltip" data-placement="right" id="btnCreaCapa" role="button" class="btn btn-success" value="{% trans 'Crear capa WMS' %}" />-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="container separador_seccio">
             <table id="capeswmslocal" style="width:100%;"></table>
         </div>

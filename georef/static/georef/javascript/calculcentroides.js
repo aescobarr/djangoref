@@ -30,6 +30,7 @@ $(document).ready(function() {
     });
 
     var computeCentroid = function(filename){
+        $('#info_block').show();
         show_data('','','');
         show_thinking(true);
         $.ajax({

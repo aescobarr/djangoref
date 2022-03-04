@@ -49,10 +49,6 @@
         .collapsed{
             height: 45px;
         }
-        #sidebar{
-            top: 70px;
-            margin-right: 10px;
-        }
         .navbar {
 	        margin-bottom: 0px;
         }
@@ -102,8 +98,8 @@
     <div class="container">
     </div>
     <div class="container-fluid">
-        <div id="map" class="sidebar-map"></div>
-        <div id="sidebar" class="sidebar collapsed">
+        <div id="map" class="sidebar-map">
+            <div id="sidebar" class="sidebar collapsed">
             <div class="sidebar-tabs">
                 <ul role="tablist">
                     <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
@@ -115,9 +111,9 @@
                     <div class="col-xs-12" style="height:25px;"></div>
                     <div class="row">
                         <div class="col-md-12">
-                            <a class="imatge_xls" href="#" onclick="javascript:exportXLS(); return false;"></a>
-                            <a class="imatge_csv" href="#" onclick="javascript:exportCSV(); return false;"></a>
-                            <a class="imatge_pdf" href="#" onclick="javascript:exportPDF(); return false;"></a>
+                            <a class="imatge_xls" href="#" title="{% trans 'Exportar a xls' %}" onclick="javascript:exportXLS(); return false;"></a>
+                            <a class="imatge_csv" href="#" title="{% trans 'Exportar a csv' %}" onclick="javascript:exportCSV(); return false;"></a>
+                            <a class="imatge_pdf" href="#" title="{% trans 'Exportar a pdf' %}" onclick="javascript:exportPDF(); return false;"></a>
                         </div>
                     </div>
                     <div class="wrapper clear_blue">
@@ -154,6 +150,7 @@
                 </div> <!-- sidebar-pane -->
             </div> <!-- sidebar-content -->
         </div> <!-- sidebar -->
+        </div>
     </div>
     <div class="container-fluid">
         <div id="fileuploader"></div>

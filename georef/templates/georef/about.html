@@ -15,8 +15,34 @@
         </div>
     </div>
     <div class="container">
-        <h3>Georef <b>v{{ version }}</b></h3>
+        <h3>Ali-Bey <b>v{{ version }}</b></h3>
         {% trans '<p class="text-justify">Georef és una eina de georeferenciació de topònims, creada originalment per al Museu de Ciències Naturals de Barcelona - <a href="https://museuciencies.cat/" rel="nofollow">MCNB</a>. Permet desar, indexar i consultar topònims, que inclouen geometria, i suporta diverses versions de cadascun dels topònims. Georef està fet amb <a href="https://www.djangoproject.com/" rel="nofollow">Django</a>. L&#39;aplicació disposa d&#39;una API que permet fer consultes sobre les dades. L&#39;API és un projecte separat i es pot trobar <a href="https://github.com/aescobarr/nhc-georef-api">aquí</a>.</p>' %}
+        <div><h3>{% trans "home_text_1" %}</h3></div>
+        <!--<div><h3>La plataforma per a treballs en cartografia i georeferenciació</h3></div>-->
+        <div>
+            <p class="text-justify">
+                {% trans "home_text_2" %}
+                <!--La cartografia està present en gairebé tots els àmbits d’activitat del museu: col·leccions, recerca, publicacions, exposicions, etc. Georef és el recurs desenvolupat per donar suport a les necessitats d’indexar i reconèixer recursos cartogràfics útils inicialment pels projectes del Museu de Ciències Naturals de Barcelona. Avui dia ja és una eina compartida per altres institucions.-->
+            </p>
+            <p class="text-justify">
+                {% trans "home_text_3" %}
+                <!--Un projecte especialment actiu en museus d'història natural és la georeferenciació retrospectiva de les mostres de col·leccions. La immensa majoria de mostres són anteriors a la generalització del posicionament per satèl·lit i tenen assignada una referència del lloc de recol·lecció basada en les dades textuals de les etiquetes. Convertir topònims i descripcions de posicionament respecte topònims en un punt de coordenades sobre un mapa és l’acció de qualitat que definim com a georeferenciació.-->
+            </p>
+            <p class="text-justify">
+                {% trans "home_text_4" %}
+                <!--Desar la traça d’aquestes estimacions de georeferenciació permet:-->
+                <ul>
+                    <li>{% trans "home_text_4_1" %}</li>
+                    <!--<li>la reutilització posterior de les dades per augmentar l’eficiència de la georeferenciació.</li>-->
+                    <li>{% trans "home_text_4_2" %}</li>
+                    <!--<li>garanteix la coherència entre si de les dades de localització de les mostres de col·leccions.</li>-->
+                    <li>{% trans "home_text_4_3" %}</li>
+                    <!--<li>eventualment permet revisar la qualitat de la pròpia georeferenciació.</li>-->
+                </ul>
+                {% trans "home_text_5" %}
+                <!--La georeferenciació de col·leccions és un projecte capital a Georef.-->
+            </p>
+        </div>
         <h3>{% trans 'Autors' %}</h3>
         {% trans '<p class="text-justify"><ul><li>Desenvolupadors: <a href="https://github.com/aescobarr">Agustí Escobar</a> (versió actual), <a href="https://github.com/vg-coder">Victor Garcia</a> (versió inicial)</li></ul><ul><li>Disseny conceptual: <a href="http://www.arnaldmarcer.org/">Arnald Marcer (CREAF)</a>, Francesc Uribe (Museu de Ciències Naturals de Barcelona).</li></ul></p>' %}
         <h3>{% trans 'Com citar el programari' %}</h3>

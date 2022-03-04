@@ -109,7 +109,7 @@ $(document).ready(function() {
                 'sortable': false,
                 'render': function(value){
                     if(value==true){
-                        return '<button class="delete_button btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
+                        return '<button class="delete_button btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
                     }else{
                         return '&nbsp;';
                     }
@@ -120,7 +120,19 @@ $(document).ready(function() {
                 'data': 'editable',
                 'sortable': false,
                 'render': function(value){
-                    return '<button class="edit_button btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+                    return '<button class="edit_button btn btn-sm btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+                }
+            },
+            {
+                'targets': 6,
+                'data': 'coords_centroide',
+                'sortable': false,
+                'render': function(value){
+                    if(value){
+                        return '<button class="lookup_button btn btn-sm btn-info"><i class="fa fa-binoculars" aria-hidden="true"></i></button>';
+                    }else{
+                        return '&nbsp;';
+                    }
                 }
             },
             {
@@ -334,7 +346,9 @@ $(document).ready(function() {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
         var id = row.data().id;
-        confirmDialog(gettext("S'esborrarà el topònim '") + row.data().nom_str + gettext("' i totes les seves versions i informació associada! Segur que vols continuar?"),id);
+        if(id != '0'){
+            confirmDialog(gettext("S'esborrarà el topònim '") + row.data().nom_str + gettext("' i totes les seves versions i informació associada! Segur que vols continuar?"),id);
+        }
     });
 
     $('#toponims_list tbody').on('click', 'td button.edit_button', function () {
@@ -343,6 +357,14 @@ $(document).ready(function() {
         var id = row.data().id;
         url = '/toponims/update/' + id + '/-1';
         window.location.href = url;
+    });
+
+    $('#toponims_list tbody').on('click', 'td button.lookup_button', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+        var coords = row.data().coords_centroide;
+        console.log(coords);
+        map.map.setView( { lon:coords.x,lat:coords.y }, 10 );
     });
 
     $( '#saveDoFilter' ).click(function() {
@@ -517,7 +539,7 @@ $(document).ready(function() {
         var html = '';
         html += '<style type="text/css">li.titol {font-size: 80%;padding:2px; } li.text {font-size: 100%;padding:2px;} a.linkFitxa{color:#00008B;text-align:right;padding:2px;} table.contingut{font-size: 80%;width:100%;} th, td {border: none;} td.atribut {text-align:right;vertical-align:top;padding:2px;} td.valor {text-align:left;padding:2px;} th.aladreta{text-align:right;padding:2px;} th.alesquerra{text-align:left;padding:2px;}</style>';
         html += '<table class="contingut"><tbody>';
-        html += '<tr><th class="alesquerra">' + gettext('Darreres versions de topònims') + '</th>';
+        html += '<tr><th class="alesquerra">' + gettext('Topònims') + '</th>';
         html += '<tr><td class="atribut">' + gettext('Nom topònim') + ' : </td><td class="valor">' + data.properties.nomtoponim + '</td></tr>';
         html += '<tr><td class="atribut">' + gettext('Aquàtic') + '? : </td><td class="valor">' + data.properties.aquatic + '</td></tr>';
         html += '<tr><td class="atribut">' + gettext('Tipus de topònim') + ' : </td><td class="valor">' + data.properties.tipustoponim + '</td></tr>';
