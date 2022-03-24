@@ -96,6 +96,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'georef.context_processors.revision_number_processor',
                 'georef.context_processors.version_number_processor',
+                'georef.context_processors.custom_util_links_processor',
             ],
         },
     },
@@ -198,3 +199,17 @@ JAVASCRIPT_VERSION = 1
 MAJOR="1"
 MINOR="0"
 PATCH="0"
+
+# Links in utilities. Each element is "title","link"
+# if title is blank, a separator is inserted
+CUSTOM_TOOL_LINKS = (
+    (_("Anar a google"), "https://www.google.es"),
+    (_("Anar a ICC"), "http://www.icgc.cat/"),
+    ("", ""),
+    (_("Conversió de coordenades - Convertbox"), "http://betaportal.icgc.cat/convertbox/#"),
+    (_("Conversió de coordenades - Earth Point: Convert coordinates"), "http://www.earthpoint.us/Convert.aspx"),
+    ("", ""),
+    (_("Georeferenciació - Geolocate"), "http://www.geo-locate.org/web/WebGeoref.aspx"),
+    (_("Georeferenciació - Georeferencing calculator"), "https://www.gbif.org/tool/81315/georeferencing-calculator"),
+    (_("Georeferenciació - Berkeley Mapper"), "http://berkeleymapper.berkeley.edu/#"),
+)
