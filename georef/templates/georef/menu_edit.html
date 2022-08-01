@@ -1,0 +1,72 @@
+{% extends "georef/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% block extra_css %}
+    <link href="{% static 'jquery-ui/themes/base/jquery-ui.min.css' %}" rel="stylesheet">
+    <link href="{% static 'georef/css/georef.css' %}" rel="stylesheet">
+    <link href="{% static 'jstree/dist/themes/default/style.min.css' %}" rel="stylesheet">
+{% endblock %}
+{% block extrahead %}
+
+{% endblock %}
+{% block main %}
+<main>
+    {% csrf_token %}
+    <div class="page-header">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans 'Inici' %}</a></li>
+                <li class="breadcrumb-item">{% trans 'Utilitats' %}</li>
+                <li class="breadcrumb-item active">{% trans 'Edició menú utilitats' %}</li>
+            </ol>
+        </div>
+    </div>
+    <div class="container">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% for lang in LANGUAGES %}
+        {% if LANGUAGE_CODE == lang.0 %}
+            <p><b>{% trans 'Idioma' %}:</b> <span class="badge"> {{ lang.1 }}</span></p>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <label for="id_titol">{% trans 'Títol' %}:</label>
+                    <input type="text" name="titol" class="form-control" required="" id="id_titol">
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <label for="id_link">{% trans 'Enllaç' %}:</label>
+                    <input type="text" name="link" class="form-control" required="" id="id_link">
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="id_extern">{% trans 'Obrir en nova finestra?' %}:</label>
+                    <input type="checkbox" name="extern" class="form-control" required="" id="id_extern">
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="add">&nbsp;</label>
+                    <button id="add" type="button" class="btn btn-primary form-control">{% trans 'Afegir' %} <i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="add_hr">&nbsp;</label>
+                    <button id="add_hr" type="button" class="btn btn-primary form-control">{% trans 'Afegir separador' %} <i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h4>Vista prèvia del menú:</h4>
+        <div id="preview"></div>
+    </div>
+</main>
+{% endblock %}

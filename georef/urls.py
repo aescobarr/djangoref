@@ -104,6 +104,7 @@ urlpatterns = [
     url(r'^toponimstree/$', views.toponimstreenode, name='toponimstreenode'),
     url(r'^toponimfilters$', views.toponimfilters, name='toponimfilters'),
     url(r'^recursfilters$', views.recursfilters, name='recursfilters'),
+    url(r'^menu_edit$', views.menu_edit, name='menu_edit'),
     url(r'^user/my_profile/$', views.my_profile, name='my_profile'),
     url(r'^user/profile/$', views.user_profile, name='user_profile'),
     url(r'^user/profile/(?P<user_id>[0-9A-Za-z_\-]+)/$', views.user_profile, name='user_profile'),

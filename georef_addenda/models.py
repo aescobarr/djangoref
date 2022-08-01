@@ -97,6 +97,17 @@ class HelpFile(models.Model):
         verbose_name = _("Fitxer d'ajuda")
 
 
+class MenuItem(models.Model):
+    title = models.TextField()
+    language = models.CharField(max_length=5, blank=True, null=True)
+    link = models.URLField(blank=True, null=True)
+    open_in_outside_tab = models.BooleanField(default=True)
+    control_html = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = _("Item del menú")
+
+
 @receiver(models.signals.post_delete, sender=HelpFile)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     """

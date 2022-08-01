@@ -705,6 +705,12 @@ def process_shapefile(request):
 
 
 @login_required
+def menu_edit(request):
+    csrf_token = get_token(request)
+    return render(request, 'georef/menu_edit.html', context={'csrf_token': csrf_token})
+
+
+@login_required
 def recursfilters(request):
     csrf_token = get_token(request)
     return render(request, 'georef/recursfilters_list.html', context={'csrf_token': csrf_token})
