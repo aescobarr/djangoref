@@ -6,9 +6,9 @@ from rest_framework import status, viewsets
 from georef.serializers import ToponimSerializer, FiltrejsonSerializer, RecursgeorefSerializer, ToponimVersioSerializer, \
     UserSerializer, ProfileSerializer, ParaulaClauSerializer, AutorSerializer, CapawmsSerializer, ToponimSearchSerializer, \
     QualificadorversioSerializer, PaisSerializer, TipusrecursgeorefSerializer, SuportSerializer, TipusToponimSerializer, \
-    TipusunitatsSerializer, SistemareferenciammSerializer, OrganizationSerializer
+    TipusunitatsSerializer, SistemareferenciammSerializer, OrganizationSerializer, MenuItemSerializer
 from georef.models import Toponim, Filtrejson, Recursgeoref, Paraulaclau, Autorrecursgeoref, Tipusunitats
-from georef_addenda.models import Profile, Autor, GeometriaRecurs, GeometriaToponimVersio, HelpFile, Organization
+from georef_addenda.models import Profile, Autor, GeometriaRecurs, GeometriaToponimVersio, HelpFile, Organization, MenuItem
 from georef_addenda.forms import HelpfileForm
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -201,6 +201,17 @@ def index(request):
     wms_url = conf.GEOSERVER_WMS_URL
     context = {'wms_url': wms_url, 'bing': conf.BING_MAPS_API_KEY}
     return render(request, 'georef/index.html', context)
+
+
+class MenuItemViewSet(viewsets.ModelViewSet):
+    serializer_class = MenuItemSerializer
+
+    def get_queryset(self):
+        queryset = MenuItem.objects.all().order_by('order')
+        lang = self.request.query_params.get('lang', None)
+        if lang is not None:
+            queryset = queryset.filter(language=lang)
+        return queryset
 
 
 class PaisViewSet(viewsets.ModelViewSet):
@@ -706,8 +717,7 @@ def process_shapefile(request):
 
 @login_required
 def menu_edit(request):
-    csrf_token = get_token(request)
-    return render(request, 'georef/menu_edit.html', context={'csrf_token': csrf_token})
+    return render(request, 'georef/menu_edit.html', context={})
 
 
 @login_required
@@ -1713,6 +1723,49 @@ def recursos_update(request, id=None):
                 return HttpResponseRedirect(url)
 
     return render(request, 'georef/recurs_update.html', context)
+
+
+@api_view(['POST'])
+@transaction.atomic
+def save_menu_links(request):
+    if request.method == 'POST':
+        data = request.data
+        lang = request.LANGUAGE_CODE
+        MenuItem.objects.filter(language=lang).delete()
+        items = []
+        for i in data:
+            is_separator = i['is_separator']
+            m = MenuItem(
+                is_separator=i['is_separator'],
+                language=i['language'],
+                link='' if is_separator else i['link'],
+                open_in_outside_tab=i['open_in_outside_tab'],
+                order=i['order'],
+                title='' if is_separator else i['title']
+            )
+            items.append(m)
+        MenuItem.objects.bulk_create(items)
+        return Response(data=data, status=200)
+
+
+@api_view(['POST'])
+def create_menu_link(request):
+    if request.method == 'POST':
+        title = request.POST.get('title', None)
+        link = request.POST.get('link', None)
+        new_window = request.POST.get('new_window', True)
+        if title == '' or link == '' or title is None or link is None:
+            content = {'status': 'KO', 'detail': _('Cal posar un títol i un enllaç')}
+            return Response(data=content, status=400)
+        else:
+            m = MenuItem(
+                title = title,
+                link = link,
+                open_in_outside_tab = (new_window == 'true')
+            )
+            m.save()
+            content = {'status': 'OK', 'detail': 'created'}
+            return Response(data=content, status=200)
 
 
 @api_view(['GET'])

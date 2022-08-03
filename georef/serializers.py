@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from georef.models import Toponim, Tipustoponim, Filtrejson, Recursgeoref, Toponimversio, Paraulaclau, Capawms, \
     Capesrecurs, Qualificadorversio, Pais, Tipusrecursgeoref, Suport, Tipusunitats, Sistemareferenciamm
-from georef_addenda.models import Profile, Autor, Organization
+from georef_addenda.models import Profile, Autor, Organization, MenuItem
 from django.contrib.auth.models import User
 import json
 
@@ -205,3 +205,9 @@ class CapawmsSerializer(serializers.ModelSerializer):
                 if elem['id'] == obj.id:
                     return True
         return False
+
+
+class MenuItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MenuItem
+        fields = '__all__'

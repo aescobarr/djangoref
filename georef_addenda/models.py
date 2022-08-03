@@ -98,11 +98,12 @@ class HelpFile(models.Model):
 
 
 class MenuItem(models.Model):
-    title = models.TextField()
+    title = models.TextField(blank=True, null=True)
     language = models.CharField(max_length=5, blank=True, null=True)
     link = models.URLField(blank=True, null=True)
     open_in_outside_tab = models.BooleanField(default=True)
-    control_html = models.TextField(blank=True, null=True)
+    is_separator = models.BooleanField(default=False)
+    order = models.IntegerField(blank=True, null=True)
 
     class Meta:
         verbose_name = _("Item del menú")

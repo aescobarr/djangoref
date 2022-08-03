@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 15:59+0200\n"
+"POT-Creation-Date: 2022-08-03 10:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,7 +135,7 @@ msgstr "Deleted successfully!"
 #: georef/static/georef/javascript/capes_wms.js:150
 #: georef/static/georef/javascript/recursfilters_list.js:74
 #: georef/static/georef/javascript/toponimfilters_list.js:74
-#: georef/static/georef/javascript/toponims_list.js:247
+#: georef/static/georef/javascript/toponims_list.js:259
 #: georef/static/georef/javascript/users_list.js:118
 #: static/georef/javascript/capes_wms.js:150
 #: static/georef/javascript/recursfilters_list.js:74
@@ -243,7 +243,7 @@ msgid "Centroides de topònims extrets de la digitalització"
 msgstr "Digitisation-derived centroids"
 
 #: georef/static/georef/javascript/georef_layers.js:76
-#: georef/static/georef/javascript/georef_layers.js:148
+#: georef/static/georef/javascript/georef_layers.js:149
 #: static/georef/javascript/georef_layers.js:76
 #: static/georef/javascript/georef_layers.js:148
 #: static/georef/javascript/toponims_list.js:520
@@ -251,7 +251,7 @@ msgid "Darreres versions de topònims"
 msgstr "Sites (latest versions)"
 
 #: georef/static/georef/javascript/georef_layers.js:77
-#: georef/static/georef/javascript/georef_layers.js:161
+#: georef/static/georef/javascript/georef_layers.js:162
 #: georef/static/georef/javascript/recursos_list.js:376
 #: georef/static/georef/javascript/recursos_list.js:440
 #: static/georef/javascript/georef_layers.js:77
@@ -266,7 +266,7 @@ msgid "Recursos de georeferenciació (límits de les capes wms associades)"
 msgstr "Cartographic resources (associated WMS layer bounds)"
 
 #: georef/static/georef/javascript/georef_layers.js:91
-#: georef/static/georef/javascript/toponim_update.js:527
+#: georef/static/georef/javascript/toponim_update.js:529
 #: static/georef/javascript/georef_layers.js:91
 #: static/georef/javascript/toponim_update.js:527
 msgid "Toponims"
@@ -279,17 +279,17 @@ msgstr "Site names"
 msgid "Recursos de georeferenciació"
 msgstr "Cartographic resources    "
 
-#: georef/static/georef/javascript/georef_layers.js:149
-#: georef/static/georef/javascript/toponims_list.js:521
+#: georef/static/georef/javascript/georef_layers.js:150
+#: georef/static/georef/javascript/toponims_list.js:543
 #: static/georef/javascript/georef_layers.js:149
 #: static/georef/javascript/toponims_list.js:521
 msgid "Nom topònim"
 msgstr "Name"
 
-#: georef/static/georef/javascript/georef_layers.js:150
-#: georef/static/georef/javascript/graphs.js:28
-#: georef/static/georef/javascript/toponims_list.js:132
-#: georef/static/georef/javascript/toponims_list.js:522
+#: georef/static/georef/javascript/georef_layers.js:151
+#: georef/static/georef/javascript/graphs.js:30
+#: georef/static/georef/javascript/toponims_list.js:144
+#: georef/static/georef/javascript/toponims_list.js:544
 #: static/georef/javascript/georef_layers.js:150
 #: static/georef/javascript/graphs.js:28
 #: static/georef/javascript/toponims_list.js:132
@@ -297,86 +297,102 @@ msgstr "Name"
 msgid "Aquàtic"
 msgstr "Aquatic"
 
-#: georef/static/georef/javascript/georef_layers.js:151
-#: georef/static/georef/javascript/toponims_list.js:523
+#: georef/static/georef/javascript/georef_layers.js:152
+#: georef/static/georef/javascript/toponims_list.js:545
 #: static/georef/javascript/georef_layers.js:151
 #: static/georef/javascript/toponims_list.js:523
 msgid "Tipus de topònim"
 msgstr "Type"
 
-#: georef/static/georef/javascript/georef_layers.js:152
-#: georef/static/georef/javascript/toponims_list.js:524
+#: georef/static/georef/javascript/georef_layers.js:153
+#: georef/static/georef/javascript/toponims_list.js:546
 #: static/georef/javascript/georef_layers.js:152
 #: static/georef/javascript/toponims_list.js:524
 msgid "Número de versió"
 msgstr "Version number"
 
-#: georef/static/georef/javascript/georef_layers.js:162
+#: georef/static/georef/javascript/georef_layers.js:163
 #: georef/static/georef/javascript/recursos_list.js:73
 #: georef/static/georef/javascript/recursos_list.js:441
 #: static/georef/javascript/recursos_list.js:441
 msgid "Nom recurs"
 msgstr "Resource name"
 
-#: georef/static/georef/javascript/georef_layers.js:163
+#: georef/static/georef/javascript/georef_layers.js:164
 #: georef/static/georef/javascript/recursos_list.js:442
 #: static/georef/javascript/recursos_list.js:442
 msgid "Acrònim"
 msgstr "Acronym"
 
-#: georef/static/georef/javascript/graphs.js:30
+#: georef/static/georef/javascript/graphs.js:32
 #: static/georef/javascript/graphs.js:30
 msgid "Terrestre"
 msgstr "Terrestrial"
 
-#: georef/static/georef/javascript/graphs.js:127
-#: static/georef/javascript/graphs.js:127
-msgid "Número de topònims per país"
-msgstr "Number of site names by country"
-
-#: georef/static/georef/javascript/graphs.js:127
-#: georef/static/georef/javascript/graphs.js:128
-#: georef/static/georef/javascript/graphs.js:129
-#: static/georef/javascript/graphs.js:127
-#: static/georef/javascript/graphs.js:128
-#: static/georef/javascript/graphs.js:129
-msgid "Número de topònims"
-msgstr "Number of site names"
-
-#: georef/static/georef/javascript/graphs.js:128
+#: georef/static/georef/javascript/graphs.js:138
 #: static/georef/javascript/graphs.js:128
 msgid "Número de topònims per georeferenciador"
 msgstr "Number of site names by georeferencer"
 
-#: georef/static/georef/javascript/graphs.js:129
+#: georef/static/georef/javascript/graphs.js:139
 #: static/georef/javascript/graphs.js:129
 msgid "Número de topònims per tipus"
 msgstr "Number of site names by type"
 
-#: georef/static/georef/javascript/graphs.js:130
+#: georef/static/georef/javascript/graphs.js:140
 #: static/georef/javascript/graphs.js:130
 msgid "Número de topònims per aquàtic/terrestre"
 msgstr "Number of site names by aquatic/terrestrial"
 
-#: georef/static/georef/javascript/graphs.js:130
-#: georef/static/georef/javascript/toponims_list.js:456
-#: georef/static/georef/javascript/toponims_list.js:462
-#: georef/static/georef/javascript/toponims_list.js:520
-#: static/georef/javascript/graphs.js:130
-#: static/georef/javascript/toponims_list.js:456
-#: static/georef/javascript/toponims_list.js:462
-msgid "Topònims"
-msgstr "Sites"
-
-#: georef/static/georef/javascript/graphs.js:131
+#: georef/static/georef/javascript/graphs.js:141
 #: static/georef/javascript/graphs.js:131
 msgid "Número de recursos georeferenciació per tipus"
 msgstr "Number of georeferencing resources by type"
 
-#: georef/static/georef/javascript/graphs.js:131
-#: static/georef/javascript/graphs.js:131
-msgid "Número de recursos"
-msgstr "Number of resources"
+#: georef/static/georef/javascript/menu_edit.js:16
+msgid "L'item està marcat com a separador però té titol i link, fila - "
+msgstr ""
+
+#: georef/static/georef/javascript/menu_edit.js:20
+msgid ""
+"L'item no és un separador i no té títol o link i són obligatoris, fila - "
+msgstr ""
+
+#: georef/static/georef/javascript/menu_edit.js:24
+msgid "Ordre en blanc a la fila - "
+msgstr ""
+
+#: georef/static/georef/javascript/menu_edit.js:82
+msgid "Taula desada amb èxit!"
+msgstr "Table successfully saved!"
+
+#: georef/static/georef/javascript/menu_edit.js:86
+msgid "S'ha produït un error desant"
+msgstr "There was an error while saving"
+
+#: georef/static/georef/javascript/menu_edit.js:116
+msgid "Ordre"
+msgstr "Order"
+
+#: georef/static/georef/javascript/menu_edit.js:117
+msgid "Separador?"
+msgstr "Separator?"
+
+#: georef/static/georef/javascript/menu_edit.js:118
+msgid "Text de l'item de menu"
+msgstr "Menu item text"
+
+#: georef/static/georef/javascript/menu_edit.js:119
+msgid "Enllaç"
+msgstr "Link"
+
+#: georef/static/georef/javascript/menu_edit.js:120
+msgid "Obrir en finestra exterior"
+msgstr "Open in outside window"
+
+#: georef/static/georef/javascript/menu_edit.js:121
+msgid "Eliminar fila?"
+msgstr "Delete row?"
 
 #: georef/static/georef/javascript/prefsvisualitzaciowms.js:46
 #: static/georef/javascript/prefsvisualitzaciowms.js:46
@@ -389,10 +405,10 @@ msgstr "Show layer"
 #: georef/static/georef/javascript/recurs_update.js:87
 #: georef/static/georef/javascript/recursos_list.js:350
 #: georef/static/georef/javascript/recursos_list.js:351
-#: georef/static/georef/javascript/toponim_update.js:426
-#: georef/static/georef/javascript/toponim_update.js:427
-#: georef/static/georef/javascript/toponims_list.js:431
-#: georef/static/georef/javascript/toponims_list.js:432
+#: georef/static/georef/javascript/toponim_update.js:428
+#: georef/static/georef/javascript/toponim_update.js:429
+#: georef/static/georef/javascript/toponims_list.js:453
+#: georef/static/georef/javascript/toponims_list.js:454
 #: static/georef/javascript/recurs_create.js:97
 #: static/georef/javascript/recurs_create.js:98
 #: static/georef/javascript/recurs_update.js:86
@@ -432,78 +448,78 @@ msgstr "Deleting resource filter..."
 msgid "Segur que vols esborrar?"
 msgstr "Are you sure you want to delete?"
 
-#: georef/static/georef/javascript/toponim_update.js:96
+#: georef/static/georef/javascript/toponim_update.js:97
 #: static/georef/javascript/toponim_update.js:96
 msgid "Esborrant versió..."
 msgstr "Deleting version..."
 
-#: georef/static/georef/javascript/toponim_update.js:192
+#: georef/static/georef/javascript/toponim_update.js:194
 #: static/georef/javascript/toponim_update.js:192
 msgid "Versió esborrada amb èxit!"
 msgstr "Version successfully deleted!"
 
-#: georef/static/georef/javascript/toponim_update.js:197
+#: georef/static/georef/javascript/toponim_update.js:199
 #: static/georef/javascript/toponim_update.js:197
 msgid "Error esborrant la versió"
 msgstr "Error deleting version"
 
-#: georef/static/georef/javascript/toponim_update.js:279
+#: georef/static/georef/javascript/toponim_update.js:281
 #: static/georef/javascript/toponim_update.js:279
 msgid "error_message_entermarker"
 msgstr ""
 "Enter a valid decimal or integer number. If decimal, use the character '.' "
 "as separator. For example, 206.57"
 
-#: georef/static/georef/javascript/toponim_update.js:306
+#: georef/static/georef/javascript/toponim_update.js:308
 #: static/georef/javascript/toponim_update.js:306
 msgid "txt_error_digitize_1"
 msgstr ""
 "Enter a valid decimal or integer number for uncertainty radius. If decimal,  "
 "use the character '.' as separator. For example, 206.57"
 
-#: georef/static/georef/javascript/toponim_update.js:308
+#: georef/static/georef/javascript/toponim_update.js:310
 #: static/georef/javascript/toponim_update.js:308
 msgid "txt_error_digitize_2"
 msgstr ""
 "Enter a valid decimal or integer number for x coordinate. If decimal,  use "
 "the character '.' as separator. For example, 206.57"
 
-#: georef/static/georef/javascript/toponim_update.js:310
+#: georef/static/georef/javascript/toponim_update.js:312
 #: static/georef/javascript/toponim_update.js:310
 msgid "txt_error_digitize_3"
 msgstr ""
 "Enter a valid decimal or integer number for y coordinate. If decimal,  use "
 "the character '.' as separator. For example, 206.57"
 
-#: georef/static/georef/javascript/toponim_update.js:312
+#: georef/static/georef/javascript/toponim_update.js:314
 #: static/georef/javascript/toponim_update.js:312
 msgid "txt_error_digitize_4"
 msgstr "Latitude can't be greater than 90 or smaller than 0"
 
-#: georef/static/georef/javascript/toponim_update.js:314
+#: georef/static/georef/javascript/toponim_update.js:316
 #: static/georef/javascript/toponim_update.js:314
 msgid "txt_error_digitize_5"
 msgstr "Longitude can't be greater than 180 or smaller than -180"
 
-#: georef/static/georef/javascript/toponim_update.js:388
+#: georef/static/georef/javascript/toponim_update.js:390
 #: static/georef/javascript/toponim_update.js:388
 msgid "D'acord"
 msgstr "D'acord"
 
-#: georef/static/georef/javascript/toponim_update.js:451
+#: georef/static/georef/javascript/toponim_update.js:453
 #: static/georef/javascript/toponim_update.js:451
 msgid "Sistema de referència no especificat"
 msgstr "Sistema de referència no especificat"
 
-#: georef/static/georef/javascript/toponim_update.js:494
-#: georef/static/georef/javascript/toponims_list.js:397
+#: georef/static/georef/javascript/toponim_update.js:496
+#: georef/static/georef/javascript/toponims_list.js:419
 #: static/georef/javascript/toponim_update.js:494
 #: static/georef/javascript/toponims_list.js:397
 msgid "Importació amb èxit!"
 msgstr "Import successful!"
 
-#: georef/static/georef/javascript/toponim_update.js:499
-#: georef/static/georef/javascript/toponims_list.js:411
+#: georef/static/georef/javascript/toponim_update.js:501
+#: georef/static/georef/javascript/toponims_list.js:433
 #: static/georef/javascript/toponim_update.js:499
 #: static/georef/javascript/toponims_list.js:411
 msgid "Error important fitxer"
@@ -593,79 +609,79 @@ msgstr "Site names already existed in the database (not imported)"
 msgid "Descarrega fitxer csv de resum"
 msgstr "Download csv summary file"
 
-#: georef/static/georef/javascript/toponims_list.js:128
+#: georef/static/georef/javascript/toponims_list.js:140
 #: static/georef/javascript/toponims_list.js:128
 msgid "Topònim"
 msgstr "Toponym"
 
-#: georef/static/georef/javascript/toponims_list.js:136
+#: georef/static/georef/javascript/toponims_list.js:148
 #: static/georef/javascript/toponims_list.js:136
 msgid "Tipus"
 msgstr "Type"
 
-#: georef/static/georef/javascript/toponims_list.js:140
+#: georef/static/georef/javascript/toponims_list.js:152
 #: georef/static/georef/javascript/users_list.js:53
 #: static/georef/javascript/toponims_list.js:140
 #: static/georef/javascript/users_list.js:53
 msgid "Organització"
 msgstr "Organization"
 
-#: georef/static/georef/javascript/toponims_list.js:146
+#: georef/static/georef/javascript/toponims_list.js:158
 #: static/georef/javascript/toponims_list.js:146
 msgid "No assignada"
 msgstr "Unassigned"
 
-#: georef/static/georef/javascript/toponims_list.js:199
+#: georef/static/georef/javascript/toponims_list.js:211
 #: static/georef/javascript/toponims_list.js:199
 msgid "Filtre desat amb èxit!"
 msgstr "Filter successfully saved!"
 
-#: georef/static/georef/javascript/toponims_list.js:202
+#: georef/static/georef/javascript/toponims_list.js:214
 #: static/georef/javascript/toponims_list.js:202
 msgid "Error afegint filtre!"
 msgstr "Error adding filter!"
 
-#: georef/static/georef/javascript/toponims_list.js:224
+#: georef/static/georef/javascript/toponims_list.js:236
 #: static/georef/javascript/toponims_list.js:224
 msgid "Filtre actualitzat amb èxit!"
 msgstr "Filter successfully updated!"
 
-#: georef/static/georef/javascript/toponims_list.js:228
+#: georef/static/georef/javascript/toponims_list.js:240
 #: static/georef/javascript/toponims_list.js:228
 msgid "Error actualitzant filtre"
 msgstr "Error updating filter!"
 
-#: georef/static/georef/javascript/toponims_list.js:244
+#: georef/static/georef/javascript/toponims_list.js:256
 #: static/georef/javascript/toponims_list.js:244
 msgid "Filtre esborrat amb èxit!"
 msgstr "Filter successfully deleted!"
 
-#: georef/static/georef/javascript/toponims_list.js:256
+#: georef/static/georef/javascript/toponims_list.js:268
 #: static/georef/javascript/toponims_list.js:256
 msgid "Esborrant topònim..."
 msgstr "Deleting toponym..."
 
-#: georef/static/georef/javascript/toponims_list.js:278
+#: georef/static/georef/javascript/toponims_list.js:290
 #: static/georef/javascript/toponims_list.js:278
 msgid "Sobreescriure i filtrar"
 msgstr "Overwrite and filter"
 
-#: georef/static/georef/javascript/toponims_list.js:324
+#: georef/static/georef/javascript/toponims_list.js:336
 #: static/georef/javascript/toponims_list.js:324
 msgid "Topònim esborrat amb èxit!"
 msgstr "Toponym successfully deleted!"
 
-#: georef/static/georef/javascript/toponims_list.js:328
+#: georef/static/georef/javascript/toponims_list.js:340
 #: static/georef/javascript/toponims_list.js:328
 msgid "Error esborrant topònim"
 msgstr "Error deleting toponym"
 
-#: georef/static/georef/javascript/toponims_list.js:337
+#: georef/static/georef/javascript/toponims_list.js:350
 #: static/georef/javascript/toponims_list.js:337
 msgid "S'esborrarà el topònim '"
 msgstr "Will delete toponym '"
 
-#: georef/static/georef/javascript/toponims_list.js:337
+#: georef/static/georef/javascript/toponims_list.js:350
 #: static/georef/javascript/toponims_list.js:337
 msgid ""
 "' i totes les seves versions i informació associada! Segur que vols "
@@ -673,17 +689,26 @@ msgid ""
 msgstr ""
 "' and all versions and associated info! Are you sure you want to proceed?"
 
-#: georef/static/georef/javascript/toponims_list.js:351
+#: georef/static/georef/javascript/toponims_list.js:373
 #: static/georef/javascript/toponims_list.js:351
 msgid "El nom de filtre està en blanc. Cal posar un nom vàlid."
 msgstr "Filter name is blank. Please assign a name."
 
-#: georef/static/georef/javascript/toponims_list.js:356
+#: georef/static/georef/javascript/toponims_list.js:378
 #: static/georef/javascript/toponims_list.js:356
 msgid ""
 "El filtre no té condicions, està en blanc. Tria alguns criteris i torna-ho a "
 "intentar."
 msgstr "Filter has no conditions. Choose a few criteria and try again."
+
+#: georef/static/georef/javascript/toponims_list.js:478
+#: georef/static/georef/javascript/toponims_list.js:484
+#: georef/static/georef/javascript/toponims_list.js:542
+#: static/georef/javascript/graphs.js:130
+#: static/georef/javascript/toponims_list.js:456
+#: static/georef/javascript/toponims_list.js:462
+msgid "Topònims"
+msgstr "Sites"
 
 #: georef/static/georef/javascript/users_list.js:37
 #: static/georef/javascript/users_list.js:37
@@ -926,6 +951,20 @@ msgstr ""
 #: static/admin/js/collapse.js:18 static/admin/js/collapse.min.js:1
 msgid "Hide"
 msgstr ""
+
+#: static/georef/javascript/graphs.js:127
+msgid "Número de topònims per país"
+msgstr "Number of site names by country"
+
+#: static/georef/javascript/graphs.js:127
+#: static/georef/javascript/graphs.js:128
+#: static/georef/javascript/graphs.js:129
+msgid "Número de topònims"
+msgstr "Number of site names"
+
+#: static/georef/javascript/graphs.js:131
+msgid "Número de recursos"
+msgstr "Number of resources"
 
 #: static/georef/javascript/recursos_list.js:73
 msgid "Recurs de georeferenciació"

@@ -90,12 +90,15 @@
                     <li><a href="{% url 'calculcentroides' %}">{% trans "Calcula centroides" %}</a></li>
                     <li><a href="{% url 'toponims_import' %}">{% trans "Importació de topònims" %}</a></li>
                     <li><a href="{% url 'graphs' %}">{% trans "Gràfiques" %}</a></li>
+                    {% if user.profile.is_admin or user.is_superuser %}
+                    <li><a href="{% url 'menu_edit' %}">{% trans "Edició menú utilitats" %}</a></li>
+                    {% endif %}
                     <li role="separator" class="divider"></li>
                     {% for link in custom_tool_links %}
-                        {% if link.1 == '' %}
+                        {% if link.is_separator %}
                         <li role="separator" class="divider"></li>
                         {% else %}
-                        <li><a href="{{ link.1 }}" target="_blank">{{ link.0 }}</a></li>
+                        <li><a href="{{ link.link }}" {% if link.open_in_outside_tab %} target="_blank" {% endif %}>{{ link.title }}</a></li>
                         {% endif %}
                     {% endfor %}
                 </ul>

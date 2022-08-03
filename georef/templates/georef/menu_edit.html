@@ -5,6 +5,7 @@
     <link href="{% static 'jquery-ui/themes/base/jquery-ui.min.css' %}" rel="stylesheet">
     <link href="{% static 'georef/css/georef.css' %}" rel="stylesheet">
     <link href="{% static 'jstree/dist/themes/default/style.min.css' %}" rel="stylesheet">
+    <link href="{% static 'georef/javascript/tabulator/css/tabulator.min.css' %}" rel="stylesheet">
 {% endblock %}
 {% block extrahead %}
 
@@ -32,41 +33,44 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-xs-3">
-                <div class="form-group">
-                    <label for="id_titol">{% trans 'Títol' %}:</label>
-                    <input type="text" name="titol" class="form-control" required="" id="id_titol">
-                </div>
-            </div>
-            <div class="col-xs-3">
-                <div class="form-group">
-                    <label for="id_link">{% trans 'Enllaç' %}:</label>
-                    <input type="text" name="link" class="form-control" required="" id="id_link">
-                </div>
+            <div class="col-xs-2">
+                <button id="add" type="button" class="btn btn-primary form-control">{% trans 'Afegir fila' %} <i class="fa fa-plus" aria-hidden="true"></i></button>
             </div>
             <div class="col-xs-2">
-                <div class="form-group">
-                    <label for="id_extern">{% trans 'Obrir en nova finestra?' %}:</label>
-                    <input type="checkbox" name="extern" class="form-control" required="" id="id_extern">
-                </div>
+                <button id="save" type="button" class="btn btn-success form-control">{% trans 'Desar taula' %} <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
             </div>
             <div class="col-xs-2">
-                <div class="form-group">
-                    <label for="add">&nbsp;</label>
-                    <button id="add" type="button" class="btn btn-primary form-control">{% trans 'Afegir' %} <i class="fa fa-plus" aria-hidden="true"></i></button>
-                </div>
+                <button id="undo" type="button" class="btn btn-success form-control">{% trans 'Desfer canvis' %} <i class="fa fa-undo" aria-hidden="true"></i></button>
             </div>
-            <div class="col-xs-2">
-                <div class="form-group">
-                    <label for="add_hr">&nbsp;</label>
-                    <button id="add_hr" type="button" class="btn btn-primary form-control">{% trans 'Afegir separador' %} <i class="fa fa-plus" aria-hidden="true"></i></button>
-                </div>
+        </div>
+    </div>
+    <div id="errors_panel" class="container" style="display:none;">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">{% trans 'Hi ha alguns errors' %}</h3>
+            </div>
+            <div class="panel-body">
+                <ul id="errors"></ul>
             </div>
         </div>
     </div>
     <div class="container">
-        <h4>Vista prèvia del menú:</h4>
-        <div id="preview"></div>
+        <div class="row">
+            <div id="menuitems"></div>
+        </div>
     </div>
 </main>
+{% endblock %}
+{% block extra_js %}
+<script>
+    var _create_link_url = "{% url 'create_menu_link' %}";
+    var _data_url = "{% url 'menuitems-list' %}";
+    var _data_save_url = "{% url 'save_menu_links' %}";
+    {% get_current_language as LANGUAGE_CODE %}
+    var locale = '{{ LANGUAGE_CODE }}';
+</script>
+<script src="{% static 'georef/javascript/cookies.js' %}?{{ revision }}"></script>
+<script src="{% static 'georef/javascript/csrf_utils.js' %}?{{ revision }}"></script>
+<script src="{% static 'georef/javascript/tabulator/js/tabulator.js' %}?{{ revision }}"></script>
+<script src="{% static 'georef/javascript/menu_edit.js' %}?{{ revision }}"></script>
 {% endblock %}

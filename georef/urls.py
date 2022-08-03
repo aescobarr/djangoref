@@ -24,6 +24,7 @@ router.register(r'tipustoponim', views.TipusToponimViewSet, base_name='tipustopo
 router.register(r'tipusunitats', views.TipusUnitatsViewSet, base_name='tipusunitats')
 router.register(r'sistemareferenciamm', views.SistemaReferenciammViewSet, base_name='sistemareferenciamm')
 router.register(r'paisos', views.PaisViewSet, base_name='paisos')
+router.register(r'menuitems', views.MenuItemViewSet, base_name='menuitems')
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -57,6 +58,8 @@ urlpatterns = [
     url(r'^georef_layers/$', views.georef_layers, name='georef_layers'),
     url(r'^help/$', views.help, name='help'),
     url(r'^help/delete/(?P<iddoc>[0-9A-Za-z_\-]+)/$', views.help_delete, name='help_delete'),
+    url(r'^create_menu_link/', views.create_menu_link, name='create_menu_link'),
+    url(r'^save_menu_links/', views.save_menu_links, name='save_menu_links'),
 
     url(r'^toponims$', views.toponims, name='toponims'),
     url(r'^toponims/update/(?P<id>[0-9A-Za-z_\-]+)/$', views.toponims_update, name='toponims_update'),
