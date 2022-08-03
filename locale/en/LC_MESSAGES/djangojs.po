@@ -351,16 +351,16 @@ msgstr "Number of georeferencing resources by type"
 
 #: georef/static/georef/javascript/menu_edit.js:16
 msgid "L'item està marcat com a separador però té titol i link, fila - "
-msgstr ""
+msgstr "Item is marked as separator but does have title and link, row - "
 
 #: georef/static/georef/javascript/menu_edit.js:20
 msgid ""
 "L'item no és un separador i no té títol o link i són obligatoris, fila - "
-msgstr ""
+msgstr "Item is not a separator, but does not have title or link (they are mandatory), row - "
 
 #: georef/static/georef/javascript/menu_edit.js:24
 msgid "Ordre en blanc a la fila - "
-msgstr ""
+msgstr "Blank order in row - "
 
 #: georef/static/georef/javascript/menu_edit.js:82
 msgid "Taula desada amb èxit!"
