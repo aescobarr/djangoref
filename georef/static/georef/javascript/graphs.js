@@ -127,6 +127,80 @@ $(document).ready(function() {
         });
     }
 
+//    Highcharts.chart('state_sunburst', {
+//        chart: {
+//            height: '100%'
+//        },
+//
+//        plotOptions: {
+//            series:
+//                {
+//                    turboThreshold:10000
+//                }
+//        },
+//
+//        // Let the center circle be transparent
+//        colors: ['transparent'].concat(Highcharts.getOptions().colors),
+//
+//        title: {
+//            text: 'World population 2017'
+//        },
+//
+//        subtitle: {
+//            text: 'Source <a href="https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)">Wikipedia</a>'
+//        },
+//
+//        series: [{
+//            type: 'sunburst',
+//            data: sunburst_data,
+//            name: 'Root',
+//            allowDrillToNode: true,
+//            cursor: 'pointer',
+//            dataLabels: {
+//                format: '{point.name}',
+//                filter: {
+//                    property: 'innerArcLength',
+//                    operator: '>',
+//                    value: 16
+//                },
+//                rotationMode: 'circular'
+//            },
+//            levels: [{
+//                level: 1,
+//                levelIsConstant: false,
+//                dataLabels: {
+//                    filter: {
+//                        property: 'outerArcLength',
+//                        operator: '>',
+//                        value: 64
+//                    }
+//                }
+//            }, {
+//                level: 2,
+//                colorByPoint: true
+//            },
+//            {
+//                level: 3,
+//                colorVariation: {
+//                    key: 'brightness',
+//                    to: -0.5
+//                }
+//            }, {
+//                level: 4,
+//                colorVariation: {
+//                    key: 'brightness',
+//                    to: 0.5
+//                }
+//            }]
+//
+//        }],
+//
+//        tooltip: {
+//            headerFormat: '',
+//            pointFormat: 'The population of <b>{point.name}</b> is <b>{point.value}</b>'
+//        }
+//    });
+
     /*
     spawn_chart('toponims_per_pais',gettext('Número de topònims per país'),gettext('Número de topònims'),gettext('Número de topònims'),paisos,toponims_per_pais,-85,'8px');
     spawn_chart('toponims_per_georeferenciador',gettext('Número de topònims per georeferenciador'),gettext('Número de topònims'),gettext('Número de topònims'),georeferenciadors,toponims_georef,-45,'12px');

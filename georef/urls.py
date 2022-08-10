@@ -105,6 +105,7 @@ urlpatterns = [
     url(r'^importtoponims/$', views.import_toponims, name='import_toponims'),
     #url(r'^toponimstree/(?P<node_id>[\w\-]+)/$', views.toponimstreenode, name='toponimstreenode'),
     url(r'^toponimstree/$', views.toponimstreenode, name='toponimstreenode'),
+    url(r'^statedata/$', views.statedata, name='statedata'),
     url(r'^toponimfilters$', views.toponimfilters, name='toponimfilters'),
     url(r'^recursfilters$', views.recursfilters, name='recursfilters'),
     url(r'^menu_edit$', views.menu_edit, name='menu_edit'),

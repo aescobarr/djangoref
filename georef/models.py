@@ -94,7 +94,7 @@ class Toponim(models.Model):
     aquatic = models.CharField(max_length=1, blank=True, null=True, default='N')
     idtipustoponim = models.ForeignKey(Tipustoponim, models.CASCADE, db_column='idtipustoponim')
     idpais = models.ForeignKey(Pais, models.CASCADE, db_column='idpais', blank=True, null=True)
-    idpare = models.ForeignKey('self', models.DO_NOTHING, db_column='idpare', blank=True, null=True)
+    idpare = models.ForeignKey('self', models.DO_NOTHING, db_column='idpare', blank=True, null=True, related_name="children")
     sinonims = models.CharField(max_length=500, blank=True, null=True)
     # This field holds the organization to which the last toponym version author belongs
     # it is automatically updated when somebody edits/adds/deletes the versions, and should not be

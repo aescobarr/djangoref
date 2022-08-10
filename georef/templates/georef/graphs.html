@@ -3,16 +3,26 @@
 {% load staticfiles %}
 {% block extra_css %}
 <link href="{% static 'jquery-ui/themes/base/jquery-ui.min.css' %}" rel="stylesheet">
+<!--<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree.min.css">-->
+<link rel="stylesheet" type="text/css" href="{% static 'georef/javascript/d3-mitch-tree/css/d3-mitch-tree.min.css' %}">
+<!--<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree-theme-default.min.css">-->
+<link rel="stylesheet" type="text/css" href="{% static 'georef/javascript/d3-mitch-tree/css/d3-mitch-tree-theme-default.min.css' %}">
 <style>
     hr {
         border-top: 2px solid black;
+    }
+    .d3plus-textBox text {
+        font-size: 10px !important;
+    }
+    #visualisation{
+        border-style: solid;
     }
 </style>
 {% endblock %}
 {% block extrahead %}
 <script>
     var toponims_georeferenciador = JSON.parse('{{ toponims_georeferenciador | escapejs }}');
-    var toponims_pais = JSON.parse('{{ toponims_pais | escapejs }}');
+    //var toponims_pais = JSON.parse('{{ toponims_pais | escapejs }}');
     var toponims_tipus = JSON.parse('{{ toponims_tipus | escapejs }}');
     var toponims_aquatic = JSON.parse('{{ toponims_aquatic | escapejs }}');
     var recursos_tipus = JSON.parse('{{ recursos_tipus | escapejs }}');
@@ -40,11 +50,21 @@
         <div id="toponims_humitat"></div>
         <hr>
         <div id="recursos_tipus"></div>
+        <hr>
+        <div id="state_sunburst">
+            <h4>Estats</h4>
+            <section id="visualisation">
+            </section>
+        </div>
     </div>
 
 </main>
 {% endblock %}
 {% block extra_js %}
+    <!--<script src="https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/js/d3-mitch-tree.min.js"></script>-->
+    <script src="{% static 'georef/javascript/d3-mitch-tree/js/d3-mitch-tree.min.js' %}"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="{% static 'georef/javascript/csrf_utils.js' %}"></script>
     <script src="{% static 'georef/javascript/graphs.js' %}?{{ revision }}"></script>
+    <script src="{% static 'georef/javascript/d3graph.js' %}?{{ revision }}"></script>
 {% endblock %}

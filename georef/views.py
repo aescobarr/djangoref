@@ -840,7 +840,6 @@ def get_node_from_toponim(toponim):
         toponim_node = {'text': toponim.nom_str, 'id': toponim.id}
     return toponim_node
 
-
 @login_required
 def graphs(request):
     cursor = connection.cursor()
@@ -865,17 +864,17 @@ def graphs(request):
         where idpais is not null AND t.idpais = p.id group by p.nom order by 2 desc
     """)
 
-    toponims_pais = cursor.fetchall()
-
-    cursor.execute("""
-        select tp.nom, count(t.id)
-        from
-        toponim t,
-        tipustoponim tp
-        where idpais is not null AND
-        t.idtipustoponim = tp.id
-        group by tp.nom order by 2 desc;
-    """)
+    # toponims_pais = cursor.fetchall()
+    #
+    # cursor.execute("""
+    #     select tp.nom, count(t.id)
+    #     from
+    #     toponim t,
+    #     tipustoponim tp
+    #     where idpais is not null AND
+    #     t.idtipustoponim = tp.id
+    #     group by tp.nom order by 2 desc;
+    # """)
 
     toponims_tipus = cursor.fetchall()
 
@@ -902,13 +901,49 @@ def graphs(request):
 
     context = {
         'toponims_georeferenciador': json.dumps(toponims_georeferenciador),
-        'toponims_pais': json.dumps(toponims_pais),
+        #'toponims_pais': json.dumps(toponims_pais),
         'toponims_tipus': json.dumps(toponims_tipus),
         'toponims_aquatic': json.dumps(toponims_aquatic),
         'recursos_tipus' : json.dumps(recursos_tipus),
     }
 
     return render(request, 'georef/graphs.html', context)
+
+
+def get_tree_down(toponim, data):
+    children = toponim.children.all()
+    if toponim.idtipustoponim.id == 'mz_tipustoponim_6':
+        data.append({'id': toponim.id, 'name': toponim.nom_str, 'parentId': '', 'value': children.count()} )
+    else:
+        data.append({'id': toponim.id, 'name': toponim.nom_str, 'parentId': toponim.idpare.id, 'value': children.count()} )
+    for c in children:
+        get_tree_down(c,data)
+
+
+def get_state_root_data(data):
+    estates = Toponim.objects.filter(idtipustoponim__id='mz_tipustoponim_6').order_by('nom')
+    data.append({'id': '0', 'name': 'Estats', 'parentId': '', 'value': estates.count()})
+    for e in estates:
+        data.append( {'id': e.id, 'name': e.nom_str, 'parentId': '0', 'value': e.children.all().count()})
+
+
+def get_sunburst_state_data_per_state(data, state_id):
+    state = Toponim.objects.get(pk=state_id)
+    children = state.children.all().order_by('nom')
+    for c in children:
+        data.append({'id': c.id, 'name': c.nom_str, 'parentId': c.idpare.id, 'value': c.children.all().count()})
+
+
+@api_view(['GET'])
+def statedata(request):
+    if request.method == 'GET':
+        data = []
+        state_id = request.query_params.get('id', None)
+        if state_id != '':
+            get_sunburst_state_data_per_state(data, state_id)
+        else:
+            get_state_root_data(data)
+        return Response(data=data, status=200)
 
 
 @api_view(['GET'])
