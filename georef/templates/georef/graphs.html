@@ -43,18 +43,55 @@
     </div>
 
     <div class="container">
-        <div id="toponims_per_georeferenciador"></div>
-        <hr>
-        <div id="toponims_per_tipus"></div>
-        <hr>
-        <div id="toponims_humitat"></div>
-        <hr>
-        <div id="recursos_tipus"></div>
-        <hr>
-        <div id="state_sunburst">
-            <h4>Estats</h4>
-            <section id="visualisation">
-            </section>
+        <!--<ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="#">1</a>
+                <div id="toponims_per_georeferenciador"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">2</a>
+                <div id="toponims_per_tipus"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">3</a>
+                <div id="toponims_humitat"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">4</a>
+                <div id="recursos_tipus"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">5</a>
+                <div id="state_sunburst">
+                    <h4>Estats</h4>
+                    <section id="visualisation">
+                    </section>
+                </div>
+            </li>
+        </ul>-->
+        <ul class="nav nav-pills" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="toponims_georef_tab" data-toggle="tab" href="#toponims_georef" role="tab" aria-selected="true">{% trans 'toponims_georef' %}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="toponims_tipus_tab" data-toggle="tab" href="#toponims_tipus" role="tab" aria-selected="false">{% trans 'toponims_tipus' %}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="toponims_humitat_tab" data-toggle="tab" href="#toponims_per_humitat" role="tab" aria-selected="false">{% trans 'toponims_humitat' %}</a>
+          </li>
+            <li class="nav-item">
+                <a class="nav-link" id="recursos_per_tipus_tab" data-toggle="tab" href="#recursos_per_tipus" role="tab" aria-selected="false">{% trans 'recursos_tipus' %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="estats_tab" data-toggle="tab" href="#estats" role="tab" aria-selected="false">{% trans 'estats' %}</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade fad in active" id="toponims_georef" role="tabpanel" aria-labelledby="toponims_georef_tab"><hr><div id="toponims_per_georeferenciador"></div></div>
+            <div class="tab-pane fade" id="toponims_tipus" role="tabpanel" aria-labelledby="toponims_tipus_tab"><hr><div id="toponims_per_tipus"></div></div>
+            <div class="tab-pane fade" id="toponims_per_humitat" role="tabpanel" aria-labelledby="toponims_humitat_tab"><hr><div id="toponims_humitat"></div></div>
+            <div class="tab-pane fade" id="recursos_per_tipus" role="tabpanel" aria-labelledby="recursos_per_tipus"><hr><div id="recursos_tipus"></div></div>
+            <div class="tab-pane fade" id="estats" role="tabpanel" aria-labelledby="estats"><hr><div id="state_sunburst"><section id="visualisation"></section></div></div>
         </div>
     </div>
 
@@ -62,6 +99,7 @@
 {% endblock %}
 {% block extra_js %}
     <!--<script src="https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/js/d3-mitch-tree.min.js"></script>-->
+    <script src="{% static 'bootstrap/dist/js/bootstrap.js' %}"></script>
     <script src="{% static 'georef/javascript/d3-mitch-tree/js/d3-mitch-tree.min.js' %}"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="{% static 'georef/javascript/csrf_utils.js' %}"></script>
