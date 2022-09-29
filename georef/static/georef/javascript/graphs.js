@@ -24,6 +24,13 @@ $(document).ready(function() {
         tipus_per_pais.push(toponims_tipus[i][1]);
     }
 
+    var estats = [];
+    var toponims_per_estat = [];
+    for (var i = 0; i < estats_count.length; i++){
+        estats.push(estats_count[i][0]);
+        toponims_per_estat.push(estats_count[i][1]);
+    }
+
     var pie_data = [];
     for (var i = 0; i < toponims_aquatic.length; i++){
         if(toponims_aquatic[i][0]=='S'){
@@ -75,29 +82,46 @@ $(document).ready(function() {
         });
     }
 
-    var spawn_chart = function(div_id,title,yaxis_title,series_name,cats,data, x_label_rotation, fontsize){
-        Highcharts.chart(div_id, {
+    var spawn_chart_options = function(options){
+        options = options || {};
+        options = $.extend({},
+        {
+            'yaxis_title':'',
+            'series_name': '',
+            'x_label_rotation': -45,
+            'fontsize': '12px',
+            'type': 'column',
+            'height': 400,
+            'yaxistype': 'logarithmic'
+        },
+        options);
+
+        Highcharts.chart(options.div_id, {
             chart: {
-                type: 'column'
+                type: options.type,
+                height: options.height
+                //type: 'bar',
+                //inverted: false,
+                //
             },
             title: {
-                text: title
+                text: options.title
             },
             xAxis: {
-                categories: cats,
+                categories: options.cats,
                 crosshair: true,
                 labels: {
-                    rotation: x_label_rotation,
+                    rotation: options.x_label_rotation,
                     style: {
-                        fontSize: fontsize
+                        fontSize: options.fontsize
                     }
                 }
             },
             yAxis: {
-                type: 'logarithmic',
+                type: options.yaxistype,
                 //min: 0,
                 title: {
-                    text: yaxis_title
+                    text: options.yaxis_title
                 }
             },
             tooltip: {
@@ -120,99 +144,53 @@ $(document).ready(function() {
                 }*/
             },
             series: [{
-                name: series_name,
-                data: data,
+                name: options.series_name,
+                data: options.data,
                 showInLegend: false
             }]
         });
     }
 
-//    Highcharts.chart('state_sunburst', {
-//        chart: {
-//            height: '100%'
-//        },
-//
-//        plotOptions: {
-//            series:
-//                {
-//                    turboThreshold:10000
-//                }
-//        },
-//
-//        // Let the center circle be transparent
-//        colors: ['transparent'].concat(Highcharts.getOptions().colors),
-//
-//        title: {
-//            text: 'World population 2017'
-//        },
-//
-//        subtitle: {
-//            text: 'Source <a href="https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)">Wikipedia</a>'
-//        },
-//
-//        series: [{
-//            type: 'sunburst',
-//            data: sunburst_data,
-//            name: 'Root',
-//            allowDrillToNode: true,
-//            cursor: 'pointer',
-//            dataLabels: {
-//                format: '{point.name}',
-//                filter: {
-//                    property: 'innerArcLength',
-//                    operator: '>',
-//                    value: 16
-//                },
-//                rotationMode: 'circular'
-//            },
-//            levels: [{
-//                level: 1,
-//                levelIsConstant: false,
-//                dataLabels: {
-//                    filter: {
-//                        property: 'outerArcLength',
-//                        operator: '>',
-//                        value: 64
-//                    }
-//                }
-//            }, {
-//                level: 2,
-//                colorByPoint: true
-//            },
-//            {
-//                level: 3,
-//                colorVariation: {
-//                    key: 'brightness',
-//                    to: -0.5
-//                }
-//            }, {
-//                level: 4,
-//                colorVariation: {
-//                    key: 'brightness',
-//                    to: 0.5
-//                }
-//            }]
-//
-//        }],
-//
-//        tooltip: {
-//            headerFormat: '',
-//            pointFormat: 'The population of <b>{point.name}</b> is <b>{point.value}</b>'
-//        }
-//    });
+    var options_toponims_per_georeferenciador = {
+        'div_id': 'toponims_per_georeferenciador',
+        'title': '',
+        'cats': georeferenciadors,
+        'data': toponims_georef
+    }
+    spawn_chart_options( options_toponims_per_georeferenciador );
 
-    /*
-    spawn_chart('toponims_per_pais',gettext('Número de topònims per país'),gettext('Número de topònims'),gettext('Número de topònims'),paisos,toponims_per_pais,-85,'8px');
-    spawn_chart('toponims_per_georeferenciador',gettext('Número de topònims per georeferenciador'),gettext('Número de topònims'),gettext('Número de topònims'),georeferenciadors,toponims_georef,-45,'12px');
-    spawn_chart('toponims_per_tipus',gettext('Número de topònims per tipus'),gettext('Número de topònims'),gettext('Número de topònims'),tipus,tipus_per_pais,-45,'12px');
-    spawn_pie('toponims_humitat',gettext('Número de topònims per aquàtic/terrestre'),gettext('Topònims'),pie_data);
-    spawn_chart('recursos_tipus',gettext('Número de recursos georeferenciació per tipus'),gettext('Número de recursos'),gettext('Número de recursos'),recursos,tipus_per_recurs,-45,'12px');
-    */
+    var options_toponims_per_tipus = {
+        'div_id': 'toponims_per_tipus',
+        'title': '',
+        'cats': tipus,
+        'data': tipus_per_pais,
+        'type': 'bar',
+        'height': 2200,
+        'x_label_rotation': 0
+    }
+    spawn_chart_options( options_toponims_per_tipus );
 
-    spawn_chart('toponims_per_georeferenciador',gettext('Número de topònims per georeferenciador'),'','',georeferenciadors,toponims_georef,-45,'12px');
-    spawn_chart('toponims_per_tipus',gettext('Número de topònims per tipus'),'','',tipus,tipus_per_pais,-45,'12px');
     spawn_pie('toponims_humitat',gettext('Número de topònims per aquàtic/terrestre'),'',pie_data);
-    spawn_chart('recursos_tipus',gettext('Número de recursos georeferenciació per tipus'),'','',recursos,tipus_per_recurs,-45,'12px');
+
+    var options_recursos_tipus = {
+        'div_id': 'recursos_tipus',
+        'title': '',
+        'cats': recursos,
+        'data': tipus_per_recurs
+    }
+    spawn_chart_options( options_recursos_tipus );
+
+    var toponims_per_estat_options = {
+        'div_id': 'toponims_estat_graph',
+        'title': '',
+        'cats': estats,
+        'data': toponims_per_estat,
+        'type': 'bar',
+        'height': 2200,
+        'x_label_rotation': 0,
+        'yaxistype' : 'linear'
+    }
+    spawn_chart_options( toponims_per_estat_options );
 
 
 });

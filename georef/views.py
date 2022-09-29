@@ -899,12 +899,24 @@ def graphs(request):
 
     recursos_tipus = cursor.fetchall()
 
+    '''
+    estates = Toponim.objects.filter(idtipustoponim__id='mz_tipustoponim_6').order_by('nom')
+    data.append({'id': '0', 'name': 'Estats', 'parentId': '', 'value': estates.count()})
+    for e in estates:
+        data.append({'id': e.id, 'name': e.nom_str, 'parentId': '0', 'value': e.children.all().count()})
+    '''
+    count_estates = []
+    estates = Toponim.objects.filter(idtipustoponim__id='mz_tipustoponim_6').order_by('nom')
+    for e in estates:
+        count_estates.append( [ e.nom, e.children.all().count() ] )
+    sorted_estates = sorted( count_estates, key=lambda x: x[1], reverse=True)
+
     context = {
         'toponims_georeferenciador': json.dumps(toponims_georeferenciador),
-        #'toponims_pais': json.dumps(toponims_pais),
         'toponims_tipus': json.dumps(toponims_tipus),
         'toponims_aquatic': json.dumps(toponims_aquatic),
         'recursos_tipus' : json.dumps(recursos_tipus),
+        'estats_count': json.dumps(sorted_estates)
     }
 
     return render(request, 'georef/graphs.html', context)
