@@ -9,6 +9,7 @@ $(document).ready(function() {
                         ,coord_x: item.coordenada_x_centroide
                         ,coord_y: item.coordenada_y_centroide
                         ,precisio: item.precisio
+                        ,precisio_calc: item.precisio_calc
                         ,id: item.id
                         //,json: item.json
                     };
@@ -23,6 +24,7 @@ $(document).ready(function() {
             $('#val_y').text(ui.item.coord_y);
             $('#val_x').text(ui.item.coord_x);
             $('#val_prec').text(ui.item.precisio);
+            $('#val_prec_calc').text(ui.item.precisio_calc);
             return false;
         }
     });

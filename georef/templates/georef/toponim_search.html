@@ -43,12 +43,16 @@
         </div>
         <div class="container separador_seccio">
             <div class="row">
-                <div class="col-xs-2"><span class="label label-primary">{% trans 'Coordenada Y centroide (lat)' %}:</span></div>
-                <div class="col-xs-2" id="val_y"></div>
-                <div class="col-xs-2"><span class="label label-primary">{% trans 'Coordenada X centroide (long)' %}:</span></div>
-                <div class="col-xs-2" id="val_x"></div>
-                <div class="col-xs-2"><span class="label label-primary">{% trans 'Incertesa de coordenades (m)' %}:</span></div>
-                <div class="col-xs-2" id="val_prec"></div>
+                <div class="col-xs-3"><span class="label label-primary">{% trans 'Coordenada Y centroide (lat)' %}:</span></div>
+                <div class="col-xs-3" id="val_y"></div>
+                <div class="col-xs-3"><span class="label label-primary">{% trans 'Coordenada X centroide (long)' %}:</span></div>
+                <div class="col-xs-3" id="val_x"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3"><span class="label label-primary">{% trans 'Incertesa de coordenades (m)' %}:</span></div>
+                <div class="col-xs-3" id="val_prec"></div>
+                <div class="col-xs-3"><span class="label label-primary">{% trans 'Incertesa calculadora georeferenciació (m)' %}:</span></div>
+                <div class="col-xs-3" id="val_prec_calc"></div>
             </div>
         </div>
     </main>

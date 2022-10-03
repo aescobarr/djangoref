@@ -38,6 +38,7 @@ class ToponimSearchSerializer(serializers.ModelSerializer):
     coordenada_x_centroide = serializers.SerializerMethodField()
     coordenada_y_centroide = serializers.SerializerMethodField()
     precisio = serializers.SerializerMethodField()
+    precisio_calc = serializers.SerializerMethodField()
 
     class Meta:
         model = Toponim
@@ -63,6 +64,13 @@ class ToponimSearchSerializer(serializers.ModelSerializer):
             return None
         else:
             return darrera_versio.get_incertesa_centroide
+
+    def get_precisio_calc(self, obj):
+        darrera_versio = obj.get_darrera_versio()
+        if darrera_versio is None:
+            return None
+        else:
+            return darrera_versio.georefcalc_uncertainty
 
 
 class ToponimSerializer(serializers.ModelSerializer):
