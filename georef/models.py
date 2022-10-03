@@ -192,6 +192,16 @@ class Toponim(models.Model):
                     accum_query = append_chain_query(accum_query, ~Q(id__in=versions_amb_qualificador), condicio)
                 else:
                     accum_query = append_chain_query(accum_query, Q(id__in=versions_amb_qualificador), condicio)
+            elif condicio['condicio'] == 'arbre':
+                llista_pares = Toponim.objects.filter(idpare__isnull=False).values('idpare').distinct()
+                pares = Toponim.objects.filter(id__in=llista_pares)
+                if condicio['valor'] != '':
+                    pare = pares.filter(nom__icontains=condicio['valor']).first()
+                    if pare is not None:
+                        if condicio['not'] == 'S':
+                            accum_query = append_chain_query(accum_query, ~Q(denormalized_toponimtree__icontains=pare.id), condicio)
+                        else:
+                            accum_query = append_chain_query(accum_query, Q(denormalized_toponimtree__icontains=pare.id), condicio)
             elif condicio['condicio'] == 'geografic':
                 # Es passa al constructor unicament el geometry del json
                 # geo = GEOSGeometry('{"type":"Polygon","coordinates":[[[-5.800781,32.546813],[12.480469,41.508577],[-6.855469,48.224673],[-5.800781,32.546813]]]}')

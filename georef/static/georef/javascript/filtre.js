@@ -208,7 +208,7 @@ function getGeoJSONDeObjectesDigitalitzats(){
 function extreureValorJSON(tdCondicio,tdValor){
     var json = '"valor":"';
     var idCondicio = extreureIdSelect(tdCondicio);
-    if('nom'==idCondicio){
+    if('nom'==idCondicio || 'arbre'==idCondicio){
         var inputTxt = tdValor.children[0];
         var txt = inputTxt.value;
         json = '"valor":"'+txt+'"';
