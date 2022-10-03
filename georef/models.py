@@ -304,6 +304,9 @@ class Toponimversio(models.Model):
     altitud_profunditat_minima = models.IntegerField(blank=True, null=True)
     altitud_profunditat_maxima = models.IntegerField(blank=True, null=True)
 
+    georefcalc_string = models.TextField(blank=True, null=True)
+    georefcalc_uncertainty = models.IntegerField(blank=True, null=True)
+
     class Meta:
         managed = False
         db_table = 'toponimversio'

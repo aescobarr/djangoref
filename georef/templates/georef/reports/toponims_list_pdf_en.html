@@ -134,6 +134,9 @@
                     <div class="cell">
                         Centroid uncertainty(m)
                     </div>
+                    <div class="cell">
+                        Georeferencing calculator centroid uncertainty(m)
+                    </div>
                 </div>
                 {% for record in records %}
                 <div class="row">
@@ -154,6 +157,9 @@
                     </div>
                     <div class="cell" data-title="Incertesa centroide(m)">
                         {{ record.inc }}
+                    </div>
+                    <div class="cell" data-title="Incertesa centroide(m)">
+                        {{ record.inc_calc }}
                     </div>
                 </div>
                 {% endfor %}

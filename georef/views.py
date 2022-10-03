@@ -81,6 +81,7 @@ from datetime import date
 
 from slugify import slugify
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext
 from django.contrib.auth.views import login
 from django.http import Http404
 from rest_framework.exceptions import ParseError
@@ -1390,7 +1391,7 @@ def toponims_list_xls(request):
     versions = {}
     darreres_versions = Toponimversio.objects.filter(last_version=True).filter(idtoponim__id__in=id_toponims)
     for darrera_versio in darreres_versions:
-        versions[darrera_versio.idtoponim.id] = { '_x': darrera_versio.get_coordenada_x_centroide, '_y': darrera_versio.get_coordenada_y_centroide, '_inc': darrera_versio.get_incertesa_centroide}
+        versions[darrera_versio.idtoponim.id] = { '_x': darrera_versio.get_coordenada_x_centroide, '_y': darrera_versio.get_coordenada_y_centroide, '_inc': darrera_versio.get_incertesa_centroide, '_inc_grcalc': darrera_versio.georefcalc_uncertainty}
 
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = get_sitenames_export_filename('xls')
@@ -1404,7 +1405,7 @@ def toponims_list_xls(request):
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    columns = ['Nom', 'Aquàtic?', 'Tipus', 'Coordenada x centroide', 'Coordenada y centroide', 'Precisio (m)']
+    columns = [ugettext('Nom'), ugettext('Aquàtic?'), ugettext('Tipus'), ugettext('Coordenada x centroide'), ugettext('Coordenada y centroide'), ugettext('Precisio (m)'), ugettext('Incertesa calculadora georeferenciació')]
 
     for col_num in range(len(columns)):
         ws.write(row_num, col_num, columns[col_num], font_style)
@@ -1426,10 +1427,12 @@ def toponims_list_xls(request):
             ws.write(row_num, 3, versio['_x'], font_style)
             ws.write(row_num, 4, versio['_y'], font_style)
             ws.write(row_num, 5, versio['_inc'], font_style)
+            ws.write(row_num, 6, versio['_inc_grcalc'], font_style)
         else:
             ws.write(row_num, 3, '', font_style)
             ws.write(row_num, 4, '', font_style)
             ws.write(row_num, 5, '', font_style)
+            ws.write(row_num, 6, '', font_style)
 
     wb.save(response)
     return response
@@ -1485,7 +1488,8 @@ def toponims_list_pdf(request):
     for darrera_versio in darreres_versions:
         versions[darrera_versio.idtoponim.id] = {'_x': darrera_versio.get_coordenada_x_centroide,
                                                  '_y': darrera_versio.get_coordenada_y_centroide,
-                                                 '_inc': darrera_versio.get_incertesa_centroide}
+                                                 '_inc': darrera_versio.get_incertesa_centroide,
+                                                 '_inc_calc': darrera_versio.georefcalc_uncertainty}
     clean_data = []
     for record in records:
         versio = None
@@ -1494,9 +1498,9 @@ def toponims_list_pdf(request):
         except KeyError:
             pass
         if versio:
-            clean_data.append({'nom_str':record['nom_str'],'aquatic':record['aquatic'],'tipus':record['idtipustoponim']['nom'],'x':versio['_x'],'y':versio['_y'],'inc':versio['_inc']})
+            clean_data.append({'nom_str':record['nom_str'],'aquatic':record['aquatic'],'tipus':record['idtipustoponim']['nom'],'x':versio['_x'],'y':versio['_y'],'inc':versio['_inc'], 'inc_calc':versio['_inc_calc']})
         else:
-            clean_data.append({'nom_str':record['nom_str'],'aquatic':record['aquatic'],'tipus':record['idtipustoponim']['nom'], 'x': '', 'y': '', 'inc': ''})
+            clean_data.append({'nom_str':record['nom_str'],'aquatic':record['aquatic'],'tipus':record['idtipustoponim']['nom'], 'x': '', 'y': '', 'inc': '', 'inc_calc': ''})
 
     language = request.LANGUAGE_CODE
     try:
@@ -1564,12 +1568,13 @@ def toponims_list_csv(request):
     for darrera_versio in darreres_versions:
         versions[darrera_versio.idtoponim.id] = {'_x': darrera_versio.get_coordenada_x_centroide,
                                                  '_y': darrera_versio.get_coordenada_y_centroide,
-                                                 '_inc': darrera_versio.get_incertesa_centroide}
+                                                 '_inc': darrera_versio.get_incertesa_centroide,
+                                                 '_inc_calc': darrera_versio.georefcalc_uncertainty}
 
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = get_sitenames_export_filename('csv')
     writer = csv.writer(response, delimiter=';')
-    writer.writerow(['nom_toponim', 'aquatic?', 'tipus_toponim', 'centroide_x', 'centroide_y','incertesa_m'])
+    writer.writerow([ugettext('nom_toponim'), ugettext('aquatic?'), ugettext('tipus_toponim'), ugettext('centroide_x'), ugettext('centroide_y'),ugettext('incertesa_m'), ugettext('incertesa_calc_georef')])
     for record in records:
         versio = None
         try:
@@ -1577,9 +1582,9 @@ def toponims_list_csv(request):
         except KeyError:
             pass
         if versio:
-            writer.writerow([record['nom_str'], record['aquatic'], record['idtipustoponim']['nom'], versio['_x'], versio['_y'], versio['_inc']])
+            writer.writerow([record['nom_str'], record['aquatic'], record['idtipustoponim']['nom'], versio['_x'], versio['_y'], versio['_inc'], versio['_inc_calc']])
         else:
-            writer.writerow([record['nom_str'], record['aquatic'], record['idtipustoponim']['nom'], '', '', ''])
+            writer.writerow([record['nom_str'], record['aquatic'], record['idtipustoponim']['nom'], '', '', '', ''])
 
     return response
 

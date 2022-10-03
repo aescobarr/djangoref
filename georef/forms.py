@@ -84,7 +84,7 @@ class ToponimversioForm(ModelForm):
         #fields = ['numero_versio', 'idqualificador','idrecursgeoref','nom','datacaptura','coordenada_x_origen','coordenada_y_origen','coordenada_z_origen','precisio_z_origen','coordenada_x_centroide','coordenada_y_centroide','precisio_h','observacions']
         fields = ['numero_versio', 'idqualificador', 'idrecursgeoref', 'nom', 'datacaptura', 'coordenada_x_origen',
                   'coordenada_y_origen', 'altitud_profunditat_maxima', 'altitud_profunditat_minima', 'coordenada_x_centroide',
-                  'coordenada_y_centroide', 'precisio_h', 'observacions']
+                  'coordenada_y_centroide', 'precisio_h', 'observacions', 'georefcalc_string', 'georefcalc_uncertainty']
         widgets = {
             'idrecursgeoref': forms.HiddenInput(),
         }

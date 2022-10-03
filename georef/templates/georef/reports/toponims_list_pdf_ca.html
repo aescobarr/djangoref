@@ -134,6 +134,9 @@
                     <div class="cell">
                         Incertesa centroide(m)
                     </div>
+                    <div class="cell">
+                        Incertesa calculadora georeferenciació(m)
+                    </div>
                 </div>
                 {% for record in records %}
                 <div class="row">
@@ -154,6 +157,9 @@
                     </div>
                     <div class="cell" data-title="Incertesa centroide(m)">
                         {{ record.inc }}
+                    </div>
+                    <div class="cell" data-title="Incertesa centroide(m)">
+                        {{ record.inc_calc }}
                     </div>
                 </div>
                 {% endfor %}

@@ -318,6 +318,26 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-sm-6">
+                            <table class="toponimversio_edit">
+                                <tr>
+                                    <th><label class="iconainfo"  title="{% trans 'site_georefcalc_string_text' %}" for="{{ toponimversio_form.georefcalc_string.id_for_label }}">{% trans 'Cadena metadades calculadora georeferenciació' %} <a href="http://georeferencing.org/georefcalculator/gc.html" target="_blank">(link)</a></label></th>
+                                    <td>{{ toponimversio_form.georefcalc_string }}</td>
+                                    <td>{{ toponimversio_form.georefcalc_string.errors }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-sm-6">
+                            <table class="toponimversio_edit">
+                                <tr>
+                                    <th><label class="iconainfo"  title="{% trans 'site_georefcalc_uncertainty_text' %}" for="{{ toponimversio_form.georefcalc_uncertainty.id_for_label }}">{% trans 'Incertesa calculadora georeferenciació (m)' %} <a href="http://georeferencing.org/georefcalculator/gc.html" target="_blank">(link)</a></label></th>
+                                    <td>{{ toponimversio_form.georefcalc_uncertainty }}</td>
+                                    <td>{{ toponimversio_form.georefcalc_uncertainty.errors }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group">
                         <label for="{{ form.observacions.id_for_label }}">{% trans 'Observacions' %}</label>
                         {{ toponimversio_form.observacions }}
