@@ -32,7 +32,7 @@ $(document).ready(function() {
     $( '#clipboard' ).click(function() {
         var text = '';
         var TAB = "\t";
-        text = $('#val_nom').text() + TAB + ' lat:' + $('#val_y').text() + TAB + ' long:' + $('#val_x').text() + TAB + ' prec:' + $('#val_prec').text();
+        text = $('#val_nom').text() + TAB + ' lat:' + $('#val_y').text() + TAB + ' long:' + $('#val_x').text() + TAB + ' prec:' + $('#val_prec').text() + TAB + ' prec_calc:' + $('#val_prec_calc').text();
         copyToClipboard(text);
         toastr.success("Resultats copiats al portapapers!");
     });
