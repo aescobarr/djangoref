@@ -10,6 +10,7 @@ from django.views.i18n import JavaScriptCatalog
 router = routers.DefaultRouter()
 router.register(r'toponims', views.ToponimViewSet, base_name='toponims')
 router.register(r'toponimsearch', views.ToponimSearchViewSet, base_name='toponimsearch')
+router.register(r'toponimparesearch', views.ToponimPareSearchViewSet, base_name='toponimparesearch')
 router.register(r'filtres', views.FiltrejsonViewSet, base_name='filtres')
 router.register(r'recursgeoref', views.RecursGeoRefViewSet, base_name='recursgeoref')
 router.register(r'versions', views.ToponimVersioViewSet, base_name='versions')

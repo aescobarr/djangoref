@@ -6,7 +6,7 @@ function crearTaulaFiltre(jsonStringFiltre){
     var jsonFiltre = JSON.parse(jsonStringFiltre);
     var condicions = jsonFiltre.filtre;
     for (var i=0; i<condicions.length; i++){
-        insertCondicioFiltre(condicions[i].operador,condicions[i].condicio,condicions[i].valor,condicions[i].not,i);
+        insertCondicioFiltre(condicions[i].operador,condicions[i].condicio,condicions[i].valor,condicions[i].not,i, condicions[i].extra);
         indexTaula++;
     }
 
@@ -29,7 +29,7 @@ function createSelect(valors,idselected,idselect,onchange){
     return htmlSelect;
 }
 
-function createValor(condicio,valor){
+function createValor(condicio,valor, extra){
     if('nom'==condicio){
         return "<input type='text' value='"+valor+"' />";
     }else if('tipus'==condicio){
@@ -44,6 +44,8 @@ function createValor(condicio,valor){
         return createSelect(valorsVersio,valor);
     }else if('geografic'==condicio){
         return createImportCartoButton(valor);
+    }else if('arbre'==condicio){
+        return "<input data-extra='" + extra + "' class='arbre' type='text' value='"+valor+"' />";
     }else{
         return "<input type='text' value='"+valor+"' />";
     }
@@ -68,7 +70,7 @@ function esborrarFilaFiltre(indexTaulaAEsborrar){
     fila.parentNode.removeChild(fila);
 }
 
-function insertCondicioFiltre(operador,condicio,valor,not,indexTaulaNovaFila){
+function insertCondicioFiltre(operador,condicio,valor,not,indexTaulaNovaFila,extra){
     var taula = $("#taulafiltre")[0];
     var selectOperador = createSelect(valorsOperadors,operador,'select_operador_'+indexTaulaNovaFila);
     if(taula.children.length==1){
@@ -76,7 +78,7 @@ function insertCondicioFiltre(operador,condicio,valor,not,indexTaulaNovaFila){
         selectOperador = "&nbsp;";
     }
     var selectCondicio = createSelect(valorsCondicions,condicio,'select_condicio_'+indexTaulaNovaFila,'javascript:canviCondicio('+indexTaulaNovaFila+');');
-    var valorCondicio = createValor(condicio,valor);
+    var valorCondicio = createValor(condicio,valor, extra);
     var checkNot = createCheckNot(not);
     var botoEsborrar = '<button id="addCondicio" onclick="javascript:esborrarFilaFiltre('+indexTaulaNovaFila+');return false;" type="button" class="btn btn-danger">' + gettext('Esborrar') + '<i class="fa fa-times" aria-hidden="true"></i></button>';
     var fila = "<td>"+selectOperador+"</td>";
@@ -89,11 +91,36 @@ function insertCondicioFiltre(operador,condicio,valor,not,indexTaulaNovaFila){
     newtr.setAttribute('name','trfiltre');
     newtr.innerHTML = fila;
     taula.appendChild(newtr);
+    refreshAutocoComplete();
+}
+
+function refreshAutocoComplete(){
+    $('#taulafiltre').find("input.arbre").autocomplete({
+        source: function(request,response){
+            $.getJSON( '/api_internal/toponimparesearch/?term=' + request.term, function(data){
+                response($.map(data.results, function(item){
+                    return {
+                        label: item.nom_str
+                        ,value: item.nom
+                        ,id: item.id
+                    };
+                }));
+            });
+        },
+        minLength: 2,
+        select: function( event, ui ) {
+            var arbreid = ui.item.id + '$' + ui.item.value;
+            $(this).attr('data-extra', arbreid);
+            $(this).val(ui.item.label);
+            return false;
+        }
+    });
 }
 
 function afegirCondicioFiltre(){
-    insertCondicioFiltre("and", "", "", "N", indexTaula);
+    insertCondicioFiltre("and", "", "", "N", indexTaula,"");
     indexTaula++;
+    refreshAutocoComplete();
 }
 
 function canviCondicio(indexTaulaFila){
@@ -101,8 +128,9 @@ function canviCondicio(indexTaulaFila){
     var indexSelect = select.selectedIndex;
     var valueCondicio = select.options[indexSelect].id;
     var tdValue = document.getElementById('value_'+indexTaulaFila);
-    var valorCondicio = createValor(valueCondicio,"");
+    var valorCondicio = createValor(valueCondicio,"", "");
     tdValue.innerHTML = valorCondicio;
+    refreshAutocoComplete();
 }
 
 function mostrarGeoJSON(valor){
@@ -208,10 +236,15 @@ function getGeoJSONDeObjectesDigitalitzats(){
 function extreureValorJSON(tdCondicio,tdValor){
     var json = '"valor":"';
     var idCondicio = extreureIdSelect(tdCondicio);
-    if('nom'==idCondicio || 'arbre'==idCondicio){
+    if('nom'==idCondicio){
         var inputTxt = tdValor.children[0];
         var txt = inputTxt.value;
         json = '"valor":"'+txt+'"';
+    }else if('arbre'==idCondicio){
+        var inputTxt = tdValor.children[0];
+        var txt = inputTxt.value;
+        var extra = $(inputTxt).data('extra');
+        json = '"valor":"'+txt+'","extra":"' + extra + '"';
     }else if('tipus'==idCondicio || 'pais'==idCondicio || 'aquatic'==idCondicio || 'nomautor'==idCondicio || 'versio'==idCondicio){
         var idValor = extreureIdSelect(tdValor);
         var etiquetaValor = extreureValorSelect(tdValor);

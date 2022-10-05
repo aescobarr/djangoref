@@ -344,6 +344,18 @@ class UsersViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
+class ToponimPareSearchViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = ToponimSearchSerializer
+
+    def get_queryset(self):
+        llista_pares = Toponim.objects.filter(idpare__isnull=False).values('idpare').distinct()
+        queryset = Toponim.objects.filter(id__in=llista_pares).order_by('nom')
+        term = self.request.query_params.get('term', None)
+        if term is not None:
+            queryset = queryset.filter(nom__icontains=term).order_by('nom')
+        return queryset
+
+
 class ToponimSearchViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ToponimSearchSerializer
 

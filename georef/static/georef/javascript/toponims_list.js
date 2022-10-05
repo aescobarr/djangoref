@@ -187,6 +187,7 @@ $(document).ready(function() {
                 filterCQL(ui.item.json,layer);
             }
             $('#autoc_filtres').val(listname);
+            filter();
             return false;
         }
     });
@@ -309,7 +310,7 @@ $(document).ready(function() {
                     width: 400,
                     modal: true,
                     buttons: {
-                        label_sobreescriure_i_filtrar: function() {
+                        Ok: function() {
                             update_filtre(json,nomfiltre,idfiltre,modul);
                             $( this ).dialog( 'close' );
                         },

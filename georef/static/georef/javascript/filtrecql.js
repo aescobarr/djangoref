@@ -4,7 +4,7 @@ function transformarJSONACQL(jsonStringFiltre){
         var jsonFiltre = JSON.parse(jsonStringFiltre);
         var condicions = jsonFiltre.filtre;
         for (var i=0; i<condicions.length; i++){
-            filtre = transformarCondicioFiltreJSONACQL(filtre,condicions[i].operador,condicions[i].condicio,condicions[i].valor,condicions[i].not);
+            filtre = transformarCondicioFiltreJSONACQL(filtre,condicions[i].operador,condicions[i].condicio,condicions[i].valor,condicions[i].not,condicions[i].extra);
 
         }
     }
@@ -63,6 +63,15 @@ function transformarCondicioPartNomACQL(partnomtoponim){
     return filtre;
 }
 
+function transformarCondicioArbreACQL(idarbre){
+    var filtre = new OpenLayers.Filter.Comparison({
+        type: OpenLayers.Filter.Comparison.LIKE,
+        property: 'denormalized_toponimtree',
+        value: '%'+idarbre+'%'
+    });
+    return filtre;
+}
+
 function transformarCondicioAquaticACQL(idaquatic){
     var filtre = new OpenLayers.Filter.Comparison({
         type: OpenLayers.Filter.Comparison.EQUAL_TO,
@@ -82,7 +91,7 @@ function transformarCondicioGeograficACQL(geometria){
 }
 
 
-function transformarCondicioFiltreJSONACQL(filtreAnterior,operador,condicio,valor,not){
+function transformarCondicioFiltreJSONACQL(filtreAnterior,operador,condicio,valor,not,extra){
     var filtre,filtreNou;
 
     if('nom'==condicio){
@@ -90,6 +99,12 @@ function transformarCondicioFiltreJSONACQL(filtreAnterior,operador,condicio,valo
             filtreNou = transformarNotCQL(transformarCondicioPartNomACQL(valor));
         }else{
             filtreNou = transformarCondicioPartNomACQL(valor);
+        }
+    }else if('arbre'==condicio){
+        if('S'==not){
+            filtreNou = transformarNotCQL(transformarCondicioArbreACQL(extra));
+        }else{
+            filtreNou = transformarCondicioArbreACQL(extra);
         }
     }else if('org'==condicio){
         filtreNou = transformarCondicioOrgACQL(valor);

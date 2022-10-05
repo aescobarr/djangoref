@@ -2,7 +2,10 @@ from django.conf import settings
 from georef_addenda.models import MenuItem
 
 def revision_number_processor(request):
-    return {'revision': settings.JAVASCRIPT_VERSION}
+    if settings.DEBUG:
+        return {'revision': ''}
+    else:
+        return {'revision': settings.JAVASCRIPT_VERSION}
 
 def version_number_processor(request):
     version_string = '.'.join((settings.MAJOR, settings.MINOR, settings.PATCH))
