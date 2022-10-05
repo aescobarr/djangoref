@@ -159,7 +159,7 @@ function createImportCartoButton(valor){
 }
 
 function extreureJSONDeFiltre(){
-    var json = '{"filtre":[';
+    var json = '{"filtre":['
     var trs = document.getElementsByName("trfiltre");
     var tr;
     var tds;
@@ -243,7 +243,7 @@ function extreureValorJSON(tdCondicio,tdValor){
     }else if('arbre'==idCondicio){
         var inputTxt = tdValor.children[0];
         var txt = inputTxt.value;
-        var extra = $(inputTxt).data('extra');
+        var extra = inputTxt.getAttribute('data-extra');
         json = '"valor":"'+txt+'","extra":"' + extra + '"';
     }else if('tipus'==idCondicio || 'pais'==idCondicio || 'aquatic'==idCondicio || 'nomautor'==idCondicio || 'versio'==idCondicio){
         var idValor = extreureIdSelect(tdValor);
