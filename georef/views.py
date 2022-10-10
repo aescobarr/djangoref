@@ -445,38 +445,42 @@ def block_user(request):
 @api_view(['POST'])
 def compute_centroid(request):
     if request.method == 'POST':
-        try:
-            geom = request.data['geom']
-        except KeyError:
-            geom = None
+        geom = request.data.get('geom')
+        centroid_method = request.data.get('cm', 0)
         if geom is None:
             content = {'status': 'KO', 'detail': 'mandatory param missing'}
             return Response(data=content, status=400)
-        features = json.loads(geom)
-        union_geometry = None
-        for feature in features:
-            if union_geometry is None:
-                union_geometry = GEOSGeometry( json.dumps(feature['geometry']) )
-            else:
-                union_geometry = union_geometry.union( GEOSGeometry( json.dumps(feature['geometry']) ) )
-        centroid = union_geometry.centroid
-        if centroid is not None:
-            centroid_haversine = (centroid.y, centroid.x)
-            dist_max = 0
-            vertexes = extract_coords(union_geometry.coords)
-            for vertex in vertexes:
-                vertex_haversine = (vertex.y, vertex.x)
-                dist = haversine(centroid_haversine, vertex_haversine, unit='m')
-                if dist > dist_max:
-                    dist_max = dist
-            #return dist_max
-            geom_struct = {
-                "type": "Feature",
-                "properties": {},
-                "geometry": json.loads(centroid.json)
-            }
-            content = {'status': 'OK', 'detail': {'centroid': geom_struct, 'radius': dist_max}}
-            return Response(data=content, status=200)
+        if centroid_method == 0:
+            features = json.loads(geom)
+            union_geometry = None
+            for feature in features:
+                if union_geometry is None:
+                    union_geometry = GEOSGeometry( json.dumps(feature['geometry']) )
+                else:
+                    union_geometry = union_geometry.union( GEOSGeometry( json.dumps(feature['geometry']) ) )
+            centroid = union_geometry.centroid
+            if centroid is not None:
+                centroid_haversine = (centroid.y, centroid.x)
+                dist_max = 0
+                vertexes = extract_coords(union_geometry.coords)
+                for vertex in vertexes:
+                    vertex_haversine = (vertex.y, vertex.x)
+                    dist = haversine(centroid_haversine, vertex_haversine, unit='m')
+                    if dist > dist_max:
+                        dist_max = dist
+                #return dist_max
+                geom_struct = {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": json.loads(centroid.json)
+                }
+                content = {'status': 'OK', 'detail': {'centroid': geom_struct, 'radius': dist_max}}
+                return Response(data=content, status=200)
+        elif centroid_method == 1:
+            pass
+        else:
+            content = {'status': 'KO', 'detail': 'calculation method not implemented'}
+            return Response(data=content, status=400)
 
 
 @api_view(['GET'])

@@ -307,6 +307,10 @@ class Toponimversio(models.Model):
     georefcalc_string = models.TextField(blank=True, null=True)
     georefcalc_uncertainty = models.IntegerField(blank=True, null=True)
 
+    # 0 - traditional centroid calculation method (i.e geometric centroid)
+    # 1 - centroid is asjusted following practices dictated by https://docs.gbif.org/georeferencing-best-practices/1.0/en/#paths
+    centroid_calc_method = models.IntegerField(default=0)
+
     class Meta:
         managed = False
         db_table = 'toponimversio'
