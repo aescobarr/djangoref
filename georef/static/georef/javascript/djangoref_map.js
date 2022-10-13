@@ -263,6 +263,7 @@
         map.on(L.Draw.Event.DELETED, function (e) {
             if(options.show_centroid_after_edit){
                 djangoRef.Map.refreshCentroid();
+                djangoRef.Map.centroid.clearLayers();
             }
             djangoRef.Map.editableLayers.bringToFront();
         });
@@ -377,7 +378,7 @@
     };
 
     djangoRef.Map.refreshCentroid = function(radius_km){
-        djangoRef.Map.centroid.clearLayers();
+        /*djangoRef.Map.centroid.clearLayers();
         var centroid_data = djangoRef.Map.getCurrentCentroid();
         if(centroid_data != null){
             var centroid = centroid_data.centroid;
@@ -391,6 +392,43 @@
                 var circle = turf.circle(centroid,dist_km);
                 djangoRef.Map.centroid.addData(circle);
             }
+        }*/
+        if( djangoRef.Map.getDigitizedFeaturesJSON().features.length > 0 ){
+            $.ajax({
+                url: '/compute_centroid',
+                method: "POST",
+                data: { "geom": JSON.stringify(djangoRef.Map.getDigitizedFeaturesJSON().features) },
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type)) {
+                        var csrftoken = getCookie('csrftoken');
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                },
+                success: function( centroid_data, textStatus, jqXHR ) {
+                    //console.log(data);
+                    //def.resolve(data.detail);
+                    djangoRef.Map.centroid.clearLayers();
+                    if(centroid_data != null){
+                        var centroid = centroid_data.detail.centroid;
+                        var dist_km;
+                        if(radius_km){
+                            dist_km = radius_km
+                        }else{
+                            dist_km = centroid_data.detail.radius / 1000;
+                        }
+                        if(dist_km > 0){
+                            var circle = turf.circle(centroid,dist_km);
+                            var point = turf.point( [centroid.geometry.coordinates[0], centroid.geometry.coordinates[1]] );
+                            djangoRef.Map.centroid.addData(circle);
+                            djangoRef.Map.centroid.addData(point);
+                        }
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(textStatus);
+                    //def.reject(textStatus);
+                }
+            });
         }
     };
 

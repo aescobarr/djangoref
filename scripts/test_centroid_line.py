@@ -22,6 +22,7 @@ def centroid_calc(geometry, calc_method):
     elif calc_method == 1:
         original_centroid = geometry.centroid
         corrected_centroid = closest_point_on_geometry( original_centroid, geometry )
+        print(centroid_is_in_geometry( corrected_centroid, geometry ))
     else:
         raise Exception("Calculation method not implemented")
     if corrected_centroid is not None:
@@ -51,7 +52,7 @@ def main():
             #     calc_method = 0
             # else:
             #     calc_method = 1
-            calc_method = 0
+            calc_method = 1
             if not centroid_in_geometry and geom.geometria.geom_type == 'Polygon':
                 result = centroid_calc(geom.geometria, calc_method)
                 print( "{0} {1} {2} {3} {4} {5}".format( geom.geometria.geom_type, geom.id, result['detail']['centroid']['geometry']['coordinates'][0], result['detail']['centroid']['geometry']['coordinates'][1], result['detail']['radius'], calc_method ) )
