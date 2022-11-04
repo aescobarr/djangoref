@@ -477,7 +477,7 @@ def compute_centroid(request):
                 "properties": {},
                 "geometry": json.loads(corrected_centroid.json)
             }
-            content = {'status': 'OK', 'detail': {'centroid': geom_struct, 'radius': dist_max}}
+            content = {'status': 'OK', 'detail': {'centroid': geom_struct, 'centroid_method': 0 if centroid_on_geometry else 1,'radius': dist_max}}
             return Response(data=content, status=200)
 
 

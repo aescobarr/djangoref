@@ -163,6 +163,7 @@ var refreshCentroid = function(radius_km){
             }
             $('#id_coordenada_x_centroide').val( centroid_data.centroid.geometry.coordinates[0] );
             $('#id_coordenada_y_centroide').val( centroid_data.centroid.geometry.coordinates[1] );
+            $('#id_centroid_calc_method').val( centroid_data.centroid_method );
             if(radius_km){
                 $('#id_precisio_h').val(dist_km*1000);
             }else{
@@ -176,6 +177,7 @@ var refreshCentroid = function(radius_km){
         }else{
             $('#id_coordenada_x_centroide').val( '' );
             $('#id_coordenada_y_centroide').val( '' );
+            $('#id_centroid_calc_method').val( 0 );
             $('#id_precisio_h').val( '' );
         }
     });
@@ -219,6 +221,7 @@ var refreshCentroidUI = function(radius_m){
         if(centroid_data != null){
             $('#id_coordenada_x_centroide').val( centroid_data.centroid.geometry.coordinates[0] );
             $('#id_coordenada_y_centroide').val( centroid_data.centroid.geometry.coordinates[1] );
+            $('#id_centroid_calc_method').val( centroid_data.centroid_method );
             if(radius_m){
                 $('#id_precisio_h').val(radius_m);
             }else{
@@ -227,6 +230,7 @@ var refreshCentroidUI = function(radius_m){
         }else{
             $('#id_coordenada_x_centroide').val( '' );
             $('#id_coordenada_y_centroide').val( '' );
+            $('#id_centroid_calc_method').val( 0 );
             $('#id_precisio_h').val( '' );
         }
     });
@@ -345,6 +349,7 @@ $(document).ready(function() {
                 /*refreshCentroidUI(parseFloat(radius));*/
                 $('#id_coordenada_x_centroide').val( centroid_data.centroid.geometry.coordinates[0] );
                 $('#id_coordenada_y_centroide').val( centroid_data.centroid.geometry.coordinates[1] );
+                $('#id_centroid_calc_method').val( centroid_data.centroid_method );
                 $('#id_precisio_h').val(radius);
                 refreshDigitizedGeometry();
 
