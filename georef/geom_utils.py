@@ -1,5 +1,20 @@
 from django.contrib.gis.geos import GEOSGeometry, Point
+from shapely.ops import nearest_points
+from shapely.geometry import shape, mapping
+import json
 
+def closest_point_on_geometry(centroid, geometry):
+    shp_centroid = shape(json.loads(centroid.json))
+    shp_geometry = shape(json.loads(geometry.json))
+    contacts = nearest_points( shp_centroid, shp_geometry )
+    geos_geom = GEOSGeometry( json.dumps( mapping(contacts[1]) ) )
+    return geos_geom
+
+
+def centroid_is_in_geometry(centroid, geometry):
+    shp_centroid = shape(json.loads(centroid.json))
+    shp_geometry = shape(json.loads(geometry.json))
+    return shp_geometry.contains(shp_centroid)
 
 def search_level(level, retVal):
     if len(level) == 0:

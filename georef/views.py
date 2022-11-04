@@ -457,10 +457,7 @@ def block_user(request):
 @api_view(['POST'])
 def compute_centroid(request):
     if request.method == 'POST':
-        try:
-            geom = request.data['geom']
-        except KeyError:
-            geom = None
+        geom = request.data.get('geom')
         if geom is None:
             content = {'status': 'KO', 'detail': 'mandatory param missing'}
             return Response(data=content, status=400)
@@ -471,9 +468,14 @@ def compute_centroid(request):
                 union_geometry = GEOSGeometry( json.dumps(feature['geometry']) )
             else:
                 union_geometry = union_geometry.union( GEOSGeometry( json.dumps(feature['geometry']) ) )
-        centroid = union_geometry.centroid
-        if centroid is not None:
-            centroid_haversine = (centroid.y, centroid.x)
+        original_centroid = union_geometry.centroid
+        centroid_on_geometry = centroid_is_in_geometry(original_centroid, union_geometry)
+        if not centroid_on_geometry:
+            corrected_centroid = closest_point_on_geometry(original_centroid, union_geometry)
+        else:
+            corrected_centroid = original_centroid
+        if corrected_centroid is not None:
+            centroid_haversine = (corrected_centroid.y, corrected_centroid.x)
             dist_max = 0
             vertexes = extract_coords(union_geometry.coords)
             for vertex in vertexes:
@@ -485,9 +487,9 @@ def compute_centroid(request):
             geom_struct = {
                 "type": "Feature",
                 "properties": {},
-                "geometry": json.loads(centroid.json)
+                "geometry": json.loads(corrected_centroid.json)
             }
-            content = {'status': 'OK', 'detail': {'centroid': geom_struct, 'radius': dist_max}}
+            content = {'status': 'OK', 'detail': {'centroid': geom_struct, 'centroid_method': 0 if centroid_on_geometry else 1,'radius': dist_max}}
             return Response(data=content, status=200)
 
 
