@@ -87,6 +87,8 @@ from django.http import Http404
 from rest_framework.exceptions import ParseError
 from django.template.loader import TemplateDoesNotExist
 
+import pandas as pd
+
 def get_order_clause(params_dict, translation_dict=None):
     order_clause = []
     try:
@@ -2083,6 +2085,34 @@ def get_max_distance(coords, centroid):
     return max_dist
 
 
+FILE_TYPE_CSV = 1
+FILE_TYPE_EXCEL = 2
+FILE_TYPE_EXCEL_97 = 3
+FILE_TYPE_EXCEL_03 = 4
+FILE_TYPE_OTHER = -1
+
+
+def determine_import_file_type(file_path):
+    file_type = magic.from_file(file_path)
+    if 'text' in file_type:
+        return FILE_TYPE_CSV
+    elif 'Excel' in file_type:
+        return FILE_TYPE_EXCEL
+    elif 'Composite Document File V2 Document' in file_type:
+        return FILE_TYPE_EXCEL_97
+    elif 'Microsoft OOXML':
+        return FILE_TYPE_EXCEL_03
+    else:
+        return FILE_TYPE_OTHER
+
+
+def cleanup_excel_line_item(x):
+    pre_clean = str(x).strip()
+    if pre_clean == 'nan':
+        return '';
+    return pre_clean
+
+
 @api_view(['POST'])
 def import_toponims(request, file_name=None):
     if file_name is None or file_name.strip() == '':
@@ -2090,25 +2120,70 @@ def import_toponims(request, file_name=None):
         return Response(data=content, status=400)
     filepath = UPLOAD_DIR + '/' + file_name
     filename = ntpath.basename(os.path.splitext(filepath)[0])
-    file_type = magic.from_file(filepath)
-    if not 'text' in file_type:
+    #file_type = magic.from_file(filepath)
+    file_type = determine_import_file_type(filepath)
+    if file_type == FILE_TYPE_OTHER:
         content = {'status': 'KO', 'detail': [file_type], 'status_type': 'FILE_TYPE_WRONG'}
         return Response(data=content, status=400)
     else: #seems to be text file
-        #read file
         file_array = []
         raw_lines = []
         errors = []
-        with open(filepath) as f:
-            raw_lines = f.readlines()
-        raw_lines = [x.strip() for x in raw_lines]
-        with open(filepath,'rt') as csvfile:
-            #dialect = csv.Sniffer().sniff(csvfile.read(1024))
-            dialect = csv.Sniffer().sniff(csvfile.readline())
-            csvfile.seek(0)
-            reader = csv.reader(csvfile,dialect)
-            for row in reader:
-                file_array.append(row)
+        if file_type == FILE_TYPE_CSV:
+            #read file
+            with open(filepath) as f:
+                raw_lines = f.readlines()
+            raw_lines = [x.strip() for x in raw_lines]
+            with open(filepath,'rt') as csvfile:
+                #dialect = csv.Sniffer().sniff(csvfile.read(1024))
+                dialect = csv.Sniffer().sniff(csvfile.readline())
+                csvfile.seek(0)
+                reader = csv.reader(csvfile,dialect)
+                for row in reader:
+                    file_array.append(row)
+                try:
+                    check_file_structure(file_array)
+                except NumberOfColumnsException as n:
+                    details = n.args[0]
+                    msg = "Problema amb l'estructura del fitxer. S'esperaven 16 columnes i se n'han trobat " + details["numcols"] + " a la fila " + details["numrow"]
+                    errors.append(msg)
+                except EmptyFileException as e:
+                    msg = "Sembla que el fitxer té menys de 2 línies"
+                    errors.append(msg)
+
+                contador_fila = 1
+                toponims_exist = []
+                toponims_to_create = []
+                problems = {}
+                if len(errors) == 0:
+                    for fila, linia in zip(file_array[1:], raw_lines[1:]):
+                        process_line(fila, linia, errors, toponims_exist, toponims_to_create, contador_fila, problems, filename)
+                        contador_fila += 1
+
+            if len(errors) > 0:
+                content = {'status': 'KO', 'detail': errors}
+                return Response(data=content, status=400)
+            else:
+                for toponim_and_versio in toponims_to_create:
+                    t = toponim_and_versio['toponim']
+                    v = toponim_and_versio['versio']
+                    t.save()
+                    v.idtoponim = t
+                    v.save()
+                success_report = create_success_report(toponims_to_create, toponims_exist)
+                filelink = create_result_csv(toponims_to_create, toponims_exist, request)
+                content = {'status': 'OK', 'detail': file_type, 'results': success_report, 'fileLink': filelink}
+                return Response(data=content, status=200)
+        if file_type in [FILE_TYPE_EXCEL, FILE_TYPE_EXCEL_03, FILE_TYPE_EXCEL_97]:
+            if file_type == FILE_TYPE_EXCEL_03:
+                df = pd.read_excel(filepath, engine="openpyxl")
+            else:
+                df = pd.read_excel(filepath)
+            np_array = df.to_numpy()
+            for row in np_array:
+                line = [cleanup_excel_line_item(x) for x in row]
+                file_array.append(line)
+                raw_lines.append(';'.join(line))
             try:
                 check_file_structure(file_array)
             except NumberOfColumnsException as n:
@@ -2124,25 +2199,24 @@ def import_toponims(request, file_name=None):
             toponims_to_create = []
             problems = {}
             if len(errors) == 0:
-                for fila, linia in zip(file_array[1:], raw_lines[1:]):
+                for fila, linia in zip(file_array, raw_lines):
                     process_line(fila, linia, errors, toponims_exist, toponims_to_create, contador_fila, problems, filename)
                     contador_fila += 1
 
-        if len(errors) > 0:
-            content = {'status': 'KO', 'detail': errors}
-            return Response(data=content, status=400)
-        else:
-            for toponim_and_versio in toponims_to_create:
-                t = toponim_and_versio['toponim']
-                v = toponim_and_versio['versio']
-                t.save()
-                v.idtoponim = t
-                v.save()
-            success_report = create_success_report(toponims_to_create, toponims_exist)
-            filelink = create_result_csv(toponims_to_create, toponims_exist, request)
-            content = {'status': 'OK', 'detail': file_type, 'results': success_report, 'fileLink': filelink}
-            return Response(data=content, status=200)
-
+            if len(errors) > 0:
+                content = {'status': 'KO', 'detail': errors}
+                return Response(data=content, status=400)
+            else:
+                for toponim_and_versio in toponims_to_create:
+                    t = toponim_and_versio['toponim']
+                    v = toponim_and_versio['versio']
+                    t.save()
+                    v.idtoponim = t
+                    v.save()
+                success_report = create_success_report(toponims_to_create, toponims_exist)
+                filelink = create_result_csv(toponims_to_create, toponims_exist, request)
+                content = {'status': 'OK', 'detail': file_type, 'results': success_report, 'fileLink': filelink}
+                return Response(data=content, status=200)
 
 def create_result_csv(toponims_to_create, toponims_exist, request):
     file_name = str(uuid.uuid4()) + ".csv"
