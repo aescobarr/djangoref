@@ -88,6 +88,7 @@ from rest_framework.exceptions import ParseError
 from django.template.loader import TemplateDoesNotExist
 
 import pandas as pd
+import sys
 
 def get_order_clause(params_dict, translation_dict=None):
     order_clause = []
@@ -2157,8 +2158,14 @@ def import_toponims(request, file_name=None):
                 problems = {}
                 if len(errors) == 0:
                     for fila, linia in zip(file_array[1:], raw_lines[1:]):
-                        process_line(fila, linia, errors, toponims_exist, toponims_to_create, contador_fila, problems, filename)
-                        contador_fila += 1
+                        try:
+                            process_line(fila, linia, errors, toponims_exist, toponims_to_create, contador_fila, problems, filename)
+                            contador_fila += 1
+                        except:
+                            e = sys.exc_info()[0]
+                            content = {'status': 'KO', 'detail': "%s" % e}
+                            return Response(data=content, status=400)
+
 
             if len(errors) > 0:
                 content = {'status': 'KO', 'detail': errors}
@@ -2175,10 +2182,15 @@ def import_toponims(request, file_name=None):
                 content = {'status': 'OK', 'detail': file_type, 'results': success_report, 'fileLink': filelink}
                 return Response(data=content, status=200)
         if file_type in [FILE_TYPE_EXCEL, FILE_TYPE_EXCEL_03, FILE_TYPE_EXCEL_97]:
-            if file_type == FILE_TYPE_EXCEL_03:
-                df = pd.read_excel(filepath, engine="openpyxl")
-            else:
-                df = pd.read_excel(filepath)
+            try:
+                if 'xlsx' in filepath:
+                    df = pd.read_excel(filepath, engine="openpyxl")
+                else:
+                    df = pd.read_excel(filepath)
+            except:
+                e = sys.exc_info()[0]
+                content = {'status': 'KO', 'detail': "%s" % e}
+                return Response(data=content, status=400)
             np_array = df.to_numpy()
             for row in np_array:
                 line = [cleanup_excel_line_item(x) for x in row]

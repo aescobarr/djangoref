@@ -266,8 +266,8 @@ def process_line(line, line_string, errors, toponims_exist, toponims_to_create, 
             data = None
         else:
             try:
-                #data = datetime.strptime(line[8].strip(), '%d/%m/%Y')
-                data = parser.parse(line[8].strip())
+                data = datetime.strptime(line[8].strip(), '%d/%m/%Y')
+                #data = parser.parse(line[8].strip())
             except ValueError:
                 errorsALinia = True
                 errorsLiniaActual.append("Error convertint " + line[FIELD_MAP['date']['index']] + " a format data a  la columna 9")
