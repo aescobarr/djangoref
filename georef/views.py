@@ -875,24 +875,24 @@ def graphs(request):
 
     toponims_georeferenciador = cursor.fetchall()
 
-    cursor.execute("""
-        select
-        p.nom, count(t.id) from
-        toponim t, pais p
-        where idpais is not null AND t.idpais = p.id group by p.nom order by 2 desc
-    """)
+    # cursor.execute("""
+    #     select
+    #     p.nom, count(t.id) from
+    #     toponim t, pais p
+    #     where idpais is not null AND t.idpais = p.id group by p.nom order by 2 desc
+    # """)
 
     # toponims_pais = cursor.fetchall()
     #
-    # cursor.execute("""
-    #     select tp.nom, count(t.id)
-    #     from
-    #     toponim t,
-    #     tipustoponim tp
-    #     where idpais is not null AND
-    #     t.idtipustoponim = tp.id
-    #     group by tp.nom order by 2 desc;
-    # """)
+    cursor.execute("""
+        select tp.nom, count(t.id)
+        from
+        toponim t,
+        tipustoponim tp
+        where idpais is not null AND
+        t.idtipustoponim = tp.id
+        group by tp.nom order by 2 desc;
+    """)
 
     toponims_tipus = cursor.fetchall()
 

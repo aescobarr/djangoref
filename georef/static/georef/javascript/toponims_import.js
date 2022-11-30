@@ -48,8 +48,8 @@ $(document).ready(function() {
             }
         },
         template:'<div class="qq-uploader">' +
-            '<div class="qq-upload-drop-area"><span>' + gettext('Pujar fitxer CSV') + '</span></div>' +
-            '<div class="qq-upload-button ui-widget-content ui-button ui-corner-all ui-state-default">' + gettext('Pujar fitxer CSV') + '</div>' +
+            '<div class="qq-upload-drop-area"><span>' + gettext('Pujar fitxer') + '</span></div>' +
+            '<div class="qq-upload-button ui-widget-content ui-button ui-corner-all ui-state-default">' + gettext('Pujar fitxer') + '</div>' +
             '<ul class="qq-upload-list"></ul>' +
             '</div>',
         params: {
