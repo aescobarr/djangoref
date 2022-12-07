@@ -1655,7 +1655,15 @@ def user_profile(request, user_id=None):
                    'nodelist_full': nodelist_full})
 
 def about(request):
-    return render(request, 'georef/about.html', {})
+    version_string = '.'.join((settings.MAJOR, settings.MINOR, settings.PATCH))
+    locale = request.LANGUAGE_CODE
+    current_version_template = 'georef/version_info/{0}_{1}.html'.format( version_string, locale )
+    try:
+        render_to_string(current_version_template)
+        return render(request, 'georef/about.html', {'current_version_template': current_version_template})
+    except TemplateDoesNotExist:
+        fallback_template = 'georef/version_info/fallback_{0}.html'.format( locale )
+        return render(request, 'georef/about.html', {'current_version_template': fallback_template})
 
 @login_required
 def change_my_password(request):
