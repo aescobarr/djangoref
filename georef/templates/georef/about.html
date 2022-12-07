@@ -16,6 +16,12 @@
     </div>
     <div class="container">
         <h3>Ali-Bey <b>v{{ version }}</b></h3>
+        {% get_current_language as LANGUAGE_CODE %}
+        {% if LANGUAGE_CODE == 'ca' %}
+        {% include 'georef/version_info/1.1.0_ca.html' %}
+        {% else %}
+        {% include 'georef/version_info/1.1.0_en.html' %}
+        {% endif %}
         {% trans '<p class="text-justify">Georef és una eina de georeferenciació de topònims, creada originalment per al Museu de Ciències Naturals de Barcelona - <a href="https://museuciencies.cat/" rel="nofollow">MCNB</a>. Permet desar, indexar i consultar topònims, que inclouen geometria, i suporta diverses versions de cadascun dels topònims. Georef està fet amb <a href="https://www.djangoproject.com/" rel="nofollow">Django</a>. L&#39;aplicació disposa d&#39;una API que permet fer consultes sobre les dades. L&#39;API és un projecte separat i es pot trobar <a href="https://github.com/aescobarr/nhc-georef-api">aquí</a>.</p>' %}
         <div><h3>{% trans "home_text_1" %}</h3></div>
         <!--<div><h3>La plataforma per a treballs en cartografia i georeferenciació</h3></div>-->

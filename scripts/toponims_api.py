@@ -41,7 +41,8 @@ for toponim in Toponim.objects.all():
         centroid_specs = extract_centroid_specs(tv)
         coordenadaxcentroide = centroid_specs['x']
         coordenadaycentroide = centroid_specs['y']
-        incertesa = centroid_specs['h']
+        #incertesa = centroid_specs['h']
+        incertesa = tv.georefcalc_uncertainty
 
     rows_insert.append([id, nomtoponim, nom, aquatic, tipus.nom, tipus.id, datacaptura, coordenadaxcentroide, coordenadaycentroide, incertesa])
 
@@ -68,9 +69,9 @@ cursor.execute("""
 
 for row in rows_insert:
     cursor.execute("""
-        INSERT INTO toponims_api 
-        (id,nomtoponim,nom,aquatic,tipus,idtipus,datacaptura,coordenadaxcentroide,coordenadaycentroide,incertesa) 
-        values 
+        INSERT INTO toponims_api
+        (id,nomtoponim,nom,aquatic,tipus,idtipus,datacaptura,coordenadaxcentroide,coordenadaycentroide,incertesa)
+        values
         (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
     """, (row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],) )
 

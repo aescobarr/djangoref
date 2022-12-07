@@ -60,7 +60,8 @@ for toponimversio in Toponimversio.objects.all():
     observacions = toponimversio.observacions
     coordXCentroide = centroide['x']
     coordYCentroide = centroide['y']
-    incertesaCoord = centroide['h']
+    #incertesaCoord = centroide['h']
+    incertesaCoord = toponimversio.georefcalc_uncertainty
     if toponimversio.idtoponim:
         idtoponim = toponimversio.idtoponim.id
 
@@ -93,10 +94,10 @@ cursor.execute("DROP TABLE IF EXISTS toponimsversio_api cascade")
 
 cursor.execute("""
     create table toponimsversio_api(
-        id character varying(200) NOT NULL PRIMARY KEY,        
+        id character varying(200) NOT NULL PRIMARY KEY,
         nom character varying(500),
         nomtoponim character varying(255),
-        tipus character varying(100),        
+        tipus character varying(100),
         versio integer,
         qualificadorVersio character varying(500),
         recursCaptura character varying(500),
@@ -118,9 +119,9 @@ cursor.execute("""
 for row in rows_insert:
     print(row)
     cursor.execute("""
-        INSERT INTO toponimsversio_api 
-        (id, nom, nomtoponim, tipus, versio, qualificadorVersio, recursCaptura, sistRefRecurs, dataCaptura, coordXOriginal, coordYOriginal, coordZ, incertesaZ, georeferenciatPer, observacions, coordXCentroide, coordYCentroide, incertesaCoord, idtoponim) 
-        values 
+        INSERT INTO toponimsversio_api
+        (id, nom, nomtoponim, tipus, versio, qualificadorVersio, recursCaptura, sistRefRecurs, dataCaptura, coordXOriginal, coordYOriginal, coordZ, incertesaZ, georeferenciatPer, observacions, coordXCentroide, coordYCentroide, incertesaCoord, idtoponim)
+        values
         (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],) )
 

@@ -312,7 +312,7 @@ class Toponimversio(models.Model):
     altitud_profunditat_maxima = models.IntegerField(blank=True, null=True)
 
     georefcalc_string = models.TextField(blank=True, null=True)
-    georefcalc_uncertainty = models.IntegerField(blank=True, null=True)
+    georefcalc_uncertainty = models.FloatField(blank=True, null=True)
 
     # 0 - traditional centroid calculation method (i.e geometric centroid)
     # 1 - centroid is asjusted following practices dictated by https://docs.gbif.org/georeferencing-best-practices/1.0/en/#paths
