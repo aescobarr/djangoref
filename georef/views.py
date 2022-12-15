@@ -926,7 +926,9 @@ def graphs(request):
     count_estates = []
     estates = Toponim.objects.filter(idtipustoponim__id='mz_tipustoponim_6').order_by('nom')
     for e in estates:
-        count_estates.append( [ e.nom, e.children.all().count() ] )
+        toponim_hash = e.id + '$' + e.nom
+        count_descendants = Toponim.objects.filter(denormalized_toponimtree__icontains=toponim_hash).count()
+        count_estates.append( [ e.nom, count_descendants ] )
     sorted_estates = sorted( count_estates, key=lambda x: x[1], reverse=True)
 
     context = {

@@ -85,7 +85,8 @@
                 overlays: [],
                 show_coordinates: true,
                 show_centroid_after_edit: false,
-                attribution_position: 'bottomright'
+                attribution_position: 'bottomright',
+                show_scale: 'true'
             },
             options);
 
@@ -143,6 +144,10 @@
             //coordControl = L.control.coordinates({position:"bottomright",enableUserInput:false});
             coordControl = L.control.coordinates(coordinates_options);
             map.addControl(coordControl);
+        }
+
+        if(options.show_scale){
+            L.control.scale().addTo(map);
         }
 
         if(options.show_centroid_after_edit){

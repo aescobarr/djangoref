@@ -1,3 +1,5 @@
+var first_copy = true;
+
 $(document).ready(function() {
     $( '#autoc_toponim' ).autocomplete({
         source: function(request,response){
@@ -32,8 +34,31 @@ $(document).ready(function() {
     $( '#clipboard' ).click(function() {
         var text = '';
         var TAB = "\t";
-        text = $('#val_nom').text() + TAB + ' lat:' + $('#val_y').text() + TAB + ' long:' + $('#val_x').text() + TAB + ' prec:' + $('#val_prec').text() + TAB + ' prec_calc:' + $('#val_prec_calc').text();
-        copyToClipboard(text);
+        var headers = [
+            'name',
+            'lat',
+            'long',
+            'prec',
+            'prec_calc'
+        ];
+        var values = [
+            $('#val_nom').text(),
+            $('#val_y').text(),
+            $('#val_x').text(),
+            $('#val_prec').text(),
+            $('#val_prec_calc').text()
+        ];
+        var headers_str = headers.join(TAB);
+        var values_str = values.join(TAB);
+        text = headers_str + '\n' + values_str;
+        //text = $('#val_nom').text() + TAB + ' lat:' + $('#val_y').text() + TAB + ' long:' + $('#val_x').text() + TAB + ' prec:' + $('#val_prec').text() + TAB + ' prec_calc:' + $('#val_prec_calc').text();
+        //copyToClipboard(text);
+        if(first_copy){
+            navigator.clipboard.writeText(text);
+            first_copy = false;
+        }else{
+            navigator.clipboard.writeText(values_str);
+        }
         toastr.success("Resultats copiats al portapapers!");
     });
 });

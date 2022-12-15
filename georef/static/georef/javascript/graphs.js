@@ -92,7 +92,8 @@ $(document).ready(function() {
             'fontsize': '12px',
             'type': 'column',
             'height': 400,
-            'yaxistype': 'logarithmic'
+            'yaxistype': 'linear',
+            'xaxistype': 'linear'
         },
         options);
 
@@ -108,6 +109,7 @@ $(document).ready(function() {
                 text: options.title
             },
             xAxis: {
+                type: options.xaxistype,
                 categories: options.cats,
                 crosshair: true,
                 labels: {
@@ -188,7 +190,8 @@ $(document).ready(function() {
         'type': 'bar',
         'height': 2200,
         'x_label_rotation': 0,
-        'yaxistype' : 'linear'
+        'yaxistype' : 'logarithmic',
+        //'xaxistype' : 'logarithmic',
     }
     spawn_chart_options( toponims_per_estat_options );
 

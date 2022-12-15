@@ -1,0 +1,18 @@
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading"><b>Novetats a la versió {{ version }}</b></h4>
+    <ul>
+        <li><b>Cerca jeràrquica al filtre de topònims:</b> la opció 'inclosos a' del filtre permet filtrar tots els topònims continguts dins d'un altre topònim. Així per exemple, un filtre de topònims inclosos a 'Illes balears' tornarà tots els topònims que ténen com a topònim pare les Illes Balears.</li>
+        <li><b>Visualització del centroide en topònims:</b> en digitalitzar la geometria de tipus línia o polígon associada a un topònim, es mostra un marcador al centroide</li>
+        <li><b>Nou algorisme de càlcul de centroides:</b> en cas que el centroide calculat de la geometria associada a un topònim estigui fora de la geometria, es corregeix i es situa al punt més proper a sobre la geometria.</li>
+        <li><b>Nous camps d'incertesa total i metadades:</b> s'ha afegit als topònims els camps Altitud profunditat màxima(m), Altitud profunditat mínima(m), Cadena metadades calculadora georeferenciació i Incertesa calculadora georeferenciació (m)</li>
+        <li><b>Suport fitxers excel en importació de topònims:</b> la importació de topònims suporta el format Excel de microsoft</li>
+        <li><b>Noves visualitzacions per topònims de tipus 'estat':</b> recompte de número de topònims dins de cada estat i visualització jeràrquica d'estats afegits a Utilitats -> Gràfiques</li>
+        <li><b>Interfície d'edició del menú d'utilitats:</b> l'usuari administrador pot editar (afegir, treure, eliminar) enllaços al menú 'Utilitats' de l'aplicació</li>
+    </ul>
+    <h5 class="alert-heading"><b>Errors esmenats/millores:</b></h5>
+    <ul>
+        <li>La gràfica d'estats 'Utilitats -> Gràfiques -> Número de topònims per estat' mostrava únicament el recompte de topònims immediatament per sota de l'estat, ara els mostra tots (tots els nivells per sota de l'estat)</li>
+        <li>La funció de copiar al portapapers de la cerca de topònims 'Utilitats -> Cerca topònims' genera un format tabular, fàcil d'enganxar a un full de càlcul</li>
+        <li>S'ha incorporat una referència d'escala a tots els mapes de l'aplicació</li>
+    </ul>
+</div>
