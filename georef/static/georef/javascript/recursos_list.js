@@ -293,6 +293,7 @@ $(document).ready(function() {
 
     $( '#doClear' ).click(function() {
         clearTaula('taulafiltre');
+        map.editableLayers.clearLayers();
         filter();
         $('#autoc_filtres').val('');
     });

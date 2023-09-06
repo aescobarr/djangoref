@@ -281,8 +281,11 @@ $(document).ready(function() {
     });
 
     var url = $('#id_base_url_wms').val();
+    /* Do not call this automatically, only when pressing button!! */
+    /*
     if(url != '' && url != null){
         connectwms(url);
     }
+    */
 
 });

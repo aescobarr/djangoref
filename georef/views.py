@@ -1617,7 +1617,7 @@ def my_profile(request):
         if user_form.is_valid():
             #user_form.save()
             saved_user = user_form.save(commit=False)
-            saved_user.profile.language = request.POST['language']
+            #saved_user.profile.language = request.POST['language']
             saved_user.profile.save()
             saved_user.save()
             successfully_saved = True

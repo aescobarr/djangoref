@@ -117,7 +117,7 @@ class Toponim(models.Model):
                 max = versio.numero_versio
                 tv = versio
             else:
-                if max >= versio.numero_versio:
+                if max < versio.numero_versio:
                     max = versio.numero_versio
                     tv = versio
         return tv

@@ -47,7 +47,7 @@ function transformarCondicioPartNomACQL(partnomrecurs){
 
 function transformarCondicioGeograficACQL(geometria){
     var filtre = new OpenLayers.Filter.Spatial({
-        type: OpenLayers.Filter.Spatial.INTERSECTS,
+        type: OpenLayers.Filter.Spatial.WITHIN,
         property: 'carto_epsg23031',
         value: geometria
     });
