@@ -11,6 +11,7 @@ $(document).ready(function() {
     L.DomEvent.disableScrollPropagation(el);*/
     var div = L.DomUtil.get('sidebar');
     L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
+    L.DomEvent.on(div, 'mousedown', L.DomEvent.stopPropagation);
     L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
     L.DomEvent.on(div, 'dblclick', L.DomEvent.stopPropagation);
 });
