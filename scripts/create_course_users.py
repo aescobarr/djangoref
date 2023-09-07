@@ -31,7 +31,7 @@ def main(n=10, reset=True):
         email = nom_usuari + "@example.com"
         password = nom_usuari
         print("{0} {1} {2}".format( nom_usuari, email, password ))
-        user = User.objects.create_user(username=nom_usuari, email=email, password=password)
+        user = User.objects.create_user(username=nom_usuari, email=email, password=password, first_name=nom_usuari)
         user.profile.permission_filter_edition = True
         user.profile.permission_tesaure_edition = True
         user.profile.permission_recurs_edition = True

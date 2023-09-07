@@ -254,7 +254,7 @@ msgstr ""
 #: georef/templates/georef/_recursos_fields.html:60
 #: georef/templates/georef/about.html:46 georef/templates/georef/base.html:75
 msgid "Autors"
-msgstr "Autors"
+msgstr "Autors recursos"
 
 #: georef/templates/georef/_recursos_fields.html:68
 msgid "Versions de topònims basats en el recurs"

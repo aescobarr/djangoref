@@ -54,6 +54,15 @@ function transformarNotCQL(filtre){
     return filtreNou;
 }
 
+function transformarCondicioNomAutorACQL(idautor){
+    var filtre = new OpenLayers.Filter.Comparison({
+        type: OpenLayers.Filter.Comparison.EQUAL_TO,
+        property: 'iduser',
+        value: idautor
+    });
+    return filtre;
+}
+
 function transformarCondicioPartNomACQL(partnomtoponim){
     var filtre = new OpenLayers.Filter.Comparison({
         type: OpenLayers.Filter.Comparison.LIKE,
@@ -99,6 +108,12 @@ function transformarCondicioFiltreJSONACQL(filtreAnterior,operador,condicio,valo
             filtreNou = transformarNotCQL(transformarCondicioPartNomACQL(valor));
         }else{
             filtreNou = transformarCondicioPartNomACQL(valor);
+        }
+    }else if('nomautor'==condicio){
+        if('S'==not){
+            filtreNou = transformarNotCQL(transformarCondicioNomAutorACQL(valor));
+        }else{
+            filtreNou = transformarCondicioNomAutorACQL(valor);
         }
     }else if('arbre'==condicio){
         if('S'==not){
