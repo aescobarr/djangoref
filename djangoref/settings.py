@@ -193,12 +193,12 @@ from djangoref.settings_local import *
 #5MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
-JAVASCRIPT_VERSION = 110
+JAVASCRIPT_VERSION = 112
 
 #Semver versioning - https://semver.org/
 MAJOR="1"
 MINOR="1"
-PATCH="1"
+PATCH="2"
 
 # Links in utilities. Each element is "title","link"
 # if title is blank, a separator is inserted

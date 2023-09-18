@@ -1,0 +1,18 @@
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading"><b>New in version {{ version }}</b></h4>
+    <ul>
+        <li><b>Hyerarchy search on site names:</b> the option 'inside' of the filter allows the user to filter all site names contained in another site name. For instance, filtering for site names 'inside' UK will return all site names with parent site 'UK'</li>
+        <li><b>Centroid visualization in site names:</b> on adding geometry to a site name, the centroid is indicated by a marker</li>
+        <li><b>New centroid calculation algorithm:</b> if the centroid of a site name falls outside of its associated geometry, the centroid is corrected and moved to the nearest point on the geometry</li>
+        <li><b>New total uncertainty and metadata fields:</b> the following uncertainty and metadata fields have been added to site names: Maximum depth/height(m), Minimum depth/height(m), Georeferencing calculator metadata string, Georeferencing calculator uncertainty (m)</li>
+        <li><b>Excel file support for site names import:</b> the import tool now supports this file format</li>
+        <li><b>New visualizations for 'state' site names:</b> count of number of site names by state and tree view of states have been added to Tools -> Usage charts</li>
+        <li><b>Utility menu edition interface:</b> the admin user can now edit (add, delete, edit) links on the utility menu</li>
+    </ul>
+    <h5 class="alert-heading"><b>Bug fixes/improvements:</b></h5>
+    <ul>
+        <li>Fixed bug which prevented refresh of the site layer when filtering by author</li>
+        <li>Fixed bug which prevented some recent sites showing (join with countries table)</li>
+        <li>Disabled automatic load of wms servers on resources form</li>
+    </ul>
+</div>
