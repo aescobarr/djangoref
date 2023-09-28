@@ -40,7 +40,7 @@ class Tipustoponim(models.Model):
     nom = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipustoponim'
         verbose_name = _('Tipus de topònim')
 
@@ -53,7 +53,7 @@ class Pais(models.Model):
     nom = models.CharField(max_length=200)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'pais'
         verbose_name = _('País')
 
@@ -66,7 +66,7 @@ class Qualificadorversio(models.Model):
     qualificador = models.CharField(max_length=500)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'qualificadorversio'
         verbose_name = _('Qualificador de la versió de topònim')
 
@@ -82,7 +82,7 @@ class Sistemareferenciarecurs(models.Model):
     conversio = models.CharField(max_length=250, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'sistemareferenciarecurs'
         verbose_name = _('Sistema de referència del recurs')
 
@@ -105,7 +105,7 @@ class Toponim(models.Model):
     denormalized_toponimtree = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'toponim'
         verbose_name = _('Topònim')
 
@@ -220,7 +220,7 @@ class Tipusunitats(models.Model):
     tipusunitat = models.CharField(max_length=500)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipusunitats'
         verbose_name = _('Tipus unitats')
 
@@ -236,7 +236,7 @@ class Tipusrecursgeoref(models.Model):
         return '%s' % (self.nom)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipusrecursgeoref'
         verbose_name = _('Tipus de recurs')
 
@@ -249,7 +249,7 @@ class Suport(models.Model):
         return '%s' % (self.nom)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'suport'
         verbose_name = _('Tipus de suport')
 
@@ -259,7 +259,7 @@ class Sistemareferenciamm(models.Model):
     nom = models.CharField(max_length=500)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'sistemareferenciamm'
         verbose_name = _('Sistema de referència')
 
@@ -274,7 +274,7 @@ class PrefsVisibilitatCapes(models.Model):
     prefscapesjson = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'prefs_visibilitat_capes'
         verbose_name = _('Preferències visualització capes WMS')
 
@@ -319,7 +319,7 @@ class Toponimversio(models.Model):
     centroid_calc_method = models.IntegerField(default=0)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'toponimversio'
         verbose_name = _('Versió de topònim')
 
@@ -396,7 +396,7 @@ class Paraulaclau(models.Model):
     paraula = models.CharField(max_length=500)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'paraulaclau'
         verbose_name = _('Paraula clau')
 
@@ -410,7 +410,7 @@ class ParaulaclauRecurs(models.Model):
     idrecursgeoref = models.ForeignKey('Recursgeoref', on_delete=models.CASCADE, db_column='idrecursgeoref')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'paraulaclaurecursgeoref'
         verbose_name = _('Paraules clau del recurs (relació)')
 
@@ -424,7 +424,7 @@ class Autorrecursgeoref(models.Model):
     autor = models.ForeignKey(Autor, models.CASCADE, db_column='idpersona')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'autorrecursgeoref'
         unique_together = (('autor', 'recurs'),)
         verbose_name = _('Autors del recurs (relació)')
@@ -463,7 +463,7 @@ class Capawms(models.Model):
             return cr.idrecurs
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'capawms'
         verbose_name = _('Capa WMS')
 
@@ -474,7 +474,7 @@ class Capesrecurs(models.Model):
     idrecurs = models.ForeignKey('Recursgeoref', models.CASCADE, db_column='idrecurs', blank=True, null=True, related_name='capes')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'capesrecurs'
         verbose_name = _('Capes WMS del recurs (relació)')
 
@@ -510,7 +510,7 @@ class Recursgeoref(models.Model):
     iduser = models.ForeignKey(User, models.CASCADE, blank=True, null=True, db_column='iduser')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'recursgeoref'
         verbose_name = _('Recurs de georeferenciació')
 
@@ -573,7 +573,7 @@ class Versions(models.Model):
     idversio = models.ForeignKey(Toponimversio, models.DO_NOTHING, db_column='idversio', blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'versions'
 '''
 
@@ -629,7 +629,7 @@ class Filtrejson(models.Model):
         return query
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'filtrejson'
         verbose_name = _('Filtre')
 
