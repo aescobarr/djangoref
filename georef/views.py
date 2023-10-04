@@ -86,6 +86,7 @@ from django.contrib.auth.views import login
 from django.http import Http404
 from rest_framework.exceptions import ParseError
 from django.template.loader import TemplateDoesNotExist
+from georef.sec_calculation import compute_sec
 
 import pandas as pd
 import sys
@@ -471,29 +472,71 @@ def compute_centroid(request):
                 union_geometry = GEOSGeometry( json.dumps(feature['geometry']) )
             else:
                 union_geometry = union_geometry.union( GEOSGeometry( json.dumps(feature['geometry']) ) )
-        original_centroid = union_geometry.centroid
-        centroid_on_geometry = centroid_is_in_geometry(original_centroid, union_geometry)
-        if not centroid_on_geometry:
-            corrected_centroid = closest_point_on_geometry(original_centroid, union_geometry)
-        else:
-            corrected_centroid = original_centroid
-        if corrected_centroid is not None:
-            centroid_haversine = (corrected_centroid.y, corrected_centroid.x)
-            dist_max = 0
-            vertexes = extract_coords(union_geometry.coords)
-            for vertex in vertexes:
-                vertex_haversine = (vertex.y, vertex.x)
-                dist = haversine(centroid_haversine, vertex_haversine, unit='m')
-                if dist > dist_max:
-                    dist_max = dist
-            #return dist_max
-            geom_struct = {
-                "type": "Feature",
-                "properties": {},
-                "geometry": json.loads(corrected_centroid.json)
-            }
-            content = {'status': 'OK', 'detail': {'centroid': geom_struct, 'centroid_method': 0 if centroid_on_geometry else 1,'radius': dist_max}}
-            return Response(data=content, status=200)
+        sec = compute_sec(union_geometry, max_points_polygon=10000, tolerance=500, sample_size=50, n_nearest=10)
+        # original_centroid = union_geometry.centroid
+        # centroid_on_geometry = centroid_is_in_geometry(original_centroid, union_geometry)
+        # if not centroid_on_geometry:
+        #     corrected_centroid = closest_point_on_geometry(original_centroid, union_geometry)
+        # else:
+        #     corrected_centroid = original_centroid
+        # if corrected_centroid is not None:
+        #     centroid_haversine = (corrected_centroid.y, corrected_centroid.x)
+        #     dist_max = 0
+        #     vertexes = extract_coords(union_geometry.coords)
+        #     for vertex in vertexes:
+        #         vertex_haversine = (vertex.y, vertex.x)
+        #         dist = haversine(centroid_haversine, vertex_haversine, unit='m')
+        #         if dist > dist_max:
+        #             dist_max = dist
+        #     #return dist_max
+        #     geom_struct = {
+        #         "type": "Feature",
+        #         "properties": {},
+        #         "geometry": json.loads(corrected_centroid.json)
+        #     }
+        dist_max = sec['radius']
+        geom_struct = {
+            "type": "Feature",
+            "properties": {},
+            "geometry": json.loads(sec['center_wgs84'].json)
+        }
+        content = {'status': 'OK', 'detail': {'centroid': geom_struct, 'centroid_method': 2, 'radius': dist_max, 'mbc_aeqd': json.loads(sec['mbc_aeqd'].json), 'mbc_wgs': json.loads(sec['mbc_wgs'].json)}}
+        return Response(data=content, status=200)
+    # if request.method == 'POST':
+    #     geom = request.data.get('geom')
+    #     if geom is None:
+    #         content = {'status': 'KO', 'detail': 'mandatory param missing'}
+    #         return Response(data=content, status=400)
+    #     features = json.loads(geom)
+    #     union_geometry = None
+    #     for feature in features:
+    #         if union_geometry is None:
+    #             union_geometry = GEOSGeometry( json.dumps(feature['geometry']) )
+    #         else:
+    #             union_geometry = union_geometry.union( GEOSGeometry( json.dumps(feature['geometry']) ) )
+    #     original_centroid = union_geometry.centroid
+    #     centroid_on_geometry = centroid_is_in_geometry(original_centroid, union_geometry)
+    #     if not centroid_on_geometry:
+    #         corrected_centroid = closest_point_on_geometry(original_centroid, union_geometry)
+    #     else:
+    #         corrected_centroid = original_centroid
+    #     if corrected_centroid is not None:
+    #         centroid_haversine = (corrected_centroid.y, corrected_centroid.x)
+    #         dist_max = 0
+    #         vertexes = extract_coords(union_geometry.coords)
+    #         for vertex in vertexes:
+    #             vertex_haversine = (vertex.y, vertex.x)
+    #             dist = haversine(centroid_haversine, vertex_haversine, unit='m')
+    #             if dist > dist_max:
+    #                 dist_max = dist
+    #         #return dist_max
+    #         geom_struct = {
+    #             "type": "Feature",
+    #             "properties": {},
+    #             "geometry": json.loads(corrected_centroid.json)
+    #         }
+    #         content = {'status': 'OK', 'detail': {'centroid': geom_struct, 'centroid_method': 0 if centroid_on_geometry else 1,'radius': dist_max}}
+    #         return Response(data=content, status=200)
 
 
 @api_view(['GET'])

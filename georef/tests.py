@@ -6,7 +6,7 @@ import sys
 from georef.sec_calculation import geometry_from_json, wgs_to_azimuthal_eq, get_vertex_n, \
     simplify_geometry, get_minimum_bounding_circle, point_is_in_geometry, sample_geometry, closest_vertex_on_geometry, \
     n_closest_points, closest_point_on_geometry, compute_sec, centroid_is_in_geom, multipoint_from_coordinate_list, \
-    get_best_sec, get_further_point_in_geometry, flatten
+    get_best_sec, get_further_point_in_geometry, flatten, get_aeqd_srs_from_wgs_geom, azimuthal_eq_to_wgs, get_distance_sphere
 
 test_params = {
     'simplify_threshold':  1000,
@@ -21,8 +21,9 @@ big_c_polygon = "./georef/test_files/c_polygon_1000.shp"
 spain_polygon = "./georef/test_files/spain.shp"
 line = "./georef/test_files/c_line.shp"
 multi_line = "./georef/test_files/multi_line.shp"
+triangle_polygon = "./georef/test_files/triangle_polygon.shp"
 
-all_geoms = [small_c_polygon, big_c_polygon, spain_polygon, line, multi_line]
+all_geoms = [small_c_polygon, big_c_polygon, spain_polygon, line, multi_line, triangle_polygon]
 
 geojson_single_poly = '[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[1.153564,41.996107],[1.494141,41.877605],[1.461182,41.623518],[1.148071,41.570115],[0.906372,41.758883],[0.906372,41.93484],[1.153564,41.996107]]]}}]'
 geojson_multi_poly = '[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[1.153564,41.996107],[1.494141,41.877605],[1.461182,41.623518],[1.148071,41.570115],[0.906372,41.758883],[0.906372,41.93484],[1.153564,41.996107]]]}},{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[1.763306,41.855174],[1.636963,41.932865],[1.683655,42.024746],[1.820984,42.008421],[1.829224,41.910385],[1.763306,41.855174]]]}}]'
@@ -62,7 +63,8 @@ class SECTests(TestCase):
 
     def test_reproject(self):
         single_poly_geom_wgs84 = geometry_from_json(geojson_single_poly)
-        single_poly_geom_aeqd = wgs_to_azimuthal_eq(single_poly_geom_wgs84)
+        srs_aeqd = get_aeqd_srs_from_wgs_geom(single_poly_geom_wgs84)
+        single_poly_geom_aeqd = wgs_to_azimuthal_eq(single_poly_geom_wgs84, srs_aeqd)
 
     def test_simplify(self):
         union_geometry = get_geometry_from_file(spain_polygon)
@@ -74,29 +76,63 @@ class SECTests(TestCase):
         self.assertTrue( simplified_vertices < original_n_vertices, "Simplified geometry n of vertices is equal or bigger than original vertices n ({0}>={1}".format( simplified_vertices, original_n_vertices ) )
 
     def test_compute_sec(self):
-        single_poly_geom_wgs84 = geometry_from_json(geojson_single_poly)
-        single_poly_geom_aeqd = wgs_to_azimuthal_eq(single_poly_geom_wgs84)
-        sec = get_minimum_bounding_circle( single_poly_geom_aeqd )
-        if test_params['output_print']:
-            print( "SEC center x={0}, y={1}, radius={2}".format( sec['center'].x, sec['center'].y, sec['radius'] ))
+        for file in all_geoms:
+            single_poly_geom_wgs84 = get_geometry_from_file(file)
+            srs_aeqd = get_aeqd_srs_from_wgs_geom(single_poly_geom_wgs84)
+            single_poly_geom_aeqd = wgs_to_azimuthal_eq(single_poly_geom_wgs84,srs_aeqd)
+            sec = get_minimum_bounding_circle( single_poly_geom_aeqd, srs_aeqd )
+            radius = sec['radius']
+            sec_center = sec['center']
+            sec_center_wgs = sec['center_wgs84']
+            coords = []
+            flattened_coords = flatten(single_poly_geom_aeqd.coords)
+            for point in flattened_coords:
+                coords.append(GEOSGeometry("POINT( {} {} )".format(point[0], point[1])))
+            if len(coords) <= 4: #triangle or two line vertex(perfect fit)
+                last_distance = None
+                last_distance_wgs = None
+                for c in coords:
+                    c_wgs84 = azimuthal_eq_to_wgs(c,srs_aeqd)
+                    if last_distance is None:
+                        last_distance = round(sec_center.distance(c), 6)
+                        last_distance_wgs = round(get_distance_sphere(sec_center_wgs, c_wgs84), 6)
+                    else:
+                        current_distance = round(sec_center.distance(c), 6)
+                        current_distance_wgs = round( get_distance_sphere(sec_center_wgs, c_wgs84) , 6)
+                        self.assertTrue( last_distance == current_distance, "AEQD Projection - Distance between sec center {0} and vertex {1} should be {2}, is {3} - file {4}".format( sec_center.wkt, c.wkt, last_distance, current_distance, file ) )
+                        #This does not work
+                        #self.assertTrue( last_distance_wgs == current_distance_wgs, "WGS84 Projection - Distance between sec center {0} and vertex {1} should be {2}, is {3} - file {4}".format(sec_center_wgs.wkt, c_wgs84.wkt, last_distance_wgs, current_distance_wgs, file))
+                        last_distance = current_distance
+                        last_distance_wgs = current_distance_wgs
+            else:
+                #at least two vertexes should be at distance = sec['radius']
+                num_hits = 0
+                for c in coords:
+                    current_distance = round(sec_center.distance(c), 6)
+                    rounded_radius = round(radius, 6)
+                    if current_distance == rounded_radius:
+                        num_hits += 1
+                self.assertTrue(num_hits >= 2, "AEQD Projection - Number of equidistant vertexes from sec center should be greater than {0}, is {1} for file {2}".format( 3, num_hits, file))
 
     def test_center_in_geometry(self):
         c_geometry = get_geometry_from_file(small_c_polygon)
-        sec = get_minimum_bounding_circle(c_geometry)
+        srs_aeqd = get_aeqd_srs_from_wgs_geom(c_geometry)
+        sec = get_minimum_bounding_circle(c_geometry, srs_aeqd)
         its_in_c = point_is_in_geometry( sec['center'], c_geometry )
         self.assertFalse( its_in_c, "Centroid should not be in geometry of c polygon, it is" )
 
         potato_geometry_wgs84 = geometry_from_json(geojson_potato_geometry)
-        potato_geometry_aeqd = wgs_to_azimuthal_eq(potato_geometry_wgs84)
+        potato_geometry_aeqd = wgs_to_azimuthal_eq(potato_geometry_wgs84, srs_aeqd)
 
-        sec_potato = get_minimum_bounding_circle(potato_geometry_aeqd)
+        sec_potato = get_minimum_bounding_circle(potato_geometry_aeqd, srs_aeqd)
         its_in_potato = point_is_in_geometry(sec_potato['center'], potato_geometry_aeqd)
         self.assertTrue( its_in_potato, "Centroid should be in geometry of potato polygon, it's not")
 
     def test_sample(self):
         for file in all_geoms:
             geom = get_geometry_from_file(file)
-            geom_aeqd = wgs_to_azimuthal_eq(geom)
+            srs_aeqd = get_aeqd_srs_from_wgs_geom(geom)
+            geom_aeqd = wgs_to_azimuthal_eq(geom,srs_aeqd)
             original_n_coords = get_vertex_n(geom_aeqd)
             coords_sampled = sample_geometry(geom_aeqd, original_n_coords - 1)
             self.assertTrue(len(coords_sampled) < original_n_coords,"Number of sampled coordinates {0} should be less than total coordinates {1}".format(original_n_coords - 1, len(coords_sampled)))
@@ -105,7 +141,8 @@ class SECTests(TestCase):
     def test_closest_point(self):
         for file in all_geoms:
             geom = get_geometry_from_file(file)
-            c_geom_aeqd = wgs_to_azimuthal_eq(geom)
+            srs_aeqd = get_aeqd_srs_from_wgs_geom(geom)
+            c_geom_aeqd = wgs_to_azimuthal_eq(geom,srs_aeqd)
             centroid = c_geom_aeqd.centroid
             closestpoint_by_postgis = closest_point_on_geometry(centroid, c_geom_aeqd)
             coords = []
@@ -124,7 +161,8 @@ class SECTests(TestCase):
     def test_closest_vertex(self):
         for file in all_geoms:
             c_geometry = get_geometry_from_file(file)
-            c_geom_aeqd = wgs_to_azimuthal_eq(c_geometry)
+            srs_aeqd = get_aeqd_srs_from_wgs_geom(c_geometry)
+            c_geom_aeqd = wgs_to_azimuthal_eq(c_geometry, srs_aeqd)
             centroid = c_geom_aeqd.centroid
             closestpoint_by_postgis = closest_vertex_on_geometry(centroid, c_geom_aeqd)
             coords = []
@@ -143,7 +181,8 @@ class SECTests(TestCase):
     def test_n_closest_points(self):
         for file in all_geoms:
             c_geometry = get_geometry_from_file(file)
-            c_geom_aeqd = wgs_to_azimuthal_eq(c_geometry)
+            srs_aeqd = get_aeqd_srs_from_wgs_geom(c_geometry)
+            c_geom_aeqd = wgs_to_azimuthal_eq(c_geometry, srs_aeqd)
             centroid = c_geom_aeqd.centroid
             closestpoint_by_postgis = closest_vertex_on_geometry(centroid, c_geom_aeqd)
             closest_point_in_geometry = GEOSGeometry(closestpoint_by_postgis)
@@ -173,7 +212,8 @@ class SECTests(TestCase):
     def test_compute_sec_algo(self):
         for file in all_geoms:
             geom = get_geometry_from_file(file)
-            aeqd_geometry = wgs_to_azimuthal_eq(geom)
+            srs_aeqd = get_aeqd_srs_from_wgs_geom(geom)
+            aeqd_geometry = wgs_to_azimuthal_eq(geom, srs_aeqd)
             #should not be simplified
             n = get_vertex_n(aeqd_geometry)
             if n > test_params['simplify_threshold']:
@@ -182,7 +222,7 @@ class SECTests(TestCase):
                 self.assertTrue(n_new < n, "Simplified polygon ({0} vertexes) should have less vertexes, has {1}".format(n_new, n))
             # self.assertTrue( n < test_params['simplify_threshold'], "C polygon should be under {0}, vertexes, has {1}".format( test_params['simplify_threshold'], n) )
 
-            sec = get_minimum_bounding_circle(aeqd_geometry)
+            sec = get_minimum_bounding_circle(aeqd_geometry, srs_aeqd)
             centroid = sec['center']
             centroid_is_in_geometry = centroid.intersects(aeqd_geometry)
             if not centroid_is_in_geometry:
