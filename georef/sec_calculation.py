@@ -27,7 +27,7 @@ def get_distance_sphere(point_a, point_b):
 
 
 def get_aeqd_srs_from_wgs_geom(wgs_geometry):
-    srs_aeqd = SpatialReference("+proj=aeqd +lat_0={0} +lon_0={1} +x_0=0 +y_0=0 +R=6371000 +units=m +no_defs +type=crs".format(wgs_geometry.centroid.x, wgs_geometry.centroid.y))
+    srs_aeqd = SpatialReference("+proj=aeqd +lat_0={0} +lon_0={1} +x_0=0 +y_0=0 +R=6371000 +units=m +no_defs +type=crs".format(wgs_geometry.centroid.y,wgs_geometry.centroid.x))
     return srs_aeqd
 
 
@@ -74,7 +74,7 @@ def get_minimum_bounding_circle(geometry, srs_aeqd):
         center_wgs = azimuthal_eq_to_wgs( center_aeqd, srs_aeqd )
         radius = results[1]
         sql = """
-            select st_astext(ST_MinimumBoundingCircle(ST_GeomFromText(%s)))
+            select st_astext(st_makevalid(ST_MinimumBoundingCircle(ST_GeomFromText(%s))))
         """
         cursor.execute(sql, [geometry.wkt])
         results = cursor.fetchone()

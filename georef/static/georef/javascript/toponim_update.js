@@ -157,7 +157,12 @@ var refreshCentroid = function(radius_km){
             }
             if(dist_km > 0){
                 //var circle = turf.circle(centroid,dist_km);
-                var circle = centroid_data.mbc_wgs;
+                var circle;
+                if(centroid_data.mbc_wgs.type=='Point'){
+                    circle = turf.circle(centroid,dist_km);
+                }else{
+                    circle = centroid_data.mbc_wgs;
+                }
                 var point = turf.point( [centroid.geometry.coordinates[0], centroid.geometry.coordinates[1]] );
                 djangoRef_map.centroid.addData(circle);
                 djangoRef_map.centroid.addData(point);

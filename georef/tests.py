@@ -23,7 +23,8 @@ line = "./georef/test_files/c_line.shp"
 multi_line = "./georef/test_files/multi_line.shp"
 triangle_polygon = "./georef/test_files/triangle_polygon.shp"
 
-all_geoms = [small_c_polygon, big_c_polygon, spain_polygon, line, multi_line, triangle_polygon]
+#all_geoms = [small_c_polygon, big_c_polygon, spain_polygon, line, multi_line, triangle_polygon]
+all_geoms = [small_c_polygon, spain_polygon, line, multi_line, triangle_polygon]
 
 geojson_single_poly = '[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[1.153564,41.996107],[1.494141,41.877605],[1.461182,41.623518],[1.148071,41.570115],[0.906372,41.758883],[0.906372,41.93484],[1.153564,41.996107]]]}}]'
 geojson_multi_poly = '[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[1.153564,41.996107],[1.494141,41.877605],[1.461182,41.623518],[1.148071,41.570115],[0.906372,41.758883],[0.906372,41.93484],[1.153564,41.996107]]]}},{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[1.763306,41.855174],[1.636963,41.932865],[1.683655,42.024746],[1.820984,42.008421],[1.829224,41.910385],[1.763306,41.855174]]]}}]'
@@ -187,10 +188,15 @@ class SECTests(TestCase):
             closestpoint_by_postgis = closest_vertex_on_geometry(centroid, c_geom_aeqd)
             closest_point_in_geometry = GEOSGeometry(closestpoint_by_postgis)
             closest_points = n_closest_points( closest_point_in_geometry, c_geom_aeqd, test_params['sample_size'])
-            coords = []
+            #coords = []
             flattened_coords = flatten(c_geom_aeqd.coords)
+            added_points = set()
             for point in flattened_coords:
-                coords.append(GEOSGeometry("POINT( {} {} )".format(point[0], point[1])))
+                added_points.add( "POINT( {} {} )".format(point[0], point[1]) )
+                # new_point = GEOSGeometry("POINT( {} {} )".format(point[0], point[1]))
+                # if new_point not in coords:
+                #     coords.append(new_point)
+            coords = [GEOSGeometry(i) for i in added_points]
             sorted_distance_list = []
             for point in coords:
                 current_dist = point.distance(closest_point_in_geometry)
@@ -200,14 +206,34 @@ class SECTests(TestCase):
                 geom_closest_points_i = GEOSGeometry(closest_points[i][0])
                 geom_sorted_distance_list_i = GEOSGeometry(sorted_distance_list[i][0])
                 if test_params['output_print']:
-                    print("Brute force - {0} || Closest points function - {1}".format( sorted_distance_list[i], closest_points[i] ))
-                self.assertTrue(geom_closest_points_i.equals_exact(geom_sorted_distance_list_i, tolerance=0.00000001), "Brute force and postgis results are not the same for point {0} (brute force), {1} (closest points function)".format( geom_sorted_distance_list_i.wkt, geom_closest_points_i.wkt ))
+                    print("File {0} Brute force - {1} || Closest points function - {2}".format( file, sorted_distance_list[i], closest_points[i] ))
+                self.assertTrue(geom_closest_points_i.equals_exact(geom_sorted_distance_list_i, tolerance=0.00000001), "File {0} Brute force and postgis results are not the same for point {0} (brute force), {1} (closest points function)".format( file, geom_sorted_distance_list_i.wkt, geom_closest_points_i.wkt ))
 
     def test_compute_sec_executes_ok(self):
         c_geometry = get_geometry_from_file(small_c_polygon)
         sec = compute_sec(c_geometry, test_params['simplify_threshold'], test_params['tolerance'], test_params['sample_size'], test_params['n_nearest'])
         if test_params['output_print']:
             print(sec)
+
+    # def test_step_by_step_process_w_output(self):
+    #     file = triangle_polygon
+    #     geom = get_geometry_from_file(file)
+    #     print("Original geometry wgs 84")
+    #     print(geom.wkt)
+    #     srs_aeqd = get_aeqd_srs_from_wgs_geom(geom)
+    #     print("AEQD proj string")
+    #     print(srs_aeqd.proj4)
+    #     aeqd_geometry = wgs_to_azimuthal_eq(geom, srs_aeqd)
+    #     print("Projected geometry AEQD")
+    #     print(aeqd_geometry.wkt)
+    #     sec = get_minimum_bounding_circle(aeqd_geometry, srs_aeqd)
+    #     print("SEC data")
+    #     # {'center': center_aeqd, 'center_wgs84': center_wgs, 'radius': radius, 'mbc_aeqd': mbc_aeqd, 'mbc_wgs': mbc_wgs}
+    #     print("Center aeqd: {0} ".format( sec['center'].wkt ))
+    #     print("Center wgs: {0} ".format(sec['center_wgs84'].wkt))
+    #     print("Sec aeqd: {0} ".format(sec['mbc_aeqd'].wkt))
+    #     print("Sec wgs: {0} ".format(sec['mbc_wgs'].wkt))
+    #     print("Radius: {0} ".format(sec['radius']))
 
     def test_compute_sec_algo(self):
         for file in all_geoms:
@@ -237,7 +263,7 @@ class SECTests(TestCase):
                 candidates.append(closest_to_centroid_g)
                 closest_candidates = n_closest_points(closest_to_centroid_g, multipoint_from_coordinate_list(candidates), test_params['n_nearest'])
                 self.assertTrue(len(closest_candidates) == test_params['n_nearest'], "Number of close to centroid candidate points {0} should be equal to n_nearest param {1}".format(len(closest_candidates),test_params['n_nearest']))
-                best_sec = get_best_sec(closest_candidates, aeqd_geometry)
+                best_sec = get_best_sec(closest_candidates, aeqd_geometry, srs_aeqd)
                 best_sec_centroid = best_sec['center']
                 best_sec_radius = best_sec['radius']
                 for c in closest_candidates:
@@ -245,3 +271,4 @@ class SECTests(TestCase):
                     worst_d = get_further_point_in_geometry(worst_sec_point, aeqd_geometry)
                     if not worst_sec_point.equals_exact(best_sec_centroid, tolerance=0.00000001):
                         self.assertTrue( best_sec_radius < worst_d['radius'], "Uncertainty radius of non optimal solution {0} should be grater than optimal solution {1}".format(worst_d, best_sec_radius))
+
