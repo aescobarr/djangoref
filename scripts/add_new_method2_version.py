@@ -11,13 +11,16 @@ from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
 from georef.models import Toponim
+from georef_addenda.models import GeometriaToponimVersio
 from georef.sec_calculation import *
+from datetime import date
 
 excluded_list = [
     'adiaz14249140202392592015', # Nusa Kambangan Island
     'xisabal193819556837562931529', # Ribagorza
     'mlozano5135736533235221564', # Grècia
 ]
+
 
 def main():
     toponims = Toponim.objects.all()
@@ -29,7 +32,6 @@ def main():
                 if geom is not None:
                     if geom.geom_type == 'Point':
                         pass
-                        #print("Point, nothing to do")
                     else:
                         print("{0}".format(t))
                         print("{0}, create new version".format(geom.geom_type))
@@ -39,7 +41,21 @@ def main():
                         nou_y = sec['center_wgs84'].y
                         radi = sec['radius']
                         print("Versio corregida - x=>{0} y=>{1} radi=>{2}".format(nou_x, nou_y, radi))
+                        darrera_versio.last_version = False
+                        darrera_versio.save()
+                        new_version = darrera_versio.clone()
+                        new_version.numero_versio = darrera_versio.numero_versio + 1
+                        new_version.centroid_calc_method = 2
+                        new_version.coordenada_x_centroide = nou_x
+                        new_version.coordenada_y_centroide = nou_y
+                        new_version.precisio_h = radi
+                        new_version.georefcalc_uncertainty = radi
+                        new_version.datacaptura = date.today()
+                        new_version.last_version = True
+                        new_version.save()
 
+                        gtv = GeometriaToponimVersio(idversio=new_version, geometria=geom)
+                        gtv.save()
 
 if __name__ == '__main__':
     main()

@@ -1,3 +1,5 @@
+import copy
+
 from django.db.models import Q
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
@@ -326,6 +328,43 @@ class Toponimversio(models.Model):
     def __str__(self):
         return '%s' % (self.nom)
 
+    def clone(self):
+        clone = Toponimversio()
+        clone.codi = self.codi
+        clone.nom = self.nom
+        clone.datacaptura = self.datacaptura
+        clone.coordenada_x = self.coordenada_x
+        clone.coordenada_y = self.coordenada_y
+        clone.coordenada_z = self.coordenada_z
+        clone.precisio_h = self.precisio_h
+        clone.precisio_z = self.precisio_z
+        clone.idsistemareferenciarecurs = self.idsistemareferenciarecurs
+        clone.coordenada_x_origen = self.coordenada_x_origen
+        clone.coordenada_y_origen = self.coordenada_y_origen
+        clone.coordenada_z_origen = self.coordenada_z_origen
+        clone.precisio_h_origen = self.precisio_h_origen
+        clone.precisio_z_origen = self.precisio_z_origen
+        clone.idpersona = self.idpersona
+        clone.iduser = self.iduser
+        clone.observacions = self.observacions
+        clone.idrecursgeoref = self.idrecursgeoref
+        clone.idtoponim = self.idtoponim
+        clone.numero_versio = self.numero_versio
+        clone.idqualificador = self.idqualificador
+        clone.coordenada_x_centroide = self.coordenada_x_centroide
+        clone.coordenada_y_centroide = self.coordenada_y_centroide
+        clone.last_version = self.last_version
+        clone.altitud_profunditat_minima = self.altitud_profunditat_minima
+        clone.altitud_profunditat_maxima = self.altitud_profunditat_maxima
+
+        clone.georefcalc_string = self.georefcalc_string
+        clone.georefcalc_uncertainty = self.georefcalc_uncertainty
+
+        # 0 - traditional centroid calculation method (i.e geometric centroid)
+        # 1 - centroid is asjusted following practices dictated by https://docs.gbif.org/georeferencing-best-practices/1.0/en/#paths
+        clone.centroid_calc_method = self.centroid_calc_method
+        return clone
+
     def union_geometry(self):
         geometries = self.geometries.all()
         unio_geometries = None
@@ -649,7 +688,7 @@ def update_toponim_org(sender, instance, *args, **kwargs):
         if versio.numero_versio > max:
             max = versio.numero_versio
             darrer = versio
-    if darrer is not None:
+    if darrer is not None and darrer.iduser is not None:
         darrer.idtoponim.idorganization_id = darrer.iduser.profile.organization
         darrer.idtoponim.save()
 
