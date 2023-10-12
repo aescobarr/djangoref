@@ -23,8 +23,8 @@ line = "./georef/test_files/c_line.shp"
 multi_line = "./georef/test_files/multi_line.shp"
 triangle_polygon = "./georef/test_files/triangle_polygon.shp"
 
-#all_geoms = [small_c_polygon, big_c_polygon, spain_polygon, line, multi_line, triangle_polygon]
-all_geoms = [small_c_polygon, spain_polygon, line, multi_line, triangle_polygon]
+all_geoms = [small_c_polygon, big_c_polygon, spain_polygon, line, multi_line, triangle_polygon]
+#all_geoms = [small_c_polygon, spain_polygon, line, multi_line, triangle_polygon]
 
 geojson_single_poly = '[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[1.153564,41.996107],[1.494141,41.877605],[1.461182,41.623518],[1.148071,41.570115],[0.906372,41.758883],[0.906372,41.93484],[1.153564,41.996107]]]}}]'
 geojson_multi_poly = '[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[1.153564,41.996107],[1.494141,41.877605],[1.461182,41.623518],[1.148071,41.570115],[0.906372,41.758883],[0.906372,41.93484],[1.153564,41.996107]]]}},{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[1.763306,41.855174],[1.636963,41.932865],[1.683655,42.024746],[1.820984,42.008421],[1.829224,41.910385],[1.763306,41.855174]]]}}]'

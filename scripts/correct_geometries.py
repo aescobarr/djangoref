@@ -138,21 +138,36 @@ def fix_vallibierna():
 
 def fix_grecia():
     try:
-        g = GeometriaToponimVersio.objects.filter(idversio='mlozano5135736534587091565')
-        fused = None
-        ids = []
-        for geom in g:
-            ids.append(geom.id)
-            if fused is None:
-                fused = geom.geometria
-            else:
-                fused = geom.geometria.union(fused)
-        id_0 = ids[0]
-        id_1 = ids[1]
-        GeometriaToponimVersio.objects.get(pk=id_0).delete()
-        new = GeometriaToponimVersio.objects.get(pk=id_1)
-        new.geometria = fused
-        new.save()
+        g_3769 = GeometriaToponimVersio.objects.get(pk=3769)
+        g_3770 = GeometriaToponimVersio.objects.get(pk=3770)
+        g_3771 = GeometriaToponimVersio.objects.get(pk=3771)
+        g_3769.delete()
+        g_3771.delete()
+        file = proj_path + "/scripts/files/grecia.wkt"
+        f = open(file, "r")
+        g = GEOSGeometry(f.read(), srid=4326)
+        g_3770.geometria = g
+        g_3770.save()
+    except ObjectDoesNotExist:
+        print("Nothing to do")
+
+
+def fix_ribagorza():
+    try:
+        file = proj_path + "/scripts/files/ribagorza.wkt"
+        f = open(file, "r")
+        g = GEOSGeometry(f.read(), srid=4326)
+        GeometriaToponimVersio.objects.get(pk=5059).delete()
+        modif = GeometriaToponimVersio.objects.get(pk=5058)
+        modif.geometria = g
+        modif.save()
+    except ObjectDoesNotExist:
+        print("Nothing to do")
+
+
+def fix_nusa_kambangan():
+    try:
+        GeometriaToponimVersio.objects.get(pk='1158').delete()
     except ObjectDoesNotExist:
         print("Nothing to do")
 
@@ -160,6 +175,9 @@ def fix_grecia():
 def fix_particular_cases():
     fix_aiguafreda()
     fix_vallibierna()
+    fix_grecia()
+    fix_nusa_kambangan()
+    fix_ribagorza()
 
 
 def do_fix_non_valid_geom():
@@ -212,7 +230,6 @@ def do_fix_multipoint_to_point():
                                     gtn.delete()
 
 def main():
-    fix_grecia()
     fix_particular_cases()
     for x in range(2):
         do_fix_polygon_point_issue()
@@ -223,3 +240,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

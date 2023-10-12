@@ -16,14 +16,15 @@ from georef.sec_calculation import *
 from datetime import date
 
 excluded_list = [
-    'adiaz14249140202392592015', # Nusa Kambangan Island
-    'xisabal193819556837562931529', # Ribagorza
-    'mlozano5135736533235221564', # Grècia
+    #'adiaz14249140202392592015', # Nusa Kambangan Island, idversio adiaz14249140204416192016
+    #'xisabal193819556837562931529', # Ribagorza
+    #'mlozano5135736533235221564', # Grècia, idversio mlozano5135736534587091565
 ]
 
 
 def main():
     toponims = Toponim.objects.all()
+    #toponims = Toponim.objects.filter(id='mlozano5135736533235221564')
     for t in toponims:
         if t.id not in excluded_list:
             darrera_versio = t.get_darrera_versio()
