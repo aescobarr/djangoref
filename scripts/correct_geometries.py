@@ -172,12 +172,20 @@ def fix_nusa_kambangan():
         print("Nothing to do")
 
 
+def fix_almadra():
+    try:
+        GeometriaToponimVersio.objects.get(pk=9414).delete()
+    except ObjectDoesNotExist:
+        print("Nothing to do")
+
+
 def fix_particular_cases():
     fix_aiguafreda()
     fix_vallibierna()
     fix_grecia()
     fix_nusa_kambangan()
     fix_ribagorza()
+    fix_almadra()
 
 
 def do_fix_non_valid_geom():
