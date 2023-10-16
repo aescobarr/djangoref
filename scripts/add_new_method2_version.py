@@ -34,6 +34,8 @@ def main():
                     if geom.geom_type == 'Point':
                         pass
                     else:
+                        print("")
+                        print("{0}".format(geom.geom_type))
                         print("{0}".format(t))
                         print("{0}, create new version".format(geom.geom_type))
                         sec = compute_sec(geom, max_points_polygon=10000, tolerance=500, sample_size=50, n_nearest=10)

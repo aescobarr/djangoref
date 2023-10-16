@@ -178,6 +178,34 @@ def fix_almadra():
     except ObjectDoesNotExist:
         print("Nothing to do")
 
+def fix_cami_degotalls():
+    try:
+        GeometriaToponimVersio.objects.get(pk=8781).delete()
+    except ObjectDoesNotExist:
+        print("Nothing to do")
+
+def fix_barranco_irene():
+    try:
+        GeometriaToponimVersio.objects.get(pk=4470).delete()
+    except ObjectDoesNotExist:
+        print("Nothing to do")
+
+def fix_riu_llobregat():
+    try:
+        GeometriaToponimVersio.objects.get(pk=1465).delete()
+    except ObjectDoesNotExist:
+        print("Nothing to do")
+    try:
+        GeometriaToponimVersio.objects.get(pk=1466).delete()
+    except ObjectDoesNotExist:
+        print("Nothing to do")
+
+def fix_cami_pep():
+    try:
+        GeometriaToponimVersio.objects.get(pk=8646).delete()
+    except ObjectDoesNotExist:
+        print("Nothing to do")
+
 
 def fix_particular_cases():
     fix_aiguafreda()
@@ -186,6 +214,10 @@ def fix_particular_cases():
     fix_nusa_kambangan()
     fix_ribagorza()
     fix_almadra()
+    fix_cami_degotalls()
+    fix_barranco_irene()
+    fix_riu_llobregat()
+    fix_cami_pep()
 
 
 def do_fix_non_valid_geom():
