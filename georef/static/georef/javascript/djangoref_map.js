@@ -422,7 +422,8 @@
                             dist_km = centroid_data.detail.radius / 1000;
                         }
                         if(dist_km > 0){
-                            var circle = turf.circle(centroid,dist_km);
+                            //var circle = turf.circle(centroid,dist_km);
+                            var circle = centroid_data.detail.mbc_wgs;
                             var point = turf.point( [centroid.geometry.coordinates[0], centroid.geometry.coordinates[1]] );
                             djangoRef.Map.centroid.addData(circle);
                             djangoRef.Map.centroid.addData(point);
