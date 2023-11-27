@@ -1,0 +1,11 @@
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading"><b>New in version {{ version }}</b></h4>
+    <h5 class="alert-heading"><b>Bug fixes/improvements:</b></h5>
+    <ul>
+        <li>
+            Improved algorithm for calculating the corrected centroid. The algorithm starts from the point in geometry
+            that represents the site closest to the centroid and attempts to improve it by searching around this
+            nearest point if there is a point that makes the circle of uncertainty smallest.
+        </li>
+    </ul>
+</div>

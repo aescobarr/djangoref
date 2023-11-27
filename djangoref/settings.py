@@ -198,7 +198,7 @@ JAVASCRIPT_VERSION = 112
 #Semver versioning - https://semver.org/
 MAJOR="1"
 MINOR="1"
-PATCH="2"
+PATCH="3"
 
 # Links in utilities. Each element is "title","link"
 # if title is blank, a separator is inserted
