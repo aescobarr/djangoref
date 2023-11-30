@@ -1368,12 +1368,12 @@ def toponims_update_2(request, idtoponim=None, idversio=None):
 def get_sitenames_export_filename(extension):
     today = date.today()
     str_today = today.strftime("%d/%m/%Y")
-    return 'attachment; filename="georef_sitenames_export_{0}.{1}"'.format(str_today, extension)
+    return 'attachment; filename="alibey_sitenames_export_{0}.{1}"'.format(str_today, extension)
 
 def get_carto_res_export_filename(extension):
     today = date.today()
     str_today = today.strftime("%d/%m/%Y")
-    return 'attachment; filename="georef_cartographic_resources_export_{0}.{1}"'.format(str_today, extension)
+    return 'attachment; filename="alibey_cartographic_resources_export_{0}.{1}"'.format(str_today, extension)
 
 @login_required
 def recursos_list_csv(request):
@@ -1778,7 +1778,9 @@ def recursos_update(request, id=None):
     recurs = get_object_or_404(Recursgeoref, pk=id)
     wms_url = conf.GEOSERVER_WMS_URL
     geometries_json = recursgeoref_geometries_to_geojson(recurs)
-    queryset = Toponimversio.objects.filter(idrecursgeoref=recurs).order_by('nom')
+    #queryset = Toponimversio.objects.filter(idrecursgeoref=recurs).order_by('nom')
+    versions_basades_en_recurs = Toponimversio.objects.filter(idrecursgeoref=recurs).values('idtoponim').distinct()
+    queryset = Toponim.objects.filter(id__in=versions_basades_en_recurs).order_by('nom')
     toponimsversio = queryset
     moretoponims = len(queryset) > 20
     capeswms = recurs.capes_wms_recurs.all()

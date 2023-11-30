@@ -24,7 +24,7 @@
         var autors = "{{ autors | safe }}";
         var toponims_basats_recurs = [];
         {% for toponim in toponims_basats_recurs|slice:":20" %}
-        toponims_basats_recurs.push({ 'id':'{{ toponim.idtoponim.id }}', 'nom':'{{ toponim.idtoponim.nom }}',  });
+        toponims_basats_recurs.push({ 'id':'{{ toponim.id }}', 'nom':'{{ toponim.nom }}',  });
         {% endfor %}
         var moretoponims = false;
         {% if moretoponims %}
@@ -70,7 +70,7 @@
             <table>
                 {% for toponim in toponims_basats_recurs %}
                 <tr><td>
-                    <a target="_blank" href="/toponims/update/{{ toponim.idtoponim.id }}/-1" title="{{ toponim.idtoponim.nom }}"> <span class="label label-default">{{ toponim.idtoponim.nom }}</span></a>
+                    <a target="_blank" href="/toponims/update/{{ toponim.id }}/-1" title="{{ toponim.nom }}"> <span class="label label-default">{{ toponim.nom }}</span></a>
                 </td></tr>
                 {% endfor %}
             </table>
