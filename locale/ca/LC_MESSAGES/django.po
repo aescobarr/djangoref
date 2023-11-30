@@ -1213,7 +1213,7 @@ msgstr "Entra el radi d'incertesa del punt, en metres"
 
 #: georef/templates/georef/toponim_update_2.html:210
 msgid "Radi"
-msgstr "Radius"
+msgstr "Radi"
 
 #: georef/templates/georef/toponim_update_2.html:213
 msgid "Digitalització de punt via teclat"
