@@ -6,7 +6,7 @@ import sys
 from georef.sec_calculation import geometry_from_json, wgs_to_azimuthal_eq, get_vertex_n, \
     simplify_geometry, get_minimum_bounding_circle, point_is_in_geometry, sample_geometry, closest_vertex_on_geometry, \
     n_closest_points, closest_point_on_geometry, compute_sec, centroid_is_in_geom, multipoint_from_coordinate_list, \
-    get_best_sec, get_further_point_in_geometry, flatten, get_aeqd_srs_from_wgs_geom, azimuthal_eq_to_wgs, get_distance_sphere
+    get_best_sec, get_further_point_in_geometry, flatten, get_aeqd_srs_from_wgs_geom, azimuthal_eq_to_wgs
 
 test_params = {
     'simplify_threshold':  1000,
@@ -96,15 +96,12 @@ class SECTests(TestCase):
                     c_wgs84 = azimuthal_eq_to_wgs(c,srs_aeqd)
                     if last_distance is None:
                         last_distance = round(sec_center.distance(c), 6)
-                        last_distance_wgs = round(get_distance_sphere(sec_center_wgs, c_wgs84), 6)
                     else:
                         current_distance = round(sec_center.distance(c), 6)
-                        current_distance_wgs = round( get_distance_sphere(sec_center_wgs, c_wgs84) , 6)
                         self.assertTrue( last_distance == current_distance, "AEQD Projection - Distance between sec center {0} and vertex {1} should be {2}, is {3} - file {4}".format( sec_center.wkt, c.wkt, last_distance, current_distance, file ) )
                         #This does not work
                         #self.assertTrue( last_distance_wgs == current_distance_wgs, "WGS84 Projection - Distance between sec center {0} and vertex {1} should be {2}, is {3} - file {4}".format(sec_center_wgs.wkt, c_wgs84.wkt, last_distance_wgs, current_distance_wgs, file))
                         last_distance = current_distance
-                        last_distance_wgs = current_distance_wgs
             else:
                 #at least two vertexes should be at distance = sec['radius']
                 num_hits = 0

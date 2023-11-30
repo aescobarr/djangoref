@@ -4,6 +4,8 @@ from django.contrib.gis.gdal import SpatialReference, CoordTransform
 from django.db import connection
 import random
 import sys
+import geopandas as gpd
+import shapely
 
 # params = {
 #     'simplify_threshold':  10000,
@@ -14,17 +16,6 @@ import sys
 
 def get_vertex_n(geometry):
     return geometry.num_coords
-
-
-def get_distance_sphere(point_a, point_b):
-    with connection.cursor() as cursor:
-        sql = """
-            select st_distancesphere(st_geomfromtext(%s),st_geomfromtext(%s))
-        """
-        cursor.execute(sql, [point_a.wkt, point_b.wkt])
-        results = cursor.fetchone()
-        return results[0]
-
 
 def get_aeqd_srs_from_wgs_geom(wgs_geometry):
     srs_aeqd = SpatialReference("+proj=aeqd +lat_0={0} +lon_0={1} +x_0=0 +y_0=0 +R=6371000 +units=m +no_defs +type=crs".format(wgs_geometry.centroid.y,wgs_geometry.centroid.x))
@@ -64,23 +55,26 @@ def simplify_geometry(geometry, tolerance):
 
 
 def get_minimum_bounding_circle(geometry, srs_aeqd):
-    with connection.cursor() as cursor:
-        sql = """
-            select st_astext(center), radius from ST_MinimumBoundingRadius(%s)
-        """
-        cursor.execute(sql,[ geometry.wkt ])
-        results = cursor.fetchone()
-        center_aeqd = GEOSGeometry(results[0])
-        center_wgs = azimuthal_eq_to_wgs( center_aeqd, srs_aeqd )
-        radius = results[1]
-        sql = """
-            select st_astext(st_makevalid(ST_MinimumBoundingCircle(ST_GeomFromText(%s))))
-        """
-        cursor.execute(sql, [geometry.wkt])
-        results = cursor.fetchone()
-        mbc_aeqd = GEOSGeometry(results[0])
-        mbc_wgs = azimuthal_eq_to_wgs( mbc_aeqd, srs_aeqd )
-        return { 'center': center_aeqd, 'center_wgs84': center_wgs, 'radius': radius, 'mbc_aeqd': mbc_aeqd, 'mbc_wgs': mbc_wgs }
+    location_aeqd = gpd.GeoSeries(shapely.wkt.loads(geometry.wkt))
+    sec = location_aeqd.geometry.minimum_bounding_circle()
+    print(sec)
+    # with connection.cursor() as cursor:
+    #     sql = """
+    #         select st_astext(center), radius from ST_MinimumBoundingRadius(%s)
+    #     """
+    #     cursor.execute(sql,[ geometry.wkt ])
+    #     results = cursor.fetchone()
+    #     center_aeqd = GEOSGeometry(results[0])
+    #     center_wgs = azimuthal_eq_to_wgs( center_aeqd, srs_aeqd )
+    #     radius = results[1]
+    #     sql = """
+    #         select st_astext(st_makevalid(ST_MinimumBoundingCircle(ST_GeomFromText(%s))))
+    #     """
+    #     cursor.execute(sql, [geometry.wkt])
+    #     results = cursor.fetchone()
+    #     mbc_aeqd = GEOSGeometry(results[0])
+    #     mbc_wgs = azimuthal_eq_to_wgs( mbc_aeqd, srs_aeqd )
+    #     return { 'center': center_aeqd, 'center_wgs84': center_wgs, 'radius': radius, 'mbc_aeqd': mbc_aeqd, 'mbc_wgs': mbc_wgs }
 
 
 def point_is_in_geometry(point, geometry):
