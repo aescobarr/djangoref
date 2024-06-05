@@ -38,22 +38,15 @@ LOCALE_PATHS = (
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# OVERRIDEN IN SETTINGS_LOCAL
-SECRET_KEY = 'gx%(-$i!e@y9o-xa^=962t*f-ngn-!u+zf)m-$icedw8pzb@&s'
+SECRET_KEY = os.environ.get("SECRET_KEY","secret!")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# OVERRIDEN IN SETTINGS_LOCAL
-DEBUG = True
+DEBUG=int(os.environ.get("DEBUG", default=0))
 
-# OVERRIDEN IN SETTINGS_LOCAL
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS=os.environ.get("DJANGO_ALLOWED_HOSTS","*").split(" ")
 
 # Application definition
-
 INSTALLED_APPS = [
-    #'material',
-    #'material.admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,19 +132,19 @@ USE_TZ = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': os.environ.get("SQL_ENGINE", 'django.contrib.gis.db.backends.postgis'),
+        'NAME': os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "postgres")),
+        'USER': os.environ.get("SQL_USER", "postgres"),
+        'PASSWORD': os.environ.get("SQL_PASSWORD", ""),
+        'HOST': os.environ.get("SQL_HOST", "db"),
+        'PORT': os.environ.get("SQL_PORT", "5432")
     }
 }
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# OVERRIDEN IN SETTINGS_LOCAL
-STATIC_ROOT = '/home/webuser/dev/django/djangoref/static/'
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -183,33 +176,32 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 25
 }
 
-# OVERRIDEN IN SETTINGS_LOCAL
-UPLOAD_DIR = BASE_DIR + "/uploads"
-MEDIA_ROOT = UPLOAD_DIR
+# PATHS
 MEDIA_URL = "/media/"
+UPLOAD_DIR = BASE_DIR + "/uploads"
+LOCAL_DATAFILE_ROOT_DIRECTORY = 'helpfile_uploads'
+MEDIA_ROOT = UPLOAD_DIR
+STATIC_ROOT = '/public_html/djangoref/static/'
 
-from djangoref.settings_local import *
+#GEOSERVER STUFF
+#DO NOT CHANGE THIS VALUE!
+GEOSERVER_WORKSPACE = 'mzoologia'
+GEOSERVER_USER = os.environ.get("GEOSERVER_ADMIN_USER", 'admin')
+GEOSERVER_PASSWORD = os.environ.get("GEOSERVER_ADMIN_PASSWORD", 'geoserver')
+GEOSERVER_BASE_URL = 'http://127.0.0.1:8080/'
+GEOSERVER_WMS_URL_CLEAN = GEOSERVER_BASE_URL + 'geoserver/wms/'
+GEOSERVER_REST_URL = GEOSERVER_BASE_URL + 'geoserver/rest/'
+GEOSERVER_WMS_URL = GEOSERVER_BASE_URL + 'geoserver/' + GEOSERVER_WORKSPACE + "/wms/?"
+
+# bing developer account a.escobar@creaf.uab.cat
+BING_MAPS_API_KEY = os.environ.get("BING_MAPS_API_KEY", "")
 
 #5MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
-JAVASCRIPT_VERSION = 112
+JAVASCRIPT_VERSION = 1
 
 #Semver versioning - https://semver.org/
 MAJOR="1"
 MINOR="1"
 PATCH="3"
-
-# Links in utilities. Each element is "title","link"
-# if title is blank, a separator is inserted
-# CUSTOM_TOOL_LINKS = (
-#     (_("Anar a google"), "https://www.google.es"),
-#     (_("Anar a ICC"), "http://www.icgc.cat/"),
-#     ("", ""),
-#     (_("Conversió de coordenades - Convertbox"), "http://betaportal.icgc.cat/convertbox/#"),
-#     (_("Conversió de coordenades - Earth Point: Convert coordinates"), "http://www.earthpoint.us/Convert.aspx"),
-#     ("", ""),
-#     (_("Georeferenciació - Geolocate"), "http://www.geo-locate.org/web/WebGeoref.aspx"),
-#     (_("Georeferenciació - Georeferencing calculator"), "https://www.gbif.org/tool/81315/georeferencing-calculator"),
-#     (_("Georeferenciació - Berkeley Mapper"), "http://berkeleymapper.berkeley.edu/#"),
-# )
