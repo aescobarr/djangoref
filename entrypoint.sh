@@ -9,8 +9,10 @@ done
 echo "PostgreSQL started"
 
 echo "Collecting static resources"
+python3.6 manage.py migrate
 python3.6 manage.py collectstatic --noinput
-#echo "Creating django users"
-python3.6 createusers.py
+# echo "Creating django users"
+# python3.6 createusers.py
 
 exec "$@"
+
