@@ -8,7 +8,7 @@ from georef.serializers import ToponimSerializer, FiltrejsonSerializer, Recursge
     QualificadorversioSerializer, PaisSerializer, TipusrecursgeorefSerializer, SuportSerializer, TipusToponimSerializer, \
     TipusunitatsSerializer, SistemareferenciammSerializer, OrganizationSerializer, MenuItemSerializer
 from georef.models import Toponim, Filtrejson, Recursgeoref, Paraulaclau, Autorrecursgeoref, Tipusunitats
-from georef_addenda.models import Profile, Autor, GeometriaRecurs, GeometriaToponimVersio, HelpFile, Organization, MenuItem
+from georef_addenda.models import Profile, Autor, GeometriaRecurs, GeometriaToponimVersio, HelpFile, Organization, MenuItem, LookupDescription
 from georef_addenda.forms import HelpfileForm
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -37,7 +37,7 @@ from django import forms
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from georef.forms import ToponimsUpdateForm, ToponimversioForm, ProfileForm, UserForm, ChangePasswordForm, NewUserForm, \
-    RecursForm, NewUserProfileForm
+    RecursForm, NewUserProfileForm, LookupDescriptionForm
 from django.forms import formset_factory
 from django.db import IntegrityError, transaction
 from georef.tasks import compute_denormalized_toponim_tree_val, format_denormalized_toponimtree, \
@@ -2548,6 +2548,7 @@ def wmslocal_create(request):
 
 @login_required
 def t_organizations(request):
+    description = get_lookup_description(request.LANGUAGE_CODE,'georef_addenda.Organization')
     context = {
         'text_field_name': 'name',
         'column_name': _('Nom organització'),
@@ -2555,13 +2556,16 @@ def t_organizations(request):
         'crud_url': reverse('organizations-list'),
         'list_url': reverse('organizations_datatable_list'),
         'instance_label': 't_organizations',
-        'class_full_qualified_name': 'georef_addenda.Organization'
+        'class_full_qualified_name': 'georef_addenda.Organization',
+        'description': description.description if description else None,
+        'description_id': description.id if description else None
     }
     return render(request, 'georef/t_generic.html', context)
 
 
 @login_required
 def t_authors(request):
+    description = get_lookup_description(request.LANGUAGE_CODE, 'georef_addenda.Autor')
     context = {
         'text_field_name' : 'nom',
         'column_name': _('Nom autor'),
@@ -2569,13 +2573,16 @@ def t_authors(request):
         'crud_url': reverse('autors-list'),
         'list_url': reverse('autors_datatable_list'),
         'instance_label': 't_autors',
-        #'class_full_qualified_name': 'georef_addenda.Autor'
+        'description': description.description if description else None,
+        'description_id': description.id if description else None,
+        'class_full_qualified_name': 'georef_addenda.Autor'
     }
     return render(request, 'georef/t_generic.html', context)
 
 
 @login_required
 def t_qualificadors(request):
+    description = get_lookup_description(request.LANGUAGE_CODE,'georef.Qualificadorversio')
     context = {
         'text_field_name' : 'qualificador',
         'column_name': _('Nom qualificador'),
@@ -2583,13 +2590,16 @@ def t_qualificadors(request):
         'crud_url': reverse('qualificadorsversio-list'),
         'list_url': reverse('qualificadors_datatable_list'),
         'instance_label': 't_qualificadors',
-        'class_full_qualified_name': 'georef.Qualificadorversio'
+        'class_full_qualified_name': 'georef.Qualificadorversio',
+        'description': description.description if description else None,
+        'description_id': description.id if description else None
     }
     return render(request, 'georef/t_generic.html', context)
 
 
 @login_required
 def t_paisos(request):
+    description = get_lookup_description(request.LANGUAGE_CODE,'georef.Pais')
     context = {
         'text_field_name' : 'nom',
         'column_name': _('Nom país'),
@@ -2597,13 +2607,16 @@ def t_paisos(request):
         'crud_url': reverse('paisos-list'),
         'list_url': reverse('paisos_datatable_list'),
         'instance_label': 't_paisos',
-        'class_full_qualified_name': 'georef.Pais'
+        'class_full_qualified_name': 'georef.Pais',
+        'description': description.description if description else None,
+        'description_id': description.id if description else None
     }
     return render(request, 'georef/t_generic.html', context)
 
 
 @login_required
 def t_paraulesclau(request):
+    description = get_lookup_description(request.LANGUAGE_CODE,'georef.Paraulaclau')
     context = {
         'text_field_name' : 'paraula',
         'column_name': _('Paraula clau'),
@@ -2611,13 +2624,16 @@ def t_paraulesclau(request):
         'crud_url': reverse('paraulesclau-list'),
         'list_url': reverse('paraulaclau_datatable_list'),
         'instance_label': 't_paraulesclau',
-        #'class_full_qualified_name': 'georef.Paraulaclau'
+        'description': description.description if description else None,
+        'description_id': description.id if description else None,
+        'class_full_qualified_name': 'georef.Paraulaclau'
     }
     return render(request, 'georef/t_generic.html', context)
 
 
 @login_required
 def t_tipuscontingut(request):
+    description = get_lookup_description(request.LANGUAGE_CODE,'georef.Tipusrecursgeoref')
     context = {
         'text_field_name' : 'nom',
         'column_name': _('Tipus de contingut'),
@@ -2625,13 +2641,16 @@ def t_tipuscontingut(request):
         'crud_url': reverse('tipusrecurs-list'),
         'list_url': reverse('tipusrecurs_datatable_list'),
         'instance_label': 't_tipuscontingut',
-        'class_full_qualified_name': 'georef.Tipusrecursgeoref'
+        'class_full_qualified_name': 'georef.Tipusrecursgeoref',
+        'description': description.description if description else None,
+        'description_id': description.id if description else None
     }
     return render(request, 'georef/t_generic.html', context)
 
 
 @login_required
 def t_tipussuport(request):
+    description = get_lookup_description(request.LANGUAGE_CODE,'georef.Suport')
     context = {
         'text_field_name' : 'nom',
         'column_name': _('Tipus de suport'),
@@ -2639,13 +2658,16 @@ def t_tipussuport(request):
         'crud_url': reverse('tipussuport-list'),
         'list_url': reverse('suport_datatable_list'),
         'instance_label': 't_tipussuport',
-        'class_full_qualified_name': 'georef.Suport'
+        'class_full_qualified_name': 'georef.Suport',
+        'description': description.description if description else None,
+        'description_id': description.id if description else None
     }
     return render(request, 'georef/t_generic.html', context)
 
 
 @login_required
 def t_tipustoponim(request):
+    description = get_lookup_description(request.LANGUAGE_CODE,'georef.Tipustoponim')
     context = {
         'text_field_name' : 'nom',
         'column_name': _('Tipus de topònim'),
@@ -2653,7 +2675,9 @@ def t_tipustoponim(request):
         'crud_url': reverse('tipustoponim-list'),
         'list_url': reverse('tipustoponim_datatable_list'),
         'instance_label': 't_tipustoponim',
-        'class_full_qualified_name': 'georef.Tipustoponim'
+        'class_full_qualified_name': 'georef.Tipustoponim',
+        'description': description.description if description else None,
+        'description_id': description.id if description else None
     }
     return render(request, 'georef/t_generic.html', context)
 
@@ -2676,6 +2700,33 @@ def create_dependencies_report(accumulated_data, to_delete, depth):
             #accumulated_data.append( '<strong>' + elem.__class__.__name__ + '</strong> ' + str(elem) )
             accumulated_data.append('<strong>' + str(elem._meta.verbose_name) + '</strong> ' + str(elem))
             accumulated_data.append('</li>')
+
+
+def t_description_new(request):
+    if request.method == 'POST':
+        form = LookupDescriptionForm(request.POST)
+        lookup = form.save(commit=False)
+        lookup.model_fully_qualified_name = request.GET['model']
+        lookup.model_label = request.GET['label']
+        lookup.locale = request.LANGUAGE_CODE
+        lookup.save()
+        return HttpResponseRedirect(request.GET['next'])
+    else:
+        form = LookupDescriptionForm()
+
+    return render(request, 'georef/t_description_edit.html', {'form': form })
+
+def t_description_edit(request, id=None):
+    lookupdescription = get_object_or_404(LookupDescription, pk=id)
+    if request.method == 'POST':
+        form = LookupDescriptionForm(request.POST, instance=lookupdescription)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.GET['next'])
+    else:
+        form = LookupDescriptionForm(instance=lookupdescription)
+    return render(request, 'georef/t_description_edit.html', {'form': form, 'description': lookupdescription})
+
 
 
 @api_view(['GET'])
@@ -2704,9 +2755,17 @@ def t_checkdelete(request):
             content = {'status': 'KO', 'detail': 'model not found'}
             return Response(data=content, status=400)
 
+def get_lookup_description(locale,model_fully_qualified_name):
+    l = None
+    try:
+        l = LookupDescription.objects.get(model_fully_qualified_name=model_fully_qualified_name, locale=locale)
+    except LookupDescription.DoesNotExist:
+        return None
+    return l
 
 @login_required
 def t_tipusunitats(request):
+    description = get_lookup_description(request.LANGUAGE_CODE,'georef.Tipusunitats')
     context = {
         'text_field_name' : 'tipusunitat',
         'column_name': _("Tipus d'unitats"),
@@ -2714,6 +2773,9 @@ def t_tipusunitats(request):
         'crud_url': reverse('tipusunitats-list'),
         'list_url': reverse('tipusunitats_datatable_list'),
         'instance_label': 't_tipusunitats',
-        'class_full_qualified_name': 'georef.Tipusunitats'
+        'class_full_qualified_name': 'georef.Tipusunitats',
+        'description': description.description if description else None,
+        'description': description.description if description else None,
+        'description_id': description.id if description else None
     }
     return render(request, 'georef/t_generic.html', context)

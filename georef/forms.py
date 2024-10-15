@@ -4,7 +4,7 @@ from georef.models import *
 from django.forms import ModelForm
 from django.forms import inlineformset_factory
 from datetimewidget.widgets import DateWidget
-from georef_addenda.models import Profile
+from georef_addenda.models import Profile, LookupDescription
 from djangoref import settings
 from georef.cyclic import check_if_cyclic
 
@@ -164,6 +164,18 @@ class ProfileForm(forms.ModelForm):
         fields = ('toponim_permission', 'permission_tesaure_edition', 'permission_administrative', 'permission_filter_edition', 'permission_toponim_edition', 'permission_recurs_edition', 'organization')
         widgets = {
             'toponim_permission': forms.HiddenInput(),
+        }
+
+
+class LookupDescriptionForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}), required=True)
+    class Meta:
+        model = LookupDescription
+        fields = '__all__'
+        widgets = {
+            'model_fully_qualified_name': forms.HiddenInput(),
+            'model_label': forms.HiddenInput(),
+            'locale': forms.HiddenInput(),
         }
 
 

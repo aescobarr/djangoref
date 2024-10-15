@@ -130,3 +130,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+
+class LookupDescription(models.Model):
+    model_fully_qualified_name = models.CharField(help_text="The name of the model, in form [package].[name]", max_length=300, default=None)
+    model_label = models.CharField(help_text="The label of the lookup. This should be the same as the unstranslated string used for showing the name anywhere in the ui", max_length=200, default=None)
+    locale = models.CharField(help_text="Language of the description", max_length=10)
+    description = models.TextField(null=True)

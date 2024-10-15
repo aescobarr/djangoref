@@ -92,6 +92,8 @@ urlpatterns = [
     url(r'^thesaurus/tipustoponim/$', views.t_tipustoponim, name='t_tipustoponim'),
     url(r'^thesaurus/tipusunitats/$', views.t_tipusunitats, name='t_tipusunitats'),
     url(r'^thesaurus/checkdelete/$', views.t_checkdelete, name='t_checkdelete'),
+    url(r'^thesaurus/description/edit/(?P<id>[0-9]+)/$', views.t_description_edit, name='t_description_edit'),
+    url(r'^thesaurus/description/new/$', views.t_description_new, name='t_description_new'),
 
     url(r'^users/list/$', views.users_list, name='users_list'),
 

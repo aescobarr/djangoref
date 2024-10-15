@@ -1,0 +1,33 @@
+{% extends "georef/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% block extrahead %}
+{% endblock %}
+{% block main %}
+<main>
+    <div class="page-header">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans 'Inici' %}</a></li>
+                <li class="breadcrumb-item">{% trans 'Tesaures' %}</li>
+                <li class="breadcrumb-item active"></li>
+            </ol>
+        </div>
+    </div>
+    <div class="container separador_seccio">
+        <form action="{{ request.get_full_path }}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <div class="row">
+                <div class="col-xs-4">
+                    <input role="button" class="btn btn-success" type="submit" value="Save" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+</main>
+{% endblock %}
+{% block extra_js %}
+
+{% endblock %}
