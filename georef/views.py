@@ -37,7 +37,7 @@ from django import forms
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from georef.forms import ToponimsUpdateForm, ToponimversioForm, ProfileForm, UserForm, ChangePasswordForm, NewUserForm, \
-    RecursForm, NewUserProfileForm, LookupDescriptionForm
+    RecursForm, NewUserProfileForm, LookupDescriptionForm, AddLookupDescriptionForm
 from django.forms import formset_factory
 from django.db import IntegrityError, transaction
 from georef.tasks import compute_denormalized_toponim_tree_val, format_denormalized_toponimtree, \
@@ -2704,15 +2704,16 @@ def create_dependencies_report(accumulated_data, to_delete, depth):
 
 def t_description_new(request):
     if request.method == 'POST':
-        form = LookupDescriptionForm(request.POST)
-        lookup = form.save(commit=False)
-        lookup.model_fully_qualified_name = request.GET['model']
-        lookup.model_label = request.GET['label']
-        lookup.locale = request.LANGUAGE_CODE
-        lookup.save()
-        return HttpResponseRedirect(request.GET['next'])
+        form = AddLookupDescriptionForm(request.POST)
+        if form.is_valid():
+            lookup = form.save(commit=False)
+            lookup.model_fully_qualified_name = request.GET['model']
+            lookup.model_label = request.GET['label']
+            lookup.locale = request.LANGUAGE_CODE
+            lookup.save()
+            return HttpResponseRedirect(request.GET['next'])
     else:
-        form = LookupDescriptionForm()
+        form = AddLookupDescriptionForm()
 
     return render(request, 'georef/t_description_edit.html', {'form': form })
 

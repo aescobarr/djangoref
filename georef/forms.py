@@ -167,6 +167,13 @@ class ProfileForm(forms.ModelForm):
         }
 
 
+class AddLookupDescriptionForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}), required=True)
+    class Meta:
+        model = LookupDescription
+        fields = ('description',)
+
+
 class LookupDescriptionForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}), required=True)
     class Meta:
