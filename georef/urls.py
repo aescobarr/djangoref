@@ -98,6 +98,7 @@ urlpatterns = [
     url(r'^users/list/$', views.users_list, name='users_list'),
 
     url(r'^graphs$', views.graphs, name='graphs'),
+    url(r'^check_site_name/$', views.check_site_name, name='check_site_name'),
     url(r'^toponimstree$', views.toponimstree, name='toponimstree'),
     url(r'^toponim_node_search$', views.toponim_node_search, name='toponimnodesearch'),
     url(r'^calculcentroides', views.calculcentroides, name='calculcentroides'),

@@ -157,4 +157,94 @@ $(document).ready(function() {
             return false;
         }
     });
+
+    function reset_similar_list(){
+        $('#similar_list').empty();
+    }
+
+    function single_similar_item_template(item){
+        return `
+            <li><a target="_blank" href="/toponims/update/${ item.toponim_id }/-1/">${ item.nom }</a></li>
+        `
+    }
+
+    function init_single_items(data){
+        reset_similar_list();
+        const root = $('#similar_list');
+        for(var i = 0; i < data.length; i++){
+            root.append(single_similar_item_template(data[i]));
+        }
+    }
+
+    function check_name(name){
+        $.ajax({
+            url: _ajax_check_name + "?q=" +  encodeURIComponent(name),
+            type: "GET",
+            headers: { "X-CSRFToken": csrf_token },
+            dataType: "json",
+            success: function(data) {
+                if(data.length==0){
+                    $('#site_form').submit();
+                }else{
+                    init_single_items(data);
+                    $( "#dialog-confirm" ).dialog({
+                      resizable: false,
+                      height: "auto",
+                      width: 400,
+                      modal: true,
+                      buttons: [
+                        {
+                            text: gettext("Sí, crear topònim"),
+                            click: function(){
+                                $( this ).dialog( "close" );
+                                $('#site_form').submit();
+                            }
+                        },
+                        {
+                            text: gettext("Cancel·lar"),
+                            click: function(){
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                      ]
+                      /*buttons: {
+                        yes_create_label: function() {
+                          $( this ).dialog( "close" );
+                          $('#site_form').submit();
+                        },
+                        Cancel: function() {
+                          $( this ).dialog( "close" );
+                        }
+                      }*/
+                    });
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                //alert(jqXHR.responseJSON.message);
+            },
+            cache: false
+        });
+    }
+
+    $('#create_site').on('click',function(e){
+        e.preventDefault();
+        check_name($('#id_nom').val());
+        /*
+        $( "#dialog-confirm" ).dialog({
+          resizable: false,
+          height: "auto",
+          width: 400,
+          modal: true,
+          buttons: {
+            "Delete all items": function() {
+              $( this ).dialog( "close" );
+              $('#site_form').submit();
+            },
+            Cancel: function() {
+              $( this ).dialog( "close" );
+            }
+          }
+        });
+        */
+    });
 });

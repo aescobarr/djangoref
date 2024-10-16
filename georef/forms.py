@@ -65,7 +65,6 @@ class ToponimsUpdateForm(ModelForm):
             raise forms.ValidationError('Aquest pare forma un cicle, operació no permesa')
 
 
-
 class ToponimversioForm(ModelForm):
     numero_versio = forms.IntegerField(required=True)
     idqualificador = forms.ModelChoiceField(queryset=Qualificadorversio.objects.all().order_by('qualificador'), widget=forms.Select, required=False)
