@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-16 16:53+0200\n"
+"POT-Creation-Date: 2024-10-17 10:53+0200\n"
 "PO-Revision-Date: 2019-11-18 09:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,12 +25,12 @@ msgstr "Catalan"
 msgid "English"
 msgstr "English"
 
-#: georef/models.py:47 georef/views.py:2692 georef/views.py:2693
+#: georef/models.py:47 georef/views.py:2690 georef/views.py:2691
 msgid "Tipus de topònim"
 msgstr "Site name type"
 
 #: georef/models.py:60 georef/templates/georef/toponims_list.html:190
-#: georef/views.py:2625
+#: georef/views.py:2623
 msgid "País"
 msgstr "Country"
 
@@ -73,8 +73,8 @@ msgid "Tipus de recurs"
 msgstr "Resource type"
 
 #: georef/models.py:256 georef/templates/georef/_recursos_fields.html:144
-#: georef/templates/georef/base.html:81 georef/views.py:2675
-#: georef/views.py:2676
+#: georef/templates/georef/base.html:81 georef/views.py:2673
+#: georef/views.py:2674
 msgid "Tipus de suport"
 msgstr "Support type"
 
@@ -94,7 +94,7 @@ msgid "Versió de topònim"
 msgstr "Site name version"
 
 #: georef/models.py:440 georef/templates/georef/recursos_list.html:172
-#: georef/views.py:2641 georef/views.py:2642
+#: georef/views.py:2639 georef/views.py:2640
 msgid "Paraula clau"
 msgstr "Keyword"
 
@@ -203,7 +203,7 @@ msgstr "Basic data"
 #: georef/templates/georef/toponim_update_2.html:105
 #: georef/templates/georef/toponims_list.html:187
 #: georef/templates/georef/user_base.html:50
-#: georef/templates/georef/user_new.html:48 georef/views.py:1489
+#: georef/templates/georef/user_new.html:48 georef/views.py:1487
 msgid "Nom"
 msgstr "Name"
 
@@ -213,8 +213,8 @@ msgid "Acrònim"
 msgstr "Acronym"
 
 #: georef/templates/georef/_recursos_fields.html:39
-#: georef/templates/georef/base.html:80 georef/views.py:2658
-#: georef/views.py:2659
+#: georef/templates/georef/base.html:80 georef/views.py:2656
+#: georef/views.py:2657
 msgid "Tipus de contingut"
 msgstr "Content type"
 
@@ -906,7 +906,7 @@ msgstr "User data"
 
 #: georef/templates/georef/profile.html:42
 #: georef/templates/georef/user_base.html:88
-#: georef/templates/georef/user_new.html:86 georef/views.py:2574
+#: georef/templates/georef/user_new.html:86 georef/views.py:2572
 #: georef_addenda/models.py:37
 msgid "Organització"
 msgstr "Organization"
@@ -1062,7 +1062,7 @@ msgstr "Click here to access the Cartographic Resource creation form"
 #: georef/templates/georef/recursos_list.html:173
 #: georef/templates/georef/toponim_create.html:60
 #: georef/templates/georef/toponim_update_2.html:110
-#: georef/templates/georef/toponims_list.html:189 georef/views.py:1489
+#: georef/templates/georef/toponims_list.html:189 georef/views.py:1487
 msgid "Tipus"
 msgstr "Type"
 
@@ -1126,6 +1126,14 @@ msgstr "Attention, are you sure you want to create the site?"
 #: georef/templates/georef/toponim_create.html:93
 msgid "Els següents topònims tenen un nom similar:"
 msgstr "The following sites have a similar name:"
+
+#: georef/templates/georef/toponim_create.html:99
+msgid "Hi ha errors al formulari"
+msgstr "There are errors in the form"
+
+#: georef/templates/georef/toponim_create.html:101
+msgid "Si us plau, corregeix el següent:"
+msgstr "Please, correct the following:"
 
 #: georef/templates/georef/toponim_search.html:20
 msgid "Cerca topònims"
@@ -1198,7 +1206,7 @@ msgid "Data"
 msgstr "Date"
 
 #: georef/templates/georef/toponim_update_2.html:156
-#: georef/templates/georef/toponims_list.html:188 georef/views.py:2591
+#: georef/templates/georef/toponims_list.html:188 georef/views.py:2589
 #: georef_addenda/models.py:84
 msgid "Autor"
 msgstr "Author"
@@ -1263,7 +1271,7 @@ msgstr ""
 msgid "Número versió"
 msgstr "Number"
 
-#: georef/templates/georef/toponim_update_2.html:242 georef/views.py:2608
+#: georef/templates/georef/toponim_update_2.html:242 georef/views.py:2606
 msgid "Qualificador versió"
 msgstr "Qualifier"
 
@@ -1492,79 +1500,79 @@ msgstr "Password(repeat)"
 msgid "Tots els topònims"
 msgstr "All site names"
 
-#: georef/views.py:1147 georef/views.py:1864
+#: georef/views.py:1147 georef/views.py:1862
 msgid "Recurs desat amb èxit!"
 msgstr "Resource successfully saved!"
 
-#: georef/views.py:1489
+#: georef/views.py:1487
 msgid "Aquàtic?"
 msgstr "On water?"
 
-#: georef/views.py:1489
+#: georef/views.py:1487
 msgid "Coordenada x centroide"
 msgstr "X coordinate of centroid"
 
-#: georef/views.py:1489
+#: georef/views.py:1487
 msgid "Coordenada y centroide"
 msgstr "Y coordinate of centroid"
 
-#: georef/views.py:1489
+#: georef/views.py:1487
 msgid "Precisio (m)"
 msgstr "Precision (m)"
 
-#: georef/views.py:1489
+#: georef/views.py:1487
 msgid "Incertesa calculadora georeferenciació"
 msgstr "Georeferencing calculator uncertainty (m)"
 
-#: georef/views.py:1658
+#: georef/views.py:1656
 msgid "nom_toponim"
 msgstr ""
 
-#: georef/views.py:1658
+#: georef/views.py:1656
 msgid "aquatic?"
 msgstr ""
 
-#: georef/views.py:1658
+#: georef/views.py:1656
 msgid "tipus_toponim"
 msgstr "site_type"
 
-#: georef/views.py:1658
+#: georef/views.py:1656
 msgid "centroide_x"
 msgstr "centroid_x"
 
-#: georef/views.py:1658
+#: georef/views.py:1656
 msgid "centroide_y"
 msgstr "centroid_y"
 
-#: georef/views.py:1658
+#: georef/views.py:1656
 msgid "incertesa_m"
 msgstr "uncertainty_m"
 
-#: georef/views.py:1658
+#: georef/views.py:1656
 msgid "incertesa_calc_georef"
 msgstr "georeferencing_calculator_uncertainty_m"
 
-#: georef/views.py:1901
+#: georef/views.py:1899
 msgid "Cal posar un títol i un enllaç"
 msgstr "Title and link are mandatory"
 
-#: georef/views.py:2573
+#: georef/views.py:2571
 msgid "Nom organització"
 msgstr "Organization name"
 
-#: georef/views.py:2590
+#: georef/views.py:2588
 msgid "Nom autor"
 msgstr "Author name"
 
-#: georef/views.py:2607
+#: georef/views.py:2605
 msgid "Nom qualificador"
 msgstr "Qualifier name"
 
-#: georef/views.py:2624
+#: georef/views.py:2622
 msgid "Nom país"
 msgstr "Country name"
 
-#: georef/views.py:2793 georef/views.py:2794
+#: georef/views.py:2791 georef/views.py:2792
 msgid "Tipus d'unitats"
 msgstr "Unit type"
 

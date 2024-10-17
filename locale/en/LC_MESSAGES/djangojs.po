@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-16 16:53+0200\n"
+"POT-Creation-Date: 2024-10-17 11:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -173,7 +173,7 @@ msgstr "Update"
 
 #: georef/static/georef/javascript/generic_thesaurus.js:88
 #: georef/static/georef/javascript/generic_thesaurus.js:143
-#: georef/static/georef/javascript/toponim_create.js:207
+#: georef/static/georef/javascript/toponim_create.js:228
 msgid "Cancel·lar"
 msgstr "Cancel"
 
@@ -436,9 +436,25 @@ msgstr "Deleting resource filter..."
 msgid "Segur que vols esborrar?"
 msgstr "Are you sure you want to delete?"
 
-#: georef/static/georef/javascript/toponim_create.js:200
+#: georef/static/georef/javascript/toponim_create.js:28
+msgid "Cal triar un nom per al topònim"
+msgstr "You have to choose a name for the site"
+
+#: georef/static/georef/javascript/toponim_create.js:33
+msgid "Cal triar el tipus de topònim del desplegable"
+msgstr "You have to select the type from the drop down control"
+
+#: georef/static/georef/javascript/toponim_create.js:38
+msgid "Cal seleccionar un pare per al topònim"
+msgstr "You have to select a parent for the site"
+
+#: georef/static/georef/javascript/toponim_create.js:221
 msgid "Sí, crear topònim"
 msgstr "Yes, create site"
+
+#: georef/static/georef/javascript/toponim_create.js:254
+msgid "Ok"
+msgstr "Ok"
 
 #: georef/static/georef/javascript/toponim_update.js:97
 #: static/georef/javascript/toponim_update.js:96
