@@ -533,7 +533,8 @@ $(document).ready(function() {
         controlcapes_options: controlcapes_options,
         coordinates_options: coordinates_options,
         wms_url: wms_url,
-        attribution_position: 'bottomleft'
+        attribution_position: 'bottomleft',
+        highlight: true
     };
 
     var toponimsdarreraversio_formatter = function(data){

@@ -86,7 +86,8 @@
                 show_coordinates: true,
                 show_centroid_after_edit: false,
                 attribution_position: 'bottomright',
-                show_scale: 'true'
+                show_scale: 'true',
+                highlight: false
             },
             options);
 
@@ -281,6 +282,31 @@
             djangoRef.Map.setState(options.state);
         }
 
+        if(options.highlight){
+            var myStyle = {
+                "color": "#ff7800",
+                "weight": 5,
+                "opacity": 0.65
+            };
+            var geojsonMarkerOptions = {
+                radius: 8,
+                fillColor: "#ff7800",
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            };
+            djangoRef.Map.highLightLayer = L.geoJSON(null,{
+                    style: myStyle,
+                    pointToLayer:
+                        function (feature, latlng) {
+                            return L.circleMarker(latlng, geojsonMarkerOptions);
+                    }
+                } 
+            );
+            map.addLayer( djangoRef.Map.highLightLayer );
+        }
+
         djangoRef.Map.map = map;
 
         return djangoRef.Map;
@@ -450,12 +476,24 @@
         // Otherwise show the content in a popup, or something.
         if(content){
             var html = "";
+            djangoRef.Map.highLightLayer.clearLayers();
             for (feature in content.features){
                 var feature_formatter_name = content.features[feature].id.split('.')[0];
                 if(djangoRef.Map.featureInfoFormatters && djangoRef.Map.featureInfoFormatters[feature_formatter_name]){
                     html = html + djangoRef.Map.featureInfoFormatters[feature_formatter_name](content.features[feature]);
                 }else{
                     html = html + JSON.stringify(content.features[feature]);
+                }
+                if(djangoRef.Map.highLightLayer){
+                    //console.log('highlight!');
+                    djangoRef.Map.highLightLayer.addData(content.features[feature].geometry);
+                    /*
+                    djangoRef.Map.highLightLayer.eachLayer(function (layer) {
+                        if(layer.feature.geometry.type != 'Point'){
+                            layer.setStyle(myStyle)
+                        }
+                    });
+                    */
                 }
             }
             if(html != ""){
