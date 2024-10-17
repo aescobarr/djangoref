@@ -19,6 +19,8 @@
     <script>
         var wms_url = "{{ wms_url }}";
         var _toponim_node_search_url = "{% url 'toponimnodesearch' %}";
+        var _ajax_check_name = "{% url 'check_site_name' %}";
+        var csrf_token = '{{ csrf_token }}';
     </script>
 {% endblock %}
 {% block main %}
@@ -33,11 +35,11 @@
         </div>
     </div>
     <div class="container">
-        <form action="{% url 'toponims_create' %}" onsubmit="return validate_toponim_create()" method="post">
+        <form id="site_form" action="{% url 'toponims_create' %}" method="post">
             {% csrf_token %}
             <div class="container">
                 <a role="button" class="btn btn-success" href="{% url 'toponims' %}">{% trans 'Cancel·lar' %}</a>
-                <input role="button" class="btn btn-success" type="submit" value="{% trans 'Desar' %}" />
+                <input id="create_site" role="button" class="btn btn-success" type="submit" value="{% trans 'Desar' %}" />
             </div>
             <div class="container separador_seccio">
                 <p><strong>{% trans 'Dades bàsiques' %}:</strong></p>
@@ -50,6 +52,9 @@
                                 <th><label for="{{ form.nom.id_for_label }}">{% trans 'Nom' %}:</label></th>
                                 <td>{{ form.nom }}</td>
                                 <td>{{ form.nom.errors }}</td>
+                            </tr>
+                            <tr>
+
                             </tr>
                             <tr>
                                 <th><label for="{{ form.idtipustoponim.id_for_label }}">{% trans 'Tipus' %}:</label></th>
@@ -83,9 +88,27 @@
         </form>
     </div>
 </main>
+<div id="dialog-confirm" title="{% trans 'Atenció, segur que vols crear el topònim?' %}" style="display:none;">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>{% trans 'Els següents topònims tenen un nom similar:' %}
+    </p>
+    <p>
+        <ul id="similar_list"></ul>
+    </p>
+</div>
+<div id="dialog-error" title="{% trans 'Hi ha errors al formulari' %}" style="display:none;">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>{% trans 'Si us plau, corregeix el següent:' %}
+    </p>
+    <p>
+        <ul id="error_list"></ul>
+    </p>
+</div>
 {% endblock %}
 {% block extra_js %}
     <script src="{% static 'jstree/dist/jstree.min.js' %}"></script>
     <script src="{% static 'georef/javascript/tree_util.js' %}?{{ revision }}"></script>
     <script src="{% static 'georef/javascript/toponim_create.js' %}?{{ revision }}"></script>
+{% endblock %}
+{% block outside_body %}
 {% endblock %}

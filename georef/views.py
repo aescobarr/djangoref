@@ -90,6 +90,7 @@ from georef.sec_calculation import compute_sec
 
 import pandas as pd
 import sys
+from django.contrib.postgres.search import TrigramSimilarity
 
 def get_order_clause(params_dict, translation_dict=None):
     order_clause = []
@@ -1010,6 +1011,19 @@ def get_sunburst_state_data_per_state(data, state_id):
 
 
 @api_view(['GET'])
+def check_site_name(request):
+    if request.method == 'GET':
+        data = []
+        threshold = 0.44
+        search_query = request.query_params.get('q', None)
+        if search_query is None:
+            raise ParseError(detail='search term is mandatory')
+        results = Toponim.objects.annotate(similarity=TrigramSimilarity('nom', search_query)).filter(similarity__gt=threshold).order_by('-similarity','nom')[:5]
+        for r in results:
+            data.append({ 'toponim_id': r.id, 'nom': r.nom_str })
+        return Response(data=data, status=200)
+
+@api_view(['GET'])
 def statedata(request):
     if request.method == 'GET':
         data = []
@@ -1149,6 +1163,9 @@ def toponims_create(request):
             form.save()
             url = reverse('toponims_update_2', kwargs={'idtoponim': form.instance.id, 'idversio': '-1'})
             return HttpResponseRedirect(url)
+        else:
+            nodelist_full = ['1']
+            node_ini = '1'
     else:
         this_user = request.user
         id_toponim = request.user.profile.toponim_permission
@@ -1162,7 +1179,7 @@ def toponims_create(request):
         form = ToponimsUpdateForm()
     return render(request, 'georef/toponim_create.html',
                   {'form': form, 'wms_url': conf.GEOSERVER_WMS_URL, 'node_ini': node_ini,
-                   'nodelist_full': nodelist_full})
+                   'nodelist_full': nodelist_full })
 
 
 def recursgeoref_geometries_to_geojson(recurs):
@@ -2702,6 +2719,7 @@ def create_dependencies_report(accumulated_data, to_delete, depth):
             accumulated_data.append('</li>')
 
 
+@login_required
 def t_description_new(request):
     if request.method == 'POST':
         form = AddLookupDescriptionForm(request.POST)
@@ -2717,6 +2735,7 @@ def t_description_new(request):
 
     return render(request, 'georef/t_description_edit.html', {'form': form })
 
+@login_required
 def t_description_edit(request, id=None):
     lookupdescription = get_object_or_404(LookupDescription, pk=id)
     if request.method == 'POST':

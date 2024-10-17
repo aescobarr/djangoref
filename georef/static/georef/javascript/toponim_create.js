@@ -18,11 +18,42 @@ var node_load_callback = function(node,status){
     }
 };
 
+var error_item_template = function(message){
+    return `
+        <li>${message}</li>
+    `
+}
+
+var validate_form = function(){
+    var valid = true;
+    var errors = [];
+    if( $('#id_nom').val() == '' ){
+        valid = false;
+        errors.push(gettext("Cal triar un nom per al topònim"));
+    }
+    if( $('#id_idtipustoponim').val() == '' ){
+        valid = false;
+        errors.push(gettext("Cal triar el tipus de topònim del desplegable"));
+    }
+    if ( validate_toponim_create() == false ){
+        valid = false;
+        errors.push(gettext("Cal seleccionar un pare per al topònim"));
+    }
+
+    $('#error_list').empty();
+    const root = $('#error_list');
+    for(var i = 0; i < errors.length; i++){
+        root.append(error_item_template(errors[i]));
+    }
+
+    return valid;
+}
+
 var validate_toponim_create = function(){
     var top_selected = get_top_selected_node('#jstree');
     var checked = get_undetermined_nodes('#jstree');
     if (top_selected == null){
-        toastr.error("Cal seleccionar un pare per al topònim")
+        //toastr.error("Cal seleccionar un pare per al topònim")
         return false;
     }
     return true;
@@ -155,6 +186,87 @@ $(document).ready(function() {
             reload_tree( ui.item.node_list );
             init_ariadna( ui.item.node_list );
             return false;
+        }
+    });
+
+    function reset_similar_list(){
+        $('#similar_list').empty();
+    }
+
+    function single_similar_item_template(item){
+        return `
+            <li><a target="_blank" href="/toponims/update/${ item.toponim_id }/-1/">${ item.nom }</a></li>
+        `
+    }
+
+    function init_single_items(data){
+        reset_similar_list();
+        const root = $('#similar_list');
+        for(var i = 0; i < data.length; i++){
+            root.append(single_similar_item_template(data[i]));
+        }
+    }
+
+    function check_name(name){
+        $.ajax({
+            url: _ajax_check_name + "?q=" +  encodeURIComponent(name),
+            type: "GET",
+            headers: { "X-CSRFToken": csrf_token },
+            dataType: "json",
+            success: function(data) {
+                if(data.length==0){
+                    $('#site_form').submit();
+                }else{
+                    init_single_items(data);
+                    $( "#dialog-confirm" ).dialog({
+                      resizable: false,
+                      height: "auto",
+                      width: 400,
+                      modal: true,
+                      buttons: [
+                        {
+                            text: gettext("Sí, crear topònim"),
+                            click: function(){
+                                $( this ).dialog( "close" );
+                                $('#site_form').submit();
+                            }
+                        },
+                        {
+                            text: gettext("Cancel·lar"),
+                            click: function(){
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                      ]
+                    });
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                //alert(jqXHR.responseJSON.message);
+            },
+            cache: false
+        });
+    }
+
+    $('#create_site').on('click',function(e){
+        e.preventDefault();
+        if(validate_form()==false){
+            $( "#dialog-error" ).dialog({
+                      resizable: false,
+                      height: "auto",
+                      width: 400,
+                      modal: true,
+                      buttons: [
+                        {
+                            text: gettext("Ok"),
+                            click: function(){
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                      ]
+                    });
+        }else{
+            check_name($('#id_nom').val());
         }
     });
 });
