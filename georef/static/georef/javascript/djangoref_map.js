@@ -302,7 +302,7 @@
                         function (feature, latlng) {
                             return L.circleMarker(latlng, geojsonMarkerOptions);
                     }
-                } 
+                }
             );
             map.addLayer( djangoRef.Map.highLightLayer );
         }
@@ -476,7 +476,9 @@
         // Otherwise show the content in a popup, or something.
         if(content){
             var html = "";
-            djangoRef.Map.highLightLayer.clearLayers();
+            if(djangoRef.Map.highLightLayer){
+                djangoRef.Map.highLightLayer.clearLayers();
+            }
             for (feature in content.features){
                 var feature_formatter_name = content.features[feature].id.split('.')[0];
                 if(djangoRef.Map.featureInfoFormatters && djangoRef.Map.featureInfoFormatters[feature_formatter_name]){
