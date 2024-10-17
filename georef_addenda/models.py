@@ -21,6 +21,12 @@ class GeometriaToponimVersio(models.Model):
     def __str__(self):
         return 'Geometria %s %s' % (self.idversio.nom, self.geometria.geom_type)
 
+    def clone(self):
+        clone = GeometriaToponimVersio()
+        clone.idversio = self.idversio
+        clone.geometria = self.geometria.clone()
+        return clone
+
 
 class GeometriaRecurs(models.Model):
     idrecurs = models.ForeignKey('georef.Recursgeoref', on_delete=models.CASCADE, db_column='idrecurs', blank=True, null=True, related_name='geometries')

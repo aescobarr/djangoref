@@ -1009,6 +1009,25 @@ def get_sunburst_state_data_per_state(data, state_id):
     for c in children:
         data.append({'id': c.id, 'name': c.nom_str, 'parentId': c.idpare.id, 'value': c.children.all().count()})
 
+@api_view(['POST'])
+@transaction.atomic
+def copy_version(request):
+    if request.method == 'POST':
+        idtoponim = request.POST.get('idtoponim', None)
+        if idtoponim is None:
+            raise ParseError(detail='idtoponim is mandatory')
+        toponim = Toponim.objects.get(pk=idtoponim)
+        original_version = toponim.get_darrera_versio()
+        new_version = original_version.clone()
+        original_version.last_version=False
+        original_version.save()
+        new_version.numero_versio = original_version.numero_versio + 1
+        new_version.save()
+        original_geometry = GeometriaToponimVersio.objects.get(idversio=original_version.id)
+        cloned_geometry = original_geometry.clone()
+        cloned_geometry.idversio = new_version
+        cloned_geometry.save()
+        return Response(data={ 'new_version_id': new_version.id }, status=201)
 
 @api_view(['GET'])
 def check_site_name(request):
