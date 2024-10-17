@@ -18,26 +18,25 @@ var node_load_callback = function(node,status){
     }
 };
 
-var error_item_template = function(message){
-    return `
-        <li>${message}</li>
-    `
-}
+
 
 var validate_form = function(){
     var valid = true;
     var errors = [];
     if( $('#id_nom').val() == '' ){
         valid = false;
-        errors.push(gettext("Cal triar un nom per al topònim"));
+        const choose_name = gettext("Cal triar un nom per al topònim");
+        errors.push(choose_name);
     }
     if( $('#id_idtipustoponim').val() == '' ){
         valid = false;
-        errors.push(gettext("Cal triar el tipus de topònim del desplegable"));
+        const choose_type = gettext("Cal triar el tipus de topònim del desplegable")
+        errors.push(choose_type);
     }
     if ( validate_toponim_create() == false ){
         valid = false;
-        errors.push(gettext("Cal seleccionar un pare per al topònim"));
+        const select_parent = gettext("Cal seleccionar un pare per al topònim");
+        errors.push(select_parent);
     }
 
     $('#error_list').empty();
@@ -191,12 +190,6 @@ $(document).ready(function() {
 
     function reset_similar_list(){
         $('#similar_list').empty();
-    }
-
-    function single_similar_item_template(item){
-        return `
-            <li><a target="_blank" href="/toponims/update/${ item.toponim_id }/-1/">${ item.nom }</a></li>
-        `
     }
 
     function init_single_items(data){
