@@ -35,7 +35,7 @@
         </div>
     </div>
     <div class="container">
-        <form id="site_form" action="{% url 'toponims_create' %}" onsubmit="return validate_toponim_create()" method="post">
+        <form id="site_form" action="{% url 'toponims_create' %}" method="post">
             {% csrf_token %}
             <div class="container">
                 <a role="button" class="btn btn-success" href="{% url 'toponims' %}">{% trans 'Cancel·lar' %}</a>
@@ -94,6 +94,14 @@
     </p>
     <p>
         <ul id="similar_list"></ul>
+    </p>
+</div>
+<div id="dialog-error" title="{% trans 'Hi ha errors al formulari' %}" style="display:none;">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>{% trans 'Si us plau, corregeix el següent:' %}
+    </p>
+    <p>
+        <ul id="error_list"></ul>
     </p>
 </div>
 {% endblock %}

@@ -1164,10 +1164,8 @@ def toponims_create(request):
             url = reverse('toponims_update_2', kwargs={'idtoponim': form.instance.id, 'idversio': '-1'})
             return HttpResponseRedirect(url)
         else:
-            pre_toponim = form.instance
-            pare = Toponim.objects.get(pk=pre_toponim.idpare.id)
-            node_ini = '1'
             nodelist_full = ['1']
+            node_ini = '1'
     else:
         this_user = request.user
         id_toponim = request.user.profile.toponim_permission
@@ -1181,7 +1179,7 @@ def toponims_create(request):
         form = ToponimsUpdateForm()
     return render(request, 'georef/toponim_create.html',
                   {'form': form, 'wms_url': conf.GEOSERVER_WMS_URL, 'node_ini': node_ini,
-                   'nodelist_full': nodelist_full})
+                   'nodelist_full': nodelist_full })
 
 
 def recursgeoref_geometries_to_geojson(recurs):

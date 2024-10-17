@@ -18,11 +18,42 @@ var node_load_callback = function(node,status){
     }
 };
 
+var error_item_template = function(message){
+    return `
+        <li>${message}</li>
+    `
+}
+
+var validate_form = function(){
+    var valid = true;
+    var errors = [];
+    if( $('#id_nom').val() == '' ){
+        valid = false;
+        errors.push(gettext("Cal triar un nom per al topònim"));
+    }
+    if( $('#id_idtipustoponim').val() == '' ){
+        valid = false;
+        errors.push(gettext("Cal triar el tipus de topònim del desplegable"));
+    }
+    if ( validate_toponim_create() == false ){
+        valid = false;
+        errors.push(gettext("Cal seleccionar un pare per al topònim"));
+    }
+
+    $('#error_list').empty();
+    const root = $('#error_list');
+    for(var i = 0; i < errors.length; i++){
+        root.append(error_item_template(errors[i]));
+    }
+
+    return valid;
+}
+
 var validate_toponim_create = function(){
     var top_selected = get_top_selected_node('#jstree');
     var checked = get_undetermined_nodes('#jstree');
     if (top_selected == null){
-        toastr.error("Cal seleccionar un pare per al topònim")
+        //toastr.error("Cal seleccionar un pare per al topònim")
         return false;
     }
     return true;
@@ -207,15 +238,6 @@ $(document).ready(function() {
                             }
                         }
                       ]
-                      /*buttons: {
-                        yes_create_label: function() {
-                          $( this ).dialog( "close" );
-                          $('#site_form').submit();
-                        },
-                        Cancel: function() {
-                          $( this ).dialog( "close" );
-                        }
-                      }*/
                     });
                 }
             },
@@ -228,23 +250,23 @@ $(document).ready(function() {
 
     $('#create_site').on('click',function(e){
         e.preventDefault();
-        check_name($('#id_nom').val());
-        /*
-        $( "#dialog-confirm" ).dialog({
-          resizable: false,
-          height: "auto",
-          width: 400,
-          modal: true,
-          buttons: {
-            "Delete all items": function() {
-              $( this ).dialog( "close" );
-              $('#site_form').submit();
-            },
-            Cancel: function() {
-              $( this ).dialog( "close" );
-            }
-          }
-        });
-        */
+        if(validate_form()==false){
+            $( "#dialog-error" ).dialog({
+                      resizable: false,
+                      height: "auto",
+                      width: 400,
+                      modal: true,
+                      buttons: [
+                        {
+                            text: gettext("Ok"),
+                            click: function(){
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                      ]
+                    });
+        }else{
+            check_name($('#id_nom').val());
+        }
     });
 });
