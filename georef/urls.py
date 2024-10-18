@@ -97,6 +97,7 @@ urlpatterns = [
 
     url(r'^users/list/$', views.users_list, name='users_list'),
 
+    url(r'^copy_version$', views.copy_version, name='copy_version'),
     url(r'^graphs$', views.graphs, name='graphs'),
     url(r'^check_site_name/$', views.check_site_name, name='check_site_name'),
     url(r'^toponimstree$', views.toponimstree, name='toponimstree'),

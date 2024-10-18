@@ -672,6 +672,33 @@ $(document).ready(function() {
         djangoRef_map.map.fitBounds(djangoRef_map.centroid.getBounds());
     }
     */
+    var copy_version = function(idtoponim){
+        $.ajax({
+            url: _copy_version_url,
+            data: { 'idtoponim': idtoponim },
+            dataType: "json",
+            method: 'POST',
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    var csrftoken = getCookie('csrftoken');
+                    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+                }
+            },
+            success: function( data, textStatus, jqXHR ) {
+                const idversio = data.new_version_id;
+                const url = `/toponims/update/${idtoponim}/${idversio}/`;
+                window.location.href = url;
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                toastr.error(gettext('Error copiant versió') + ':' + jqXHR.responseJSON.detail);
+            }
+        });
+    };
+
+    $('#do_copy_version').on('click', function(){
+        const id_toponim = $(this).data('idtoponim');
+        copy_version(id_toponim);
+    });
 
     $('[data-toggle="tooltip"]').tooltip();
 

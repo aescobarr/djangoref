@@ -51,6 +51,7 @@
         var _sistref_list_url = "{% url 'sistrefassociat' %}";
         var _versio_capturada_url = "{% url 'recursgeoref-list' %}";
         var _toponim_node_search_url = "{% url 'toponimnodesearch' %}";
+        var _copy_version_url = "{% url 'copy_version' %}";
     </script>
     <script>
         var node_list_full = {{ nodelist_full|safe }};
@@ -146,6 +147,7 @@
             <p><strong>{% trans 'Versions' %}</strong></p>
             {% if user.profile.is_admin or user.profile.can_edit_toponim or user.is_superuser %}
             <a  title="{% trans 'btn_save_version_tooltip' %}" href="{% url 'toponims_update_2' idtoponim -2 %}" class="btn btn-success">{% trans 'Afegir nova versió' %}</a>
+            <button id="do_copy_version" data-idtoponim="{{ idtoponim }}" class="btn btn-success" >{% trans 'Copiar darrera versió' %}</button>
             <!-- "Crear la fitxa d’una nova versió del topònim" -->
             {% endif %}
             <table id="versions">
