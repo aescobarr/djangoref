@@ -363,9 +363,9 @@ $(document).ready(function() {
     $('#toponims_list tbody').on('click', 'td button.lookup_button', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
-        var coords = row.data().coords_centroide;
-        console.log(coords);
-        map.map.setView( { lon:coords.x,lat:coords.y }, 10 );
+        /*var coords = row.data().coords_centroide;
+        map.map.setView( { lon:coords.x,lat:coords.y }, 10 );*/
+        map.highLightVersion( row.data().id );
     });
 
     $( '#saveDoFilter' ).click(function() {

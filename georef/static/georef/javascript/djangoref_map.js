@@ -312,6 +312,29 @@
         return djangoRef.Map;
     };
 
+    djangoRef.Map.highLightVersion = function(idversion){
+        $.ajax({
+            url: '/geojson_site_geom/?idtoponim=' + idversion,
+            method: "GET",
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    var csrftoken = getCookie('csrftoken');
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            success: function( data, textStatus, jqXHR ) {
+                if(djangoRef.Map.highLightLayer){
+                    djangoRef.Map.highLightLayer.clearLayers();
+                    djangoRef.Map.highLightLayer.addData(data.geometry);
+                    djangoRef.Map.map.fitBounds([ [data.extent[1], data.extent[0]], [data.extent[3], data.extent[2]] ], { 'maxZoom': 11 });
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                console.log(textStatus);
+            }
+        });
+    }
+
     djangoRef.Map.getCenter = function(){
         return djangoRef.Map.map.getCenter();
     };
