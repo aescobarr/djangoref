@@ -1010,6 +1010,20 @@ def get_sunburst_state_data_per_state(data, state_id):
     for c in children:
         data.append({'id': c.id, 'name': c.nom_str, 'parentId': c.idpare.id, 'value': c.children.all().count()})
 
+@api_view(['GET'])
+def geojson_site_geom(request):
+    if request.method == 'GET':
+        idtoponim = request.GET.get('idtoponim', None)
+        if idtoponim is None:
+            raise ParseError(detail='idtoponim is mandatory')
+        toponim = get_object_or_404(Toponim, pk=idtoponim)
+        last_version = toponim.get_darrera_versio()
+        version_geometry = last_version.union_geometry()
+        data = {}
+        data['extent'] = version_geometry.extent
+        data['geometry'] = json.loads(version_geometry.json)
+        return Response(data=data, status=200)
+
 @api_view(['POST'])
 @transaction.atomic
 def copy_version(request):
