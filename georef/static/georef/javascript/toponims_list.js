@@ -105,7 +105,7 @@ $(document).ready(function() {
         'columnDefs': [
             {
                 'targets': 4,
-                'data': 'editable',
+                'data': 'deletable',
                 'sortable': false,
                 'render': function(value){
                     if(value==true){
