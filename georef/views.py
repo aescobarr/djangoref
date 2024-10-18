@@ -78,6 +78,7 @@ from django.contrib.admin.utils import NestedObjects
 from georef.geom_utils import *
 from haversine import haversine
 from datetime import date
+import datetime
 
 from slugify import slugify
 from django.utils.translation import gettext_lazy as _
@@ -1012,6 +1013,7 @@ def get_sunburst_state_data_per_state(data, state_id):
 @api_view(['POST'])
 @transaction.atomic
 def copy_version(request):
+    this_user = request.user
     if request.method == 'POST':
         idtoponim = request.POST.get('idtoponim', None)
         if idtoponim is None:
@@ -1022,6 +1024,8 @@ def copy_version(request):
         original_version.last_version=False
         original_version.save()
         new_version.numero_versio = original_version.numero_versio + 1
+        new_version.iduser = this_user
+        new_version.datacaptura = datetime.date.today()
         new_version.save()
         original_geometry = GeometriaToponimVersio.objects.get(idversio=original_version.id)
         cloned_geometry = original_geometry.clone()
