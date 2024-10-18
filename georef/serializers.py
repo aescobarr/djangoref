@@ -79,6 +79,7 @@ class ToponimSerializer(serializers.ModelSerializer):
     idtipustoponim = TipusToponimSerializer(required=True)
     idorganization = OrganizationSerializer()
     editable = serializers.SerializerMethodField()
+    deletable = serializers.SerializerMethodField()
     coords_centroide = serializers.SerializerMethodField()
 
     class Meta:
@@ -95,8 +96,7 @@ class ToponimSerializer(serializers.ModelSerializer):
                 return {'x': darrera_versio.get_coordenada_x_centroide ,'y': darrera_versio.get_coordenada_y_centroide }
         return None
 
-    def get_editable(self, obj):
-        user = self.context['request'].user
+    def is_editable(self, obj, user):
         if user.is_superuser:
             return True
         if not user.is_anonymous and user.profile and user.profile.toponim_permission == '1':
@@ -106,6 +106,20 @@ class ToponimSerializer(serializers.ModelSerializer):
                 if user.profile.toponim_permission in obj.denormalized_toponimtree:
                     return True
         return False
+
+    def get_editable(self, obj):
+        user = self.context['request'].user
+        return self.is_editable(obj, user)
+
+    def get_deletable(self,obj):
+        user = self.context['request'].user
+        editable = self.is_editable(obj, user)
+        deletable = False
+        if not user.is_anonymous and user.profile and user.profile.permission_administrative is True:
+            deletable = True
+        return editable and deletable
+
+
 
 
 class ToponimVersioSerializer(serializers.ModelSerializer):
@@ -141,6 +155,17 @@ class RecursgeorefSerializer(serializers.ModelSerializer):
 
     def get_editable(self, obj):
         user = self.context['request'].user
+        return self.is_editable(obj,user)
+
+    def get_deletable(self,obj):
+        user = self.context['request'].user
+        editable = self.is_editable(obj, user)
+        deletable = False
+        if not user.is_anonymous and user.profile and user.profile.permission_administrative is True:
+            deletable = True
+        return editable and deletable
+
+    def is_editable(self, obj, user):
         if user.is_superuser:
             return True
         if not user.is_anonymous and user.profile and user.profile.can_edit_recurs:
