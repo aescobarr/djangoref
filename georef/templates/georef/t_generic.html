@@ -37,12 +37,17 @@
     </div>
     {% if description %}
     <div class="container alert alert-success">
-        <h4>{{ description }}</h4><a href="{% url 't_description_edit' description_id %}?next={{ request.path }}" id="edit_description" type="button" class="btn btn-primary">{% trans 'Editar' %} <i class="fa fa-edit" aria-hidden="true"></i></a>
+        <h4>{{ description }}</h4>
+        {% if user.profile.is_admin or user.profile.can_edit_tesaure or user.is_superuser %}
+            <a href="{% url 't_description_edit' description_id %}?next={{ request.path }}" id="edit_description" type="button" class="btn btn-primary">{% trans 'Editar' %} <i class="fa fa-edit" aria-hidden="true"></i></a>
+        {% endif %}
     </div>
     {% else %}
+    {% if user.profile.is_admin or user.profile.can_edit_tesaure or user.is_superuser %}
     <div class="container alert alert-danger">
         <a href="{% url 't_description_new' %}?next={{ request.path }}&label={{ class_name_sing|urlencode }}&model={{ class_full_qualified_name|urlencode }}" id="new_description" type="button" class="btn btn-danger">{% trans 'Aquest tesaure no té descripció, pots afegir-la' %} <i class="fa fa-plus" aria-hidden="true"></i></a>
     </div>
+    {% endif %}
     {% endif %}
     <div class="container separador_seccio">
         <div class="pull-right">
