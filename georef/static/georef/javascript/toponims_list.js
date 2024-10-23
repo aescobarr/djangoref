@@ -1,4 +1,5 @@
 var sidebar;
+var zoom_to_extent = false;
 
 var exportPDF = function(){
     var params = table.ajax.params();
@@ -50,6 +51,20 @@ $(document).ready(function() {
         'ajax': {
             'url': _toponim_list_url,
             'dataType': 'json',
+            'dataSrc': function(json){
+                if(zoom_to_extent == true){
+                    //const bounds = [ [ json.extent[1],json.extent[0] ], [ json.extent[3],json.extent[2] ] ];
+                    const corner_min = L.latLng( json.extent[1],json.extent[0] );
+                    const corner_max = L.latLng( json.extent[3],json.extent[2] );
+                    const bounds = L.latLngBounds([ corner_min, corner_max ]);
+                    if(bounds.isValid()){
+                        djangoRef.Map.map.fitBounds(bounds);
+                    }
+                    //map.map.fitBounds();
+                    zoom_to_extent = false;
+                }
+                return json.data;
+            },
             'data': function(d){
                 var valorFiltre = getCookie('filtre_t');
                 var valorOrg = getCookie('torg' + current_user_id);
@@ -388,11 +403,13 @@ $(document).ready(function() {
     };
 
     $( '#doFilter' ).click(function() {
+        zoom_to_extent = true;
         filter();
         //scrollToTableTop();
     });
 
     $( '#doClear' ).click(function() {
+        zoom_to_extent = false;
         clearTaula('taulafiltre');
         map.editableLayers.clearLayers();
         filter();
