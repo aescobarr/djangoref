@@ -318,7 +318,6 @@ function filterMap(){
 }
 
 function filter(){
-    zoom_to_extent = true;
     filterMap();
     table.ajax.reload();
 }

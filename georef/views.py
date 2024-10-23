@@ -215,12 +215,37 @@ def generic_datatable_list_endpoint(request, search_field_list, queryClass, clas
 
     return Response(data['datatable_data'])
 
+
+def cut_latitude(latitude):
+    if latitude < -90:
+        latitude = -90
+    elif latitude > 90:
+        latitude = 90
+    return latitude
+
+
+def cut_longitude(longitude):
+    if longitude < -180:
+        longitude = -180
+    elif longitude > 180:
+        longitude = 180
+    return longitude
+
+
+def sanitize_extent(geometries_qs):
+    x_min = cut_longitude(geometries_qs['extent_min_x'])
+    y_min = cut_latitude(geometries_qs['extent_min_y'])
+    x_max = cut_longitude(geometries_qs['extent_max_x'])
+    y_max = cut_latitude(geometries_qs['extent_max_y'])
+    return [ x_min, y_min, x_max, y_max ]
+
+
 def site_datatable_list_endpoint(request, search_field_list, queryClass, classSerializer, field_translation_dict=None, order_translation_dict=None, paginate=True):
     data = generic_datatable_data_generator(request, search_field_list, queryClass, classSerializer, field_translation_dict, order_translation_dict, paginate)
     site_queryset = data['qs']
     versions_qs = Toponimversio.objects.filter(idtoponim__in=site_queryset)
     geometries_qs = GeometriaToponimVersio.objects.filter(idversio__in=versions_qs).aggregate(extent_min_x=Min('x_min'), extent_min_y=Min('y_min'), extent_max_x=Max('x_max'), extent_max_y=Max('y_max'))
-    data['datatable_data']['extent'] = [ geometries_qs['extent_min_x'], geometries_qs['extent_min_y'],geometries_qs['extent_max_x'], geometries_qs['extent_max_y'] ]
+    data['datatable_data']['extent'] = sanitize_extent(geometries_qs)
     return Response(data['datatable_data'])
 
 def index(request):
