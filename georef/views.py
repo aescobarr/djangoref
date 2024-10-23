@@ -217,18 +217,20 @@ def generic_datatable_list_endpoint(request, search_field_list, queryClass, clas
 
 
 def cut_latitude(latitude):
-    if latitude < -90:
-        latitude = -90
-    elif latitude > 90:
-        latitude = 90
+    if latitude is not None:
+        if latitude < -90:
+            latitude = -90
+        elif latitude > 90:
+            latitude = 90
     return latitude
 
 
 def cut_longitude(longitude):
-    if longitude < -180:
-        longitude = -180
-    elif longitude > 180:
-        longitude = 180
+    if longitude is not None:
+        if longitude < -180:
+            longitude = -180
+        elif longitude > 180:
+            longitude = 180
     return longitude
 
 
