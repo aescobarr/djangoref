@@ -1,4 +1,5 @@
 var sidebar;
+var zoom_to_extent = false;
 
 var exportPDF = function(){
     var params = table.ajax.params();
@@ -50,6 +51,14 @@ $(document).ready(function() {
         'ajax': {
             'url': _toponim_list_url,
             'dataType': 'json',
+            'dataSrc': function(json){
+                if(zoom_to_extent == true){
+                    const bounds = [ [ json.extent[1],json.extent[0] ], [ json.extent[3],json.extent[2] ] ];
+                    map.map.fitBounds(bounds);
+                    zoom_to_extent = false;
+                }
+                return json.data;
+            },
             'data': function(d){
                 var valorFiltre = getCookie('filtre_t');
                 var valorOrg = getCookie('torg' + current_user_id);
