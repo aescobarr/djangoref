@@ -14,10 +14,6 @@ from django.utils.translation import gettext as _
 class GeometriaToponimVersio(models.Model):
     idversio = models.ForeignKey('georef.Toponimversio', on_delete=models.CASCADE, db_column='idversio', blank=True, null=True, related_name='geometries')
     geometria = models.GeometryField(srid=4326)
-    x_min = models.FloatField(blank=True, null=True)
-    x_max = models.FloatField(blank=True, null=True)
-    y_min = models.FloatField(blank=True, null=True)
-    y_max = models.FloatField(blank=True, null=True)
 
     class Meta:
         verbose_name = _('Geometria de versió de topònim')
@@ -30,15 +26,6 @@ class GeometriaToponimVersio(models.Model):
         clone.idversio = self.idversio
         clone.geometria = self.geometria.clone()
         return clone
-
-    def save(self, *args, **kwargs):
-        if self.geometria:
-            extent = self.geometria.extent
-            self.x_min = extent[0]
-            self.y_min = extent[1]
-            self.x_max = extent[2]
-            self.y_max = extent[3]
-        super(GeometriaToponimVersio, self).save(*args, **kwargs)
 
 
 class GeometriaRecurs(models.Model):
