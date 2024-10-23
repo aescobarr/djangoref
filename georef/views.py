@@ -16,7 +16,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from querystring_parser import parser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from django.db.models import Q
+from django.db.models import Q, Min, Max
 from django.contrib.auth.decorators import login_required, user_passes_test
 import operator
 import functools
@@ -72,6 +72,7 @@ from django.db import connection
 from georef.permissions import HasAdministrativePermission
 from django.contrib import messages
 from django.contrib.gis.gdal import DataSource
+from django.contrib.gis.db.models import Union
 
 from django.apps import apps
 from django.contrib.admin.utils import NestedObjects
@@ -135,13 +136,11 @@ def get_filter_clause(params_dict, fields, translation_dict=None):
 Request is a rest_framework request
 """
 
-
-def generic_datatable_list_endpoint(request, search_field_list, queryClass, classSerializer,
-                                    field_translation_dict=None, order_translation_dict=None, paginate=True):
+def generic_datatable_data_generator(request, search_field_list, queryClass, classSerializer,field_translation_dict=None, order_translation_dict=None, paginate=True):
     '''
-    request.query_params works only for rest_framework requests, but not for WSGI requests. request.GET[key] works for
-    both types of requests
-    '''
+        request.query_params works only for rest_framework requests, but not for WSGI requests. request.GET[key] works for
+        both types of requests
+        '''
 
     '''
     draw = request.query_params.get('draw', -1)
@@ -200,9 +199,29 @@ def generic_datatable_list_endpoint(request, search_field_list, queryClass, clas
         recordsTotal = queryset.count()
         recordsFiltered = recordsTotal
 
-    return Response(
-        {'draw': draw, 'recordsTotal': recordsTotal, 'recordsFiltered': recordsFiltered, 'data': serializer.data})
+    return {
+                'datatable_data': {
+                    'draw': draw,
+                    'recordsTotal': recordsTotal,
+                    'recordsFiltered': recordsFiltered,
+                    'data': serializer.data
+                },
+                'qs': queryset
+            }
 
+
+def generic_datatable_list_endpoint(request, search_field_list, queryClass, classSerializer, field_translation_dict=None, order_translation_dict=None, paginate=True):
+    data = generic_datatable_data_generator(request, search_field_list, queryClass, classSerializer,field_translation_dict, order_translation_dict, paginate)
+
+    return Response(data['datatable_data'])
+
+def site_datatable_list_endpoint(request, search_field_list, queryClass, classSerializer, field_translation_dict=None, order_translation_dict=None, paginate=True):
+    data = generic_datatable_data_generator(request, search_field_list, queryClass, classSerializer, field_translation_dict, order_translation_dict, paginate)
+    site_queryset = data['qs']
+    versions_qs = Toponimversio.objects.filter(idtoponim__in=site_queryset)
+    geometries_qs = GeometriaToponimVersio.objects.filter(idversio__in=versions_qs).aggregate(extent_min_x=Min('x_min'), extent_min_y=Min('y_min'), extent_max_x=Max('x_max'), extent_max_y=Max('y_max'))
+    data['datatable_data']['extent'] = [ geometries_qs['extent_min_x'], geometries_qs['extent_min_y'],geometries_qs['extent_max_x'], geometries_qs['extent_max_y'] ]
+    return Response(data['datatable_data'])
 
 def index(request):
     wms_url = conf.GEOSERVER_WMS_URL
@@ -633,7 +652,9 @@ def toponims_datatable_list(request):
                                  'idtipustoponim.nom': 'idtipustoponim__nom'}
         field_translation_list = {'nom_str': 'nom', 'aquatic_str': 'aquatic',
                                   'idtipustoponim.nom': 'idtipustoponim__nom'}
-        response = generic_datatable_list_endpoint(request, search_field_list, Toponim, ToponimSerializer,
+        # response = generic_datatable_list_endpoint(request, search_field_list, Toponim, ToponimSerializer,
+        #                                            field_translation_list, sort_translation_list)
+        response = site_datatable_list_endpoint(request, search_field_list, Toponim, ToponimSerializer,
                                                    field_translation_list, sort_translation_list)
         return response
 
