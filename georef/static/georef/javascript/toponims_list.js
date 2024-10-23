@@ -1,4 +1,5 @@
 var sidebar;
+var zoom_to_extent = false;
 
 var exportPDF = function(){
     var params = table.ajax.params();
