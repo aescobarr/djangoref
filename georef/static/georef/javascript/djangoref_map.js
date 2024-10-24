@@ -510,20 +510,18 @@
                     html = html + JSON.stringify(content.features[feature]);
                 }
                 if(djangoRef.Map.highLightLayer){
-                    //console.log('highlight!');
                     djangoRef.Map.highLightLayer.addData(content.features[feature].geometry);
-                    /*
-                    djangoRef.Map.highLightLayer.eachLayer(function (layer) {
-                        if(layer.feature.geometry.type != 'Point'){
-                            layer.setStyle(myStyle)
-                        }
-                    });
-                    */
                 }
             }
             if(html != ""){
                 html = '<div style="height:150px;overflow:auto;">' + html + '</div>';
-                L.popup({ maxWidth: 800}).setLatLng(latlng).setContent(html).openOn(djangoRef.Map.map);
+                const popup = L.popup({ maxWidth: 800}).setLatLng(latlng).setContent(html);
+                if(djangoRef.Map.highLightLayer){
+                    popup.on('remove', function() {
+                        djangoRef.Map.highLightLayer.clearLayers();
+                    });
+                }
+                popup.openOn(djangoRef.Map.map);
             }
         }
     };
