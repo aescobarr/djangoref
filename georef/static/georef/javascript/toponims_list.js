@@ -412,6 +412,9 @@ $(document).ready(function() {
         zoom_to_extent = false;
         clearTaula('taulafiltre');
         map.editableLayers.clearLayers();
+        if(map.highLightLayer){
+            map.highLightLayer.clearLayers();
+        }
         filter();
         $('#autoc_filtres').val('');
     });
