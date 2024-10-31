@@ -1,0 +1,78 @@
+Camps DWC
+
+https://dwc.tdwg.org/terms/#location
+https://dwc.tdwg.org/terms/#dwc:higherGeographyID
+x https://dwc.tdwg.org/terms/#dwc:higherGeography
+https://dwc.tdwg.org/terms/#dwc:continent
+x https://dwc.tdwg.org/terms/#dwc:waterBody
+https://dwc.tdwg.org/terms/#dwc:islandGroup
+https://dwc.tdwg.org/terms/#dwc:island
+https://dwc.tdwg.org/terms/#dwc:country
+https://dwc.tdwg.org/terms/#dwc:countryCode
+https://dwc.tdwg.org/terms/#dwc:stateProvince
+https://dwc.tdwg.org/terms/#dwc:county
+https://dwc.tdwg.org/terms/#dwc:municipality
+https://dwc.tdwg.org/terms/#dwc:locality
+https://dwc.tdwg.org/terms/#dwc:verbatimLocality
+https://dwc.tdwg.org/terms/#dwc:minimumElevationInMeters
+https://dwc.tdwg.org/terms/#dwc:maximumElevationInMeters
+https://dwc.tdwg.org/terms/#dwc:verbatimElevation
+https://dwc.tdwg.org/terms/#dwc:verticalDatum
+x https://dwc.tdwg.org/terms/#dwc:minimumDepthInMeters
+x https://dwc.tdwg.org/terms/#dwc:maximumDepthInMeters
+https://dwc.tdwg.org/terms/#dwc:verbatimDepth
+https://dwc.tdwg.org/terms/#dwc:minimumDistanceAboveSurfaceInMeters
+https://dwc.tdwg.org/terms/#dwc:maximumDistanceAboveSurfaceInMeters
+https://dwc.tdwg.org/terms/#dwc:locationAccordingTo
+https://dwc.tdwg.org/terms/#dwc:locationRemarks
+x https://dwc.tdwg.org/terms/#dwc:decimalLatitude
+x https://dwc.tdwg.org/terms/#dwc:decimalLongitude
+https://dwc.tdwg.org/terms/#dwc:geodeticDatum
+x https://dwc.tdwg.org/terms/#dwc:coordinateUncertaintyInMeters
+https://dwc.tdwg.org/terms/#dwc:coordinatePrecision
+https://dwc.tdwg.org/terms/#dwc:pointRadiusSpatialFit
+https://dwc.tdwg.org/terms/#dwc:verbatimCoordinates
+https://dwc.tdwg.org/terms/#dwc:verbatimLatitude
+https://dwc.tdwg.org/terms/#dwc:verbatimLongitude
+https://dwc.tdwg.org/terms/#dwc:verbatimCoordinateSystem
+x https://dwc.tdwg.org/terms/#dwc:verbatimSRS
+x https://dwc.tdwg.org/terms/#dwc:footprintWKT
+x https://dwc.tdwg.org/terms/#dwc:footprintSRS
+x https://dwc.tdwg.org/terms/#dwc:footprintSpatialFit
+x https://dwc.tdwg.org/terms/#dwc:georeferencedBy
+x https://dwc.tdwg.org/terms/#dwc:georeferencedDate
+https://dwc.tdwg.org/terms/#dwc:georeferenceProtocol
+x https://dwc.tdwg.org/terms/#dwc:georeferenceSources
+x https://dwc.tdwg.org/terms/#dwc:georeferenceRemarks
+
+
+
+Toponim
+
+Location -> https://dwc.tdwg.org/terms/#location
+nom topònim -> https://dwc.tdwg.org/terms/#dwc:locality
+tipus -> N/A
+aquatic -> ~ https://dwc.tdwg.org/terms/#dwc:waterBody
+jerarquia -> https://dwc.tdwg.org/terms/#dwc:higherGeography
+
+Versio
+
+numero versio -> N/A
+qualificador versió -> N/A
+versió capturada del recurs -> https://dwc.tdwg.org/terms/#dwc:georeferenceSources
+Sistema referència del recurs -> https://dwc.tdwg.org/terms/#dwc:verbatimSRS
+nom al recurs -> N/A
+data -> https://dwc.tdwg.org/terms/#dwc:georeferencedDate
+autor -> https://dwc.tdwg.org/terms/#dwc:georeferencedBy
+Coordenada X original -> N/A? https://dwc.tdwg.org/terms/#dwc:decimalLongitude
+Coordenada Y original -> N/A? https://dwc.tdwg.org/terms/#dwc:decimalLatitude
+Altitud profunditat màxima(m) -> https://dwc.tdwg.org/terms/#dwc:maximumDepthInMeters
+Altitud profunditat mínima(m) -> https://dwc.tdwg.org/terms/#dwc:minimumDepthInMeters
+incertesa coordenades -> https://dwc.tdwg.org/terms/#dwc:coordinateUncertaintyInMeters
+observacions -> https://dwc.tdwg.org/terms/#dwc:georeferenceRemarks
+
+geometria -> https://dwc.tdwg.org/terms/#dwc:footprintWKT
+WGS84 constant -> https://dwc.tdwg.org/terms/#dwc:footprintSRS
+derivable a partir centroide/geometria -> https://dwc.tdwg.org/terms/#dwc:footprintSpatialFit
+
+
