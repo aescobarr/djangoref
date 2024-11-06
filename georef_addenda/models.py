@@ -50,6 +50,7 @@ class GeometriaRecurs(models.Model):
 
 class Organization(models.Model):
     name = models.CharField(max_length=200)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = _('Organització')
@@ -97,6 +98,7 @@ class Profile(models.Model):
 class Autor(models.Model):
     id = models.CharField(primary_key=True, max_length=200, default=pkgen)
     nom = models.CharField(max_length=500)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = _('Autor')

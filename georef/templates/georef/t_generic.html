@@ -68,10 +68,14 @@
             <div class="form-group">
                 <label for="name">{{ column_name }}</label>
                 <input type="text" name="name_update" id="name_update" value="" class="form-control">
-                <input type="hidden" name="id" id="id" value="">
                 <!-- Allow form submission with keyboard without duplicating the dialog button -->
-                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
             </div>
+            <div class="form-group">
+                <label for="description_update">Description</label>
+                <textarea style="width:100%;" name="description_update" id="description_update"></textarea>
+                <input type="hidden" name="id" id="id" value="">
+            </div>
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
         </form>
     </div>
 
@@ -83,8 +87,12 @@
                 <label for="name">{{ column_name }}</label>
                 <input type="text" name="name" id="name" value="" class="form-control">
                 <!-- Allow form submission with keyboard without duplicating the dialog button -->
-                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
             </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea style="width:100%;" name="description" id="description"></textarea>
+            </div>
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
         </form>
     </div>
 

@@ -687,7 +687,7 @@ def toponims_datatable_list(request):
 @api_view(['GET'])
 def tipusunitats_datatable_list(request):
     if request.method == 'GET':
-        search_field_list = ('tipusunitat',)
+        search_field_list = ('tipusunitat', 'description')
         response = generic_datatable_list_endpoint(request, search_field_list, Tipusunitats, TipusunitatsSerializer)
         return response
 
@@ -695,7 +695,7 @@ def tipusunitats_datatable_list(request):
 @api_view(['GET'])
 def tipustoponim_datatable_list(request):
     if request.method == 'GET':
-        search_field_list = ('nom',)
+        search_field_list = ('nom', 'description')
         response = generic_datatable_list_endpoint(request, search_field_list, Tipustoponim, TipusToponimSerializer)
         return response
 
@@ -703,7 +703,7 @@ def tipustoponim_datatable_list(request):
 @api_view(['GET'])
 def suport_datatable_list(request):
     if request.method == 'GET':
-        search_field_list = ('nom',)
+        search_field_list = ('nom', 'description')
         response = generic_datatable_list_endpoint(request, search_field_list, Suport, SuportSerializer)
         return response
 
@@ -711,7 +711,7 @@ def suport_datatable_list(request):
 @api_view(['GET'])
 def tipusrecurs_datatable_list(request):
     if request.method == 'GET':
-        search_field_list = ('nom',)
+        search_field_list = ('nom', 'description')
         response = generic_datatable_list_endpoint(request, search_field_list, Tipusrecursgeoref, TipusrecursgeorefSerializer)
         return response
 
@@ -719,7 +719,7 @@ def tipusrecurs_datatable_list(request):
 @api_view(['GET'])
 def paraulaclau_datatable_list(request):
     if request.method == 'GET':
-        search_field_list = ('paraula',)
+        search_field_list = ('paraula','description')
         response = generic_datatable_list_endpoint(request, search_field_list, Paraulaclau, ParaulaClauSerializer)
         return response
 
@@ -727,14 +727,14 @@ def paraulaclau_datatable_list(request):
 @api_view(['GET'])
 def organizations_datatable_list(request):
     if request.method == 'GET':
-        search_field_list = ('name',)
+        search_field_list = ('name', 'description')
         response = generic_datatable_list_endpoint(request, search_field_list, Organization, OrganizationSerializer)
         return response
 
 @api_view(['GET'])
 def paisos_datatable_list(request):
     if request.method == 'GET':
-        search_field_list = ('nom',)
+        search_field_list = ('nom', 'description')
         response = generic_datatable_list_endpoint(request, search_field_list, Pais, PaisSerializer)
         return response
 
@@ -742,7 +742,7 @@ def paisos_datatable_list(request):
 @api_view(['GET'])
 def autors_datatable_list(request):
     if request.method == 'GET':
-        search_field_list = ('nom',)
+        search_field_list = ('nom','description')
         response = generic_datatable_list_endpoint(request, search_field_list, Autor, AutorSerializer)
         return response
 
@@ -758,7 +758,7 @@ def capeswmslocals_datatable_list(request):
 @api_view(['GET'])
 def qualificadors_datatable_list(request):
     if request.method == 'GET':
-        search_field_list = ('qualificador',)
+        search_field_list = ('qualificador', 'description')
         response = generic_datatable_list_endpoint(request, search_field_list, Qualificadorversio, QualificadorversioSerializer)
         return response
 

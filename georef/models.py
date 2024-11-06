@@ -40,6 +40,7 @@ def append_chain_query(accum_query, current_clause, condicio):
 class Tipustoponim(models.Model):
     id = models.CharField(primary_key=True, max_length=100,default=uuid.uuid4)
     nom = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         managed = True
@@ -53,6 +54,7 @@ class Tipustoponim(models.Model):
 class Pais(models.Model):
     id = models.CharField(primary_key=True, max_length=100,default=uuid.uuid4)
     nom = models.CharField(max_length=200)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         managed = True
@@ -66,6 +68,7 @@ class Pais(models.Model):
 class Qualificadorversio(models.Model):
     id = models.CharField(primary_key=True, max_length=100,default=uuid.uuid4)
     qualificador = models.CharField(max_length=500)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         managed = True
@@ -220,6 +223,7 @@ class Toponim(models.Model):
 class Tipusunitats(models.Model):
     id = models.CharField(primary_key=True, max_length=100,default=uuid.uuid4)
     tipusunitat = models.CharField(max_length=500)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         managed = True
@@ -233,6 +237,7 @@ class Tipusunitats(models.Model):
 class Tipusrecursgeoref(models.Model):
     id = models.CharField(primary_key=True, max_length=100,default=uuid.uuid4)
     nom = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return '%s' % (self.nom)
@@ -246,6 +251,7 @@ class Tipusrecursgeoref(models.Model):
 class Suport(models.Model):
     id = models.CharField(primary_key=True, max_length=100,default=uuid.uuid4)
     nom = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return '%s' % (self.nom)
@@ -433,6 +439,7 @@ class Toponimversio(models.Model):
 class Paraulaclau(models.Model):
     id = models.CharField(primary_key=True, max_length=100, default=uuid.uuid4)
     paraula = models.CharField(max_length=500)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         managed = True

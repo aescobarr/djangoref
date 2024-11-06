@@ -12,7 +12,9 @@
         options = options || {};
         options = $.extend({},
         {
-            column_name: 'Nom'
+            column_name: gettext('Nom'),
+            description_column_name: gettext('Descripció'),
+            description_column: 'description'
         },
         options);
 
@@ -44,11 +46,12 @@
                 return JSON.parse( localStorage.getItem( 'DataTables_' + options.instance_label ) );
             },
             'columns': [
-                { 'data': options.text_field_name }
+                { 'data': options.text_field_name },
+                { 'data': options.description_column },
             ],
             'columnDefs': [
                 {
-                    'targets': 1,
+                    'targets': 2,
                     'data': 'editable',
                     'sortable': false,
                     //'defaultContent': '<button class="delete_button btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>',
@@ -61,7 +64,7 @@
                     }
                 },
                 {
-                    'targets': 2,
+                    'targets': 3,
                     'data': 'editable',
                     'sortable': false,
                     'defaultContent': '<button class="edit_button btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>',
@@ -76,12 +79,16 @@
                 {
                     'targets':0,
                     'title': options.column_name
+                },
+                {
+                    'targets':1,
+                    'title': options.description_column_name
                 }
             ]
         } );
 
         var do_update = function(){
-            _update($('#name_update').val(),$('#id').val());
+            _update($('#name_update').val(),$('#id').val(),$('#description_update').val());
         }
 
         var update_text = gettext('Actualitzar');
@@ -89,15 +96,9 @@
 
         var dialog_update = $( "#dialog-form-update" ).dialog({
             autoOpen: false,
-            height: 300,
+            height: 400,
             width: 400,
             modal: true,
-            /*buttons: {
-                update_text: do_update,
-                Cancel: function() {
-                    dialog_update.dialog( "close" );
-                }
-            },*/
             buttons: [
                 {text: update_text, click: do_update},
                 {text: cancel_text, click: function() { dialog_update.dialog( "close" ); }}
@@ -113,10 +114,10 @@
 
 
         //return djangoRef.GenericThesaurus.table;
-        var _update = function(new_nom, id){
+        var _update = function(new_nom, id, description){
             $.ajax({
                 url: options.crud_url + encodeURI(id) + '/',
-                data: JSON.parse("{ \"" + options.text_field_name + "\":\"" + new_nom + "\"}"),
+                data: JSON.parse("{ \"" + options.text_field_name + "\":\"" + new_nom + "\",\"" + options.description_column + "\":\"" + description + "\" }"),
                 method: 'PUT',
                 beforeSend: function(xhr, settings) {
                     if (!csrfSafeMethod(settings.type)) {
@@ -136,7 +137,7 @@
         }
 
         var do_add = function(){
-            _add($('#name').val());
+            _add($('#name').val(), $('#description').val());
         };
 
         var btn_create = gettext('Crear');
@@ -148,7 +149,7 @@
 
         var dialog_create = $( "#dialog-form-create" ).dialog({
             autoOpen: false,
-            height: 300,
+            height: 400,
             width: 400,
             modal: true,
             buttons: dialog_buttons,
@@ -161,10 +162,10 @@
             event.preventDefault();
         });
 
-        var _add = function(nom){
+        var _add = function(nom, description){
             $.ajax({
                 url: options.crud_url,
-                data: JSON.parse("{ \"" + options.text_field_name + "\":\"" + nom + "\"}"),
+                data: JSON.parse("{ \"" + options.text_field_name + "\":\"" + nom + "\",\"" + options.description_column + "\":\"" + description + "\"}"),
                 method: 'POST',
                 beforeSend: function(xhr, settings) {
                     if (!csrfSafeMethod(settings.type)) {
@@ -268,8 +269,10 @@
             var row = djangoRef.GenericThesaurus.table.row( tr );
             var id = row.data().id;
             var name = row.data()[options.text_field_name];
+            var description = row.data()[options.description_column];
             $('#id').val(id);
             $('#name_update').val(name);
+            $('#description_update').val(description);
             dialog_update.dialog( "open" );
         });
 
