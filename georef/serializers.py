@@ -176,7 +176,7 @@ class RecursgeorefSerializer(serializers.ModelSerializer):
 class TipusunitatsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tipusunitats
-        fields = ('id', 'tipusunitat')
+        fields = ('id', 'tipusunitat', 'description')
 
 
 class SistemareferenciammSerializer(serializers.ModelSerializer):
@@ -188,37 +188,37 @@ class SistemareferenciammSerializer(serializers.ModelSerializer):
 class PaisSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pais
-        fields = ('id', 'nom')
+        fields = ('id', 'nom', 'description')
 
 
 class SuportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Suport
-        fields = ('id', 'nom')
+        fields = ('id', 'nom', 'description')
 
 
 class TipusrecursgeorefSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tipusrecursgeoref
-        fields = ('id', 'nom')
+        fields = ('id', 'nom', 'description')
 
 
 class QualificadorversioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Qualificadorversio
-        fields = ('id', 'qualificador')
+        fields = ('id', 'qualificador', 'description')
 
 
 class AutorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Autor
-        fields = ('id', 'nom')
+        fields = ('id', 'nom', 'description')
 
 
 class ParaulaClauSerializer(serializers.ModelSerializer):
     class Meta:
         model = Paraulaclau
-        fields = ('id', 'paraula')
+        fields = ('id', 'paraula', 'description')
 
 
 class CapawmsSerializer(serializers.ModelSerializer):
