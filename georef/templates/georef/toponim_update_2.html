@@ -41,6 +41,9 @@
         .ui-autocomplete-loading {
             background: white url("{% static 'georef/css/icon/ui-anim_basic_16x16.gif' %}") right center no-repeat;
         }
+        .dwc_link{
+            font-size: x-small;
+        }
 </style>
     </style>
 {% endblock %}
@@ -103,7 +106,7 @@
                     <div class="col-sm-4">
                         <table id="toponim_edit">
                             <tr>
-                                <th><label for="{{ form.nom.id_for_label }}">{% trans 'Nom' %}</label></th>
+                                <th><label for="{{ form.nom.id_for_label }}">{% trans 'Nom' %}</label> <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:locality" target="_blank">dwc:locality</a> </th>
                                 <td>{{ form.nom }}</td>
                                 <td>{{ form.nom.errors }}</td>
                             </tr>
