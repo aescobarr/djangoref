@@ -133,7 +133,7 @@
                         <label>{% trans 'Jerarquia del topònim' %}</label>
                         <div id="ariadna"><ul></ul></div>
                         <div><label class="iconainfo" title="{% trans 'node_search_tooltip' %}" for="autoc_tree">&nbsp;</label><input id="autoc_tree" type="text" value=""><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-                        <label>{% trans 'Topònim pare' %}</label>
+                        <label>{% trans 'Topònim pare' %}</label> <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:higherGeography" target="_blank">dwc:higherGeography</a>
                         <div class="scroll_jstree" id="jstree"></div>
                     </div>
                 </div>
@@ -249,23 +249,23 @@
                                     <td>{{ toponimversio_form.idqualificador.errors }}</td>
                                 </tr>
                                 <tr>
-                                    <th><label class="iconainfo"  title="{% trans 'toponym_version_autocomplete_tooltip' %}" for="{{ toponimversio_form.idrecursgeoref.id_for_label }}">{% trans 'Versió capturada del recurs' %}</label></th>
+                                    <th><label class="iconainfo"  title="{% trans 'toponym_version_autocomplete_tooltip' %}" for="{{ toponimversio_form.idrecursgeoref.id_for_label }}">{% trans 'Versió capturada del recurs' %}</label> <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:georeferenceSources" target="_blank">dwc:georeferenceSources</a> </th>
                                     <!-- "Al desplegable es pot triar un recurs. Després s'omplirà el control de sistemes de referència amb els sistemes possibles per al recurs triat." -->
                                     <td><input id="autoc_vcr" type="text" value="{{ toponimversio_form.instance.idrecursgeoref.nom }}"></td>
                                     <td>{{ toponimversio_form.idrecursgeoref }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{% trans 'Sistema referència del recurs' %}</th>
+                                    <th>{% trans 'Sistema referència del recurs' %} <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:verbatimSRS" target="_blank">dwc:verbatimSRS</a> </th>
                                     <td id="sistref_recurs">{{ toponimversio_form.instance.idrecursgeoref.idsistemareferenciamm.nom }}</td>
                                 </tr>
                                 <tr>
-                                    <th><label class="iconainfo"  title="{% trans 'toponym_nomtoponim_resource' %}" for="{{ toponimversio_form.nom.id_for_label }}">{% trans 'Nom del topònim al recurs' %}</label></th>
+                                    <th><label class="iconainfo"  title="{% trans 'toponym_nomtoponim_resource' %}" for="{{ toponimversio_form.nom.id_for_label }}">{% trans 'Nom del topònim al recurs' %}</label>  </th>
                                     <!-- "Transcripció literal del topònim segons el recurs emprat per georeferenciar" -->
                                     <td>{{ toponimversio_form.nom }}</td>
                                     <td>{{ toponimversio_form.nom.errors }}</td>
                                 </tr>
                                 <tr>
-                                    <th><label class="iconainfo"  title="{% trans 'toponym_date_tooltip' %}" for="{{ toponimversio_form.datacaptura.id_for_label }}">{% trans 'Data' %}</label></th>
+                                    <th><label class="iconainfo"  title="{% trans 'toponym_date_tooltip' %}" for="{{ toponimversio_form.datacaptura.id_for_label }}">{% trans 'Data' %}</label> <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:georeferencedDate" target="_blank">dwc:georeferencedDate</a> </th>
                                     <! -- "Data de generació de la fitxa de versió" -->
                                     <td>{{ toponimversio_form.datacaptura }}</td>
                                     <td>{{ toponimversio_form.datacaptura.errors }}</td>
@@ -289,12 +289,12 @@
                                     <td>{{ toponimversio_form.coordenada_y_origen.errors }}</td>
                                 </tr>
                                 <tr>
-                                    <th><label for="{{ toponimversio_form.altitud_profunditat_maxima.id_for_label }}">{% trans 'Altitud profunditat màxima(m)' %}</label></th>
+                                    <th><label for="{{ toponimversio_form.altitud_profunditat_maxima.id_for_label }}">{% trans 'Altitud profunditat màxima(m)' %}</label> <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:maximumDepthInMeters" target="_blank">dwc:maximumDepthInMeters</a> </th>
                                     <td>{{ toponimversio_form.altitud_profunditat_maxima }}</td>
                                     <td>{{ toponimversio_form.altitud_profunditat_maxima.errors }}</td>
                                 </tr>
                                 <tr>
-                                    <th><label for="{{ toponimversio_form.altitud_profunditat_minima.id_for_label }}">{% trans "Altitud profunditat mínima(m)" %}</label></th>
+                                    <th><label for="{{ toponimversio_form.altitud_profunditat_minima.id_for_label }}">{% trans "Altitud profunditat mínima(m)" %}</label> <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:minimumDepthInMeters" target="_blank">dwc:minimumDepthInMeters</a> </th>
                                     <td>{{ toponimversio_form.altitud_profunditat_minima }}</td>
                                     <td>{{ toponimversio_form.altitud_profunditat_minima.errors }}</td>
                                 </tr>
@@ -303,19 +303,19 @@
                         <div class="col-sm-7">
                             <table class="toponimversio_edit">
                                 <tr>
-                                    <th><label class="iconainfo"  title="{% trans 'toponim_coordx_transform_tooltip' %}" for="{{ toponimversio_form.coordenada_x_centroide.id_for_label }}">{% trans 'Coordenada X centroide' %}</label></th>
+                                    <th><label class="iconainfo"  title="{% trans 'toponim_coordx_transform_tooltip' %}" for="{{ toponimversio_form.coordenada_x_centroide.id_for_label }}">{% trans 'Coordenada X centroide' %}</label> <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:decimalLongitude" target="_blank">dwc:decimalLongitude</a> </th>
                                     <!-- "Valor de les coordenades del centroide obtingut a partir de l’estimació sobre el mapa a sobre d'aquests controls" -->
                                     <td>{{ toponimversio_form.coordenada_x_centroide }}</td>
                                     <td>{{ toponimversio_form.coordenada_x_centroide.errors }}</td>
                                 </tr>
                                 <tr>
-                                    <th><label class="iconainfo"  title="{% trans 'topomim_coordy_transform_tooltip' %}" for="{{ toponimversio_form.coordenada_y_centroide.id_for_label }}">{% trans 'Coordenada Y centroide' %}</label></th>
+                                    <th><label class="iconainfo"  title="{% trans 'topomim_coordy_transform_tooltip' %}" for="{{ toponimversio_form.coordenada_y_centroide.id_for_label }}">{% trans 'Coordenada Y centroide' %}</label> <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:decimalLatitude" target="_blank">dwc:decimalLatitude</a> </th>
                                     <!-- "Valor de les coordenades del centroide obtingut a partir de l’estimació sobre el mapa a sobre d'aquests controls" -->
                                     <td>{{ toponimversio_form.coordenada_y_centroide }}</td>
                                     <td>{{ toponimversio_form.coordenada_y_centroide.errors }}</td>
                                 </tr>
                                 <tr>
-                                    <th><label for="{{ toponimversio_form.precisio_h.id_for_label }}">{% trans 'Incertesa coordenades(m)' %}</label></th>
+                                    <th><label for="{{ toponimversio_form.precisio_h.id_for_label }}">{% trans 'Incertesa coordenades(m)' %}</label> <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:coordinateUncertaintyInMeters" target="_blank">dwc:coordinateUncertaintyInMeters</a> </th>
                                     <td>{{ toponimversio_form.precisio_h }}</td>
                                     <td>{{ toponimversio_form.precisio_h.errors }}</td>
                                 </tr>
@@ -344,7 +344,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                        <label for="{{ form.observacions.id_for_label }}">{% trans 'Observacions' %}</label>
+                        <label for="{{ form.observacions.id_for_label }}">{% trans 'Observacions' %}</label> <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:georeferenceRemarks" target="_blank">dwc:georeferenceRemarks</a>
                         {{ toponimversio_form.observacions }}
                         {{ toponimversio_form.observacions.errors }}
                         </div>
