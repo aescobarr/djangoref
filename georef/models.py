@@ -10,7 +10,7 @@ import json
 from django.db.models.signals import post_save, pre_save, post_delete
 from django.dispatch import receiver
 from georef.tasks import compute_denormalized_toponim_tree_val, format_denormalized_toponimtree, pkgen
-from georef_addenda.models import Autor, Organization
+from georef_addenda.models import Autor, Organization, GeoreferenceProtocol
 from georef.geom_utils import *
 import datetime
 import itertools
@@ -325,6 +325,7 @@ class Toponimversio(models.Model):
     # 0 - traditional centroid calculation method (i.e geometric centroid)
     # 1 - centroid is asjusted following practices dictated by https://docs.gbif.org/georeferencing-best-practices/1.0/en/#paths
     centroid_calc_method = models.IntegerField(default=0)
+    georeference_protocol = models.ForeignKey(GeoreferenceProtocol, models.DO_NOTHING, default=GeoreferenceProtocol.get_default_pk)
 
     class Meta:
         managed = True
@@ -369,6 +370,7 @@ class Toponimversio(models.Model):
         # 0 - traditional centroid calculation method (i.e geometric centroid)
         # 1 - centroid is asjusted following practices dictated by https://docs.gbif.org/georeferencing-best-practices/1.0/en/#paths
         clone.centroid_calc_method = self.centroid_calc_method
+        clone.georeference_protocol = self.georeference_protocol
         return clone
 
     def union_geometry(self):

@@ -156,3 +156,21 @@ class LookupDescription(models.Model):
     model_label = models.CharField(help_text="The label of the lookup. This should be the same as the unstranslated string used for showing the name anywhere in the ui", max_length=200, null=True)
     locale = models.CharField(help_text="Language of the description", max_length=10, null=True)
     description = models.TextField(null=True)
+
+
+class GeoreferenceProtocol(models.Model):
+    name = models.CharField(max_length=500)
+    description = models.TextField(null=True, blank=True)
+
+    @classmethod
+    def get_default_pk(cls):
+        prot, created = cls.objects.get_or_create(
+            name=_('Protocol de georeferenciació del Museu de Zoologia de Barcelona')
+        )
+        return prot.pk
+
+    class Meta:
+        verbose_name = _('Protocol de georeferenciació')
+
+    def __str__(self):
+        return '%s' % (self.name)
