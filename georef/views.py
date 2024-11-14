@@ -6,9 +6,9 @@ from rest_framework import status, viewsets
 from georef.serializers import ToponimSerializer, FiltrejsonSerializer, RecursgeorefSerializer, ToponimVersioSerializer, \
     UserSerializer, ProfileSerializer, ParaulaClauSerializer, AutorSerializer, CapawmsSerializer, ToponimSearchSerializer, \
     QualificadorversioSerializer, PaisSerializer, TipusrecursgeorefSerializer, SuportSerializer, TipusToponimSerializer, \
-    TipusunitatsSerializer, SistemareferenciammSerializer, OrganizationSerializer, MenuItemSerializer
+    TipusunitatsSerializer, SistemareferenciammSerializer, OrganizationSerializer, MenuItemSerializer, GeoreferenceProtocolSerializer
 from georef.models import Toponim, Filtrejson, Recursgeoref, Paraulaclau, Autorrecursgeoref, Tipusunitats
-from georef_addenda.models import Profile, Autor, GeometriaRecurs, GeometriaToponimVersio, HelpFile, Organization, MenuItem, LookupDescription
+from georef_addenda.models import Profile, Autor, GeometriaRecurs, GeometriaToponimVersio, HelpFile, Organization, MenuItem, LookupDescription, GeoreferenceProtocol
 from georef_addenda.forms import HelpfileForm
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -366,6 +366,15 @@ class AutorViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(nom__icontains=name)
         return queryset
 
+class ProtocolsViewSet(viewsets.ModelViewSet):
+    serializer_class = GeoreferenceProtocolSerializer
+
+    def get_queryset(self):
+        queryset = GeoreferenceProtocol.objects.all()
+        name = self.request.query_params.get('name', None)
+        if name is not None:
+            queryset = queryset.filter(description__icontains=name)
+        return queryset
 
 class ParaulaClauViewSet(viewsets.ModelViewSet):
     serializer_class = ParaulaClauSerializer
@@ -715,6 +724,12 @@ def tipusrecurs_datatable_list(request):
         response = generic_datatable_list_endpoint(request, search_field_list, Tipusrecursgeoref, TipusrecursgeorefSerializer)
         return response
 
+@api_view(['GET'])
+def protocol_datatable_list(request):
+    if request.method == 'GET':
+        search_field_list = ('name','description')
+        response = generic_datatable_list_endpoint(request, search_field_list, GeoreferenceProtocol, GeoreferenceProtocolSerializer)
+        return response
 
 @api_view(['GET'])
 def paraulaclau_datatable_list(request):
@@ -2716,6 +2731,21 @@ def t_paisos(request):
     }
     return render(request, 'georef/t_generic.html', context)
 
+@login_required
+def t_protocols(request):
+    description = get_lookup_description(request.LANGUAGE_CODE, 'georef_addenda.GeoreferenceProtocol')
+    context = {
+        'text_field_name': 'name',
+        'column_name': _('Nom'),
+        'class_name_sing': _('Protocol de georeferenciació'),
+        'crud_url': reverse('protocols-list'),
+        'list_url': reverse('protocol_datatable_list'),
+        'instance_label': 't_protocols',
+        'description': description.description if description else None,
+        'description_id': description.id if description else None,
+        'class_full_qualified_name': 'georef_addenda.GeoreferenceProtocol'
+    }
+    return render(request, 'georef/t_generic.html', context)
 
 @login_required
 def t_paraulesclau(request):
