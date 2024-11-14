@@ -1615,7 +1615,7 @@ msgstr ""
 
 #: georef_addenda/models.py:168
 msgid "Protocol de georeferenciació del Museu de Zoologia de Barcelona"
-msgstr ""
+msgstr "Georeferencing protocol of the Museu de Zoolgia de Barcelona"
 
 #~ msgid "Anar a google"
 #~ msgstr "Go to google"
