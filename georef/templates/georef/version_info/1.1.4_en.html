@@ -1,0 +1,36 @@
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading"><b>Novetats a la versió {{ version }}</b></h4>
+    <h5 class="alert-heading"><b>Errors esmenats/millores:</b></h5>
+    <ul>
+        <li>
+            Added georeferencing protocol field to Site name versions. This field allows specifying the protocol used
+            during georeferencing.
+        </li>
+        <li>
+            Added links to Darwin Core fields which have a direct correspondence with Site name and Site name version
+            fields, as previous step to allowing import from and to Darwin Core format.
+        </li>
+        <li>
+            Added description fields to Lookup tables, both at Lookup table and Lookup table element level.
+        </li>
+        <li>
+            When filtering a group of Site names from the Site name list filter, we now zoom to the filtered elements
+            extent on the map.
+        </li>
+        <li>
+            Deleting any element in the application is restricted to admin users.
+        </li>
+        <li>
+            Added Version copy button to Site name versions. This button replicates the fields from one version to another
+            to reduce edition effort.
+        </li>
+        <li>
+            Added visual help which highlights on the map the selected Site name, whether clicking on the individual element
+            on the map or selecting through the binocular icon on the Site names table.
+        </li>
+        <li>
+            Added a check before adding a new Site name which warns the user of similarly named Sites, to avoid as much
+            as possible accidentally adding duplicate info.
+        </li>
+    </ul>
+</div>
