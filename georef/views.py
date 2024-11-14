@@ -1087,10 +1087,13 @@ def copy_version(request):
         new_version.iduser = this_user
         new_version.datacaptura = datetime.date.today()
         new_version.save()
-        original_geometry = GeometriaToponimVersio.objects.get(idversio=original_version.id)
-        cloned_geometry = original_geometry.clone()
-        cloned_geometry.idversio = new_version
-        cloned_geometry.save()
+        try:
+            original_geometry = GeometriaToponimVersio.objects.get(idversio=original_version.id)
+            cloned_geometry = original_geometry.clone()
+            cloned_geometry.idversio = new_version
+            cloned_geometry.save()
+        except GeometriaToponimVersio.DoesNotExist: #in case there is no geometry in the original version
+            pass
         return Response(data={ 'new_version_id': new_version.id }, status=201)
 
 @api_view(['GET'])

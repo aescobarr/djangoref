@@ -73,6 +73,7 @@ class ToponimversioForm(ModelForm):
     coordenada_y_centroide = forms.CharField(widget=forms.TextInput(attrs={'readonly':'readonly'}), required=False)
     precisio_h = forms.FloatField(widget=forms.NumberInput(attrs={'readonly':'readonly'}), required=False)
     observacions = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}), required=False)
+    georeference_protocol = forms.ModelChoiceField(queryset=GeoreferenceProtocol.objects.all().order_by('name'), widget=forms.Select, required=True)
     dateTimeOptions = {
         'format': 'dd/mm/yyyy'
     }
@@ -83,11 +84,15 @@ class ToponimversioForm(ModelForm):
         #fields = ['numero_versio', 'idqualificador','idrecursgeoref','nom','datacaptura','coordenada_x_origen','coordenada_y_origen','coordenada_z_origen','precisio_z_origen','coordenada_x_centroide','coordenada_y_centroide','precisio_h','observacions']
         fields = ['numero_versio', 'idqualificador', 'idrecursgeoref', 'nom', 'datacaptura', 'coordenada_x_origen',
                   'coordenada_y_origen', 'altitud_profunditat_maxima', 'altitud_profunditat_minima', 'coordenada_x_centroide',
-                  'coordenada_y_centroide', 'precisio_h', 'observacions', 'georefcalc_string', 'georefcalc_uncertainty', 'centroid_calc_method']
+                  'coordenada_y_centroide', 'precisio_h', 'observacions', 'georefcalc_string', 'georefcalc_uncertainty', 'centroid_calc_method', 'georeference_protocol']
         widgets = {
             'idrecursgeoref': forms.HiddenInput(),
             'centroid_calc_method': forms.HiddenInput(),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(ToponimversioForm, self).__init__(*args, **kwargs)
+        self.fields['georeference_protocol'].initial = GeoreferenceProtocol.get_default_pk()
 
 
 class UserForm(forms.ModelForm):

@@ -22,6 +22,8 @@
         }
         .toponimversio_edit tbody tr th {
             min-width: 175px;
+            padding-top: 8px;
+            padding-bottom: 8px;
         }
         .toponimversio_edit tbody tr td select{
             width: 100%;
@@ -257,6 +259,11 @@
                                 <tr>
                                     <th>{% trans 'Sistema referència del recurs' %} <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:verbatimSRS" target="_blank">dwc:verbatimSRS</a> </th>
                                     <td id="sistref_recurs">{{ toponimversio_form.instance.idrecursgeoref.idsistemareferenciamm.nom }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{% trans 'Protocol de Georeferenciació' %} <a class="dwc_link" href="https://dwc.tdwg.org/terms/#dwc:georeferenceProtocol" target="_blank">dwc:georeferenceProtocol</a> </th>
+                                    <td>{{ toponimversio_form.georeference_protocol }}</td>
+                                    <td>{{ toponimversio_form.georeference_protocol.errors }}</td>
                                 </tr>
                                 <tr>
                                     <th><label class="iconainfo"  title="{% trans 'toponym_nomtoponim_resource' %}" for="{{ toponimversio_form.nom.id_for_label }}">{% trans 'Nom del topònim al recurs' %}</label>  </th>
