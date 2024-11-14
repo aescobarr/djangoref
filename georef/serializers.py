@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from georef.models import Toponim, Tipustoponim, Filtrejson, Recursgeoref, Toponimversio, Paraulaclau, Capawms, \
     Capesrecurs, Qualificadorversio, Pais, Tipusrecursgeoref, Suport, Tipusunitats, Sistemareferenciamm
-from georef_addenda.models import Profile, Autor, Organization, MenuItem
+from georef_addenda.models import Profile, Autor, Organization, MenuItem, GeoreferenceProtocol
 from django.contrib.auth.models import User
 import json
 
@@ -214,6 +214,11 @@ class AutorSerializer(serializers.ModelSerializer):
         model = Autor
         fields = ('id', 'nom', 'description')
 
+
+class GeoreferenceProtocolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GeoreferenceProtocol
+        fields = ('id', 'name', 'description')
 
 class ParaulaClauSerializer(serializers.ModelSerializer):
     class Meta:
