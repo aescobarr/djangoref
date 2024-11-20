@@ -19,7 +19,7 @@ gunicorn==19.9.0
 haversine==2.0.0
 html5lib==1.0.1
 idna==2.6
-numpy==1.14.0
+numpy==1.22.0
 OWSLib==0.16.0
 pdfrw==0.4
 Pillow==5.0.0
