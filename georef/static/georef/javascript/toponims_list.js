@@ -135,7 +135,11 @@ $(document).ready(function() {
                 'data': 'editable',
                 'sortable': false,
                 'render': function(value){
-                    return '<button class="edit_button btn btn-sm btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+                    if(value){
+                        return '<button class="edit_button btn btn-sm btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+                    }else{
+                        return '&nbsp;';
+                    }
                 }
             },
             {
