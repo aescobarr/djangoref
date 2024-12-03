@@ -458,7 +458,7 @@ msgstr ""
 
 #: georef/static/georef/javascript/toponim_create.js:221
 msgid "Sí, crear topònim"
-msgstr "Yes, create site name"
+msgstr ""
 
 #: georef/static/georef/javascript/toponim_create.js:254
 msgid "Ok"
