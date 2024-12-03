@@ -1,6 +1,6 @@
 from django.contrib.messages.context_processors import messages
 from django.middleware.csrf import get_token
-from ajaxuploader.views import AjaxFileUploader
+#from ajaxuploader.views import AjaxFileUploader
 from django.shortcuts import render
 from rest_framework import status, viewsets
 from georef.serializers import ToponimSerializer, FiltrejsonSerializer, RecursgeorefSerializer, ToponimVersioSerializer, \
@@ -35,7 +35,7 @@ from django.core import serializers
 from django.shortcuts import render, get_object_or_404
 from django import forms
 from django.http import HttpResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from georef.forms import ToponimsUpdateForm, ToponimversioForm, ProfileForm, UserForm, ChangePasswordForm, NewUserForm, \
     RecursForm, NewUserProfileForm, LookupDescriptionForm, AddLookupDescriptionForm
 from django.forms import formset_factory
@@ -47,7 +47,7 @@ from django.contrib.gis.geos import GEOSGeometry, GeometryCollection
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from owslib.wms import WebMapService
 from django.contrib.gis.geos import Polygon, GEOSGeometry
 from osgeo import gdal, osr, ogr
@@ -83,7 +83,7 @@ import datetime
 from slugify import slugify
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ugettext
-from django.contrib.auth.views import login
+# from django.contrib.auth.views import login
 from django.http import Http404
 from rest_framework.exceptions import ParseError
 from django.template.loader import TemplateDoesNotExist
@@ -2110,7 +2110,10 @@ def toponims_update(request, id=None):
     return render(request, 'georef/toponim_update.html', context)
 
 
-import_uploader = AjaxFileUploader()
+#import_uploader = AjaxFileUploader()
+def import_uploader(request):
+    ## TODO this does not work on Django 5
+    pass
 
 
 @login_required

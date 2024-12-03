@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 from django.utils.translation import gettext_lazy as _
 
+import django
+from django.utils.translation import gettext
+django.utils.translation.ugettext = gettext
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -159,6 +162,8 @@ LOGOUT_REDIRECT_URL = '/'
 
 LOGIN_URL = '/login'
 
+LOCAL_DATAFILE_ROOT_DIRECTORY = 'helpfile_uploads'
+
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -188,7 +193,10 @@ UPLOAD_DIR = BASE_DIR + "/uploads"
 MEDIA_ROOT = UPLOAD_DIR
 MEDIA_URL = "/media/"
 
-from djangoref.settings_local import *
+try:
+    from djangoref.settings_local import *
+except ModuleNotFoundError:
+    pass
 
 #5MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760

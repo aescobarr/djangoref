@@ -15,16 +15,17 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.urls import include, re_path
 from django.contrib import admin
 from georef import views
-from django.contrib.auth.views import login,logout
+#from django.contrib.auth.views import login,logout
+#from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
-    url('^', include('django.contrib.auth.urls')),
-    url('^', include('georef.urls')),
+    re_path('^', include('django.contrib.auth.urls')),
+    re_path('^', include('georef.urls')),
     #url(r'^georef/', include('georef.urls')),
     #url(r'^accounts/login/$', login, name='login'),
     #url(r'^logout/$', logout, {'next_page': '/accounts/login'}, name='logout'),
-    url(r'^admin/', admin.site.urls),
+    re_path(r'^admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
