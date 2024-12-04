@@ -142,8 +142,12 @@ USE_TZ = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': os.environ.get("SQL_ENGINE", 'django.contrib.gis.db.backends.postgis'),
+        'NAME': os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "postgres")),
+        'USER': os.environ.get("SQL_USER", "postgres"),
+        'PASSWORD': os.environ.get("SQL_PASSWORD", ""),
+        'HOST': os.environ.get("SQL_HOST", "db"),
+        'PORT': os.environ.get("SQL_PORT", "5432")
     }
 }
 
@@ -188,10 +192,26 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 25
 }
 
-# OVERRIDEN IN SETTINGS_LOCAL
+MEDIA_URL = '/media/'
+# Media root
 UPLOAD_DIR = BASE_DIR + "/uploads"
+LOCAL_DATAFILE_ROOT_DIRECTORY = 'helpfile_uploads'
 MEDIA_ROOT = UPLOAD_DIR
-MEDIA_URL = "/media/"
+STATIC_ROOT = '/public_html/djangoref/static/'
+
+#GEOSERVER STUFF
+#DO NOT CHANGE THIS VALUE!
+GEOSERVER_WORKSPACE = 'mzoologia'
+GEOSERVER_USER = os.environ.get("GEOSERVER_ADMIN_USER", 'admin')
+GEOSERVER_PASSWORD = os.environ.get("GEOSERVER_ADMIN_PASSWORD", 'geoserver')
+GEOSERVER_BASE_URL = 'http://127.0.0.1:8080/'
+GEOSERVER_WMS_URL_CLEAN = GEOSERVER_BASE_URL + 'geoserver/wms/'
+GEOSERVER_REST_URL = GEOSERVER_BASE_URL + 'geoserver/rest/'
+GEOSERVER_WMS_URL = GEOSERVER_BASE_URL + 'geoserver/' + GEOSERVER_WORKSPACE + "/wms/?"
+
+BING_MAPS_API_KEY = os.environ.get("BING_MAPS_API_KEY", "")
+
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:1337']
 
 try:
     from djangoref.settings_local import *

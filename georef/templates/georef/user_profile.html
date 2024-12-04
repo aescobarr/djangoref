@@ -1,6 +1,6 @@
 {% extends "georef/user_base.html" %}
 {% load i18n %}
-{% load staticfiles %}
+{% load static %}
 {% block form %}
 <form action="{% url 'user_profile' user_id %}" onsubmit="return checkPermissions()" method="POST">
 {% endblock %}
