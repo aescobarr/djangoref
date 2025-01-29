@@ -1347,7 +1347,7 @@ def toponims_update_2(request, idtoponim=None, idversio=None):
             'node_ini': node_ini,
             'wms_url': wms_url,
             'wmslayers': json.dumps(wms_dict),
-            'bing': conf.BING_MAPS_API_KEY
+            'bing': conf.BING_MAPS_API_KEY            
         }
         return render(request, 'georef/toponim_update_2.html', context)
     elif request.method == 'POST':

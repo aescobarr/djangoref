@@ -14,23 +14,29 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <style>
         /* Fix to avoid table overflow */
+        /*
         .toponimversio_edit{
             width: 100%;
         }
+        
         .toponimversio_edit tbody tr td {
             width: 100%;
         }
+        
         .toponimversio_edit tbody tr th {
             min-width: 175px;
             padding-top: 8px;
             padding-bottom: 8px;
         }
+        
         .toponimversio_edit tbody tr td select{
             width: 100%;
-        }
+        }        
+        
         .toponimversio_edit tbody tr td input{
             width: 100%;
-        }
+        }*/       
+        
         #map{
             height: 900px;
         }
@@ -80,7 +86,7 @@
     <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'jquery-ui/jquery-ui.min.js' %}"></script>
     <script src="{% static 'bootstrap/dist/js/bootstrap.js' %}"></script>
-    <script src="{% static 'toastr/toastr.min.js' %}"></script>
+    <script src="{% static 'toastr/toastr.min.js' %}"></script>    
     {{ toponimversio_form.media }}
 {% endblock %}
 {% block main %}
@@ -174,7 +180,8 @@
                 <tr {% if versio.id == id_darrera_versio %} class="active_edit" {% endif %} id="{{ versio.id }}">
                     <td>{{ versio.numero_versio }}</td>
                     <td>{{ versio.idqualificador.qualificador }}</td>
-                    <td>{{ versio.datacaptura | date:"d/m/Y"}}</td>
+                    <!--<td>{{ versio.datacaptura | date:"d/m/Y"}}</td>-->
+                    <td>{{ versio.datacaptura }}</td>
                     <td>{{ versio.iduser.first_name }} {{ versio.iduser.last_name }}</td>
                     <td><a href="{% url 'toponims_update_2' idtoponim versio.id %}" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></a></td>
                     <td>

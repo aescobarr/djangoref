@@ -1,4 +1,5 @@
 ajaxuploader==0.3.8
+annotated-types==0.7.0
 asgiref==3.8.1
 Brotli==1.1.0
 certifi==2024.8.30
@@ -6,6 +7,7 @@ cffi==1.17.1
 charset-normalizer==3.4.0
 cssselect2==0.7.0
 Django==5.1.3
+django-bootstrap-datepicker-plus==5.0.5
 django-bootstrap3==24.3
 django-bower==5.2.0
 django-datetime-widget==0.9.3
@@ -25,6 +27,8 @@ pandas==2.2.3
 pillow==10.4.0
 psycopg2==2.9.10
 pycparser==2.22
+pydantic==2.10.3
+pydantic_core==2.27.1
 pydyf==0.11.0
 pyphen==0.15.0
 pyproj==3.7.0
@@ -40,6 +44,7 @@ slugify==0.0.1
 sqlparse==0.5.2
 tinycss2==1.4.0
 tinyhtml5==2.0.0
+typing_extensions==4.12.2
 tzdata==2024.2
 urllib3==2.2.3
 weasyprint==63.0

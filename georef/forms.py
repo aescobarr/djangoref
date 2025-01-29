@@ -3,7 +3,8 @@ from django import forms
 from georef.models import *
 from django.forms import ModelForm
 from django.forms import inlineformset_factory
-from datetimewidget.widgets import DateWidget
+#from datetimewidget.widgets import DateWidget
+from bootstrap_datepicker_plus.widgets import DatePickerInput
 from georef_addenda.models import Profile, LookupDescription
 from djangoref import settings
 from georef.cyclic import check_if_cyclic
@@ -74,10 +75,12 @@ class ToponimversioForm(ModelForm):
     precisio_h = forms.FloatField(widget=forms.NumberInput(attrs={'readonly':'readonly'}), required=False)
     observacions = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}), required=False)
     georeference_protocol = forms.ModelChoiceField(queryset=GeoreferenceProtocol.objects.all().order_by('name'), widget=forms.Select, required=True)
-    dateTimeOptions = {
-        'format': 'dd/mm/yyyy'
-    }
-    datacaptura = forms.DateField(initial=datetime.date.today, input_formats=['%d/%m/%Y'],widget=DateWidget(bootstrap_version=3, options=dateTimeOptions),required=False)
+    # dateTimeOptions = {
+    #     'format': 'dd/mm/yyyy'
+    # }
+    # datacaptura = forms.DateField(initial=datetime.date.today, input_formats=['%d/%m/%Y'],widget=DateWidget(bootstrap_version=3, options=dateTimeOptions),required=False)
+    datacaptura = forms.DateField(widget=DatePickerInput(options={"format": "DD/MM/YYYY"}))
+
 
     class Meta:
         model = Toponimversio

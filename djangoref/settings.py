@@ -69,7 +69,7 @@ INSTALLED_APPS = [
     'georef_addenda',
     'djangobower',
     'ajaxuploader',
-    'datetimewidget',
+    "bootstrap_datepicker_plus",
 ]
 
 MIDDLEWARE = [
@@ -85,6 +85,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'djangoref.urls'
+
+# Fix for bootstrap_datepicker_plus. Using local files; but bug should be fixed on next official release
+# Current version gives
+# Deprecate Mutation Events (Deprecated) on current browsers
+DOMAIN = 'localhost'
+BOOTSTRAP_DATEPICKER_PLUS = {    
+    "app_static_url": f"http{'s' if not DEBUG else ''}://{DOMAIN}{':8000' if DEBUG else ''}/static/georef/javascript/bootstrap_datepicker_plus/",
+}
 
 TEMPLATES = [
     {

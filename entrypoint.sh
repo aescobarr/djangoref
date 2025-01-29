@@ -11,6 +11,6 @@ echo "PostgreSQL started"
 echo "Collecting static resources"
 python3 manage.py collectstatic --noinput
 #echo "Creating django users"
-python3 createusers.py
+#python3 createusers.py
 
 exec "$@"
