@@ -67,19 +67,26 @@ class ToponimsUpdateForm(ModelForm):
 
 
 class ToponimversioForm(ModelForm):
-    numero_versio = forms.IntegerField(required=True)
-    idqualificador = forms.ModelChoiceField(queryset=Qualificadorversio.objects.all().order_by('qualificador'), widget=forms.Select, required=False)
+    numero_versio = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}),required=True)
+    idqualificador = forms.ModelChoiceField(queryset=Qualificadorversio.objects.all().order_by('qualificador'), widget=forms.Select(attrs={'class': 'form-control'}), required=False)
     #idrecursgeoref  = forms.ModelChoiceField(queryset=Recursgeoref.objects.all().order_by('nom'), widget=forms.Select, required=False)
-    coordenada_x_centroide = forms.CharField(widget=forms.TextInput(attrs={'readonly':'readonly'}), required=False)
-    coordenada_y_centroide = forms.CharField(widget=forms.TextInput(attrs={'readonly':'readonly'}), required=False)
-    precisio_h = forms.FloatField(widget=forms.NumberInput(attrs={'readonly':'readonly'}), required=False)
+    coordenada_x_centroide = forms.CharField(widget=forms.TextInput(attrs={'readonly':'readonly','class': 'form-control'}), required=False)
+    coordenada_x_origen = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+    coordenada_y_centroide = forms.CharField(widget=forms.TextInput(attrs={'readonly':'readonly','class': 'form-control'}), required=False)
+    coordenada_y_origen = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+    altitud_profunditat_maxima = forms.FloatField(widget=forms.NumberInput(attrs={'class': 'form-control'}), required=False)
+    altitud_profunditat_minima = forms.FloatField(widget=forms.NumberInput(attrs={'class': 'form-control'}), required=False)
+    precisio_h = forms.FloatField(widget=forms.NumberInput(attrs={'readonly':'readonly','class': 'form-control'}), required=False)
     observacions = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}), required=False)
-    georeference_protocol = forms.ModelChoiceField(queryset=GeoreferenceProtocol.objects.all().order_by('name'), widget=forms.Select, required=True)
+    georefcalc_string = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5','cols': 50}), required=False)
+    georefcalc_uncertainty = forms.FloatField(widget=forms.NumberInput(attrs={'class': 'form-control'}), required=False)
+    georeference_protocol = forms.ModelChoiceField(queryset=GeoreferenceProtocol.objects.all().order_by('name'), widget=forms.Select(attrs={'class': 'form-control'}), required=True)
     # dateTimeOptions = {
     #     'format': 'dd/mm/yyyy'
     # }
     # datacaptura = forms.DateField(initial=datetime.date.today, input_formats=['%d/%m/%Y'],widget=DateWidget(bootstrap_version=3, options=dateTimeOptions),required=False)
-    datacaptura = forms.DateField(widget=DatePickerInput(options={"format": "DD/MM/YYYY"}))
+    datacaptura = forms.DateField(widget=DatePickerInput({'class': 'form-control'}, options={"format": "DD/MM/YYYY"}))
+    nom = forms.CharField(widget=forms.TextInput({'class': 'form-control'}))
 
 
     class Meta:
