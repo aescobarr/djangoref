@@ -124,7 +124,10 @@
                     <li role="separator" class="divider"></li>
                     {% endif %}
                     <li>
-                        <a class="nav-link" href="{% url 'logout' %}">{% trans "Tancar sessió" %} - {{ user.username }}</a>
+                        <form method="post" id="logout_form" action="{% url 'logout' %}">
+                            {% csrf_token %}                            
+                        </form>
+                        <a class="nav-link" onclick="$('#logout_form').submit();return false;" href="#">{% trans "Tancar sessió" %} - {{ user.username }}</a>
                     </li>
                 </ul>
             </li>

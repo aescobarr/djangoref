@@ -147,7 +147,7 @@ $(document).ready(function() {
 
     var delete_recurs = function(id){
         $.ajax({
-            url: _recurs_delete_url + id,
+            url: _recurs_delete_url + id + "/",
             method: 'DELETE',
             beforeSend: function(xhr, settings) {
                 if (!csrfSafeMethod(settings.type)) {
@@ -167,7 +167,7 @@ $(document).ready(function() {
 
     var delete_filtre = function(id){
         $.ajax({
-            url: _filtres_delete_url + id,
+            url: _filtres_delete_url + id + "/",
             method: 'DELETE',
             beforeSend: function(xhr, settings) {
                 if (!csrfSafeMethod(settings.type)) {

@@ -82,7 +82,7 @@ $(document).ready(function() {
     var perform_delete_check = function(id){
         var def = $.Deferred();
         $.ajax({
-            url: check_delete_url + '?' + 'mfqn=auth.User&id=' + encodeURI(id),
+            url: check_delete_url + '?' + 'mfqn=auth.User&id=' + encodeURI(id) + "/",
             method: 'GET',
             beforeSend: function(xhr, settings) {
                 if (!csrfSafeMethod(settings.type)) {
@@ -102,7 +102,7 @@ $(document).ready(function() {
 
     var delete_usuari = function(id){
         $.ajax({
-            url: _user_delete_url + id,
+            url: _user_delete_url + id + "/",
             method: 'DELETE',
             beforeSend: function(xhr, settings) {
                 if (!csrfSafeMethod(settings.type)) {

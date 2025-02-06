@@ -58,7 +58,7 @@ $(document).ready(function() {
 
     var delete_toponimfilter = function(id){
         $.ajax({
-            url: _toponimsfilter_delete_url + id,
+            url: _toponimsfilter_delete_url + id + "/",
             method: "DELETE",
             beforeSend: function(xhr, settings) {
                 if (!csrfSafeMethod(settings.type)) {

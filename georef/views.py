@@ -92,6 +92,9 @@ from georef.sec_calculation import compute_sec
 import pandas as pd
 import sys
 from django.contrib.postgres.search import TrigramSimilarity
+from django.http import JsonResponse
+from django.core.files.storage import default_storage
+
 
 def get_order_clause(params_dict, translation_dict=None):
     order_clause = []
@@ -2112,8 +2115,24 @@ def toponims_update(request, id=None):
 
 #import_uploader = AjaxFileUploader()
 def import_uploader(request):
-    ## TODO this does not work on Django 5
-    pass
+    if request.method == "POST":
+    # and request.FILES.get("file"):
+        print(request.is_ajax())
+        file = request.FILES["file"]
+        temp_filename = f"temp_{uuid.uuid4().hex}_{file.name}"
+        temp_path = os.path.join(settings.MEDIA_ROOT, "temp", temp_filename)
+
+        # Ensure the temp directory exists
+        os.makedirs(os.path.dirname(temp_path), exist_ok=True)
+
+        # Save file temporarily
+        with default_storage.open(temp_path, "wb+") as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+
+        return JsonResponse({"success": True, "file_url": f"/media/temp/{temp_filename}"})
+
+    return JsonResponse({"success": False, "error": "No file provided"}, status=400)
 
 
 @login_required

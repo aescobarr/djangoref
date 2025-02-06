@@ -264,7 +264,7 @@ $(document).ready(function() {
 
     var delete_filtre = function(id){
         $.ajax({
-            url: _filtres_delete_url + id,
+            url: _filtres_delete_url + id + "/",
             method: 'DELETE',
             beforeSend: function(xhr, settings) {
                 if (!csrfSafeMethod(settings.type)) {
@@ -344,7 +344,7 @@ $(document).ready(function() {
 
     var delete_toponim = function(id){
         $.ajax({
-            url: _toponim_delete_url + id,
+            url: _toponim_delete_url + id + '/',
             method: 'DELETE',
             beforeSend: function(xhr, settings) {
                 if (!csrfSafeMethod(settings.type)) {

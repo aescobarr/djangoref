@@ -192,7 +192,7 @@ var refreshCentroid = function(radius_km){
 
 var delete_versio = function(id){
     $.ajax({
-        url: _versio_delete_url + id,
+        url: _versio_delete_url + id + "/",
         method: "DELETE",
         beforeSend: function(xhr, settings) {
             if (!csrfSafeMethod(settings.type)) {
