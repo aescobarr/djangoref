@@ -2115,24 +2115,25 @@ def toponims_update(request, id=None):
 
 #import_uploader = AjaxFileUploader()
 def import_uploader(request):
-    if request.method == "POST":
-    # and request.FILES.get("file"):
-        print(request.is_ajax())
-        file = request.FILES["file"]
-        temp_filename = f"temp_{uuid.uuid4().hex}_{file.name}"
-        temp_path = os.path.join(settings.MEDIA_ROOT, "temp", temp_filename)
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+        file_name = default_storage.save(uploaded_file.name, uploaded_file)  # Saves file
+        file_url = default_storage.url(file_name)  # Public URL (if using media storage)
+        
+        # Extract filename with extension
+        filename_with_ext = os.path.basename(file_name)
+        
+        # Absolute file path
+        file_absolute_path = os.path.join(settings.MEDIA_ROOT, file_name)
 
-        # Ensure the temp directory exists
-        os.makedirs(os.path.dirname(temp_path), exist_ok=True)
+        return JsonResponse({
+            'success': True,
+            'file_url': file_url,
+            'filename': filename_with_ext,
+            'file_path': file_absolute_path
+        })
 
-        # Save file temporarily
-        with default_storage.open(temp_path, "wb+") as destination:
-            for chunk in file.chunks():
-                destination.write(chunk)
-
-        return JsonResponse({"success": True, "file_url": f"/media/temp/{temp_filename}"})
-
-    return JsonResponse({"success": False, "error": "No file provided"}, status=400)
+    return JsonResponse({'success': False, 'error': 'No file uploaded'})
 
 
 @login_required

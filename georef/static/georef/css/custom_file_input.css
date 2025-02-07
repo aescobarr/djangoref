@@ -1,0 +1,27 @@
+#fileInput {
+    display: none;
+}
+
+/* Styled button */
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.custom-file-upload:hover {
+    background-color: #0056b3;
+}
+
+#message {
+    margin-top: 5px;
+    font-style: italic;
+    font-size: 10px;
+}

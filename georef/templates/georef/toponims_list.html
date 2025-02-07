@@ -7,8 +7,8 @@
     <link href="{% static 'georef/javascript/leaflet/leaflet.css' %}" rel="stylesheet">
     <link href="{% static 'georef/javascript/leaflet.plugins/Leaflet.StyledLayerControl/css/styledLayerControl.css' %}" rel="stylesheet">
     <link href="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/leaflet.draw.css' %}" rel="stylesheet">
-    <link href="{% static 'georef/css/georef.css' %}" rel="stylesheet">
-    <link href="{% static 'georef/javascript/ajaxuploader/css/fileuploader.css' %}" media="screen" rel="stylesheet" type="text/css" >
+    <link href="{% static 'georef/css/custom_file_input.css' %}" rel="stylesheet">
+    <link href="{% static 'georef/css/georef.css' %}" rel="stylesheet">    
     <link href="{% static 'georef/javascript/leaflet.plugins/Leaflet.Coordinates-master/dist/Leaflet.Coordinates-0.1.5.css' %}" rel="stylesheet">
     <link href="{% static 'georef/javascript/leaflet.plugins/leaflet-sidebar-v2/leaflet-sidebar.css' %}" rel="stylesheet">
     <style>
@@ -169,8 +169,10 @@
         </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div id="fileuploader"></div>
+    <div class="container-fluid">        
+        <input type="file" id="fileInput">
+        <label for="fileInput" class="custom-file-upload">Importar shapefile</label>
+        <p id="message"></p>
     </div>
 </main>
 {% endblock %}
@@ -264,14 +266,14 @@
     <script src="{% static 'georef/javascript/cookies.js' %}?{{ revision }}"></script>
     <script src="{% static 'georef/javascript/csrf_utils.js' %}?{{ revision }}"></script>
     <script src="{% static 'georef/javascript/filtre.js' %}?{{ revision }}"></script>
-    <script src="{% static 'georef/javascript/filtrecql.js' %}?{{ revision }}"></script>
-    <script src="{% static 'ajaxuploader/js/fileuploader.js' %}"></script>
+    <script src="{% static 'georef/javascript/filtrecql.js' %}?{{ revision }}"></script>    
     <script src="{% static 'georef/javascript/toponims_list.js' %}?{{ revision }}"></script>
     <script src="{% static 'georef/javascript/leaflet-bing-layer.min.js' %}"></script>
     <script>
         var bing_key = '{{ bing }}';
     </script>
     <script src="{% static 'georef/javascript/djangoref_map.js' %}?{{ revision }}"></script>
+    <script src="{% static 'georef/javascript/file_uploader.js' %}?{{ revision }}"></script>
     <script src="{% static 'georef/javascript/init_llista_toponims.js' %}?{{ revision }}"></script>
     <!--<script src="{% static 'georef/javascript/leaflet_map_editable.js' %}"></script>-->
 {% endblock %}
