@@ -207,7 +207,7 @@
         var perform_delete_check = function(id){
             var def = $.Deferred();
             $.ajax({
-                url: check_delete_url + '?' + 'mfqn=' + encodeURI(options.class_full_qualified_name) + '&id=' + encodeURI(id),
+                url: check_delete_url + '?' + 'mfqn=' + encodeURI(options.class_full_qualified_name) + '&id=' + encodeURI(id) + "/",
                 method: 'GET',
                 beforeSend: function(xhr, settings) {
                     if (!csrfSafeMethod(settings.type)) {

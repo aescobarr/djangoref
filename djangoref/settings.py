@@ -16,6 +16,7 @@ from django.utils.translation import gettext_lazy as _
 import django
 from django.utils.translation import gettext
 django.utils.translation.ugettext = gettext
+import debugpy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -249,3 +250,9 @@ PATCH="4"
 #     (_("Georeferenciació - Georeferencing calculator"), "https://www.gbif.org/tool/81315/georeferencing-calculator"),
 #     (_("Georeferenciació - Berkeley Mapper"), "http://berkeleymapper.berkeley.edu/#"),
 # )
+if os.getenv("DEBUG") and not debugpy.is_client_connected():
+    try:
+        debugpy.listen(("0.0.0.0", 5678))
+        print("Waiting for debugger to attach...")
+    except RuntimeError:
+        print("Debugger is already listening. Skipping setup.")

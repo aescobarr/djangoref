@@ -8,7 +8,7 @@
 
             body{
                 font-family: 'Helvetica Neue', Helvetica, Arial;
-                font-size: 10px;
+                font-size: 8px;
                 line-height: 20px;
                 font-weight: 400;
                 /*color: #3b3b3b;*/
@@ -20,11 +20,11 @@
             .wrapper{
                 margin: 0 auto;
                 padding: 20px;
-                max-width: 800px;
+                max-width: 700px;
             }
 
             .table{
-                margin: 0 0 40px 0;
+                margin: 0 0 20px 0;
                 width: 100%;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.2);
                 display: table;
@@ -95,24 +95,7 @@
         </style>
     </head>
     <body>
-        <h1>{{ title }}</h1>
-        <!--<table>
-            <thead>
-                <th>Nom</th>
-                <th>Aquàtic</th>
-                <th>Tipus Topònim</th>
-            </thead>
-            <tbody>
-            {% for record in records %}
-                <tr>
-                    <td>{{ record.nom_str }}</td>
-                    <td>{{ record.aquatic }}</td>
-                    <td>{{ record.idtipustoponim.nom }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>-->
-
+        <h1>{{ title }}</h1>        
         <div class="wrapper">
             <div class="table">
                 <div class="row header blue">
