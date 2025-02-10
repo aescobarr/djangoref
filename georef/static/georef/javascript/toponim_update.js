@@ -189,6 +189,98 @@ var refreshCentroid = function(radius_km){
     });
 }
 
+var uploadFile = function () {
+    let fileInput = $('#fileInput')[0];
+
+    if (fileInput.files.length === 0) {
+        alert("Please select a file.");
+        return;
+    }
+
+    let file = fileInput.files[0];
+    let formData = new FormData();
+    formData.append("file", file);        
+
+    $.ajax({
+        url: _ajax_upload_url,  // Make sure this variable is defined
+        type: "POST",
+        data: formData,
+        processData: false,  // Prevent jQuery from processing the data
+        contentType: false,  // Prevent jQuery from setting content type
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                var csrftoken = getCookie('csrftoken');
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+            }
+        },            
+        xhr: function () {
+            let xhr = new window.XMLHttpRequest();
+            xhr.upload.addEventListener("progress", function (event) {
+                if (event.lengthComputable) {
+                    let percent = (event.loaded / event.total) * 100;
+                    $("#progress-bar").css("width", percent + "%").text(Math.round(percent) + "%");
+                    $("#progress-container").show();
+                }
+            }, false);
+            return xhr;
+        },
+        success: function (response) {
+            if (response.success) {
+                $("#message").html(`<p>File uploaded successfully: <a href="${response.file_url}" target="_blank">${response.file_url}</a></p>`);
+                let path = response.file_path;
+                importa_shapefile(path);
+            } else {
+                $("#message").html("<p>Upload failed!</p>");
+            }
+        },
+        error: function () {
+            $("#message").html("<p>An error occurred while uploading.</p>");
+        }
+    });
+};
+
+var importa_shapefile = function(filepath){
+    $.ajax({
+        url: _import_shapefile_url,
+        data: 'path=' + encodeURI(filepath),
+        method: 'GET',
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                var csrftoken = getCookie('csrftoken');
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+            }
+        },
+        success: function( data, textStatus, jqXHR ) {
+            djangoRef_map.editableLayers.clearLayers();
+            var geoJson = JSON.parse(data.detail);
+            var geoJSONLayer = L.geoJson(geoJson);
+            geoJSONLayer.eachLayer(
+                function(l){
+                    djangoRef_map.editableLayers.addLayer(l);
+                }
+            );
+            if(geoJSONIsSinglePoint(geoJson)){
+                dialog_centroid.dialog("open");
+            }else{
+                /*$$*/
+                /*djangoRef_map.refreshCentroid();*/
+                refreshCentroid();
+                /*refreshCentroidUI();*/
+                refreshDigitizedGeometry();
+                djangoRef_map.editableLayers.bringToFront();
+                if(djangoRef_map.centroid.getBounds().isValid()){
+                    djangoRef_map.map.fitBounds(djangoRef_map.centroid.getBounds());
+                }
+                toastr.success(gettext('Importació amb èxit!'));
+            }
+
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            toastr.error(gettext('Error important fitxer') + ':' + jqXHR.responseJSON.detail);
+        }
+    });
+};
+
 
 var delete_versio = function(id){
     $.ajax({
@@ -545,9 +637,7 @@ $(document).ready(function() {
 
     map_options.consultable = [toponims.layer];
 
-    djangoRef_map = new djangoRef.Map.createMap(map_options);
-
-    upload_component = new djangoRef.FileUploader.createFileUploader({internal_map: map});
+    djangoRef_map = new djangoRef.Map.createMap(map_options);    
 
     djangoRef_map.deselectAllOverlays();
 
@@ -678,5 +768,9 @@ $(document).ready(function() {
             reload_tree( ui.item.node_list );
             return false;
         }
+    });
+
+    $('#fileInput').on('change',function(e){
+        uploadFile();        
     });
 });

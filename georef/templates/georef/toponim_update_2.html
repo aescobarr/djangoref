@@ -218,7 +218,7 @@
                                 </div>
                             </div>
                             <!--<div id="fileuploader"></div>-->
-                            <div class="container-fluid">
+                            <div>
                                 <input type="file" id="fileInput">
                                 <label for="fileInput" class="custom-file-upload">Importar shapefile</label>
                                 <p id="message"></p>
@@ -512,8 +512,7 @@
     <script src="{% static 'georef/javascript/cookies.js'%}?{{ revision }}"></script>
     <script src="{% static 'georef/javascript/csrf_utils.js'%}?{{ revision }}"></script>    
     <script src="{% static 'georef/javascript/wicket.min.js' %}"></script>
-    <script src="{% static 'georef/javascript/utils.js' %}?{{ revision }}"></script>
-    <script src="{% static 'georef/javascript/file_uploader.js' %}?{{ revision }}"></script>
+    <script src="{% static 'georef/javascript/utils.js' %}?{{ revision }}"></script>    
     <script src="{% static 'georef/javascript/toponim_update.js' %}?{{ revision }}"></script>
     <script>
         {% if saved_success %}
