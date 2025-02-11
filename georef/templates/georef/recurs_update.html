@@ -7,7 +7,7 @@
     <link href="{% static 'georef/javascript/leaflet.plugins/Leaflet.StyledLayerControl/css/styledLayerControl.css' %}" rel="stylesheet">
     <link href="{% static 'georef/javascript/leaflet.plugins/Leaflet.Draw.static/src/leaflet.draw.css' %}" rel="stylesheet">
     <link href="{% static 'georef/css/georef.css' %}" rel="stylesheet">
-    <link href="{% static 'georef/javascript/ajaxuploader/css/fileuploader.css' %}" media="screen" rel="stylesheet" type="text/css" >
+    <link href="{% static 'georef/css/custom_file_input.css' %}" rel="stylesheet">
     <link href="{% static 'jstree/dist/themes/default/style.min.css' %}" rel="stylesheet">
     <link href="{% static 'jquery-tagit/css/jquery.tagit.css' %}" rel="stylesheet">
     <link href="{% static 'jquery-tagit/css/tagit.ui-zendesk.css' %}" rel="stylesheet">
@@ -129,7 +129,6 @@
     <script src="{% static 'georef/javascript/djangoref_map.js' %}?{{ revision }}"></script>
     <script src="{% static 'georef/javascript/cookies.js'%}?{{ revision }}"></script>
     <script src="{% static 'georef/javascript/csrf_utils.js'%}?{{ revision }}"></script>
-    <script src="{% static 'ajaxuploader/js/fileuploader.js' %}"></script>
     <script src="{% static 'georef/javascript/recurs_autocomplete.js' %}?{{ revision }}"></script>
     <script src="{% static 'georef/javascript/recurs_update.js' %}?{{ revision }}"></script>
 {% endblock %}

@@ -77,40 +77,91 @@ $(document).ready(function() {
         });
     }
 
-    var uploader = new qq.FileUploader({
-        action: _ajax_upload_url,
-        element: $('#fileuploader')[0],
-        multiple: false,
-        onSubmit: function(id, fileName){
-            $('.qq-upload-list').empty();
-            $('#filename').val('');
-            var regex = /^[\w.]{0,256}$/;
-            if( regex.exec(fileName) == null){
-                toastr.error(gettext('Error a nom de fitxer! Només s\'admeten lletres (majúscules i minúscules), números i el caràcter "_"') );
-                return false;
-            }
-            this.params.deletePrevious = true;
-        },
-        onComplete: function(id, fileName, responseJSON) {
-            if(responseJSON.success) {
-                $('#filename').val(responseJSON.filename);
-                toastr.success(gettext('Fitxer carregat al servidor amb èxit!'))
-            } else {
-                //alert('upload failed!');
-                toastr.error(gettext('Error pujant fitxer!'))
-            }
-        },
-        template:'<div class="qq-uploader">' +
-            '<div class="qq-upload-drop-area"><span>' + gettext('Importar shapefile (zip) ò tiff') + '</span></div>' +
-            '<div class="qq-upload-button ui-widget-content ui-button ui-corner-all ui-state-default">' + gettext('Importar shapefile (zip) ò tiff') + '</div>' +
-            '<ul class="qq-upload-list"></ul>' +
-            '</div>',
-        params: {
-            'csrf_token': csrf_token,
-            'csrf_name': 'csrfmiddlewaretoken',
-            'csrf_xname': 'X-CSRFToken',
+    var uploadFile = function () {
+        let fileInput = $('#fileInput')[0];
+    
+        if (fileInput.files.length === 0) {
+            alert("Please select a file.");
+            return;
         }
-    });
+    
+        let file = fileInput.files[0];
+        let formData = new FormData();
+        formData.append("file", file);        
+    
+        $.ajax({
+            url: _ajax_upload_url,  // Make sure this variable is defined
+            type: "POST",
+            data: formData,
+            processData: false,  // Prevent jQuery from processing the data
+            contentType: false,  // Prevent jQuery from setting content type
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    var csrftoken = getCookie('csrftoken');
+                    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+                }
+            },            
+            xhr: function () {
+                let xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function (event) {
+                    if (event.lengthComputable) {
+                        let percent = (event.loaded / event.total) * 100;
+                        $("#progress-bar").css("width", percent + "%").text(Math.round(percent) + "%");
+                        $("#progress-container").show();
+                    }
+                }, false);
+                return xhr;
+            },
+            success: function (response) {
+                if (response.success) {
+                    toastr.success(gettext('Fitxer carregat al servidor amb èxit!'));
+                    $("#message").html(`<p>File uploaded successfully: <a href="${response.file_url}" target="_blank">${response.file_url}</a></p>`);
+                    $('#filename').val(response.filename);
+                } else {
+                    toastr.error(gettext('Error pujant fitxer!'));
+                    $("#message").html("<p>Upload failed!</p>");
+                }
+            },
+            error: function () {
+                $("#" +  + options.message_id).html("<p>An error occurred while uploading.</p>");
+            }
+        });
+    };
+
+    // var uploader = new qq.FileUploader({
+    //     action: _ajax_upload_url,
+    //     element: $('#fileuploader')[0],
+    //     multiple: false,
+    //     onSubmit: function(id, fileName){
+    //         $('.qq-upload-list').empty();
+    //         $('#filename').val('');
+    //         var regex = /^[\w.]{0,256}$/;
+    //         if( regex.exec(fileName) == null){
+    //             toastr.error(gettext('Error a nom de fitxer! Només s\'admeten lletres (majúscules i minúscules), números i el caràcter "_"') );
+    //             return false;
+    //         }
+    //         this.params.deletePrevious = true;
+    //     },
+    //     onComplete: function(id, fileName, responseJSON) {
+    //         if(responseJSON.success) {
+    //             $('#filename').val(responseJSON.filename);
+    //             toastr.success(gettext('Fitxer carregat al servidor amb èxit!'))
+    //         } else {
+    //             //alert('upload failed!');
+    //             toastr.error(gettext('Error pujant fitxer!'))
+    //         }
+    //     },
+    //     template:'<div class="qq-uploader">' +
+    //         '<div class="qq-upload-drop-area"><span>' + gettext('Importar shapefile (zip) ò tiff') + '</span></div>' +
+    //         '<div class="qq-upload-button ui-widget-content ui-button ui-corner-all ui-state-default">' + gettext('Importar shapefile (zip) ò tiff') + '</div>' +
+    //         '<ul class="qq-upload-list"></ul>' +
+    //         '</div>',
+    //     params: {
+    //         'csrf_token': csrf_token,
+    //         'csrf_name': 'csrfmiddlewaretoken',
+    //         'csrf_xname': 'X-CSRFToken',
+    //     }
+    // });
 
     $('#btnCreaCapa').click(function(){
         var errors = false;
@@ -178,5 +229,9 @@ $(document).ready(function() {
         var row = table.row( tr );
         var id = row.data().id
         confirmDialog(gettext('S\'esborrarà la capa local WMS, incloent la capa del servidor geoserver. Vols continuar?'),id);
+    });
+
+    $('#fileInput').on('change',function(e){
+        uploadFile();        
     });
 });

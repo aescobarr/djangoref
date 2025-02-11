@@ -38,7 +38,7 @@
                         );
                         if(options.internal_map.editableLayers.getBounds().isValid()){
                             options.internal_map.map.fitBounds(options.internal_map.editableLayers.getBounds());
-                        }
+                        }                        
                     }else{
                         toastr.error(gettext('Error important fitxer') + ':' + data.detail);    
                     }

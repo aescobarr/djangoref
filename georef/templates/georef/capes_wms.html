@@ -5,6 +5,7 @@
     <link href="{% static 'datatables.net-dt/css/jquery.dataTables.min.css' %}" rel="stylesheet">
     <link href="{% static 'jquery-ui/themes/base/jquery-ui.min.css' %}" rel="stylesheet">
     <link href="{% static 'georef/css/georef.css' %}" rel="stylesheet">
+    <link href="{% static 'georef/css/custom_file_input.css' %}" rel="stylesheet">
     <link href="{% static 'georef/javascript/ajaxuploader/css/fileuploader.css' %}" media="screen" rel="stylesheet" type="text/css" >
     <style>
         td {
@@ -73,7 +74,12 @@
                         </div>
                     </td>
                     <td>
-                        <div id="fileuploader"></div>
+                        <!--<div id="fileuploader"></div>-->
+                        <div>
+                            <input type="file" id="fileInput">
+                            <label for="fileInput" class="custom-file-upload">Importar shapefile (zip) o *.tiff</label>
+                            <p id="message"></p>
+                        </div>
                     </td>
                     <td>
                         <input data-toggle="tooltip" data-placement="right" id="btnCreaCapa" role="button" class="btn btn-success" value="{% trans 'Crear capa WMS' %}" />
@@ -110,7 +116,6 @@
 {% block extra_js %}
     <script src="{% static 'datatables.net/js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'georef/javascript/cookies.js'%}?{{ revision }}"></script>
-    <script src="{% static 'georef/javascript/csrf_utils.js'%}?{{ revision }}"></script>
-    <script src="{% static 'ajaxuploader/js/fileuploader.js' %}?{{ revision }}"></script>
+    <script src="{% static 'georef/javascript/csrf_utils.js'%}?{{ revision }}"></script>    
     <script src="{% static 'georef/javascript/capes_wms.js' %}?{{ revision }}"></script>
 {% endblock %}
