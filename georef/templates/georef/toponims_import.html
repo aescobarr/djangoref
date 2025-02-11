@@ -4,7 +4,7 @@
 {% block extra_css %}
     <link href="{% static 'jquery-ui/themes/base/jquery-ui.min.css' %}" rel="stylesheet">
     <link href="{% static 'georef/css/georef.css' %}" rel="stylesheet">
-    <link href="{% static 'georef/javascript/ajaxuploader/css/fileuploader.css' %}" media="screen" rel="stylesheet" type="text/css" >
+    <link href="{% static 'georef/css/custom_file_input.css' %}" rel="stylesheet">    
 {% endblock %}
 {% block extrahead %}
     <script>
@@ -42,7 +42,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 separador_seccio">
-                    <div id="fileuploader"></div>
+                    <!--<div id="fileuploader"></div>-->
+                    <div>
+                        <input type="file" id="fileInput">
+                        <label for="fileInput" class="custom-file-upload">Pujar fitxer</label>
+                        <p id="message"></p>
+                    </div>
                 </div>
             </div>
         </div>
