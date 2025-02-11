@@ -185,7 +185,7 @@ $(document).ready(function() {
 
     var delete_capawmslocal = function(id){
         $.ajax({
-            url: _delete_wms_url + id,
+            url: _delete_wms_url + id + "/",
             method: "DELETE",
             beforeSend: function(xhr, settings) {
                 if (!csrfSafeMethod(settings.type)) {

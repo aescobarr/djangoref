@@ -5,6 +5,7 @@
     <link href="{% static 'datatables.net-dt/css/jquery.dataTables.min.css' %}" rel="stylesheet">
     <link href="{% static 'jquery-ui/themes/base/jquery-ui.min.css' %}" rel="stylesheet">
     <link href="{% static 'georef/css/georef.css' %}" rel="stylesheet">
+    <link href="{% static 'georef/css/custom_file_input.css' %}" rel="stylesheet">
     <link href="{% static 'georef/javascript/ajaxuploader/css/fileuploader.css' %}" media="screen" rel="stylesheet" type="text/css" >
     <style>
         #val_x, #val_y, #val_inc{
@@ -121,7 +122,12 @@
                 </div>
             </div>-->
         </div>
-    </main>
+        <div class="container">        
+            <input type="file" id="fileInput">
+            <label for="fileInput" class="custom-file-upload">Importar shapefile (zip)</label>
+            <p id="message"></p>
+        </div>
+    </main>    
     <input id="filename" name="filename" type="hidden" value=""/>
 {% endblock %}
 {% block extra_js %}

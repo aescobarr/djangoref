@@ -315,4 +315,10 @@ $(document).ready(function() {
         uploadFile();        
     });
 
+    var capes = [];
+    for(var i=0; i < capes_wms.length; i++){        
+        capes.push(capes_wms[i].id);
+    }
+    $('#capeswms').val( capes.join(',') );
+
 });

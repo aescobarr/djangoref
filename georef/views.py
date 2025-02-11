@@ -94,6 +94,7 @@ import sys
 from django.contrib.postgres.search import TrigramSimilarity
 from django.http import JsonResponse
 from django.core.files.storage import default_storage
+from django.contrib import messages
 
 
 def get_order_clause(params_dict, translation_dict=None):
@@ -1784,9 +1785,9 @@ def my_profile(request):
             #saved_user.profile.language = request.POST['language']
             saved_user.profile.save()
             saved_user.save()
-            successfully_saved = True
+            successfully_saved = True            
         else:
-            successfully_saved = False
+            successfully_saved = False            
     else:
         user_form = UserForm(instance=this_user)
     return render(request, 'georef/profile.html', {'user_form': user_form, 'successfully_saved': successfully_saved})
@@ -2591,7 +2592,7 @@ def wmslocal_create(request):
                         p = Polygon.from_bbox(bounds)
                         p_g = GEOSGeometry(str(p), srid=4326)
                         with transaction.atomic():
-                            capawms = Capawms(baseurlservidor=conf.GEOSERVER_WMS_URL_CLEAN,
+                            capawms = Capawms(baseurlservidor=conf.GEOSERVER_WMS_URL_CLEAN_EXTERNAL,
                                               name=ntpath.basename(os.path.splitext(file)[0]), label=wms_layer.title,
                                               minx=bounds[0], miny=bounds[1], maxx=bounds[2], maxy=bounds[3],
                                               boundary=p_g)
@@ -2893,6 +2894,8 @@ def t_checkdelete(request):
     if request.method == 'GET':
         model_full_qualified_name = request.query_params.get('mfqn', None)
         id = request.query_params.get('id', None)
+        if id is not None:
+            id = id.replace("/","")
         if model_full_qualified_name is None or id is None:
             content = {'status': 'KO', 'detail': 'mandatory param missing'}
             return Response(data=content, status=400)
